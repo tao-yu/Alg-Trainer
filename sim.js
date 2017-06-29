@@ -1,5 +1,22 @@
 solved = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6];
+//var alg = require("alg");
 var cube=solved;
+var currentAlgorithm = "";
+var canvas = document.getElementById("cube");
+var ctx = canvas.getContext("2d");
+var stickerSize = 50;
+function solveNoRotate(cubestate){
+	//Center sticker indexes: 4, 13, 22, 31, 40, 49
+	cubestate = [cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],
+		         cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],cubestate[13],
+		         cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],cubestate[22],
+		         cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],cubestate[31],
+		         cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],cubestate[40],
+		         cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49],cubestate[49]]
+	return cubestate;
+                    
+return cubestate;
+}
 function doU (cubestate){
 	cubestate = [cubestate[6],cubestate[3],cubestate[0],cubestate[7],cubestate[4],cubestate[1],cubestate[8],cubestate[5],cubestate[2],cubestate[45],cubestate[46],cubestate[47],cubestate[12],cubestate[13],cubestate[14],cubestate[15],cubestate[16],cubestate[17],cubestate[9],cubestate[10],cubestate[11],cubestate[21],cubestate[22],cubestate[23],cubestate[24],cubestate[25],cubestate[26],cubestate[27],cubestate[28],cubestate[29],cubestate[30],cubestate[31],cubestate[32],cubestate[33],cubestate[34],cubestate[35],cubestate[18],cubestate[19],cubestate[20],cubestate[39],cubestate[40],cubestate[41],cubestate[42],cubestate[43],cubestate[44],cubestate[36],cubestate[37],cubestate[38],cubestate[48],cubestate[49],cubestate[50],cubestate[51],cubestate[52],cubestate[53]]
 	return cubestate
@@ -46,16 +63,10 @@ function doZ (cubestate){
 	return doF(doB(doB(doB(doS(cubestate)))));
 }
 
-var canvas = document.getElementById("cube");
-var ctx = canvas.getContext("2d");
-var stickerSize = 100;
-
-
 function fillSticker(x, y, colour){
 	ctx.fillStyle = colour;
 	ctx.fillRect(stickerSize * x,stickerSize * y,stickerSize,stickerSize);
 }
-
 function fillWithIndex(x, y, face, index, cubeArray){
 	index--;
 	switch(face){
@@ -102,7 +113,6 @@ function fillWithIndex(x, y, face, index, cubeArray){
 	}
 	fillSticker(x,y,colour);
 }
-
 function drawCube(cubeArray){
 	fillWithIndex(0,0,"l",1,cubeArray);
 	fillWithIndex(1,0,"u",1,cubeArray);
@@ -144,16 +154,18 @@ function drawCube(cubeArray){
 	fillWithIndex(2,5,"f",8,cubeArray);
 	fillWithIndex(3,5,"f",9,cubeArray);
 	fillWithIndex(4,5,"r",7,cubeArray);
-	console.log(cubeArray);
 }
-
 function doMove(move){
-		var times = 1;
-		if (move.endsWith("'")){
-			move = move.substring(0,1);
-			times = 3;
-		}
-		for (var i = 0; i < times; i++){
+	var times = 1;
+	if (move.indexOf("2") > -1){
+		times = 2;
+		move = move.substring(0,1);
+	}
+	else if (move.endsWith("'")){
+		move = move.substring(0,1);
+		times = 3;
+	}
+	for (var i = 0; i < times; i++){
 		switch(move){
 			case "U":
 				cube = doU(cube);
@@ -183,21 +195,79 @@ function doMove(move){
 				cube = doZ(cube);
 				break;
 		}
-		}
-	
-	
+	}
+
+
 	drawCube(cube);
 }
-function doAlg(alg){
-	arr = alg.split(" ");
+function doAlg(algorithm){
+	arr = algorithm.replace(/\(|\)/g, "").split(" ");
+
 	for(var i = 0; i<arr.length;i++){
 		doMove(arr[i])
 	}
 }
 drawCube(cube);
 
-var listener = new window.keypress.Listener();
+function testAlg(algorithm, auf){
+	cube = solveNoRotate(cube);
+	if (auf){
 
+		rand = Math.floor(Math.random()*3);//pick 0,1 or 2
+		var aufs = ["U ", "U' ","U2 "];
+		algorithm = aufs[rand] + algorithm;
+		console.log(algorithm);
+		rand2 = Math.floor(Math.random()*3);//pick 0,1 or 2
+		switch(rand2){
+			case 1:
+				cube = doY(cube);
+			case 2:
+				cube = doY(doY(cube));
+			case 3:
+				cube = doY(doY(doY(cube)));
+		}
+				
+	}
+
+	algorithm = alg.cube.simplify(algorithm);
+	var inverse = alg.cube.invert(algorithm);	
+
+	doAlg(inverse);
+	drawCube(cube);
+
+	currentAlgorithm = algorithm;
+}
+
+function reTestAlg(){
+	doAlg(alg.cube.invert(currentAlgorithm));
+	drawCube(cube);
+
+}
+function displayAlgorithm(){
+	var x = document.getElementById("algdisp");
+    x.innerHTML = currentAlgorithm;
+	testAlg(currentAlgorithm, false);
+}
+
+var hSet = ["(R U2 R' U' R U' R') U' (R' U' R U' R' U2 R)",
+ "(R' U2 R U R' U R) U (R U R' U R U2 R')",
+ "R U R' U R' U' R U R' U' R2 U' R2 U R U2 R' U2 R",
+ "R U2 R' U' R U R' U' R U' R'",
+ "R' U2 R U R' U' R U R' U R",
+ "R' U' R U' R' U R U' R' U2 R",
+ "R U R' U R U' R' U R U2 R'",
+ "(R' U' R U' R' U2 R) U (R U2 R' U' R U' R')"] 
+
+function testRandomFromList(set){
+	var x = document.getElementById("algdisp");
+    x.innerHTML = "";
+	size = set.length;
+	rand = Math.floor(Math.random()*size);
+	testAlg(set[rand], true);
+
+}
+
+var listener = new window.keypress.Listener();
 listener.simple_combo("i", function() {	doMove("R");});
 listener.simple_combo("k", function() {	doMove("R'");});
 listener.simple_combo("j", function() {	doMove("U");});
@@ -222,3 +292,8 @@ listener.simple_combo(";", function() {	doMove("y");});
 listener.simple_combo("a", function() {	doMove("y'");});
 listener.simple_combo("p", function() {	doMove("z");});
 listener.simple_combo("q", function() {	doMove("z'");});
+listener.simple_combo("esc", function() {
+	testAlg(currentAlgorithm, false);
+});
+listener.simple_combo("space", function() {displayAlgorithm();});
+listener.simple_combo("enter", function() {testRandomFromList(hSet);});
