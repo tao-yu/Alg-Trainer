@@ -6,14 +6,26 @@
 <body>
 
 <style>
+body {
+	background: #002B36;
+	font-family: Arial;
+		color: white;
+}
 p {
     font-family: Arial;
     font-size: 20px;
+		color: white;
 }
 </style>
 
+<p id="scramble">Scramble</p>
 <canvas id="cube" width="250" height="300" ></canvas>
-<p id="algdisp"></p>
+<p id="algdisp">Solution</p>
+
+<form action="">
+<input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
+<input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
+</form>
 
 <script src="alg_jison.js"></script>
 <script src="alg.js"></script>

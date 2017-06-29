@@ -1,10 +1,13 @@
+(function(){
+
 solved = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6];
-//var alg = require("alg");
+var currentRotation = 0;
 var cube=solved;
 var currentAlgorithm = "";
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
+
 function solveNoRotate(cubestate){
 	//Center sticker indexes: 4, 13, 22, 31, 40, 49
 	cubestate = [cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],cubestate[4],
@@ -17,6 +20,7 @@ function solveNoRotate(cubestate){
                     
 return cubestate;
 }
+
 function doU (cubestate){
 	cubestate = [cubestate[6],cubestate[3],cubestate[0],cubestate[7],cubestate[4],cubestate[1],cubestate[8],cubestate[5],cubestate[2],cubestate[45],cubestate[46],cubestate[47],cubestate[12],cubestate[13],cubestate[14],cubestate[15],cubestate[16],cubestate[17],cubestate[9],cubestate[10],cubestate[11],cubestate[21],cubestate[22],cubestate[23],cubestate[24],cubestate[25],cubestate[26],cubestate[27],cubestate[28],cubestate[29],cubestate[30],cubestate[31],cubestate[32],cubestate[33],cubestate[34],cubestate[35],cubestate[18],cubestate[19],cubestate[20],cubestate[39],cubestate[40],cubestate[41],cubestate[42],cubestate[43],cubestate[44],cubestate[36],cubestate[37],cubestate[38],cubestate[48],cubestate[49],cubestate[50],cubestate[51],cubestate[52],cubestate[53]]
 	return cubestate
@@ -210,21 +214,27 @@ function doAlg(algorithm){
 drawCube(cube);
 
 function testAlg(algorithm, auf){
-	cube = solveNoRotate(cube);
+	cube = solved;
 	if (auf){
 
-		rand = Math.floor(Math.random()*3);//pick 0,1 or 2
-		var aufs = ["U ", "U' ","U2 "];
+		rand = Math.floor(Math.random()*4);//pick 0,1 or 2
+		var aufs = ["U ", "U' ","U2 ", ""];
 		algorithm = aufs[rand] + algorithm;
 		console.log(algorithm);
-		rand2 = Math.floor(Math.random()*3);//pick 0,1 or 2
+		rand2 = Math.floor(Math.random()*4);//pick 0,1 or 2
+		currentRotation = rand2;
 		switch(rand2){
 			case 1:
 				cube = doY(cube);
+				break;
 			case 2:
 				cube = doY(doY(cube));
+				break;
 			case 3:
 				cube = doY(doY(doY(cube)));
+				break;
+			case 4:
+				break;
 		}
 				
 	}
@@ -232,6 +242,16 @@ function testAlg(algorithm, auf){
 	algorithm = alg.cube.simplify(algorithm);
 	var inverse = alg.cube.invert(algorithm);	
 
+
+
+	var scrP = document.getElementById("scramble");
+	if (document.getElementById("showScramble").checked){
+		scrP.innerHTML = inverse;
+	} else{
+		scrP.innerHTML = "";
+	}
+
+		
 	doAlg(inverse);
 	drawCube(cube);
 
@@ -239,6 +259,20 @@ function testAlg(algorithm, auf){
 }
 
 function reTestAlg(){
+	cube = solved;
+	switch(currentRotation){
+		case 1:
+			cube = doY(cube);
+			break;
+		case 2:
+			cube = doY(doY(cube));
+			break;
+		case 3:
+			cube = doY(doY(doY(cube)));
+			break;
+		case 4:
+			break;
+	}
 	doAlg(alg.cube.invert(currentAlgorithm));
 	drawCube(cube);
 
@@ -246,7 +280,7 @@ function reTestAlg(){
 function displayAlgorithm(){
 	var x = document.getElementById("algdisp");
     x.innerHTML = currentAlgorithm;
-	testAlg(currentAlgorithm, false);
+	reTestAlg();
 }
 
 var hSet = ["(R U2 R' U' R U' R') U' (R' U' R U' R' U2 R)",
@@ -263,7 +297,8 @@ function testRandomFromList(set){
     x.innerHTML = "";
 	size = set.length;
 	rand = Math.floor(Math.random()*size);
-	testAlg(set[rand], true);
+	testAlg(set[rand], document.getElementById("randAUF").checked);
+	return set[rand];
 
 }
 
@@ -293,7 +328,10 @@ listener.simple_combo("a", function() {	doMove("y'");});
 listener.simple_combo("p", function() {	doMove("z");});
 listener.simple_combo("q", function() {	doMove("z'");});
 listener.simple_combo("esc", function() {
-	testAlg(currentAlgorithm, false);
+	reTestAlg();
 });
+
 listener.simple_combo("space", function() {displayAlgorithm();});
 listener.simple_combo("enter", function() {testRandomFromList(hSet);});
+
+})();
