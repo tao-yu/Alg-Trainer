@@ -205,7 +205,8 @@ function doMove(move){
 	drawCube(cube);
 }
 function doAlg(algorithm){
-	arr = algorithm.replace(/\(|\)/g, "").split(" ");
+	arr =  fixAlgorithm(algorithm).split(/(?=[A-Za-z])| /);
+	//TODO Allow commutators
 
 	for(var i = 0; i<arr.length;i++){
 		doMove(arr[i])
@@ -214,6 +215,7 @@ function doAlg(algorithm){
 drawCube(cube);
 
 function testAlg(algorithm, auf){
+	algorithm = fixAlgorithm(algorithm);
 	cube = solved;
 	if (auf){
 
@@ -239,11 +241,7 @@ function testAlg(algorithm, auf){
 				
 	}
 
-	algorithm = alg.cube.simplify(algorithm);
 	var inverse = alg.cube.invert(algorithm);	
-
-
-
 	var scrP = document.getElementById("scramble");
 	if (document.getElementById("showScramble").checked){
 		scrP.innerHTML = inverse;
@@ -256,6 +254,11 @@ function testAlg(algorithm, auf){
 	drawCube(cube);
 
 	currentAlgorithm = algorithm;
+}
+function fixAlgorithm(algorithm){
+	return algorithm.replace(/\[|\]|\)|\(/g, "");
+	//TODO Allow commutators
+
 }
 
 function reTestAlg(){
@@ -281,6 +284,8 @@ function displayAlgorithm(){
 	var x = document.getElementById("algdisp");
     x.innerHTML = currentAlgorithm;
 	reTestAlg();
+	var y = document.getElementById("showScramble");
+	y.innerHTML = alg.cube.invert(currentAlgorithm);
 }
 
 var hSet = ["(R U2 R' U' R U' R') U' (R' U' R U' R' U2 R)",
@@ -298,6 +303,7 @@ function testRandomFromList(set){
 	size = set.length;
 	rand = Math.floor(Math.random()*size);
 	testAlg(set[rand], document.getElementById("randAUF").checked);
+	//TODO Allow commutators to be parsed by alg.js.
 	return set[rand];
 
 }
@@ -332,6 +338,6 @@ listener.simple_combo("esc", function() {
 });
 
 listener.simple_combo("space", function() {displayAlgorithm();});
-listener.simple_combo("enter", function() {testRandomFromList(hSet);});
+listener.simple_combo("enter", function() {testRandomFromList(pi_2gll);});
 
 })();
