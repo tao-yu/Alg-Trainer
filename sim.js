@@ -1,5 +1,45 @@
 (function(){
 
+set2gll = {
+"t_2gll" : [
+"U' (R U R' U R U2 R') U2 (R' U' R U' R' U2 R)",
+"U' (R U R' U R U2 R') U' (R U2 R' U' R U' R')",
+"U' (R' U' R U' R' U2 R) U (R' U2 R U R' U R)",
+"R U2 R' U' R U' R2 U2 R U R' U R",
+"U2 R' U2 R U R' U R2 U2 R' U' R U' R'",
+"U' R U R2 U' R2 U' R2 U2 R U' R U' R'",
+"U' R' U' R2 U R2 U R2 U2 R' U R' U R",
+"U2 (R' U2 R U R' U R) U' (R' U' R U' R' U2 R)",
+"(R U2 R' U' R U' R') U (R U R' U R U2 R')",
+"U' R' U' R U' R' U R U' R U R2 U R2 U2 R'",
+"U' R U R' U R U' R' U R' U' R2 U' R2 U2 R",
+"R' U R U2 R' U' R U' R U R' U' R' U' R U R U' R'"]
+,
+"pi_2gll" : [
+"(R U2 R' U' R U' R') U' (R U2 R' U' R U' R')",
+"R' U2 R2 U R2 U R2 U2 R'",
+"[U'] R U2 R' U2 R U' R' U2 R U' R' U2 R U R'",
+"R' U2 R U2 R' U R U2 R' U R U2 R' U' R",
+"(R U R' U R U2 R') U' (R U R' U R U2 R')",
+"(R' U' R U' R' U2 R) U (R' U' R U' R' U2 R)",
+"R' U2 R U R' U R2 U R' U R U2 R'",
+"R U2 R' U' R U' R2 U' R U' R' U2 R",
+"R U2 R2 U' R2 U' R2 U2 R",
+"R U' R' U2 R U R' U2 R U R' U2 R U2 R'",
+"[U2] R' U R U2 R' U' R U2 R' U' R U2 R' U2 R",
+"F R U R' U' R U R' U' F' R U R' U' L R' F R F' L'",
+]
+,
+"h_2gll" : ["(R U2 R' U' R U' R') U' (R' U' R U' R' U2 R)",
+ "(R' U2 R U R' U R) U (R U R' U R U2 R')",
+ "R U R' U R' U' R U R' U' R2 U' R2 U R U2 R' U2 R",
+ "R U2 R' U' R U R' U' R U' R'",
+ "R' U2 R U R' U' R U R' U R",
+ "R' U' R U' R' U R U' R' U2 R",
+ "R U R' U R U' R' U R U2 R'",
+ "(R' U' R U' R' U2 R) U (R U2 R' U' R U' R')"]
+};
+
 solved = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6];
 var currentRotation = 0;
 var cube=solved;
@@ -206,7 +246,6 @@ function doMove(move){
 }
 function doAlg(algorithm){
 	arr =  fixAlgorithm(algorithm).split(/(?=[A-Za-z])| /);
-	//TODO Allow commutators
 
 	for(var i = 0; i<arr.length;i++){
 		doMove(arr[i])
@@ -287,16 +326,6 @@ function displayAlgorithm(){
 	var y = document.getElementById("showScramble");
 	y.innerHTML = alg.cube.invert(currentAlgorithm);
 }
-
-var hSet = ["(R U2 R' U' R U' R') U' (R' U' R U' R' U2 R)",
- "(R' U2 R U R' U R) U (R U R' U R U2 R')",
- "R U R' U R' U' R U R' U' R2 U' R2 U R U2 R' U2 R",
- "R U2 R' U' R U R' U' R U' R'",
- "R' U2 R U R' U' R U R' U R",
- "R' U' R U' R' U R U' R' U2 R",
- "R U R' U R U' R' U R U2 R'",
- "(R' U' R U' R' U2 R) U (R U2 R' U' R U' R')"] 
-
 function testRandomFromList(set){
 	var x = document.getElementById("algdisp");
     x.innerHTML = "";
@@ -306,6 +335,41 @@ function testRandomFromList(set){
 	//TODO Allow commutators to be parsed by alg.js.
 	return set[rand];
 
+}
+
+function createCheckbox(id) {
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "checkbox");
+    x.setAttribute("id", id);
+    document.body.appendChild(x);
+}
+
+//Create Checkboxes for each subset
+//Each subset has id of subset name, and is followed by text of subset name.
+for (var subset in set2gll){
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "checkbox");
+    x.setAttribute("id", subset);
+    document.body.appendChild(x);
+
+	var setName = document.createTextNode(subset);
+	document.body.appendChild(setName);
+}
+function createAlgList(){
+	algList = [];
+
+	for (var subset in set2gll){
+		console.log(document.getElementById(subset).checked);
+		if(document.getElementById(subset).checked){
+			algList = algList.concat(set2gll[subset]);
+
+		}
+
+	}
+	if(algList.length < 1){
+		algList = ["R U R' U' R' F R2 U' R' U' R U R' F'"];
+	}
+	return algList;
 }
 
 var listener = new window.keypress.Listener();
@@ -338,6 +402,8 @@ listener.simple_combo("esc", function() {
 });
 
 listener.simple_combo("space", function() {displayAlgorithm();});
-listener.simple_combo("enter", function() {testRandomFromList(pi_2gll);});
+listener.simple_combo("enter", function() {
+	testRandomFromList(createAlgList());
+});
 
 })();
