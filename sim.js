@@ -1,6 +1,6 @@
 (function(){
 
-set2gll = {
+set_zbll = {
 "t_2gll" : [
 "U' (R U R' U R U2 R') U2 (R' U' R U' R' U2 R)",
 "U' (R U R' U R U2 R') U' (R U2 R' U' R U' R')",
@@ -60,7 +60,6 @@ function solveNoRotate(cubestate){
                     
 return cubestate;
 }
-
 function doU (cubestate){
 	cubestate = [cubestate[6],cubestate[3],cubestate[0],cubestate[7],cubestate[4],cubestate[1],cubestate[8],cubestate[5],cubestate[2],cubestate[45],cubestate[46],cubestate[47],cubestate[12],cubestate[13],cubestate[14],cubestate[15],cubestate[16],cubestate[17],cubestate[9],cubestate[10],cubestate[11],cubestate[21],cubestate[22],cubestate[23],cubestate[24],cubestate[25],cubestate[26],cubestate[27],cubestate[28],cubestate[29],cubestate[30],cubestate[31],cubestate[32],cubestate[33],cubestate[34],cubestate[35],cubestate[18],cubestate[19],cubestate[20],cubestate[39],cubestate[40],cubestate[41],cubestate[42],cubestate[43],cubestate[44],cubestate[36],cubestate[37],cubestate[38],cubestate[48],cubestate[49],cubestate[50],cubestate[51],cubestate[52],cubestate[53]]
 	return cubestate
@@ -238,6 +237,33 @@ function doMove(move){
 			case "z":
 				cube = doZ(cube);
 				break;
+			case "r":
+				cube = doM(doM(doM(doR(cube))));
+				break;
+			case "l":
+				cube = doL(doM(cube));
+				break;
+			case "u":
+				cube = doU(doE(doE(doE(cube))));
+				break;
+			case "f":
+				cube = doF(doS(cube));
+				break;
+			case "d":
+				cube = doD(doE(cube));
+				break;
+			case "b":
+				cube = doB(doS(doS(doS(cube))));
+				break;
+			case "M": 
+				cube = doM(cube);
+				break;
+			case "E": 
+				cube = doE(cube);
+				break;
+			case "S": 
+				cube = doS(cube);
+				break;
 		}
 	}
 
@@ -346,7 +372,7 @@ function createCheckbox(id) {
 
 //Create Checkboxes for each subset
 //Each subset has id of subset name, and is followed by text of subset name.
-for (var subset in set2gll){
+for (var subset in set_zbll){
     var x = document.createElement("INPUT");
     x.setAttribute("type", "checkbox");
     x.setAttribute("id", subset);
@@ -358,15 +384,15 @@ for (var subset in set2gll){
 function createAlgList(){
 	algList = [];
 
-	for (var subset in set2gll){
+	for (var subset in set_zbll){
 		console.log(document.getElementById(subset).checked);
 		if(document.getElementById(subset).checked){
-			algList = algList.concat(set2gll[subset]);
-
+			algList = algList.concat(set_zbll[subset]);
+T 
 		}
 
 	}
-	if(algList.length < 1){
+	if(algList.length < 1){ //if nothing checked, just do T perm
 		algList = ["R U R' U' R' F R2 U' R' U' R U R' F'"];
 	}
 	return algList;
@@ -387,9 +413,9 @@ listener.simple_combo("s", function() {	doMove("D");});
 listener.simple_combo("l", function() {	doMove("D'");});
 listener.simple_combo("u", function() {	doMove("r");});
 listener.simple_combo("m", function() {	doMove("r'");});
-listener.simple_combo("c", function() {	doMove("l");});
+listener.simple_combo("v", function() {	doMove("l");});
 listener.simple_combo("r", function() {	doMove("l'");});
-listener.simple_combo("'", function() {	doMove("M");});
+listener.simple_combo("apostrophe", function() {	doMove("M");});
 listener.simple_combo("[", function() {	doMove("M'");});
 listener.simple_combo("t", function() {	doMove("x");});
 listener.simple_combo("n", function() {	doMove("x'");});
