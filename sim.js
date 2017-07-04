@@ -344,11 +344,14 @@
 
 	}
 	function displayAlgorithm(){
+		//show solution
 		var x = document.getElementById("algdisp");
-		x.innerHTML = currentAlgorithm;
+		x.innerHTML = alg.cube.simplify(currentAlgorithm);
 		reTestAlg();
-		var y = document.getElementById("showScramble");
-		y.innerHTML = alg.cube.invert(alg.cube.simplify(currentAlgorithm));
+
+		//show scramble
+		var y = document.getElementById("scramble");
+		y.innerHTML = alg.cube.simplify(alg.cube.invert(currentAlgorithm));
 	}
 	function testRandomFromList(set){
 		var x = document.getElementById("algdisp");
