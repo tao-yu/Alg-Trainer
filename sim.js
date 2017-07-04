@@ -348,7 +348,7 @@
 		x.innerHTML = currentAlgorithm;
 		reTestAlg();
 		var y = document.getElementById("showScramble");
-		y.innerHTML = alg.cube.invert(currentAlgorithm);
+		y.innerHTML = alg.cube.invert(alg.cube.simplify(currentAlgorithm));
 	}
 	function testRandomFromList(set){
 		var x = document.getElementById("algdisp");

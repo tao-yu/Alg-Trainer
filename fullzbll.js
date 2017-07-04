@@ -44,7 +44,7 @@ var zbll_full = {
 	"4" :[
 		"(U') l' U2 R' D2 R U2 R' D2 R2 x'",
 		"R' U2 R U' R' F R U R' U' R' F' R U' R",
-		"R' U2 R' D' R U2 R' D R3 U R' U R U2 R'",
+		"R' U2 R' D' R U2 R' D R' U R' U R U2 R'",
 		"(U2) R U2 R D R' U2 R D' R U' R U' R' U2 R",
 		"R' D' R U R' D R U2 R U2 R' U R U R'",
 		"(U) R' U' R' D' R U R' D R U' R U' R' U2 R",
