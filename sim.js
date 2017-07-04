@@ -432,6 +432,9 @@
 	listener.simple_combo("q", function() {	doMove("z'");});
 	listener.simple_combo("esc", function() {
 		reTestAlg();
+		document.getElementById("scramble").innerHTML = "";
+		document.getElementById("algdisp").innerHTML = "";
+
 	});
 
 	listener.simple_combo("space", function() {displayAlgorithm();});
