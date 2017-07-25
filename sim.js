@@ -236,16 +236,21 @@
 		}
 	}
 	drawCube(cube);
+    
+    function getRandAuf(){
+        rand = Math.floor(Math.random()*4);//pick 0,1,2 or 3
+        var aufs = ["U ", "U' ","U2 ", ""];
+        return aufs[rand] 
+    }
+            
 
 	function testAlg(algorithm, auf){
 		algorithm = fixAlgorithm(algorithm);
 		cube = solved;
 		if (auf){
 
-			rand = Math.floor(Math.random()*4);//pick 0,1 or 2
-			var aufs = ["U ", "U' ","U2 ", ""];
-			algorithm = aufs[rand] + algorithm;
-			rand2 = Math.floor(Math.random()*4);//pick 0,1 or 2
+			algorithm = getRandAuf() + algorithm + " " +  getRandAuf()
+			rand2 = Math.floor(Math.random()*4);//pick 0,1 or 2 or 3
 			currentRotation = rand2;
 			switch(rand2){
 				case 1:
