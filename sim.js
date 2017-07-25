@@ -382,7 +382,7 @@
 	listener.simple_combo("m", function() {	doMove("r'");});
 	listener.simple_combo("v", function() {	doMove("l");});
 	listener.simple_combo("r", function() {	doMove("l'");});
-	listener.simple_combo("apostrophe", function() {	doMove("M");});
+	listener.simple_combo("`", function() {	doMove("M");});
 	listener.simple_combo("[", function() {	doMove("M'");});
 	listener.simple_combo("t", function() {	doMove("x");});
 	listener.simple_combo("n", function() {	doMove("x'");});
