@@ -3,7 +3,7 @@
 	solved = [1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6];
 	var currentRotation = 0;
 	var cube=solved;
-	var currentAlgorithm = "";
+	var currentAlgorithm = "";//After an alg gets tested for the first time, it becomes the currentAlgorithm. 
 	var canvas = document.getElementById("cube");
 	var ctx = canvas.getContext("2d");
 	var stickerSize = 50;
@@ -329,13 +329,6 @@
 
 	}
 
-	function createCheckbox(id) {
-		var x = document.createElement("INPUT");
-		x.setAttribute("type", "checkbox");
-		x.setAttribute("id", id);
-		document.body.appendChild(x);
-	}
-
 	//Create Checkboxes for each subset
 	//Each subset has id of subset name, and is followed by text of subset name.
 	function createCheckboxes(){
@@ -352,8 +345,15 @@
 		}
 	}
 	createCheckboxes();
-	function createAlgList(){
+	function createAlgList(){  
 		algList = [];
+        
+        if(document.getElementById("allsets").checked){
+			for (var subset in window.zbll_full){
+                algList = algList.concat(zbll_full[subset]);
+            }
+            return algList;
+		}
 
 		for (var subset in window.zbll_full){
 			
