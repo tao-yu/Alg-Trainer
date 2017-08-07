@@ -387,7 +387,7 @@ var zbll_full = {
 		"R' D R2 D' R2 U R2 D R2 D' R2 U' R'",
 		"(U') R U R' U R U' R D R' U' R D' R2",
 		"(U2) R U' R' U' R U' R' U2 R U R2 D' R U2 R' D R",
-		"(U) F U R U' R' U R U' l U' R2 D' R U R'",
+		"(U) F U R U' R' U R U' l U' R2 D' R U R' x",
 		"(U2) R2 D' R U' R' D R U' R U R' U R",
 		"(U) R U2 R' L' U2 R U R' U2 L R U2 R'",
 		"R' D' R U R' D R2 U' R' U R U R' U' R U2 R' U R U2 R'",
