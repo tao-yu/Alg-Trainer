@@ -1,5 +1,5 @@
 var zbll_full = {
-	"1" :[
+	"T1" :[
 		"(U') R U R' U R U2 R' U2 R' U' R U' R' U2 R",
 		"R' U R U2 R' U' R U' R U R' U' R' U' R U R U' R'",
 		"(U2) R' U2 R U R' U R2 U2 R' U' R U' R'",
@@ -13,7 +13,7 @@ var zbll_full = {
 		"(U') R' U' R2 U R2 U R2 U2 R' U R' U R ",
 		"(U') R U R2 U' R2 U' R2 U2 R U' R U' R'",
 	],
-	"2" :[
+	"T2" :[
 		"(U) R U R' U R U R2 D' r U2 r' D R2 U R'",
 		"(U) R' U' R U' R' U' R2 D r' U2 r D' R2 U' R",
 		"(U2) R U' R2 D' r U2 r' D R2 U R'",
@@ -27,7 +27,7 @@ var zbll_full = {
 		"(U) R U R D R' U R D' R' U L' U R' U' L ",
 		"(U2) R2 F R U R' U' R' F' R' U' R2 U2 R U2 R",
 	],
-	"3" :[
+	"T3" :[
 		"R' U R U2 L' R' U R U' L ",
 		"R' U2 R U R2 F R U R U' R' F' R",
 		"(U2) R' U' R2 U R' F' R U R' U' R' F R2 U' R' U' R' U R",
@@ -41,7 +41,7 @@ var zbll_full = {
 		"R' U2 R U R' U R F U R U2 R' U R U R' F'",
 		"r' U' l' U2 R U' R' U2 l R U' R' U2 r",
 	],
-	"4" :[
+	"T4" :[
 		"(U') l' U2 R' D2 R U2 R' D2 R2 x'",
 		"R' U2 R U' R' F R U R' U' R' F' R U' R",
 		"R' U2 R' D' R U2 R' D R' U R' U R U2 R'",
@@ -55,7 +55,7 @@ var zbll_full = {
 		"(U2) F R U R' U' R U' R' U' R U R' F'",
 		"(U') R U R' U2 R U' R' U2 R U' R2 F' R U R U' R' F",
 	],
-	"5" :[
+	"T5" :[
 		"R U R D R' U' R D' R2",
 		"(U') R U2 R' U2 R' F R U R U' R' F'",
 		"(U2) R2 B2 R' U2 R' U2 R B2 R' U R U' R'",
@@ -69,7 +69,7 @@ var zbll_full = {
 		"(U2) F R U R' U' R' F' U2 R U R U' R2 U2 R",
 		"(U') R U' R' U' R U R D R' U2 R D' R' U' R'",
 	],
-	"6" :[
+	"T6" :[
 		"x' U' R' D R U R' D' R x",
 		"(U) R U R' U' R' F' R U2 R U2 R' F",
 		"R2 F2 R U2 R U2 R' F2 R U' R' U R",
@@ -83,7 +83,7 @@ var zbll_full = {
 		"(U) R' U2 R2 U R' U' R' U2 F' R U2 R U2 R' F",
 		"(U') R' U R U R' U' R' D' R U2 R' D R U R",
 	],
-	"7" :[
+	"U1" :[
 		"(U) R U2 R' U' R U' R' U2 R' U2 R U R' U R",
 		"R U R' U' R U' R U2 R2 U' R U R' U' R2 U' R2",
 		"R' U' R U' R' U2 R2 U R' U R U2 R'",
@@ -97,7 +97,7 @@ var zbll_full = {
 		"R' U' R U' R U2 R2 U' R2 U' R2 U R",
 		"(U2) R U R' U R' U2 R2 U R2 U R2 U' R'",
 	],
-	"8" :[
+	"L1" :[
 		"R U2 R' U2 R' U' R U R U' R' U2 R' U2 R",
 		"R U R' U R U' R' U R U' R' U R U2 R'",
 		"(U2) R U2 R' U' R U' R' U2 R U R' U R U2 R'",
@@ -111,7 +111,7 @@ var zbll_full = {
 		"(U2) R U R' U R U2 R' U R' U' R U' R' U2 R",
 		"(U) R' U' R U' R' U2 R U' R U R' U R U2 R'",
 	],
-	"9" :[
+	"H1" :[
 		"R U2 R' U' R U' R' U' R' U' R U' R' U2 R",
 		"R' U2 R U R' U R U R U R' U R U2 R'",
 		"(U) R' U' R U' R' U R U' R' U2 R",
@@ -121,7 +121,7 @@ var zbll_full = {
 		"(U) R U R' U R U' R' U R U' R' U R' U' R2 U' R' U R' U R",
 		"(U) R U R' U R U2 R' U' R' U2 R U R' U R",
 	],
-	"10" :[
+	"Pi1" :[
 		"R' U' R U R U2 R' U' R U' R2 U2 R",
 		"R U R' U' R' U2 R U R' U R2 U2 R'",
 		"(U') R' U2 R U R' U R2 U R' U R U2 R'",
@@ -135,7 +135,7 @@ var zbll_full = {
 		"R U R' U' R' U' R U R U R' U' R' U R U' R U' R'",
 		"R U2 R' U' R U' R' U' R U2 R' U' R U' R'",
 	],
-	"11" :[
+	"S1" :[
 		"(U') R' U R2 U R' U R U2 R U2 R U R' U R2",
 		"(U') R' U2 R2 U R  U' R' U R U R2 U' R'",
 		"R U R' U R U2 R'",
@@ -149,7 +149,7 @@ var zbll_full = {
 		"(U) R U R' U R' U' R2 U' R' U R' U' R U R' U R",
 		"R U R' U R U' R' U R' U' R' U R U' R' U' R2 U R",
 	],
-	"12" :[
+	"AS1" :[
 		"(U) R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2",
 		"(U) R U2 R2 U' R' U R U' R' U' R2 U R",
 		"R' U' R U' R' U2 R",
@@ -163,7 +163,7 @@ var zbll_full = {
 		"(U) R U R' U' R U R2 U' R2 U' R' U R U' R' U R' U R",
 		"(U2) R U R' U R' U' R' U R U' R' U' R' U' R' U2 R",
 	],
-	"13" :[
+	"U2" :[
 		"(U2) R' U' R U' F U' R' U R U R' U R U' F'",
 		"R U R' U L' U R U' M' x' U' R U' R'",
 		"(U') R U2 R2 F R F' M' U' R U' R' U M",
@@ -177,7 +177,7 @@ var zbll_full = {
 		"F R U' R' U' R U2 R' U' R U' R' U' R U2 R' U' F'",
 		"(U) r' U' R' F R U r F R U' R' F'",
 	],
-	"14" :[
+	"L2" :[
 		"F R U' R' U' R U R D R' U' R D' R' U2 R' U' F'",
 		"(U) F R U R' U' R U' R' U2 R U2 R' U' F'",
 		"L' U2 R U' R' U2 L R U' R'",
@@ -191,7 +191,7 @@ var zbll_full = {
 		"(U) R U2 R' U' L' U2 R U R' L U L' U L",
 		"(U) R U R' U' R' U2 R' U D R' U' R U2 D' R",
 	],
-	"15" :[
+	"H2" :[
 		"(U) x' U' R U' R' U R' F2 R U' R U R' U x",
 		"F U R U' R' U R U' R' U R U' R' F'",
 		"R U R' y' U R' U R U' R2 F R F' R",
@@ -201,7 +201,7 @@ var zbll_full = {
 		"(U) L' U L U' L' U' L U R' U' R U L' U' L U2 R' U' R",
 		"(U) R U' R' U R U R' U' L U L' U' R U R' U2 L U L'",
 	],
-	"16" :[
+	"Pi2" :[
 		"F R2 U' R U' R U' R' U2 R' U R2 F'",
 		"(U2) F R2 U' R U2 R U R' U R' U R2 F'",
 		"F U R' U' R2 U' R2 U2 R U2 R U R' F'",
@@ -215,7 +215,7 @@ var zbll_full = {
 		"R2 D R' U' R D' R' U' R' U R U' R' U' R U' R'",
 		"R2 D' R U R' D R U R U' R' U R U R' U R",
 	],
-	"17" :[
+	"S2" :[
 		"F U' R' U R U F' R U R2 U R2 U2 R'",
 		"(U) R' D' R U' R' D R U2 R U R' U2 R U R'",
 		"R' U2 R U R' U' R F U' R' U' R U F'",
@@ -229,7 +229,7 @@ var zbll_full = {
 		"R U R' U' L' U R U' L U' L' U R' U' L",
 		"(U2) r' F2 R F' r U' R' U r' F r U2 R U2 R'",
 	],
-	"18" :[
+	"AS2" :[
 		"(U') R U2 R2 U' R2 U' R' F U' R' U' R U F'",
 		"(U') R D R' U R D' R' U2 R' U' R U2 R' U' R",
 		"(U') R U2 R' U' R U R' L' U R U' L U2 R'",
@@ -243,7 +243,7 @@ var zbll_full = {
 		"z D' R' D R U R' D' R U' R U R' D R U' z'",
 		"R U2 R' U' R U r' F r U2 R' U' r' F2 r",
 	],
-	"19" :[
+	"U3" :[
 		"R' F R U' R' U' R U R' F' R U R' U' R' F R F' R",
 		"(U') F2 R U' R' U' R U R' F' R U R' U' R' F R F2",
 		"R U' R' U R U' L U r' F U2 R U2 R2 x",
@@ -257,7 +257,7 @@ var zbll_full = {
 		"(U') R' U' R F R2 D' R U R' D R2 U' F'",
 		"(U') r U R' U' r' F R U R' U' R F' R' U R",
 	],
-	"20" :[
+	"L3" :[
 		"(U') F' r U R' U' r' F R",
 		"R' U' R U R' F2 R U2 R' U2 R' F2 R2",
 		"(U') F' R U2 R' U2 R' F R U R U' R'",
@@ -271,7 +271,7 @@ var zbll_full = {
 		"(U2) R U R' U R' D' R U2 R' D R2 U' R' U R U' R'",
 		"(U) R' U' R' D' R U2 R' D R U R U' R' U' R",
 	],
-	"21" :[
+	"H3" :[
 		"(U2) R U R' U R U2 R' F R U' R' U' R U2 R' U' F'",
 		"l U' R U R' l' U r U' r' U r U r'",
 		"(U2) R' F R' F' R2 U' r' U r U' r' U' r",
@@ -285,7 +285,7 @@ var zbll_full = {
 		"(U') R2 D' R U' R' D R2 U' R2 D' R U2 R' D R2",
 		"(U') R2 D R' U R D' R2' U R2 D R' U2 R D' R2'",
 	],
-	"22" :[
+	"Pi3" :[
 		"(U') F U R U2 R' U R U R' F' R U2 R' U' R U' R'",
 		"r U' r' U' r U r' U' l R U' R' U l'",
 		"r' U r U r' U' r U R2 F R F' R",
@@ -299,7 +299,7 @@ var zbll_full = {
 		"(U') R2 D R' U2 R D' R2 U' R2 D R' U' R D' R2",
 		"(U2) R U2 R' U' R U r' F2 r U2 R' U' r' F r",
 	],
-	"23" :[
+	"S3" :[
 		"R U' L' U R' U' L",
 		"(U) R' U2 R U R' U' R' D' R U2 R' D R2",
 		"(U') R' D U' R' U R U2 D' R2 U R' U' R'",
@@ -313,7 +313,7 @@ var zbll_full = {
 		"(U) R U2 R' U2 R' F R2 U R' U' R U R' U' F'",
 		"R U R' U R U' R' U' R' F R2 U' R' U' R U R' F'",
 	],
-	"24" :[
+	"AS3" :[
 		"R' U L U' R U L'",
 		"(U') R U2 R' U' R U R D R' U2 R D' R2",
 		"(U) R D' U R U' R' U2 D R2 U' R U R",
@@ -327,7 +327,7 @@ var zbll_full = {
 		"(U2) R' U2 R' F' R U R U' R' F U2 R",
 		"(U2) L' U R U' L R U R U R U' R' U' R2",
 	],
-	"25" :[
+	"U4" :[
 		"x R2 U2 R' D2 R U2 R' D2 R' x'",
 		"(U2) x R2 D2 R U2 R' D2 R U2 l",
 		"R U R' U R U' R' U2 R' D' R U2 R' D R2 U' R'",
@@ -341,7 +341,7 @@ var zbll_full = {
 		"F R U' R' U R U R' U R U' R' F'",
 		"(U) F' R U R' U' R' F R2 U R' U2 R U R' U2 R U' R'",
 	],
-	"26" :[
+	"L4" :[
 		"(U2) F R' F' r U R U' r'",
 		"(U') R U R' U' R B2 R' U2 R U2 R B2 R2",
 		"(U2) F R U R' U' R' F' R U2 R U2 R'",
@@ -355,7 +355,7 @@ var zbll_full = {
 		"(U) R U R' U R U' R' U' L' U R U' M' x'",
 		"(U2) R U R D R' U2 R D' R' U' R' U R U R'",
 	],
-	"27" :[
+	"H4" :[
 		"(U2) F R' F' r U R U' r2 F2 r U r' F r",
 		"(U) R U R' U' R' F R U R U' R' F' R U R' U R U2 R'",
 		"R' U2 R U' L U2 R' U2 R U2 L' R' U R",
@@ -369,7 +369,7 @@ var zbll_full = {
 		"(U2) F R U R' U' R' F' U2 R U R' U R2 U2 R'",
 		"(U) F R U' R' U R U2 R' U' R U R' U' F'",
 	],
-	"28" :[
+	"Pi4" :[
 		"(U) R U2 R2 U' R U' R' U2 F R U R U' R' F'",
 		"(U') R U R' U R U2 R2 F' r U R U' r' F",
 		"(U') r' F' r U' r' F2 r2 U R' U' r' F R F'",
@@ -383,7 +383,7 @@ var zbll_full = {
 		"(U2) R U R D R' U' R D' R U' R U' R' U2 R",
 		"(U) F U R U' R' U R U2 R' U' R U R' F'",
 	],
-	"29" :[
+	"S4" :[
 		"R' D R2 D' R2 U R2 D R2 D' R2 U' R'",
 		"(U') R U R' U R U' R D R' U' R D' R2",
 		"(U2) R U' R' U' R U' R' U2 R U R2 D' R U2 R' D R",
@@ -397,7 +397,7 @@ var zbll_full = {
 		"(U2) R U R' U R' D' R U R' D R U' R U2 R'",
 		"(U2) R U2 R' U' R U R' U' R U R D R' U2 R D' R2",
 	],
-	"30" :[
+	"AS4" :[
 		"R D' R2 D R2 U' R2 D' R2 D R2 U R",
 		"(U) R' U' R U' R' U R' D' R U R' D R2",
 		"l U' R' D R2 U l' U R' U' R U R' U' F'",
@@ -411,7 +411,7 @@ var zbll_full = {
 		"(U2) R' U' R U' R D R' U' R D' R' U R' U2 R",
 		"(U2) R' U2 F' R U R' U' R' F R2 U R' U R",
 	],
-	"31" :[
+	"U5" :[
 		"R2 D' r U2 r' D R U2 R",
 		"R2 D' R U2 R' D R U2 R",
 		"R U' R' D R' U' R D' R2 U R' U' R' U2 R'",
@@ -425,7 +425,7 @@ var zbll_full = {
 		"(U') R' U2 R' D' R U2 R' D R U2 R U R' U R",
 		"(U') R' U R U' R' U' R U2 R D R' U' R D' R2 U' R",
 	],
-	"32" :[
+	"L5" :[
 		"(U) R' U2 R' D' R U2 R' D R2",
 		"(U) R' U2 R' D' r U2 r' D R2",
 		"(U2) R D R' U2 R D' R' U' R' U2 R U' R' U' R",
@@ -439,7 +439,7 @@ var zbll_full = {
 		"R U' R2 F2 R U2 R U2 R' F2 U2 R U' R'",
 		"(U) R' U R2 D R' U R D' R' U2 R' U R U R' U' R",
 	],
-	"33" :[
+	"Pi5" :[
 		"r' F' r U r U2 r' F2 U' R U R' U' R U' R'",
 		"(U2) R U2 R' U2 R' F R2 U' R' U2 R U2 R' U' F'",
 		"R' F R U R' U' R' F' R2 U' R' U R U' R' U2 R",
@@ -453,7 +453,7 @@ var zbll_full = {
 		"R U2 R' U' R U R' U2 L' U R U' M' x'",
 		"(U') L R' U' R U L' U2 R' U R U' R' U2 R",
 	],
-	"34" :[
+	"S5" :[
 		"f R' F' R U2 R U2 R' U2 S'",
 		"(U) R' D' R U R' D R2 U R' U2 R U R'",
 		"R' D R' U R D' U R U' R' U' R2 U R U' R'",
@@ -467,7 +467,7 @@ var zbll_full = {
 		"(U') R' U' F U' R2 U R2 U F' R U' R U' R'",
 		"(U') R' U' R' D' R U' R' D R' U R2 U R U' R U' R'",
 	],
-	"35" :[
+	"AS5" :[
 		"(U') R U2 R2 D' R U2 R' D R2 U' R' U R U' R'",
 		"(U') R D R' U' R D' R2 U' R U2 R' U' R",
 		"R D' R U' R' D U' R' U R U R2 U' R' U R",
@@ -481,7 +481,7 @@ var zbll_full = {
 		"(U) R U R' U2 R U R' U' F' R U2 R' U' R U' R' F",
 		"R2 D' R U' R' D F R U R U' R' F' R",
 	],
-	"36" :[
+	"U6" :[
 		"R' U2 R U R2 F' R U R U' R' F R",
 		"(U2) R2 D R' U2 R D' R' U2 R'",
 		"R' U' R U R U R' U' R' U F R U R U' R' F'",
@@ -495,7 +495,7 @@ var zbll_full = {
 		"(U') R U2 R D R' U2 R D' R' U2 R' U' R U' R'",
 		"(U') R U' R' U R U R' U2 R' D' R U R' D R2 U R'",
 	],
-	"37" :[
+	"L7" :[
 		"(U2) R U2 R D R' U2 R D' R2",
 		"(U) R' F' R U R' U' R' F R2 U' R' U2 R",
 		"(U') L' U R U' L U R2 U2 R U R' U R",
@@ -509,7 +509,7 @@ var zbll_full = {
 		"(U') R' U R2 B2 R' U2 R' U2 R B2 U2 R' U R",
 		"(U2) R U' R2 D' R U' R' D R U2 R U' R' U' R U R'",
 	],
-	"38" :[
+	"Pi6" :[
 		"(U') R U R' U R U' R' U F2 r U2 r' U' r' F r",
 		"(U) F U R U2 R' U2 R U R2 F' R U2 R U2 R'",
 		"R U' R' U' R U' R' U R U R' U R' F' R U R U' R' F",
@@ -523,7 +523,7 @@ var zbll_full = {
 		"R' U2 R U R' U' R U2 L U' R' U R L'",
 		"(U) R L' U R' U' L U2 R U' R' U R U2 R'",
 	],
-	"39" :[
+	"S6" :[
 		"(U2) R U R' U' R U R2 D' R U2 R' D R2 U2 R'",
 		"R U R' U R U' R2 F' R U R U' R' F R U' R'",
 		"(U2) R U R' U R2 D r' U2 r D' R2",
@@ -537,7 +537,7 @@ var zbll_full = {
 		"F' R U R' U R U2 R' F U R U' R' U2 R U' R'",
 		"(U) R' F R U R' U' R' F' D' R U R' D R2",
 	],
-	"40" :[
+	"AS6" :[
 		"(U') R U2 R' U' F' R U R' U' R' F R2 U' R'",
 		"(U') R' U2 R' D' R U R' D R2 U' R' U2 R",
 		"(U2) R' U' R U' R2 D' r U2 r' D R2",
