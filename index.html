@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ZBLL trainer</title>
+</head>
+<body>
+
+<style>
+body {
+	/*background: #002B36;*/
+	background: black;
+	font-family: Arial;
+		color: white;
+}
+p {
+    font-family: Arial;
+    font-size: 20px;
+		color: white;
+}
+</style>
+
+<p id="scramble" style="height: 20px">Scramble</p>
+<canvas id="cube" width="250" height="300" ></canvas>
+<p id="algdisp" style="height: 20px">Solution</p>
+
+<form action="">
+<input id="showScramble" type="checkbox">Show Scramble<br>
+<input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
+<input id="allsets" type="checkbox">All<br>
+</form>
+
+<script src="js/alg_jison.js"></script>
+<script src="js/alg.js"></script>
+<script src="js/keypress.js"></script>
+<script src="js/fullzbll.js"></script>
+<script src="js/cube.js"></script>
+<script src="js/solve.js"></script>
+
+<script src="js/RubiksCube.js"></script>
+
+<br></br>
+Enter: New scramble<br>
+Space: Reset case and show algorithm<br>
+Esc: Reset case without showing algorithm<br>
+Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
+<br>
+Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d/0B5wWQGM9R38gMXBCV1NtVlluekU/view">PDF</a>
+</body>
+</html>
