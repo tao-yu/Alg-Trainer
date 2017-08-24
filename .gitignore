@@ -1,4 +1,4 @@
 *.csv
 *.pdf
 *.xlsx
-/misc
+misc/
