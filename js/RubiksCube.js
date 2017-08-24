@@ -111,6 +111,7 @@ function getRandAuf(){
     return aufs[rand] 
 }
 //This will return an algorithm that has the same effect as algorithm, but with different moves. 
+/*
 function obfusticate(algorithm){
 
     Cube.initSolver();
@@ -119,7 +120,7 @@ function obfusticate(algorithm){
     orient = alg.cube.invert(rc.wcaOrient());
     return (alg.cube.invert(rc.solution()) + orient).replace(/2'/g, "2");
 }
-        
+*/       
 
 function testAlg(algorithm, auf){
     algorithm = fixAlgorithm(algorithm);
