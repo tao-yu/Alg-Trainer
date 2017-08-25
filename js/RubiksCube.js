@@ -1,6 +1,6 @@
 var currentRotation = 0;
 var cube = new RubiksCube();
-var currentAlgorithm = "";//After an alg gets tested for the first time, it becomes the currentAlgorithm. 
+var currentAlgorithm = "";//After an alg gets tested for the first time, it becomes the currentAlgorithm.
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
@@ -9,7 +9,7 @@ function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
     ctx.fillRect(stickerSize * x, stickerSize * y, stickerSize, stickerSize);
 }
-function fillWithIndex(x, y, face, index, cubeArray) {
+function fillWithIndex(x, y, face, index, cubeArray, shouldBeCleared = false) {
     index--;
     switch (face) {
         case "u":
@@ -53,49 +53,112 @@ function fillWithIndex(x, y, face, index, cubeArray) {
             colour = "blue";
             break;
     }
+    if(shouldBeCleared){
+      colour = "black";
+    }
     fillSticker(x, y, colour);
 }
 function drawCube(cubeArray) {
-    fillWithIndex(0, 0, "l", 1, cubeArray);
-    fillWithIndex(1, 0, "u", 1, cubeArray);
-    fillWithIndex(2, 0, "u", 2, cubeArray);
-    fillWithIndex(3, 0, "u", 3, cubeArray);
-    fillWithIndex(4, 0, "r", 3, cubeArray);
+//Just Draw Corners when Doing 2x2
+//TODO: Is this a good Idea? Is there a 2x2 draw thing already available for
+//RubiksCube.js?
+if(document.getElementById("cubeType").value == "2x2"){
 
+  //Clear not used Elements
+  fillWithIndex(0, 0, "l", 1, cubeArray,true);
+  fillWithIndex(1, 0, "u", 1, cubeArray,true);
+  fillWithIndex(2, 0, "u", 2, cubeArray,true);
+  fillWithIndex(3, 0, "u", 3, cubeArray,true);
+  fillWithIndex(4, 0, "r", 3, cubeArray,true);
 
-    fillWithIndex(0, 1, "l", 2, cubeArray);
-    fillWithIndex(1, 1, "u", 4, cubeArray);
-    fillWithIndex(2, 1, "u", 5, cubeArray);
-    fillWithIndex(3, 1, "u", 6, cubeArray);
-    fillWithIndex(4, 1, "r", 2, cubeArray);
+  fillWithIndex(0, 1, "l", 2, cubeArray,true);
+  fillWithIndex(1, 1, "u", 4, cubeArray,true);
+  fillWithIndex(2, 1, "u", 5, cubeArray,true);
+  fillWithIndex(3, 1, "u", 6, cubeArray,true);
+  fillWithIndex(4, 1, "r", 2, cubeArray,true);
 
+  fillWithIndex(0, 2, "l", 3, cubeArray,true);
+  fillWithIndex(1, 2, "u", 7, cubeArray,true);
+  fillWithIndex(2, 2, "u", 8, cubeArray,true);
+  fillWithIndex(3, 2, "u", 9, cubeArray,true);
+  fillWithIndex(4, 2, "r", 1, cubeArray,true);
 
-    fillWithIndex(0, 2, "l", 3, cubeArray);
-    fillWithIndex(1, 2, "u", 7, cubeArray);
-    fillWithIndex(2, 2, "u", 8, cubeArray);
-    fillWithIndex(3, 2, "u", 9, cubeArray);
-    fillWithIndex(4, 2, "r", 1, cubeArray);
+  fillWithIndex(0, 3, "l", 3, cubeArray,true);
+  fillWithIndex(1, 3, "f", 1, cubeArray,true);
+  fillWithIndex(2, 3, "f", 2, cubeArray,true);
+  fillWithIndex(3, 3, "f", 3, cubeArray,true);
+  fillWithIndex(4, 3, "r", 1, cubeArray,true);
 
+  fillWithIndex(0, 4, "l", 6, cubeArray,true);
+  fillWithIndex(1, 4, "f", 4, cubeArray,true);
+  fillWithIndex(2, 4, "f", 5, cubeArray,true);
+  fillWithIndex(3, 4, "f", 6, cubeArray,true);
+  fillWithIndex(4, 4, "r", 4, cubeArray,true);
 
-    fillWithIndex(0, 3, "l", 3, cubeArray);
-    fillWithIndex(1, 3, "f", 1, cubeArray);
-    fillWithIndex(2, 3, "f", 2, cubeArray);
-    fillWithIndex(3, 3, "f", 3, cubeArray);
-    fillWithIndex(4, 3, "r", 1, cubeArray);
+  fillWithIndex(0, 5, "l", 9, cubeArray,true);
+  fillWithIndex(1, 5, "f", 7, cubeArray,true);
+  fillWithIndex(2, 5, "f", 8, cubeArray,true);
+  fillWithIndex(3, 5, "f", 9, cubeArray,true);
+  fillWithIndex(4, 5, "r", 7, cubeArray,true);
 
+  //Draw 2x2
+  fillWithIndex(0, 2, "l", 1, cubeArray);
+  fillWithIndex(1, 2, "u", 1, cubeArray);
+  fillWithIndex(2, 2, "u", 3, cubeArray);
+  fillWithIndex(3, 2, "r", 3, cubeArray);
 
-    fillWithIndex(0, 4, "l", 6, cubeArray);
-    fillWithIndex(1, 4, "f", 4, cubeArray);
-    fillWithIndex(2, 4, "f", 5, cubeArray);
-    fillWithIndex(3, 4, "f", 6, cubeArray);
-    fillWithIndex(4, 4, "r", 4, cubeArray);
+  fillWithIndex(0, 3, "l", 3, cubeArray);
+  fillWithIndex(1, 3, "u", 7, cubeArray);
+  fillWithIndex(2, 3, "u", 9, cubeArray);
+  fillWithIndex(3, 3, "r", 1, cubeArray);
 
+  fillWithIndex(0, 4, "l", 3, cubeArray);
+  fillWithIndex(1, 4, "f", 1, cubeArray);
+  fillWithIndex(2, 4, "f", 3, cubeArray);
+  fillWithIndex(3, 4, "r", 1, cubeArray);
 
-    fillWithIndex(0, 5, "l", 9, cubeArray);
-    fillWithIndex(1, 5, "f", 7, cubeArray);
-    fillWithIndex(2, 5, "f", 8, cubeArray);
-    fillWithIndex(3, 5, "f", 9, cubeArray);
-    fillWithIndex(4, 5, "r", 7, cubeArray);
+  fillWithIndex(0, 5, "l", 9, cubeArray);
+  fillWithIndex(1, 5, "f", 7, cubeArray);
+  fillWithIndex(2, 5, "f", 9, cubeArray);
+  fillWithIndex(3, 5, "r", 7, cubeArray);
+
+}else{
+  fillWithIndex(0, 0, "l", 1, cubeArray);
+  fillWithIndex(1, 0, "u", 1, cubeArray);
+  fillWithIndex(2, 0, "u", 2, cubeArray);
+  fillWithIndex(3, 0, "u", 3, cubeArray);
+  fillWithIndex(4, 0, "r", 3, cubeArray);
+
+  fillWithIndex(0, 1, "l", 2, cubeArray);
+  fillWithIndex(1, 1, "u", 4, cubeArray);
+  fillWithIndex(2, 1, "u", 5, cubeArray);
+  fillWithIndex(3, 1, "u", 6, cubeArray);
+  fillWithIndex(4, 1, "r", 2, cubeArray);
+
+  fillWithIndex(0, 2, "l", 3, cubeArray);
+  fillWithIndex(1, 2, "u", 7, cubeArray);
+  fillWithIndex(2, 2, "u", 8, cubeArray);
+  fillWithIndex(3, 2, "u", 9, cubeArray);
+  fillWithIndex(4, 2, "r", 1, cubeArray);
+
+  fillWithIndex(0, 3, "l", 3, cubeArray);
+  fillWithIndex(1, 3, "f", 1, cubeArray);
+  fillWithIndex(2, 3, "f", 2, cubeArray);
+  fillWithIndex(3, 3, "f", 3, cubeArray);
+  fillWithIndex(4, 3, "r", 1, cubeArray);
+
+  fillWithIndex(0, 4, "l", 6, cubeArray);
+  fillWithIndex(1, 4, "f", 4, cubeArray);
+  fillWithIndex(2, 4, "f", 5, cubeArray);
+  fillWithIndex(3, 4, "f", 6, cubeArray);
+  fillWithIndex(4, 4, "r", 4, cubeArray);
+
+  fillWithIndex(0, 5, "l", 9, cubeArray);
+  fillWithIndex(1, 5, "f", 7, cubeArray);
+  fillWithIndex(2, 5, "f", 8, cubeArray);
+  fillWithIndex(3, 5, "f", 9, cubeArray);
+  fillWithIndex(4, 5, "r", 7, cubeArray);
+}
 }
 
 
@@ -108,9 +171,9 @@ drawCube(cube.cubestate);
 function getRandAuf(){
     rand = Math.floor(Math.random()*4);//pick 0,1,2 or 3
     var aufs = ["U ", "U' ","U2 ", ""];
-    return aufs[rand] 
+    return aufs[rand]
 }
-//This will return an algorithm that has the same effect as algorithm, but with different moves. 
+//This will return an algorithm that has the same effect as algorithm, but with different moves.
 /*
 function obfusticate(algorithm){
 
@@ -120,7 +183,7 @@ function obfusticate(algorithm){
     orient = alg.cube.invert(rc.wcaOrient());
     return (alg.cube.invert(rc.solution()) + orient).replace(/2'/g, "2");
 }
-*/       
+*/
 
 function testAlg(algorithm, auf){
     algorithm = fixAlgorithm(algorithm);
@@ -146,7 +209,7 @@ function testAlg(algorithm, auf){
 
     }
 
-    var inverse = alg.cube.invert(algorithm);	
+    var inverse = alg.cube.invert(algorithm);
     var scrP = document.getElementById("scramble");
     if (document.getElementById("showScramble").checked){
         scrP.innerHTML = alg.cube.simplify(inverse);
@@ -216,22 +279,28 @@ function testRandomFromList(set){
 //Create Checkboxes for each subset
 //Each subset has id of subset name, and is followed by text of subset name.
 function createCheckboxes(){
-    for (var subset in window.zbll_full){
-        if (window.zbll_full.hasOwnProperty(subset)) {
+  for(var set in window.algs){
+    var title = document.createElement("span");
+    title.innerHTML = set + ":";
+    document.body.appendChild(title);
+    for (var subset in window.algs[set]){
+        if (window.algs[set].hasOwnProperty(subset)) {
             var x = document.createElement("INPUT");
             x.setAttribute("type", "checkbox");
-            x.setAttribute("id", "zbll" +  subset);
+            x.setAttribute("id", set.toLowerCase() +  subset);
             document.body.appendChild(x);
 
             var setName = document.createTextNode(subset);
             document.body.appendChild(setName);
         }
     }
+    document.body.appendChild(document.createElement("BR"));
+  }
 }
 createCheckboxes();
-function createAlgList(){  
+function createAlgList(){
     algList = [];
-    
+
     if(document.getElementById("allsets").checked){
         for (var subset in window.zbll_full){
             algList = algList.concat(zbll_full[subset]);
@@ -239,18 +308,18 @@ function createAlgList(){
         return algList;
     }
 
-    for (var subset in window.zbll_full){
-        
-        if(document.getElementById("zbll" + subset).checked){
-            algList = algList.concat(zbll_full[subset]);
 
-        }
-
+    for(var set in window.algs){
+      for (var subset in window.algs[set]){
+          if(document.getElementById(set.toLowerCase() + subset).checked){
+              algList = algList.concat(window.algs[set][subset]);
+          }
+      }
     }
     if(algList.length < 1){ //if nothing checked, just do T perm
         algList = ["R U R' U' R' F R2 U' R' U' R U R' F'"];
     }
-    
+
     return algList;
 }
 
@@ -307,7 +376,7 @@ listener.simple_combo("tab", function() {
 //CUBE OBJECT
 function RubiksCube() {
     this.cubestate = [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6];
-    
+
     this.resetCube = function(){
         this.cubestate = [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6];
     }
@@ -337,7 +406,7 @@ function RubiksCube() {
 			this.doAlgorithm("x'");
 			moves+="x'";
 		}
-		
+
 		if (cubestate[13]=="3") {//R face
 			this.doAlgorithm("y");
 			moves+="y";
@@ -348,7 +417,7 @@ function RubiksCube() {
 			this.doAlgorithm("y2");
 			moves+="y2";
 		}
-		
+
 		return moves;
 	}
 	this.toString = function(){
@@ -362,22 +431,22 @@ function RubiksCube() {
 
 	}
 
-    
+
     this.test = function(alg){
         this.doAlgorithm(alg);
         drawCube(this.cubestate);
     }
-    
+
     this.doAlgorithm = function(alg) {
 		var moveArr = alg.split(/(?=[A-Za-z])/);
-        var i;
+    var i;
 
 		for (i = 0;i<moveArr.length;i++) {
             var move = moveArr[i];
             var myRegexp = /([RUFBLDrufbldxyzEMS])(\d*)('?)/g;
             var match = myRegexp.exec(move.trim());
 
-			
+
 			if (match!=null) {
 
 				var side = match[1];
@@ -450,14 +519,14 @@ function RubiksCube() {
 				}
 			} else {
 
-				console.log("Invalid alg");
+				console.log("Invalid alg, or no alg specified");
 
 			}
 
 		}
 
 	}
-    
+
     this.solveNoRotate = function(){
 		//Center sticker indexes: 4, 13, 22, 31, 40, 49
         cubestate = this.cubestate;
