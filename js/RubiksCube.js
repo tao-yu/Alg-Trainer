@@ -286,8 +286,15 @@ listener.simple_combo("esc", function() {
 
 });
 
-listener.simple_combo("space", function() {displayAlgorithm();});
+listener.simple_combo("space", function() {
+
+    displayAlgorithm();
+
+});
 listener.simple_combo("enter", function() {
+    testRandomFromList(createAlgList());
+});
+listener.simple_combo("tab", function() {
     testRandomFromList(createAlgList());
 });
 
