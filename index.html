@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ZBLL trainer</title>
+<title>Algorithm trainer</title>
 </head>
 <body>
 
@@ -27,12 +27,16 @@ p {
 <input id="showScramble" type="checkbox">Show Scramble<br>
 <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
 <input id="allsets" type="checkbox">All<br>
+<select id="cubeType" onchange="drawCube(cube.cubestate)">
+	<option value="3x3" default>3x3</option>
+  <option value="2x2">2x2</option>
+</select><br>
 </form>
 
 <script src="js/alg_jison.js"></script>
 <script src="js/alg.js"></script>
 <script src="js/keypress.js"></script>
-<script src="js/fullzbll.js"></script>
+<script src="js/alg_list.js"></script>
 
 <script src="js/RubiksCube.js"></script>
 
