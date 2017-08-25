@@ -174,6 +174,8 @@ function getRandAuf(){
     return aufs[rand]
 }
 //This will return an algorithm that has the same effect as algorithm, but with different moves.
+
+//This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
 /*
 function obfusticate(algorithm){
 
@@ -366,12 +368,6 @@ listener.simple_combo("enter", function() {
 listener.simple_combo("tab", function() {
     testRandomFromList(createAlgList());
 });
-
-
-
-//console.log(obfusticate("R U R' F' R U R' U' R' F R2 U' R'"));
-
-
 
 //CUBE OBJECT
 function RubiksCube() {

@@ -1,3 +1,3 @@
-# ZBLLtrainer
+# Alg Trainer
 
-[link](https://tao-yu.github.io/ZBLLtrainer/)
+[link](https://tao-yu.github.io/Alg-Trainer/)
