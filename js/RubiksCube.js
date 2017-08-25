@@ -343,6 +343,7 @@ listener.simple_combo("m", function() {	doAlg("r'");});
 listener.simple_combo("v", function() {	doAlg("l");});
 listener.simple_combo("r", function() {	doAlg("l'");});
 listener.simple_combo("`", function() {	doAlg("M");});
+listener.simple_combo("'", function() {	doAlg("M");});
 listener.simple_combo("[", function() {	doAlg("M'");});
 listener.simple_combo("t", function() {	doAlg("x");});
 listener.simple_combo("n", function() {	doAlg("x'");});
