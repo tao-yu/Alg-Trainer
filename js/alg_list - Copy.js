@@ -66,19 +66,4 @@ var zbll_full = {
     //"sune cases where you can't just mirror the antisune case in your head (24 algs)": ["F R U R' U' R U R2 U' F' U R U R U' R' ", "F U R' F R F' R U' R' U R U' R' F'", "R' U2 R U R' U' R F U' R' U' R U F'", "L' U2 R U' R' U2 L U R U' R' U R U2 R'", "R U R' F' R U R' U R U2 R' F R U' R'", "R U2 L' R' U2 R U2 R' U2 L U' R U' R'", "R2 U R U R' U' R' U' R' L' U R' U' L", "R' U2 F' R U R' U' R' F R U2 R U", "R U2 R' U2 R' F R2 U R' U' R U R' U' F'", "R U' R' U' R U R D R' U2 R D' R2 U R U2 R' U", "R' U2 R' D' R U R' D R U' R U R' U R", "R' U' R U' R2 F' R U R U' R' F U2 R", "R U2 R' L' U2 R U R' U2 L R U2 R'", "U R U2 R' U' R U R' U' R U R D R' U2 R D' R2", "R' D' R U R' D R2 U' R' U R U R' U' R U2 R' U R U2 R'", "(U') R U2 R2 D' R U2 R' D R2 U' R' U R U' R' ", "R U R' F' R U R' U' R' F R2 U R' U' R U' R'", "R U R' F' R U2 R' U2 R' F R2 U' R'", "(U) R U R' U R' U' R' D R' U' R D' R U2 R", "R2 D' R U' R' D F R U R U' R' F' R ", "R U R' U R U' R2' F' R U R U' R' F R U' R'", "R U R2 F' R U2 R U2 R' F R U' R'", "(U) R U R' U' R U R2 D' R U R' D R U R U2 R'", "(U') R' U2 R' D R' U R D' R U R U' R U' R'", "(U) R' F R U R' U' R' F' D' R U R' D R2"],
 
 }
-
-var ollcp = {
-	
-	"1":[ "r U R' U R' r2 U' R' U R' r2 U2' r'", "R U2' R2' F R F' U2 R' F R F'", "R U' R2 D' r U' r' D R2 U R'", "F R U R' U' F' r' U r2 U' r2' U' r2 U r'",  ],
-	"2":[ "F R U R' U' F' f R U R' U' f'", "R2 F2 r U2 R U' r2 F2 r F R", "r U R' U2 R U2 r2 F2 r F' r' F2 r", "R' F' r' F2 r2 U R' U2 r' F2 R2", "y' R U' R2' D' r U r' D R2 U R'", "r D' R2' U' R U2 R' U R2 D r'",  ],
-	"3":[ "y' f R U R' U' f' U' F R U R' U' F'", "y' F' r U R' U r' F2 R U2 R' F R", "f U R U' R' f' F R' F' R U R U' R'", "y R' F2 R2 U2' R' F R U2' R2 F2 R", "y R' D' r U' r' D R U F R' F' R", "y F R U R' U' F' r' U2 R U R' U r",  ],
-	"4":[ "y f R U R' U' f' U F R U R' U' F'", "y r U2 r2 F2 r F' R U2 R2 F2 R", "y' R' F' R U2 R' F2 r U' R U' r' F", "y' F R' F' r U' R U2 r' U2 r U' r'", "y' R D r' U r D' R' d' R' F R F", "R' F' U' F U R U' r U2 R' U' R U' r'",  ],
-	"5":[ "y' r' U2 R U R' U r", "y' r D' R2 U' R U R' U R2 D r'", "R' F' R U R' U' R' F R F' U F R", "y F U' R2 D R' U R D' R2 U F'", "y2 R U' R' U' F' U R U R' U' R' F R", "r' U2 R U R' U F' U' F U r",  ],
-	"6":[ "y r U2 R' U' R U' r'", "y F U' R2 D R' U' R D' R2 U F'", "y F R U' R' U R U2 R' U' F'", "y r' D R2 U R' U' R U' R2 D' r", "R' F R F' U' r' D' r U r' D r", "r U2 R' F R' F' R U' R U' r'",  ],
-	"7":[ "r U R' U R U2 r'", "L' U2 L U2 L F' L' F", "F R' F' R U2 R U2 R'", "y2 R' U2 R U R' U R2 U R' U' R' F R F'", "R U' R' U' F' U2' F U2' R U2 R'", "y R' U' F R' F' R U' R U R' U R",  ],
-	"8":[ "r' U' R U' R' U2 r", "y F R' F' R U R U' R2 U' R U' R' U2 R", "f' U f R' U2 R' U2 R", "y2 R U2 R' U2 R' F R F'", "y' R U2 R' U2' F' U2' F U R U R'", "R U2 R' F R' F' R U' R U' R'",  ],
-	"9":[ "y M R U2 R' U' R U' R' U' M'", "F2 r U r' U2 F R U2 l U' R' U l' ", "y' F R U R' U' R U' R' U R U2 R' U' F'", "y2 R U R' U' R' F R2 U R' U' F'", "y' F' U' F r U' r' U r U r'", "y' R' U' R U' R' U R' F R F' U R",  ],
-	"10":[ "y2 M U R' U2 R U R' U R U M'", "L' U' L U L F' L2 U' L U F", "y2 R' U' R U F R U R' U' F' R' U R", "r' U' F2 R U' R' U2 r' F r U' r", "y2 R U R' y R' F R U' R' F' R", "y2 R U R' U R' F R F' R U2 R'",],
-
-}
-window.algs = { "ZBLL" :zbll_full, "EG-1": eg_full, "OLLCP": ollcp};
+window.algs = { "ZBLL" :zbll_full, "EG-1": eg_full};
