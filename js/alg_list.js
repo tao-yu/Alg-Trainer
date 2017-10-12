@@ -88,4 +88,7 @@ var ollcp = {
 	
 
 }
-window.algs = { "ZBLL" :zbll_full, "EG-1": eg_full, "OLLCP": ollcp};
+var test = {
+	"test1":["RUR'U'", "U R U2 R' U' F' R U2 R' U' R U' R' F R U' R'/ r' U' R U' R' U R U' R' U R' F R F' U r/ U2 R U2' R' U R' D' R U R' D R2 U' R' U R U' R'","U R U R' U R U' R' U R U' R D R' U' R D' R2'/ R U2 R' U' R U R' U2' L' U R U' L R'/ U' R U R' U F2 R U2' R' U2' R' F2 R"]
+}
+window.algs = { "ZBLL" :zbll_full, "EG-1": eg_full, "OLLCP": ollcp , "test": test};

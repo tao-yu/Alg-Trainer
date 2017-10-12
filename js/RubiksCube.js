@@ -1,6 +1,7 @@
-var currentRotation = 0;
+var currentRotation = "";
 var cube = new RubiksCube();
 var currentAlgorithm = "";//After an alg gets tested for the first time, it becomes the currentAlgorithm.
+var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
@@ -168,10 +169,10 @@ function doAlg(algorithm){
 }
 drawCube(cube.cubestate);
 
-function getRandAuf(){
-    rand = Math.floor(Math.random()*4);//pick 0,1,2 or 3
-    var aufs = ["U ", "U' ","U2 ", ""];
-    return aufs[rand]
+function getRandAuf(letter){
+    var rand = Math.floor(Math.random()*4);//pick 0,1,2 or 3
+    var aufs = [letter + " ", letter +"' ",letter + "2 ", ""];
+    return aufs[rand];
 }
 //This will return an algorithm that has the same effect as algorithm, but with different moves.
 
@@ -186,31 +187,33 @@ function obfusticate(algorithm){
     return (alg.cube.invert(rc.solution()) + orient).replace(/2'/g, "2");
 }
 */
+function pickAlg(algstr, sep, algNo){
+	return algstr.split(sep)[algNo - 1];
+}
 
-function testAlg(algorithm, auf){
-    algorithm = fixAlgorithm(algorithm);
+function addAUFs(algArr){
+
+	var rand1 = getRandAuf("U");
+	var rand2 = getRandAuf("U");
+	//algorithm = getRandAuf() + algorithm + " " +  getRandAuf()
+	var i = 0;
+	for (;i<algArr.length;i++){
+		algArr[i] = alg.cube.simplify(rand1 + algArr[i] + " " + rand2); 
+	}
+	return algArr;
+}
+function testAlg(algstr, auf){
+    algArr = algstr.split("/");
+	algArr = fixAlgorithms(algArr);
+
     cube.resetCube();
     if (auf){
-
-        algorithm = getRandAuf() + algorithm + " " +  getRandAuf()
-        rand2 = Math.floor(Math.random()*4);//pick 0,1 or 2 or 3
-        currentRotation = rand2;
-        switch(rand2){
-            case 1:
-                doAlg("y");
-                break;
-            case 2:
-                doAlg("y2");
-                break;
-            case 3:
-                doAlg("y'");
-                break;
-            case 4:
-                break;
-        }
-
+		algArr = addAUFs(algArr);
+		currentRotation = getRandAuf("y")
+		doAlg(currentRotation);
     }
 
+	algorithm = algArr[0];
     var inverse = alg.cube.invert(algorithm);
     var scrP = document.getElementById("scramble");
     if (document.getElementById("showScramble").checked){
@@ -227,8 +230,13 @@ function testAlg(algorithm, auf){
     //updateVisualCube(algorithm)
 
 }
-function fixAlgorithm(algorithm){
-    return algorithm.replace(/\[|\]|\)|\(/g, "");
+function fixAlgorithms(algorithms){
+	//for now this just removes brackets
+	var i = 0;
+	for (;i<algArr.length;i++){
+    	algorithms[i] = algorithms[i].replace(/\[|\]|\)|\(/g, "");
+	}
+	return algorithms;
     //TODO Allow commutators
 
 }
@@ -240,19 +248,7 @@ function updateVisualCube(algorithm){
 
 function reTestAlg(){
     cube.resetCube();
-    switch(currentRotation){
-        case 1:
-            doAlg("y");
-            break;
-        case 2:
-            doAlg("y2");
-            break;
-        case 3:
-            doAlg("y'");
-            break;
-        case 4:
-            break;
-    }
+	doAlg(currentRotation);
     doAlg(alg.cube.invert(currentAlgorithm));
     drawCube(cube.cubestate)
 
@@ -260,12 +256,12 @@ function reTestAlg(){
 function displayAlgorithm(){
     //show solution
     var x = document.getElementById("algdisp");
-    x.innerHTML = alg.cube.simplify(currentAlgorithm);
+    x.innerHTML = algArr.join("<br>");
     reTestAlg();
 
     //show scramble
     var y = document.getElementById("scramble");
-    y.innerHTML = alg.cube.simplify(alg.cube.invert(currentAlgorithm));
+    y.innerHTML = alg.cube.simplify(alg.cube.invert(algArr[0]));
 }
 function testRandomFromList(set){
     var x = document.getElementById("algdisp");
