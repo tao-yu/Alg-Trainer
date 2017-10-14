@@ -155,4 +155,25 @@ var COLL = {
 var test = {
 	"test1":["RUR'U'", "U R U2 R' U' F' R U2 R' U' R U' R' F R U' R'/ r' U' R U' R' U R U' R' U R' F R F' U r/ U2 R U2' R' U R' D' R U R' D R2 U' R' U R U' R'","U R U R' U R U' R' U R U' R D R' U' R D' R2'/ R U2 R' U' R U R' U2' L' U R U' L R'/ U' R U R' U F2 R U2' R' U2' R' F2 R"]
 }
-window.algs = { "ZBLL" :zbll_full, "EG-1": eg_full, "OLLCP": ollcp , "COLL": COLL, "algdbOLLCP":algdbOLLCP};
+
+
+var olfc = {
+	"all":["U R U2 D R' U R D R", "U' R' U' R D2 R", "D2 R' U' R U' D2 R' D2 R", "U R U' R U' D2 R'", "R2 U2 R U' R U R2D2 U R", "U' R' U2 R D2 R", "R U R' U' R U' D2 R", "R D R' U RU2' D R", "D R U' D R", "D R U RU2' D R", "U R U2' D2 R", "R U R2 U' R U' D2 R", "U' R U2 R'D2 R", "R U R' U' R2U' D2 R", "U' D' R U' R'D' R", "R D' R D R U' D2 R", "D R' D' R'  D2 U' R", "D R' D' R'  D2 U' R", "U' R U' R'D2 R", "R U D R U' RU' D R", "R D' R' U RD' U2' R", "U2 R U2 R2U' D2 R", "R D R U R'U2' D R"]
+}
+
+var CR = {
+		"UF<->UB" :[ "R B' R D2 L' F L D2 R2 B", "R' U' R U' R2 D' L F2 L' D R2", "(U') R2 D' L F2 L' D R2 U R' U R", "y L U2 L U' L U L U' L2 U' L' ", "(U) B' R2 U' R2 U R2 B U' F' U' F", "(U') y L' U' L U' L' U L U2 L' U' L", "(U) R U' R' U R U2 R' U' R U R' ", "(U') R' U2 R' U' R' U R' U' R2 U' R", "y L U L2 U L' U' L' U L' U2 L' ", "(U) R U' R' U R U R' U R U' R'", "(U') R' U R2 U R U' R U R U2 R", "y L U2 L U2 L2 D L' U2 L U2 D' L" ],
+		"UF<->UL" :[ "R' U' R B U B' R B' R' B2 U' B' ", "(U2) R U' R' U L' B2 D' R' D B2 L", "L' B2 D' R D B2 L U' R U R' ", "(U2) y L2 U' L2 U' L2 U2 L2", "(U) y L' U' L U2 L' U' L", "F' U2 F B U B2 D' R2 D B  ", "(U') y L2 U2 L2 U L2 U L2", "(U) R' U' R2 U' R2 U2 R2 U' R'", "(U) R U' R' U' R U2 R' ", "B' R2 U' R2 U2 R2 U' R2 U' B", "(U2) R U2 R' U R U R' ", "(U) R U R2 U2 R2 U R2 U R " ],
+		"UL<->UB" :[ "(U) R U2 R' U2 B' U' R U R' B", "R U2 R D L' B2 L D' R2", "(U') R2 D L' B2 L D' R' U2 R'  ", "R2 D' L F2 L' D R U2 R", "(U) y L2 U' L U' L' U2 L U' L", "(U') R2 B U' B' U' B U2 B' U' R2", " F2 L2 D' B2 D' B2 D2 L2 F2", "(U') R2 U R' U R U2 R' U R' ", "R U2 F U R' U' R F' U2 R' ", "(U) F2 L2 D2 B2 D B2 D L2 F2", "R U2 R L' D B2 D' L R2", "(U') R U' R U2 R' U' R U' R2" ],
+		"Clockwise" :[ "y M2 U' M' U2 M U' M2", "(U) y R U2 R2 U2 R2 U R2 U R2 U' R' ", "R' U2 R U R' U R", "L2 D R' F2 R D' L' U2 L' ", "(U) F2 U2 F2 R' U F2 U F2 U' R", "F2 L U' F2 U' F2 U L' U F2", "F2 L2 U' F2 U' F2 U L2 U F2 ", "B R U2 B' U' B U' R' B'", "(U2) L' R2 U R2 U' L U2 R2 U2 R2", "(U) y L2 U2 L2 U L2 U L2 ", "(U2) F' L2 B' U' B U L2 F", "(U) F' R U2 R' U' R U' R' F" ],
+		"AntiClockwise" :[ "y M2 U M' U2 M U M2", "L' U' L U' L' U2 L ", "(U') L U L2 U' L2 U' L2 U2 L2 U2 L' ", "(U') F2 L2 D2 B2 D B2 D L2 F2", "(U) R U R' F' U' L' U2 L U F ", "(U) R U' L' U' L U' L' U2 L R'", "F' U' R' U' F U F' R U F", "(U') B' R B2 L U L' U' B2 R' B", "L U2 L D R' F2 R D' L2", "(U') y L2 U' L2 U' L2 U2 L2", "(U) F' L' U2 L U L' U L F", "R2 B U B' U' R2 F' U2 F" ],
+}
+window.algs = {
+	"ZBLL" :zbll_full,
+	"EG-1": eg_full,
+	"OLLCP": ollcp ,
+	"COLL": COLL,
+	"algdbOLLCP": algdbOLLCP,
+	"OL5C": olfc,
+	"CR" : CR
+};
