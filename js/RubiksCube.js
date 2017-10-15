@@ -236,6 +236,14 @@ function testAlg(algstr, auf){
     //updateVisualCube(algorithm)
 
 }
+
+function reTestAlg(){
+    cube.resetCube();
+	doAlg(currentRotation);
+    doAlg(alg.cube.invert(currentAlgorithm));
+    drawCube(cube.cubestate)
+
+}
 function fixAlgorithms(algorithms){
 	//for now this just removes brackets
 	var i = 0;
@@ -250,14 +258,6 @@ function fixAlgorithms(algorithms){
 function updateVisualCube(algorithm){
     imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&case=" + algorithm;
     document.getElementById("visualcube").src=imgsrc;
-}
-
-function reTestAlg(){
-    cube.resetCube();
-	doAlg(currentRotation);
-    doAlg(alg.cube.invert(currentAlgorithm));
-    drawCube(cube.cubestate)
-
 }
 function displayAlgorithm(){
 	if (algArr == null){
