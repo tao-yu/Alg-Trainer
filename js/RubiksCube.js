@@ -260,6 +260,9 @@ function reTestAlg(){
 
 }
 function displayAlgorithm(){
+	if (algArr == null){
+		return;
+	}
     //show solution
     var x = document.getElementById("algdisp");
     x.innerHTML = algArr.join("<br>");
