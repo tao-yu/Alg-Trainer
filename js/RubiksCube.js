@@ -6,6 +6,8 @@ var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
 
+Cube.initSolver();
+
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
     ctx.fillRect(stickerSize * x, stickerSize * y, stickerSize, stickerSize);
@@ -177,7 +179,7 @@ function getRandAuf(letter){
 //This will return an algorithm that has the same effect as algorithm, but with different moves.
 
 //This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
-/*
+
 function obfusticate(algorithm){
 
     Cube.initSolver();
@@ -186,7 +188,7 @@ function obfusticate(algorithm){
     orient = alg.cube.invert(rc.wcaOrient());
     return (alg.cube.invert(rc.solution()) + orient).replace(/2'/g, "2");
 }
-*/
+
 function pickAlg(algstr, sep, algNo){
 	return algstr.split(sep)[algNo - 1];
 }
@@ -217,7 +219,11 @@ function testAlg(algstr, auf){
     var inverse = alg.cube.invert(algorithm);
     var scrP = document.getElementById("scramble");
     if (document.getElementById("showScramble").checked){
-        scrP.innerHTML = alg.cube.simplify(inverse);
+        scramble = alg.cube.simplify(inverse);
+		if(document.getElementById("realScrambles").checked){
+			scramble = obfusticate(scramble);
+		}
+        scrP.innerHTML = scramble;
     } else{
         scrP.innerHTML = "";
     }
@@ -261,7 +267,11 @@ function displayAlgorithm(){
 
     //show scramble
     var y = document.getElementById("scramble");
-    y.innerHTML = alg.cube.simplify(alg.cube.invert(algArr[0]));
+    scramble = alg.cube.simplify(alg.cube.invert(algArr[0]));
+	if(document.getElementById("realScrambles").checked){
+		scramble = obfusticate(scramble);
+	}
+    y.innerHTML = scramble;
 }
 function testRandomFromList(set){
     var x = document.getElementById("algdisp");

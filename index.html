@@ -24,7 +24,8 @@ p {
 <p id="algdisp" style="height: 140px">Solution</p> 
 
 <form action="">
-<input id="showScramble" type="checkbox">Show Scramble<br>
+<input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
+<input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
 <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
 <input id="allsets" type="checkbox">All<br>
 <select id="cubeType" onchange="drawCube(cube.cubestate)">
@@ -33,6 +34,9 @@ p {
 </select><br>
 </form>
 
+
+<script src="js/cube.js"></script>
+<script src="js/solve.js"></script>
 <script src="js/alg_jison.js"></script>
 <script src="js/alg.js"></script>
 <script src="js/keypress.js"></script>
