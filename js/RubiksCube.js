@@ -290,8 +290,7 @@ function testRandomFromList(set){
 //Create Checkboxes for each subset
 //Each subset has id of subset name, and is followed by text of subset name.
 function createCheckboxes(){
- // for(var set in window.algs){
-	var set = document.getElementById("algset").value;
+  for(var set in window.algs){
     var title = document.createElement("span");
     title.innerHTML = set + ":";
     document.body.appendChild(title);
@@ -307,18 +306,8 @@ function createCheckboxes(){
         }
     }
     document.body.appendChild(document.createElement("BR"));
-  //}
+  }
 }
-
-function createListOfAlgsets(){
-	for(var algsetName in window.algs){
-		var x = document.getElementById("algset");
-		var option = document.createElement("option");
-		option.text = algsetName;
-		x.add(option);
-	}
-}
-createListOfAlgsets();
 createCheckboxes();
 function createAlgList(){
     algList = [];
