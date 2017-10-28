@@ -321,11 +321,11 @@ function createAlgList(){
 
 
     for(var set in window.algs){
-      for (var subset in window.algs[set]){
-          if(document.getElementById(set.toLowerCase() + subset).checked){
-              algList = algList.concat(window.algs[set][subset]);
-          }
-      }
+		for (var subset in window.algs[set]){
+			if(document.getElementById(set.toLowerCase() + subset).checked){
+				algList = algList.concat(window.algs[set][subset]);
+			}
+		}
     }
     if(algList.length < 1){ //if nothing checked, just do T perm
         algList = ["R U R' U' R' F R2 U' R' U' R U R' F'"];
