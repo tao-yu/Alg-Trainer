@@ -6,7 +6,7 @@ var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
 
-Cube.initSolver();
+//Cube.initSolver();
 
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
@@ -289,7 +289,43 @@ function testRandomFromList(set){
 
 //Create Checkboxes for each subset
 //Each subset has id of subset name, and is followed by text of subset name.
+
+function createAlgsetPicker(){
+    var algsetPicker = document.getElementById("algsetpicker")
+    for (var set in window.algs){
+        var option = document.createElement("option")
+        option.text = set;
+        algsetPicker.add(option);
+        
+    }
+}
+
+createAlgsetPicker();
+
 function createCheckboxes(){
+    var set = document.getElementById("algsetpicker").value;
+    console.log("createCheckboxes() called")
+    
+    var subsets = Object.keys(window.algs[set]);
+    
+    var myDiv = document.getElementById("cboxes");
+    myDiv.innerHTML = "";
+    
+    for (var i = 0; i < subsets.length; i++) {
+        var checkBox = document.createElement("input");
+        var label = document.createElement("label");
+        checkBox.type = "checkbox";
+        checkBox.value = subsets[i];
+        
+        checkBox.setAttribute("id", set.toLowerCase() +  subsets[i]);
+        console.log("id" + checkBox.id);
+        myDiv.appendChild(checkBox);
+        myDiv.appendChild(label);
+        label.appendChild(document.createTextNode(subsets[i]));
+    }
+}
+
+function createCheckboxes2(){
   for(var set in window.algs){
     var title = document.createElement("span");
     title.innerHTML = set + ":";
@@ -308,27 +344,24 @@ function createCheckboxes(){
     document.body.appendChild(document.createElement("BR"));
   }
 }
-createCheckboxes();
+//createCheckboxes();
 function createAlgList(){
     algList = [];
 
-    if(document.getElementById("allsets").checked){
-        for (var subset in window.zbll_full){
-            algList = algList.concat(zbll_full[subset]);
+
+    var set = document.getElementById("algsetpicker").value;
+    for (var subset in window.algs[set]){
+        console.log("in algist" + set.toLowerCase() + subset);
+        if(document.getElementById(set.toLowerCase() + subset).checked){
+            algList = algList.concat(window.algs[set][subset]);
+        }
+    }
+    
+    if(algList.length < 1){ //if nothing checked, just do T perm
+        for (var subset in window.algs[set]){
+            algList = algList.concat(window.algs[set][subset]);
         }
         return algList;
-    }
-
-
-    for(var set in window.algs){
-		for (var subset in window.algs[set]){
-			if(document.getElementById(set.toLowerCase() + subset).checked){
-				algList = algList.concat(window.algs[set][subset]);
-			}
-		}
-    }
-    if(algList.length < 1){ //if nothing checked, just do T perm
-        algList = ["R U R' U' R' F R2 U' R' U' R U R' F'"];
     }
 
     return algList;

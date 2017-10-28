@@ -16,7 +16,7 @@ p {
     font-family: Arial;
     font-size: 20px;
 		color: white;
-}
+
 </style>
 
 <p id="scramble" style="height: 20px">Scramble</p>
@@ -25,16 +25,23 @@ p {
 
 <form action="">
 <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
-<input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
+<input id="realScrambles" type="checkbox">Use Real Scrambles<br>
 <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
 
 <select id="cubeType" onchange="drawCube(cube.cubestate)">
     <option value="3x3" default>3x3</option>
     <option value="2x2">2x2</option>
 </select><br>
-<input id="allsets" type="checkbox">Full ZBLL<br>
+
 </form>
 
+
+<select id="algsetpicker" size=20 onchange="createCheckboxes()">
+</select>
+    
+<div id="cboxes"></div>
+    
+<!-- <input id="allsets" type="checkbox">All<br> -->
 
 <script src="js/cube.js"></script>
 <script src="js/solve.js"></script>
@@ -42,7 +49,6 @@ p {
 <script src="js/alg.js"></script>
 <script src="js/keypress.js"></script>
 <script src="js/alg_list.js"></script>
-
 <script src="js/RubiksCube.js"></script>
 
 <br></br>
