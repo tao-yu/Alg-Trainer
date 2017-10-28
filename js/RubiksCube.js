@@ -298,6 +298,7 @@ function createAlgsetPicker(){
         algsetPicker.add(option);
         
     }
+    algsetPicker.size = Object.keys(window.algs).length
 }
 
 createAlgsetPicker();
