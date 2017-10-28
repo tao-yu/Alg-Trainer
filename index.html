@@ -4,7 +4,13 @@
 <title>Algorithm trainer</title>
 </head>
 <body>
+<div id="right">
 
+<select id="algsetpicker" size=20 onchange="createCheckboxes()">
+</select>
+<div id="cboxes"></div>
+
+</div>
 <style>
 body {
 	/*background: #002B36;*/
@@ -16,6 +22,13 @@ p {
     font-family: Arial;
     font-size: 20px;
 		color: white;
+    
+}
+#right {
+    float: right;
+    width: 80%;
+    text-align: left;
+}
 
 </style>
 
@@ -36,11 +49,8 @@ p {
 </form>
 
 
-<select id="algsetpicker" size=20 onchange="createCheckboxes()">
-</select>
-    
-<div id="cboxes"></div>
-    
+
+
 <!-- <input id="allsets" type="checkbox">All<br> -->
 
 <script src="js/cube.js"></script>
