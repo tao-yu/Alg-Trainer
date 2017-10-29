@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    
 <head>
 <title>Algorithm trainer</title>
 </head>
@@ -9,7 +10,7 @@
 <select id="algsetpicker" size=19 onchange="createCheckboxes()">
 </select>
 <div id="cboxes"></div>
-
+<br>Leave all checkboxes blank to test on the full algset.
 </div>
 <style>
 body {
@@ -26,13 +27,13 @@ p {
 }
 #right {
     float: right;
-    width: 50%;
+    width: 65%;
     text-align: left;
 }
 
 </style>
 
-<p id="scramble" style="height: 40px">Scramble</p>
+<p id="scramble" style="height: 30px">Scramble</p>
 <canvas id="cube" width="250" height="300" ></canvas>
 <p id="algdisp" style="height: 140px">Solution</p> 
 
@@ -61,7 +62,7 @@ p {
 <script src="js/alg_list.js"></script>
 <script src="js/RubiksCube.js"></script>
 
-<br></br>
+<br>
 Enter/Tab: New scramble<br>
 Space: Reset case and show algorithm<br>
 Esc: Reset case without showing algorithm<br>
@@ -72,4 +73,6 @@ ZBLL Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d
 ZBLS Algorithms from Chad Battens <a href="https://docs.google.com/spreadsheets/d/15uhCNM_GUj2KvyDda8zoCIIweVjWrC2AppaxRiHf2t4/edit?usp=sharing">Spreadsheet</a>
 <br>
 Other algorithms from http://algdb.net/ unless stated otherwise.
+<br>
+</body>
 </html>

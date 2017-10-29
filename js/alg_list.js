@@ -343,7 +343,7 @@ window.algs = {
 	"EG2": EG2,
 	"ORTEGA": ORTEGA,
 	
-	"1LLL (Micki)" : oneLookLastLayer,
+	"1LLL (Micki Kanaiya Harning, WIP)" : oneLookLastLayer,
 	
 	"OLLCP (Justin Taylor, WIP)": ollcp ,
 };
