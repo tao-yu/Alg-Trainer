@@ -6,7 +6,9 @@ var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
 
-//Cube.initSolver();
+createAlgsetPicker();
+drawCube(cube.cubestate);
+Cube.initSolver();
 
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
@@ -169,7 +171,7 @@ function doAlg(algorithm){
     cube.doAlgorithm(algorithm);
     drawCube(cube.cubestate);
 }
-drawCube(cube.cubestate);
+
 
 function getRandAuf(letter){
     var rand = Math.floor(Math.random()*4);//pick 0,1,2 or 3
@@ -301,7 +303,7 @@ function createAlgsetPicker(){
     algsetPicker.size = Object.keys(window.algs).length
 }
 
-createAlgsetPicker();
+
 
 function createCheckboxes(){
     var set = document.getElementById("algsetpicker").value;
