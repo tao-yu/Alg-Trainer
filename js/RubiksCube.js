@@ -328,26 +328,6 @@ function createCheckboxes(){
     }
 }
 
-function createCheckboxes2(){
-  for(var set in window.algs){
-    var title = document.createElement("span");
-    title.innerHTML = set + ":";
-    document.body.appendChild(title);
-    for (var subset in window.algs[set]){
-        if (window.algs[set].hasOwnProperty(subset)) {
-            var x = document.createElement("INPUT");
-            x.setAttribute("type", "checkbox");
-            x.setAttribute("id", set.toLowerCase() +  subset);
-            document.body.appendChild(x);
-
-            var setName = document.createTextNode(subset);
-            document.body.appendChild(setName);
-        }
-    }
-    document.body.appendChild(document.createElement("BR"));
-  }
-}
-//createCheckboxes();
 function createAlgList(){
     algList = [];
 
