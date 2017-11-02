@@ -361,11 +361,43 @@ var zzll = {
 	"AS4":["R U R' U R' U' R' D R' U' R D' R U2 R","L' U R U' L U2 R' U' L' U R U' L R'","R2 D r' U2 r D' R2 U' R U' R'","R' U' R U' R' U2 L' U2 L U L' U2 R U' L",],
 	"AS5":["R' U' R2 U' L U2 R' U R U2 R2 L' U2 R","R U2 R' U' R U L' U L U2 R' U' L' U2 L","R' U2 L U' R U L' R' U R U' R' U2 R","R U2 R' U' R U R' L' U R U' L U2 R'",],
 	"AS6":["R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2","R U R' U R' U' R2 U' R2 U2 R","R' U' R U R U2 R' U' R' U R U' R U' R'","R U R' U' R' U' R U R U' R' U' R' U R",],
-}
+};
+
+var ttll = {
+	"Front Opp":[ "R' D' R U' R2 D' R U' R' D R U D R", "(U) R U' R' U R U2 R' U' R U R'", "(U') R2 U2 R U' R' U R' U2 R2 U R U R'", "(U2) R2 U R2 U R2 U2 R2", "R2 U2 R2 U' R2 U' R2", "R' U2 R U2 R U R' U2 R U R' U' R' U2 R", "(U') R U R' U R U R' U R U' R' U R U R' U R U R'", "R U' R' U' R U2 R' U2 R U2 R' U R U R'", "(U2) R U2 R' U' R' U2 R2 U R2 U R", "(U) R' U' R' U R U2 R U2 R2 U' R U R", "(U) R U' R' U R2 U R' U R' U' R2 U' R' U2 R'", "(U) R' U' R2 U' R2 U2 R U R U2 R'" ],
+	"Right Opp":[ "(y') R2 U2 R U' R2 U R U R' U2 R2 U2 R' U R2", "(y' U') R' U R U' R' U2 R U R' U' R", "(y' U) R2 U2 R' U R U' R U2 R2 U' R' U' R", "(y' U2) R' U2 R U R U2 R2 U' R2 U' R'", "(U') D R2 U2 R2 U R2 U R2 D'", "(y') R2 U2 R U R U' R' U2 R U R' U' R' U R2", "(y') R' U R U R' U R U2 R' U R U R' U R", "(y' U') R2 U' R2 U R2 U2 R2 U' R2 U R2", "(y' U2) R2 U' R2 U' R2 U2 R2", "(y' U') R U R U' R' U2 R' U2 R2 U R' U' R'", "(y' U) R U R U' R2 U2 R U2 R U R' U' R'", "(y' U') R U R2 U R2 U2 R' U' R' U2 R" ],
+	"Double Opp":[ "R2 U R2 D R2 D' R2 U' R2 D R2 D'", "R U2 R' U2 R' U' R2 U' R2 U2 F R U R U' R' F'", "F2 r2 U' r2 U' r2 U r2 U F2", "F2 U' r2 U' r2 U r2 U r2 F2", "R U' R' U' R U' R D R' U' R D' R' U R' U2 R U R'", "F2 U R2 U R2 U R2 U2 R2 U F2", "(U2) x R' U R U' R' U R U' R' U R U' x'", "(U') R U' R' U R U' R2 F2 R2 U' R' U' R U R' F2", "(U) l' U2 l U2 R U' R' U l' U2 l U' R U' l' U2 x'", "(U') R2 U' F2 U' F2 R2 U2 R2 D R2 D'", "R2 D R2 U' D' F2 R2 U' R2 U' F2 ", "F2 U' R2 U2 R2 U' R2 U' R2 U' F2" ],
+	"Front Bar":[ "D' r2 U R2 U' r2 D R2 ", "(y' U') F R2 U' R' U2 R' U2 R2 U R' U' R' U' R U R' F'", "(U') R U R' U' R U' R2 D' R U' R' D R U2 R U' R'", "(U') R U2 R' U R U2 R D R' U2 R D' R' U R'", "(y') R' U2 R U2 R' U R U2 R2 D' r U2 r' D R2", "(U') R2 U2 R' U x U' r' U' r U2 R' U' x'", "(U2) R2 D R' U2 R D' R2 U2 R U R' U2 R U2 R'", "R U R' U' R U' R' U' R U R' U' R' D' R U R' D R", "D' r U2 r' R U2 R U R2 U' R2 D R2", "F R U R' U' R' F' R2 U2 R' U2 R U2 R'", "D R U' R U2 R2 U R U' R U2 R' U' R' D' R U2 R'", "F U' F R2 u R' U R U' R u' R2 F2" ],
+	"Right Bar":[ "(x') D' R U' R' D2 R U R' D' x", "R U R' U2 R2 D R' U R D' R' U2 R' U R U R'", "(x) U R U2 r' U r U x' U' R U2 R2", "R' U R' U' D R2 U' R U' R' U R' U R2 U D' R2", "(U) R U R' U2 R' D' R U R' D R2 U R' U R U' R'", "R2 D' R2 U R2 U' R' U2 R' r U2 r' D", "R U2 R' U2 R U' R' U2 R2 D R' U2 R D' R2", "R U R' U' R U' R' U' R U R' U2 R' D' R U2 R' D R", "(U) R U2 R' D R U R U2 R' U R' U' R2 U2 R' U R' D'", "R U2 R' U2 R U' R' U2 R2 D r' U2 r D' R2", "R U' R D R' U2 R D' R' U2 R' U' R U2 R'", "(U') R2 U2 R2 F2 U' R2 U' R2 U F2" ],
+	"Double Bar":[ "(y') R2 r U' r' F2 R2 U' R' F R' F2 R2", "(y) F2 R U R' U' R' F R2 U' R' U' R U R' F", "(U') R U2 R' U' R U2 R' U' F2 R U2 R' U2 l' U2 l", "R2 U R2 D R2 U' R D' R D R' U R U' R D'", "(U) R' D' R U2 R' D R2 U2 R' U' R U2 R' U' R U2 R'", "R' D' R U R' D R U2 R U' R' U R U' R' U2 R U2 R'", "(y') R2 F2 R F' R U R2 F2 r U r' R2", "R U R' U' R U' R' U' R U R D R' U' R D' R' U R'", "R' U2 R2 F R F' R U' R' F' U F R U' R", "F2 r2 U' r' F r' F2 R U' R'", "(U') R2 U2 R2 U' R' U' l D2 l' U R' U' R2 F2", "R' U2 R' U R U' D' R U2 R U R U' R2 D R" ],
+};
+
+var tols = {
+	"New Shapes":["D' R' D R U' R' D' R D","R U' R' U' R' F R F' R U2 R'","R U' R' U' R U R' U l' U R U'","F R' F' R U' R U R'","R U2 R' F R' F' R U R U R'","R U2 R' U2 R U2 R2 F R F'","R U R' U' R U R2 F R F'","r U' R' U2 M U R U R' U r U' r'","R' D' R U' R' D R  ","R U' R' U R U R2 F R F'","F' R U R' U' R' F r U R U' r'","R' F R y' R' U R' U' R","R2 r' U' R' U r U R' U R U' R'","R U' R2 U' R U R U r' U' R' U r","r U' R' U R U r' U R U' R'","r U2 r' U2 r U' r' U2 r U2 r'",],
+	"Big S Shapes":["L F' L' U' L U F U' L'","R U R' U r U' R' U2 R U r'","R U' M' U R' U' R2 r' U R'","R' F R U R' U' F' U R","R U' R' F R' F' R2 U' R' U R U R'","R U2 R' F R U R' U' F' R U2 R'",],
+	"W Shapes":["R U R’ U R U’ R’ U’ R’ F R F’","R U r' U' R U M' U' R'","R' U' R U' R' U R U l U' R' U","R U' R' U' R U' R' U' R' F R F'",],
+	"C Shapes":["R' U' R' F R F' U R","F R' F' R U r U' r' U' r U r'","R U R' U' R' F R F'","R U M U' R' U r U' R'",],
+	"T Shapes":["F R U R’ U’ F’","R U' R' F R' F' R U' R U2 R'","R U R' U' R' F R F'","R U' R2 F2 r U r' F R2 U R'",],
+	"Square Shapes":["l' U2 L U L' U l","R U R' U' M' U' R U R' U M","R2 U R' U' R' U' F R F' U2 R'","R U' R' U2 R U' R' F R U R' U' F'","r U2 R' U' R U' r'","R U R' U2 R U' R' U2 R' F R F'","R U' R' U2 R U' R2 F' U' F U R","M' U' R U' R' U2 R U' r'",],
+	"All Edges Oriented":["R U R' U2 R U R'","R U2 R' U R U2 R' U2 R U R'","D R D R' U' R D' R' D'","R U' R' U' R U R' U' R U2 R'","R U2 R' U' R U R' U R U R'","R U2 R’ U2 R U R’ U R U’ R’","R U2 R' U R U R'","R U' R' U' R U' R' U R U2 R'","R U R' U R U2 R'","R U2 R' U' R U R' U' R U' R'","R2 D R' U2 R D' R' U2 R'","F R' F' r U R U' r'","R U' R' U R U2 R' U R U' R'","R U' R' U R U' R' U' R U R'","R' D' R U' R' D R  ","R U' R' U2 R U' R'","R U R' U R U R' U' R U2 R'","R U' R' U' R U2 R'","R U R' U' R U' R' U2 R U2 R'","R U2 R' U R U R' U R U2 R' U' R U' R'","R U2 R' U' R U' R'","R U2 R2 U' R2 U' R2 U2 R","r U R' U' r' F R F'",],
+	"P Shapes":["S R U R' U' R' F R f'","f R U R’ U’ f’","R U2 R' U2 l U' R U R2","R U2 R' F U R U' R' F' R U2 R'","F R' F' R U R U R' U' R U' R'","f’ L’ U’ L U f","r U' r' U r U M U' R'","F R' F' R2 U' R' U2 R U2 R'",],
+	"Line Shapes":["f R U R' U' R U R' U' f'","r U r' U R U' R' U R U' R' r U' r'","R U2 R' U' r U' r' U' r U r'","R U' R' U2 R U2 R2 F R F' R U R'","R U2 R' F R' F' R U R U R'","F U R U' R2' F' R U2 R U2 R'","R U2 R2 U' R U' R' U2 F R F'","R U2 R2 F R2 U R' U' F' R U2 R'","R U' R' U' F2 r U r' F","R U2 R' U R' F R F' U2 R U' R'",],
+	"All Corners Oriented":["M’ U M U2 M’ U M","R U R' U' M’ U R U' r'",],
+	"Small L Shapes":["R' U' l' U R U' R' U R U' x' U R","r U' r2 U r2 U r2 U' r","r' U' R U' R' U R U' R' U2 r","l' U R U' L U' R' U R U r'","R U2 R2 F R F' U R U R'","F' R U R' U R U' R' U' l' U2 R U'","R U2 R' F' U2 F U R U' R'","D r' U' r U R' U2 R U r' U r D'","F R U R' U' R U R' U' F'","r' U r2 U' r2' U' r2 U r'","r U R' U R U' R' U R U2 r'","F U R U' R' F' R U' R' U2 R U' R'","R U R' U' F' U2 F R U2 R'","R U2 R' F R U R' U' F r U r' F","r U' r' U r U r' U R U2 R'","r U r' U' R U2 R' U' r U' r'",],
+	"Fish Shapes":["F R U' R' U' R U R' F'","R U R' U' R' F R2 U R' U' F'","R U2 r' U R U R' U' M'","R U2 R2 F R F' R U2 R'","R U R' y R' F R U' R' F' R","r U2 R U2 R' U' R U' R' U r'","R U2 M' U' R' U2 R U r'","r U r' F' U2 F U2 r U' r'","R U' R' U' R U R' U R' F R2 U R' U' F'","R2 U2 r U' R2 U R' U2 R' U r'","R U' R' U r U' R' U' R U r'","M U' R U' R' U2 R U' R' U M'",],
+	"Large L Shapes":["l U' l' U' l U R' U' F U","r’ U’ r R’ U’ R U r’ U r","R2 U R' U R U2 R2 U R' F R F'","R U' R' F' U' F U R U R'","R U2 R' F' U F R U R'","R U' R' F R' F' R2 U R'","R U l U' R' U r U' R' U L'","R' F R U2 r U r' U2 R U R' U' F'","R' F R U R' F' R F U' F'","r U r' R U R' U' r U' r'","R U' R' F R' F' R U2 R U' R'","R F' L' U' L U F R'","R' F R U R U' R2 F' R2 U R'","R' U' R' F' U' F R U2 R' U' R2","R' F R2 U R' U' F' U R U' R'","R U' R U R' U r U2 R2 U' R U' r'",],
+	"Dot Shapes":["R U2 R2 F R F' U2 R' F R F'","r' R2 U R' U r U2 r' U M'","r U2 r' U2 r U r' U2 r U2 r'","M U R U R' U' M' R' F R F'","F R' F' R U2 r U' R' U2 R U r'","F R' F' R2 U2 R2 F R F'","r U' R' U2 M U' r U' R' U2 M'","R U' R' U' R' F R F' U2 l' U R U'","R U R D r' U r D' R' U' R'","D R' U' R' D' r U r' D R U R D'","R U R D r' U' r D' R2 U R U2 R'","R U' R2 D' r U r' D R2 U R'","r R2 U' R U' r' U2 r U' M","R2 D' r U r' D R2 r' U r U' r' U' r","r U R' U' M2 U R U' R' U' M'","R U2 R' U' R2 D r' U' r D' R' U' R'","F2 r U r' U2 r U' L' U2","R' F R U' M' U R U r' U' F'","R U R D r' U' M' U' R D' R2","M U' R U' R' U' r U2 r' U' M'","R U R D r' U' r D' R' U' R'","F' R U R' U R' F R F' U2 l' U2 R U'",],
+	"Small S Shapes":["r U R' U R U2 r'","r' R2 U R' U R U2 R' U M'","r U R' U' M U' R U R'","r U r2 F2 r2 U' r2 F2 r","F' L' U2 L U2 F","r' U2 R2 U R2 U r U R U R'","r U r' U2 r U R' U' R U' R' U' M","R U' R' U R' U' F U R U' F'","l' U' L U' L' U2 l","r R2 U' R U' R' U2 R U' M","F R' F' R U2 R2 U R' U R U2 R2","R U2 R' U R U' R' U2 R U' R2 F R F'","F' U2 L' U2 L F","R U' R' U' R U2 R' F R U R' U' F'","R U2 R2 F R F' R U R' U2 R U' R'","R U' R2 F R F' R U R'",],
+	"Awkward Shapes":["R U R' U R U2 R' F R U R' U' F'","F U R U2 R' U' R U2 R' U' F'","F R' F' R U' R U' R' U' R U' R'","r U' r2 U' R U' R' U2 r2 U r'","R' U' R U' R' U2 R F R U R' U' F'","r2 D' r U r' D r2 U' r' U' r","r U' R' U' R U2 R' U' M","R U' R' U' r U' R' U2 R U r'",],
+};
+var tsle = {
+	"Full":["U R U' R' U' R U' R' U R U' R'", "R U' R'", "U' R U2 R' U2 R U2 R'", "R2 D R' U' R D' R2", "R U' R' U R' U' R U' R' U2 R", "R U R' U2 R U' R' U' R U R'", "R U R' U' R U' R'", "U R U' R' U R U2 R'", "U2 R U2 R' U R U2 R'", "U' R U' R' U R U R' U' R U' R'", "R U' R' U' R U2 R' U' R U' R'", "R U R' U2 R U2 R' U R U' R'", "U' R U' R' U R U' R'", "U' R U R' U2 R U2 R'", "U R U2 R' U' R U2 R' U' R U' R'", "R U2 R' U R U' R' U R U' R'", "U R U2 R'", "U' R U2 R' U R U' R'", "U' R U R' U' R U R'", "R U' R' U' R U R' U R U2 R'", "R U' R' U R U R' U R U2 R'", "U' R U' R' U' R U' R' U R U R'", "U R U' R' U R U' R' U R U2 R'", "U2 R U R' U' R U R' U2 R U R'", "U2 R U R' U' R U R' U2 R U R'", "R U' R' U R U2 R' U' R U' R'", "R U R' U' R U R' U' R U' R'", "U R U' R' U2 R U R'", "U' R U R' U R U' R'", "R U R' U R U R' U R U' R' U' R U2 R'", "U R U' R' U' R U R' U R U' R'", "U2 R U R' U' R U' R' U2 R U' R'", "R' U2 R U R' U R U' R U R'", "U2 R U2 R' U' R U' R' U R U' R'", "R U' R' U' R U R' U2 R U R'", "U R U2 R' U2 R U R' U2 R U R'", "R U R' U' R U R' U R U R'", "R U' R' U R U2 R' U' R U R' U R U R'", "U2 R U' R' U2 R U R' U R U' R'", "R U R' U2 R U R' U R U' R'", "R U' R U R' U R U2 R' U R'", "U2 R U R'", "U R U' R' U R U' R' U2 R U R'", "U' R U R' U' R U' R' U R U R'", "R U2 R' U' R U R' U2 R U' R'", "R U' R' U2 R U R' U2 R U R'", "R U' R' U R U R' U2 R U R'", "R U2 R' U' R U' R' U R U2 R'", "U R U R' U' R U R' U2 R U' R'", "U R U R D R' U2 R D' R' U' R'", "U R' U' R U' R' U2 R U' R U R'", "R U2 R' U' R U R' U' R U2 R'", "R U R' U R U R'", "U R U R' U' R U R' U' R U2 R'", "U' R U R' U R U R' U' R U' R'", "R U2 R' U R U R' U R U' R'", "U' R U' R' U2 R U2 R'", "R U2 R' U R U2 R' U R U' R'", "U R U' R' U R U R' U2 R U' R'", "U' R U R' U2 R U' R' U R U2 R'", "R U' R' U' R U' R' U2 R U' R'", "U R U2 R' U' R U' R' U' R U2 R'", "R U R' U R U' R' U R U R'", "R U' R' U2 R U' R' U2 R U' R'", "U' R U2 R' U' R U2 R' U2 R U R'", "U R U R' U2 R U' R'", "U R' U2 R U R' U R2 U' R'", "U2 R U' R' U R U R'", "U' R U' R' U R U2 R' U' R U2 R'", "R U' R' U' R U' R' U' R U2 R'", "R U2 R' U' R U2 R'", "R U' R' U R U' R' U R U R' U R U' R'", "R U' R' U R U' R' U2 R U' R'", "U R U R' U R U2 R' U R U' R'", "U R U R' U' R U2 R'", "R U2 R' U2 R U' R'", "U U R U U R' U' R U R' U' R U R'", "U R U' R' U R U R' U' R U2 R'", "U' R U2 R' U' R U' R' U R U R'", "U2 R' U2 R U R' U R U' R U2 R'", "U2 R U R' U' R U2 R' U' R U' R'", "R U R' U' R U R' U R U' R'", "R U2 R' U2 R U R' U R U' R'", "R U2 R' U R U2 R' U2 R U R'", "U' R U2 R' U R U R'", "U2 R U' R' U' R U R' U' R U2 R'", "R U2 R' U' R U R' U R U R'", "U R U R' U' R U R' U R U U R' U' R U2 R'", "R U' R' U R U R' U R U' R'", "U2 R U' R' U' R U2 R'", "R U R' U' R U' R' U2 R U2 R'", "U' R U' R' U2 R U' R'", "U' R U' R' U R U2 R' U R U' R'", "U R U R' U' R U U R' U' R U' R' U R U R'", "R U2 R' U R U R' U R U2 R' U' R U' R'"]
+};
+
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLS (Chad Batten)": ZBLS ,
-	"ZZLL": zzll, 
+	 
 	"OLLCP": algdbOLLCP,
 
 	"ELL": ELL,
@@ -377,18 +409,23 @@ window.algs = {
 	"OH": OH,
 	"WVLS": WVLS,
 	"VLS": VLS,
+	
+	"TTLL (Justin Taylor)": ttll,
+	"TSLE": tsle,
+	"TOLS (Justin Taylor)": tols,
 
 	"CMLL": CMLL,
 	"OL5C (SqAree)": olfc,
 	"CR (Matt diPalma)" : CR,
 
 	"CLL": CLL,
-	"EG-1": eg_full,
-	"EG1": EG1,
+	"EG1": eg_full,
+	"EG1 (algdb)": EG1,
 	"EG2": EG2,
-	"ORTEGA": ORTEGA,
+	"Ortega": ORTEGA,
 	
 	"1LLL (Micki Kanaiya Harning, WIP)" : oneLookLastLayer,
 	
+	"ZZLL (WIP)": zzll,
 	"OLLCP (Justin Taylor, WIP)": ollcp ,
 };
