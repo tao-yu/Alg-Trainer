@@ -206,6 +206,28 @@ function addAUFs(algArr){
 	}
 	return algArr;
 }
+
+function preScramble(raw_alg){
+    
+}
+
+function generatePreScramble(raw_alg, generator, times){
+    var genArray = generator.split(",");
+    var rubiksCube = new RubiksCube();
+    
+    var scramble = "";
+    var i = 0;
+    
+    for (; i<times; i++){
+        var rand = Math.floor(Math.random()*genArray.length);
+        scramble += genArray[rand];
+    }
+    scramble += alg.cube.invert(raw_alg);
+    console.log(scramble);
+    return obfusticate(scramble);
+    
+}
+console.log(generatePreScramble("R U R' U' R' F R F' ", "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2", 100))
 function testAlg(algstr, auf){
 	algArr = algstr.split("/");
 	algArr = fixAlgorithms(algArr);
@@ -219,6 +241,7 @@ function testAlg(algstr, auf){
 
 	algorithm = algArr[0];
 	var inverse = alg.cube.invert(algorithm);
+    
 	var scrP = document.getElementById("scramble");
 	if (document.getElementById("showScramble").checked){
 		scramble = alg.cube.simplify(inverse);
@@ -306,12 +329,15 @@ function createAlgsetPicker(){
 
 
 function createCheckboxes(){
+    
 	var set = document.getElementById("algsetpicker").value;
+    
 	console.log("createCheckboxes() called")
-
-	var subsets = Object.keys(window.algs[set]);
+    var full_set = window.algs[set];
+	var subsets = Object.keys(full_set);
 
 	var myDiv = document.getElementById("cboxes");
+    
 	myDiv.innerHTML = "";
 
 	for (var i = 0; i < subsets.length; i++) {
@@ -321,7 +347,7 @@ function createCheckboxes(){
 		checkBox.value = subsets[i];
 
 		checkBox.setAttribute("id", set.toLowerCase() +  subsets[i]);
-		console.log("id" + checkBox.id);
+		//console.log("id" + checkBox.id);
 		myDiv.appendChild(checkBox);
 		myDiv.appendChild(label);
 		label.appendChild(document.createTextNode(subsets[i]));
@@ -331,8 +357,8 @@ function createCheckboxes(){
 function createAlgList(){
 	algList = [];
 
-
 	var set = document.getElementById("algsetpicker").value;
+    
 	for (var subset in window.algs[set]){
 		
 		if(document.getElementById(set.toLowerCase() + subset).checked){
