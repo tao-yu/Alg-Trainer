@@ -457,30 +457,30 @@ function RubiksCube() {
 		//
 		var moves = "";
 
-		if (cubestate[13]=="1") {//R face
+		if (this.cubestate[13]==1) {//R face
 			this.doAlgorithm("z'");
 			moves +="z'";
-		} else if (cubestate[22]=="1") {//on F face
+		} else if (this.cubestate[22]==1) {//on F face
 			this.doAlgorithm("x");
 			moves+="x";
-		} else if (cubestate[31]=="1") {//on D face
+		} else if (this.cubestate[31]==1) {//on D face
 			this.doAlgorithm("x2");
 			moves+="x2";
-		} else if (cubestate[40]=="1") {//on L face
+		} else if (this.cubestate[40]==1) {//on L face
 			this.doAlgorithm("z");
 			moves+="z";
-		} else if (cubestate[49]=="1") {//on B face
+		} else if (this.cubestate[49]==1) {//on B face
 			this.doAlgorithm("x'");
 			moves+="x'";
 		}
 
-		if (cubestate[13]=="3") {//R face
+		if (this.cubestate[13]==3) {//R face
 			this.doAlgorithm("y");
 			moves+="y";
-		} else if (cubestate[40]=="3") {//on L face
+		} else if (this.cubestate[40]==3) {//on L face
 			this.doAlgorithm("y'");
 			moves+="y'";
-		} else if (cubestate[49]=="3") {//on B face
+		} else if (this.cubestate[49]==3) {//on B face
 			this.doAlgorithm("y2");
 			moves+="y2";
 		}
