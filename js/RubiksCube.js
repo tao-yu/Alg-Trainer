@@ -207,13 +207,26 @@ function addAUFs(algArr){
 	return algArr;
 }
 
-function preScramble(raw_alg){
+function generateAlgScramble(raw_alg){
+    var set = document.getElementById("algsetpicker").value;
+    
+    var obfusticateAlg = document.getElementById("realScrambles").checked;
+    
+    if (!obfusticateAlg){
+        return alg.cube.invert(raw_alg);
+    }
+    
+    switch(set){
+        case "OLL":
+            return generatePreScramble(raw_alg, "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2", 100, true);
+        default: 
+            return obfusticate(alg.cube.invert(raw_alg));
+    }
     
 }
 
-function generatePreScramble(raw_alg, generator, times){
+function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     var genArray = generator.split(",");
-    var rubiksCube = new RubiksCube();
     
     var scramble = "";
     var i = 0;
@@ -224,10 +237,15 @@ function generatePreScramble(raw_alg, generator, times){
     }
     scramble += alg.cube.invert(raw_alg);
     console.log(scramble);
-    return obfusticate(scramble);
+    if (obfusticateAlg){
+        return obfusticate(scramble);
+    }
+    else {
+        return scramble;
+    }
     
 }
-console.log(generatePreScramble("R U R' U' R' F R F' ", "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2", 100))
+console.log(generatePreScramble("RUR'U'R'FRF'", "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2", 100))
 function testAlg(algstr, auf){
 	algArr = algstr.split("/");
 	algArr = fixAlgorithms(algArr);
