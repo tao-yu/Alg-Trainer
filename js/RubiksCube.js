@@ -334,13 +334,13 @@ function createAlgList(){
 
 	var set = document.getElementById("algsetpicker").value;
 	for (var subset in window.algs[set]){
-		console.log("in algist" + set.toLowerCase() + subset);
+		
 		if(document.getElementById(set.toLowerCase() + subset).checked){
 			algList = algList.concat(window.algs[set][subset]);
 		}
 	}
 
-	if(algList.length < 1){ //if nothing checked, just do T perm
+	if(algList.length < 1){ //if nothing checked, test on the whole subset
 		for (var subset in window.algs[set]){
 			algList = algList.concat(window.algs[set][subset]);
 		}
