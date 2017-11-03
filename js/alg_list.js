@@ -393,7 +393,6 @@ var test = {
 };
 
 window.algs = {
-    "test" : test,
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLS (Chad Batten)": ZBLS ,
 	

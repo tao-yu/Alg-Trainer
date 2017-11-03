@@ -215,8 +215,12 @@ function generateAlgScramble(raw_alg){
     }
     
     switch(set){
+        case "ZBLS (Chad Batten)":
+            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U", 100, true);
         case "OLL":
-            return generatePreScramble(raw_alg, "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2, U", 100, true);
+            return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);
+        case "OL5C (SqAree)":
+            return generatePreScramble(raw_alg, "R2,U,D", 100, true);
         default: 
             return obfusticate(alg.cube.invert(raw_alg));
     }
