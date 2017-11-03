@@ -285,7 +285,7 @@ function testAlg(algstr, auf){
 function reTestAlg(){
 	cube.resetCube();
 	doAlg(currentRotation);
-	doAlg(alg.cube.invert(currentAlgorithm));
+	doAlg(currentScramble);
 	drawCube(cube.cubestate)
 
 }
@@ -315,11 +315,12 @@ function displayAlgorithm(){
 
 	//show scramble
 	var y = document.getElementById("scramble");
+    /*
 	scramble = alg.cube.simplify(alg.cube.invert(algArr[0]));
 	if(document.getElementById("realScrambles").checked){
 		scramble = obfusticate(scramble);
-	}
-	y.innerHTML = scramble;
+	}*/
+	y.innerHTML = currentScramble;
 }
 function testRandomFromList(set){
 	var x = document.getElementById("algdisp");
