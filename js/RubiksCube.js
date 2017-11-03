@@ -192,7 +192,6 @@ function obfusticate(algorithm){
 	return (alg.cube.invert(rc.solution()) + " " + orient).replace(/2'/g, "2");
 }
 
-console.log(obfusticate("M U R U R' U' R' F R F' M'"));
 
 function addAUFs(algArr){
 
@@ -244,7 +243,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     }
     
 }
-console.log(generatePreScramble("RUR'U'R'FRF'", "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2", 100))
+
 function testAlg(algstr, auf){
 	algArr = algstr.split("/");
 	algArr = fixAlgorithms(algArr);
