@@ -1,6 +1,7 @@
 var currentRotation = "";
 var cube = new RubiksCube();
 var currentAlgorithm = "";//After an alg gets tested for the first time, it becomes the currentAlgorithm.
+var currentScramble = "";
 var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
@@ -236,7 +237,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
         scramble += genArray[rand];
     }
     scramble += alg.cube.invert(raw_alg);
-    console.log(scramble);
+    //console.log(scramble);
     if (obfusticateAlg){
         return obfusticate(scramble);
     }
@@ -258,7 +259,7 @@ function testAlg(algstr, auf){
 	}
 
 	algorithm = algArr[0];
-	var inverse = alg.cube.invert(algorithm);
+	var inverse = generateAlgScramble(algorithm);
     
 	var scrP = document.getElementById("scramble");
 	if (document.getElementById("showScramble").checked){
@@ -276,6 +277,7 @@ function testAlg(algstr, auf){
 	drawCube(cube.cubestate)
 	console.log(algorithm);
 	currentAlgorithm = algorithm;
+    currentScramble = inverse;
 	//updateVisualCube(algorithm)
 
 }
