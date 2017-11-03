@@ -185,11 +185,11 @@ function getRandAuf(letter){
 
 function obfusticate(algorithm){
 
-	Cube.initSolver();
+	//Cube.initSolver();
 	var rc = new RubiksCube();
 	rc.doAlgorithm(algorithm);
 	orient = alg.cube.invert(rc.wcaOrient());
-	return (alg.cube.invert(rc.solution()) + orient).replace(/2'/g, "2");
+	return (alg.cube.invert(rc.solution()) + " " + orient).replace(/2'/g, "2");
 }
 
 function pickAlg(algstr, sep, algNo){
@@ -219,7 +219,7 @@ function generateAlgScramble(raw_alg){
     
     switch(set){
         case "OLL":
-            return generatePreScramble(raw_alg, "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2", 100, true);
+            return generatePreScramble(raw_alg, "RUR'U'R'FR2U'R'U'RUR'F', F2U'R'LF2RL'U'F2, U", 100, true);
         default: 
             return obfusticate(alg.cube.invert(raw_alg));
     }
@@ -237,7 +237,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
         scramble += genArray[rand];
     }
     scramble += alg.cube.invert(raw_alg);
-    //console.log(scramble);
+    console.log(scramble);
     if (obfusticateAlg){
         return obfusticate(scramble);
     }
@@ -507,6 +507,9 @@ function RubiksCube() {
 	}
 
 	this.doAlgorithm = function(alg) {
+        if(!alg || /^\s*$/.test(alg)){
+            return;
+        }
 		var moveArr = alg.split(/(?=[A-Za-z])/);
 		var i;
 
@@ -588,7 +591,7 @@ function RubiksCube() {
 				}
 			} else {
 
-				console.log("Invalid alg, or no alg specified");
+				console.log("Invalid alg, or no alg specified:" + alg);
 
 			}
 
