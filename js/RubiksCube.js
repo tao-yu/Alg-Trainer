@@ -192,9 +192,7 @@ function obfusticate(algorithm){
 	return (alg.cube.invert(rc.solution()) + " " + orient).replace(/2'/g, "2");
 }
 
-function pickAlg(algstr, sep, algNo){
-	return algstr.split(sep)[algNo - 1];
-}
+console.log(obfusticate("M U R U R' U' R' F R F' M'"));
 
 function addAUFs(algArr){
 
@@ -237,7 +235,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
         scramble += genArray[rand];
     }
     scramble += alg.cube.invert(raw_alg);
-    console.log(scramble);
+    //console.log(scramble);
     if (obfusticateAlg){
         return obfusticate(scramble);
     }
@@ -507,9 +505,9 @@ function RubiksCube() {
 	}
 
 	this.doAlgorithm = function(alg) {
-        if(!alg || /^\s*$/.test(alg)){
+        /*if(!alg || /^\s*$/.test(alg)){
             return;
-        }
+        }*/
 		var moveArr = alg.split(/(?=[A-Za-z])/);
 		var i;
 
