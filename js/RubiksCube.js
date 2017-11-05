@@ -264,7 +264,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
         scramble += genArray[rand];
     }
     scramble += alg.cube.invert(raw_alg);
-    //console.log(scramble);
+    
     if (obfusticateAlg){
         return obfusticate(scramble);
     }
@@ -380,7 +380,7 @@ function createCheckboxes(){
     
 	var set = document.getElementById("algsetpicker").value;
     
-	console.log("createCheckboxes() called")
+	
     var full_set = window.algs[set];
 	var subsets = Object.keys(full_set);
 
@@ -395,7 +395,7 @@ function createCheckboxes(){
 		checkBox.value = subsets[i];
 
 		checkBox.setAttribute("id", set.toLowerCase() +  subsets[i]);
-		//console.log("id" + checkBox.id);
+		
 		myDiv.appendChild(checkBox);
 		myDiv.appendChild(label);
 		label.appendChild(document.createTextNode(subsets[i]));
