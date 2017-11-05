@@ -243,7 +243,7 @@ function generateAlgScramble(raw_alg){
             return generatePreScramble(raw_alg, "FRUR'U'F',RBR'FRB'R'F',RUR'URU2R',U", 100, true);
             
         case "Ortega OLL":
-            return generatePreScramble(raw_alg, "R2'DRD'RF2'L'ULF2,R'FR'B2'RF'R'B2'R2,U,D", 100, true);
+            return generatePreScramble(raw_alg, "R F' R B2 R' F R B2 R2,R'FR'B2'RF'R'B2'R2,U,D", 100, true);
         default: 
             return obfusticate(alg.cube.invert(raw_alg));
     }
