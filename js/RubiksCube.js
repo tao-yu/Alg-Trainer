@@ -241,6 +241,9 @@ function generateAlgScramble(raw_alg){
             
         case "F2L":
             return generatePreScramble(raw_alg, "FRUR'U'F',RBR'FRB'R'F',RUR'URU2R',U", 100, true);
+            
+        case "Ortega OLL":
+            return generatePreScramble(raw_alg, "R2'DRD'RF2'L'ULF2,R'FR'B2'RF'R'B2'R2,U,D", 100, true);
         default: 
             return obfusticate(alg.cube.invert(raw_alg));
     }
@@ -301,7 +304,7 @@ function testAlg(algstr, auf){
 	console.log(algorithm);
 	currentAlgorithm = algorithm;
     currentScramble = inverse;
-	//updateVisualCube(algorithm)
+	updateVisualCube("x2" + currentRotation + inverse)
 
 }
 
@@ -324,7 +327,7 @@ function fixAlgorithms(algorithms){
 }
 
 function updateVisualCube(algorithm){
-	imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&case=" + algorithm;
+	imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
 	document.getElementById("visualcube").src=imgsrc;
 }
 function displayAlgorithm(){
