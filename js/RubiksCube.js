@@ -216,16 +216,38 @@ function generateAlgScramble(raw_alg){
     
     switch(set){
         case "ZBLS (Chad Batten)":
-            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U", 100, true);
+            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U", 100, true);//ZBLLscramble
+            
         case "OLL":
-            return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);
+        case "VLS":
+        case "WVLS":
+        case "OH OLL":
+            return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
+            
+        case "OLLCP":
+        case "COLL":
+        case "COLL (Tao Yu)":
+            return generatePreScramble(raw_alg, "F2U'R'LF2RL'U'F2,U", 100, true);//EPLL scramble
+            
+        case "CMLL":
+            return generatePreScramble(raw_alg, "U,M", 100, true);//LSE scramble
+            
         case "OL5C (SqAree)":
-            return generatePreScramble(raw_alg, "R2,U,D", 100, true);
+            return generatePreScramble(raw_alg, "R2,U,D", 100, true);//<U, D, R2> scramble
+            
+        case "TOLS (Justin Taylor)":
+        case "TSLE":
+            return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true); //TTLL scramble
+            
+        case "F2L":
+            return generatePreScramble(raw_alg, "FRUR'U'F',RBR'FRB'R'F',RUR'URU2R',U", 100, true);
         default: 
             return obfusticate(alg.cube.invert(raw_alg));
     }
     
 }
+
+
 
 function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     var genArray = generator.split(",");
