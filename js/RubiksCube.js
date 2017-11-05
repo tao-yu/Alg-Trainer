@@ -225,6 +225,7 @@ function generateAlgScramble(raw_alg){
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
             
         case "OLLCP":
+        case "OLLCP (Justin Taylor, WIP)":
         case "COLL":
         case "COLL (Tao Yu)":
             return generatePreScramble(raw_alg, "F2U'R'LF2RL'U'F2,U", 100, true);//EPLL scramble
