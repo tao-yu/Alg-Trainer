@@ -1,6 +1,7 @@
 var currentRotation = "";
 var cube = new RubiksCube();
 var currentAlgorithm = "";//After an alg gets tested for the first time, it becomes the currentAlgorithm.
+var currentScramble = "";
 var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
@@ -184,16 +185,13 @@ function getRandAuf(letter){
 
 function obfusticate(algorithm){
 
-	Cube.initSolver();
+	//Cube.initSolver();
 	var rc = new RubiksCube();
 	rc.doAlgorithm(algorithm);
 	orient = alg.cube.invert(rc.wcaOrient());
-	return (alg.cube.invert(rc.solution()) + orient).replace(/2'/g, "2");
+	return (alg.cube.invert(rc.solution()) + " " + orient).replace(/2'/g, "2");
 }
-console.log(obfusticate("M U R U R' U' R' F R F' M'"));
-function pickAlg(algstr, sep, algNo){
-	return algstr.split(sep)[algNo - 1];
-}
+
 
 function addAUFs(algArr){
 
@@ -206,6 +204,75 @@ function addAUFs(algArr){
 	}
 	return algArr;
 }
+
+function generateAlgScramble(raw_alg){
+    var set = document.getElementById("algsetpicker").value;
+    
+    var obfusticateAlg = document.getElementById("realScrambles").checked;
+    
+    if (!obfusticateAlg){
+        return alg.cube.invert(raw_alg);
+    }
+    
+    switch(set){
+        case "ZBLS (Chad Batten)":
+            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U", 100, true);//ZBLLscramble
+            
+        case "OLL":
+        case "VLS":
+        case "WVLS":
+        case "OH OLL":
+            return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
+            
+        case "OLLCP":
+        case "COLL":
+        case "COLL (Tao Yu)":
+            return generatePreScramble(raw_alg, "F2U'R'LF2RL'U'F2,U", 100, true);//EPLL scramble
+            
+        case "CMLL":
+            return generatePreScramble(raw_alg, "U,M", 100, true);//LSE scramble
+            
+        case "OL5C (SqAree)":
+            return generatePreScramble(raw_alg, "R2,U,D", 100, true);//<U, D, R2> scramble
+            
+        case "TOLS (Justin Taylor)":
+        case "TSLE":
+            return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true); //TTLL scramble
+            
+        case "F2L":
+            return generatePreScramble(raw_alg, "FRUR'U'F',RBR'FRB'R'F',RUR'URU2R',U", 100, true);
+            
+        case "Ortega OLL":
+            return generatePreScramble(raw_alg, "R F' R B2 R' F R B2 R2,R'FR'B2'RF'R'B2'R2,U,D", 100, true);
+        default: 
+            return obfusticate(alg.cube.invert(raw_alg));
+    }
+    
+}
+
+
+
+function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
+    var genArray = generator.split(",");
+    
+    var scramble = "";
+    var i = 0;
+    
+    for (; i<times; i++){
+        var rand = Math.floor(Math.random()*genArray.length);
+        scramble += genArray[rand];
+    }
+    scramble += alg.cube.invert(raw_alg);
+    //console.log(scramble);
+    if (obfusticateAlg){
+        return obfusticate(scramble);
+    }
+    else {
+        return scramble;
+    }
+    
+}
+
 function testAlg(algstr, auf){
 	algArr = algstr.split("/");
 	algArr = fixAlgorithms(algArr);
@@ -218,7 +285,8 @@ function testAlg(algstr, auf){
 	}
 
 	algorithm = algArr[0];
-	var inverse = alg.cube.invert(algorithm);
+	var inverse = generateAlgScramble(algorithm);
+    
 	var scrP = document.getElementById("scramble");
 	if (document.getElementById("showScramble").checked){
 		scramble = alg.cube.simplify(inverse);
@@ -235,14 +303,15 @@ function testAlg(algstr, auf){
 	drawCube(cube.cubestate)
 	console.log(algorithm);
 	currentAlgorithm = algorithm;
-	//updateVisualCube(algorithm)
+    currentScramble = inverse;
+	updateVisualCube("x2" + currentRotation + inverse)
 
 }
 
 function reTestAlg(){
 	cube.resetCube();
 	doAlg(currentRotation);
-	doAlg(alg.cube.invert(currentAlgorithm));
+	doAlg(currentScramble);
 	drawCube(cube.cubestate)
 
 }
@@ -258,7 +327,7 @@ function fixAlgorithms(algorithms){
 }
 
 function updateVisualCube(algorithm){
-	imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&case=" + algorithm;
+	imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
 	document.getElementById("visualcube").src=imgsrc;
 }
 function displayAlgorithm(){
@@ -272,11 +341,12 @@ function displayAlgorithm(){
 
 	//show scramble
 	var y = document.getElementById("scramble");
+    /*
 	scramble = alg.cube.simplify(alg.cube.invert(algArr[0]));
 	if(document.getElementById("realScrambles").checked){
 		scramble = obfusticate(scramble);
-	}
-	y.innerHTML = scramble;
+	}*/
+	y.innerHTML = currentScramble;
 }
 function testRandomFromList(set){
 	var x = document.getElementById("algdisp");
@@ -306,12 +376,15 @@ function createAlgsetPicker(){
 
 
 function createCheckboxes(){
+    
 	var set = document.getElementById("algsetpicker").value;
+    
 	console.log("createCheckboxes() called")
-
-	var subsets = Object.keys(window.algs[set]);
+    var full_set = window.algs[set];
+	var subsets = Object.keys(full_set);
 
 	var myDiv = document.getElementById("cboxes");
+    
 	myDiv.innerHTML = "";
 
 	for (var i = 0; i < subsets.length; i++) {
@@ -321,7 +394,7 @@ function createCheckboxes(){
 		checkBox.value = subsets[i];
 
 		checkBox.setAttribute("id", set.toLowerCase() +  subsets[i]);
-		console.log("id" + checkBox.id);
+		//console.log("id" + checkBox.id);
 		myDiv.appendChild(checkBox);
 		myDiv.appendChild(label);
 		label.appendChild(document.createTextNode(subsets[i]));
@@ -331,16 +404,16 @@ function createCheckboxes(){
 function createAlgList(){
 	algList = [];
 
-
 	var set = document.getElementById("algsetpicker").value;
+    
 	for (var subset in window.algs[set]){
-		console.log("in algist" + set.toLowerCase() + subset);
+		
 		if(document.getElementById(set.toLowerCase() + subset).checked){
 			algList = algList.concat(window.algs[set][subset]);
 		}
 	}
 
-	if(algList.length < 1){ //if nothing checked, just do T perm
+	if(algList.length < 1){ //if nothing checked, test on the whole subset
 		for (var subset in window.algs[set]){
 			algList = algList.concat(window.algs[set][subset]);
 		}
@@ -460,6 +533,9 @@ function RubiksCube() {
 	}
 
 	this.doAlgorithm = function(alg) {
+        /*if(!alg || /^\s*$/.test(alg)){
+            return;
+        }*/
 		var moveArr = alg.split(/(?=[A-Za-z])/);
 		var i;
 
@@ -541,7 +617,7 @@ function RubiksCube() {
 				}
 			} else {
 
-				console.log("Invalid alg, or no alg specified");
+				console.log("Invalid alg, or no alg specified:" + alg);
 
 			}
 
