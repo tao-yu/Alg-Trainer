@@ -410,7 +410,7 @@ window.algs = {
 	"PLL": PLL,
 	"OLL": OLL,
 	"COLL": COLL,
-	"COLL (Tao Yu)": COLL,
+	"COLL (Tao Yu)": taoCOLL,
 	"OH OLL": OHOLL,
 	"OH PLL": OHPLL,
 	"WVLS": WVLS,
