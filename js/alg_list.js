@@ -321,23 +321,22 @@ var oneLookLastLayer = {
 };
 
 var zzll = {
-	
 	"T1":["L' U' L U' L' U2 L R U R' U R U2 R'","R U2 R' U' R U' R2 U2 R U R' U R","R' U R U2 R' U' R U' R U R' U' R' U' R U R U' R'","L' U2 L U L' U L2 U2 L' U' L U' L'",],
 	"T2":["R U' R2 D' r U2 r' D R2 U R'","R' U R2 D r' U2 r D' R2 U' R","R U2 R' U L U' R U L2 U R' U' L","R2 F R U R' U' R' F' R' U' R2 U2 R U2 R",],
 	"T3":["R' U' R2 U R' F' R U R' U' R' F R2 U' R' U' R' U R","r U' r U2 R' F R U2 r2 F","R' U2 R U R' U R F U R U2 R' U R U R' F'","F R U' R' U' R U2 R' U' F' R' U' R U' R' U2 R",],
 	"T4":["R U2 R' F2 R U2 R' U2 R' F2 R","R' U2 R U' R' F R U R' U' R' F' R U' R","F R U R' U' R U' R' U' R U R' F'","R U R' U2 R U' R' U2 R U' R2 F' R U R U' R' F",],
 	"T5":["R U R' U' R U' R' L U' R U R' L'","R U2 R' B' U R U' R' U' B R U' R'","U' R' U2 R U2 R' U R U' L U' R' U L' U R","r U R' U' r' F R F'",],
 	"T6":["F R F' r U R' U' r'","R' U2 R F U' R' U R U F' R' U R","U L U2 L' U2 L U' L' U R' U L U' R U' L'","R U2' R' U2 R U' R' U r' F R F' r U' R'",],
-	"U1":["R U2 R' U' R U' R' U2 R' U2 R U R' U R","R' U' R U' R' U2 R2 U R' U R U2 R","R U R' U R U2 R2 U' R U' R' U2 R","R U R' U' R U' R U2 R2 U' R U R' U' R2 U' R2",],
+	"U1":["R U2 R' U' R U' R' U2 R' U2 R U R' U R","R' U' R U' R' U2 R2 U R' U R U2 R'","R U R' U R U2 R2 U' R U' R' U2 R","R U R' U' R U' R U2 R2 U' R U R' U' R2 U' R2",],
 	"U2":["x' R2 D2 R' U2 R D2 R' U2 R' x","x' L2 D2 L U2 L' D2 L U2 L x","R U R' L' U2 R U R' L U L' U L","R U R' U R L' U R' U' R L U2 R'",],
-	"U3":["R2 F' R U R' U' R' F R2 U' R' U2 R2 U R' U R","R2 D R' U2 R D' R' U2 R' U' R U2 R' U' R U' R'","R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R' U2 R","R' U' R F R2 D' R U R' D R2 U' F'",],
+	"U3":["R2 F' R U R' U' R' F R2 U' R' U2 R2 U R' U R","F U R2 D' R U' R' D R2 F' R' U R","R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R' U2 R","R' U' R F R2 D' R U R' D R2 U' F'",],
 	"U4":["F' R U R' U' R' F R2 U R' U2 R U R' U2 R U' R'","F R U' R' U R U R' U R U' R' F'","F' R U2 R' U2 R' F R U2 R U2 R'","R' U R' F R U R U' R' F' R U R' U2 R",],
 	"U5":["R' F R U' R' F R U R' F R U' R' F2 R y' R U R'","R' U R U R' U2 R U' D' R U' R' U2 R U' R' D","R' U2 R2 D R' U2 R D' R2 U R U2 R' U2 R","R2 D' R U2 R' D R U2 R",],
-	"U6":["R' U' R U' R' U2 R2 U' L' U R' U' L","R U R' F' U' F2 D R' U R' U' R D' F'","R2 D R' U2 R D' R' U2 R'","R U2 R2 D' R U2 R' D R2 U' R' U2 R U2 R'",],
-	"L1":["R U' R' L' U2 L U L' U L R U2 R'","R U R' U R U' R' U R U' R' U R U2 R","R' U' R U' R' U2 R U2 R' U2 R U R' U R","R' U2 R U R' U R U2 R' U' R U' R' U2 R",],
+	"U6":["R' U' R U R U R' U' R' U F R U R U' R' F'","R U R' F' U' F2 D R' U R' U' R D' F'","R2 D R' U2 R D' R' U2 R'","R U2 R2 D' R U2 R' D R2 U' R' U2 R U2 R'",],
+	"L1":["R U' R' L' U2 L U L' U L R U2 R'","R U R' U R U' R' U R U' R' U R U2 R'","R' U' R U' R' U2 R U2 R' U2 R U R' U R","R' U2 R U R' U R U2 R' U' R U' R' U2 R",],
 	"L2":["R' U' R U R' U' R' F R2 U' R' U' R U R' F' U R","R U2 R' U' F' R U R' U R U2 R' F R U' R'","R' U L U R' D R U2 R' D' R2 U L'","R U' R F' R' U R F' R2 F U' F' R2 F2 R2",],
 	"L3":["R' U' R F U' R' U' R U F' R' U2 R","R U L' U R' U' L U' R U R' U2 R U2 R'","R' L' U R U' R' L U' R U' R' U R","F' r U R' U' r' F R",],
-	"L4":["F R U R' U' R' F' R U2 R U2 R'","R' U' R U' R D R' U2 R D' R2 U R U' R' U R","R F U' R' U R U R' U R U' F' R'","R U R' U R U R' U' R U R D R' U2 R D' R' U' R'",],
+	"L4":["R' U' L U' R U L' U R' U' R U2 R' U2 R","F R' F' r U R U' r'","R F U' R' U R U R' U R U' F' R'","R U R' U R U R' U' R U R D R' U2 R D' R' U' R'",],
 	"L5":["R' U2 R U2 R' U' R2 D R' U2 R D' R2 U2 R","R' U2 R' D' R U2 R' D R2","R U R' U2 R U R' U2 y' R' U2 R U' R' U' R","R U2 R U R U' R2 D R' U R D' R U R'",],
 	"L6":["F R U R' U' R' F' U' R U R U' R' U' R' U R","R U2' R' U2 R U R2' D' R U2 R' D R2 U2' R'","R U2 R D R' U2 R D' R2","R U R' F' U' R' U2 R U F R' U R2 U2 R'",],
 	"Pi1":["R U R2 U' R2 U' R2 U2 R2 U' R' U R U2 R'","R U R' U R U2 R' U R U R' U R U2 R'","R' U' R U' R' U2 R U R' U' R U' R' U2 R","R U R' U R U2' R' U' R U R' U R U2' R'",],
@@ -355,13 +354,13 @@ var zzll = {
 	"S3":["R U R' F' R U R' U R U' R' U' R' F R2 U' R'","R' U2 R2 U R D' R U R' D R2 U' R U' R'","L' U' L U' L' U' R U' L U' R' U' R U' R'","R U' L' U R' U' L",],
 	"S4":["F R U R2 U' R2 U' R2 U2 R U R U R' F'","R' U' F R U R' U' R' F U' R F2 R' U F2 R2","R' U' R U' R B' U R2 U R2 U' B U' R'","L' R U R' U' L U R U2 L' U R' U' L",],
 	"S5":["L' U' L U' R U2 L' U' R' U2 L U' R U' R'","R U R' U' R' U' F2 U R F2 R' F2 R F2 U' F2","R2' U' R U R' D' R U2 R' D R U R' U R2","R U2 L' R' U2 R U R' U2 L R U2 R'",],
-	"S6":["R2 D' R U2 R' D R2 U R' U R","L U2 L' U R' U2 L U' L' R U R' U R","F R' U' R2 U' R2 U2 F R F' R U' R' F'","R U' L' U R' U2 L U R U' L' U M' x'",],
+	"S6":["R' U' L U' R2 U L' R U' R2 U2 R' U' R2","L U2 L' U R' U2 L U' L' R U R' U R","F R' U' R2 U' R2 U2 F R F' R U' R' F'","R U' L' U R' U2 L U R U' L' U M' x'",],
 	"AS1":["R' U R' D U' R D' R' U2 R D R' U' D' R U' R","R' U L U' R2 z' R2 U' L U R2 U' D' z","R' F R' F' R' U2 R' U2 R2 U2 R U2 F R2 F'","R U R' U L' U2 R U L U2 R' U L' U L",],
 	"AS2":["R U R' U R' F U' R2 U' R2 U F' U R","R' L U' R U L' U' R' U2 L U' R U L'","R U' L U2 R' U R U2 R' U2 L' U' L U' L'","R' U' R U' R2 D' r U2 r' D R2",],
 	"AS3":["L U2 L2 U' L' D L' U' L D' L2 U L' U L","L' U R U' L U R'","R U R' U R U L' U R' U L U L' U L","R2 U' R' U R2 U R' U' R D' R U' R' D",],
 	"AS4":["R U R' U R' U' R' D R' U' R D' R U2 R","L' U R U' L U2 R' U' L' U R U' L R'","R2 D r' U2 r D' R2 U' R U' R'","R' U' R U' R' U2 L' U2 L U L' U2 R U' L",],
 	"AS5":["R' U' R2 U' L U2 R' U R U2 R2 L' U2 R","R U2 R' U' R U L' U L U2 R' U' L' U2 L","R' U2 L U' R U L' R' U R U' R' U2 R","R U2 R' U' R U R' L' U R U' L U2 R'",],
-	"AS6":["R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2","R U R' U R' U' R2 U' R2 U2 R","R' U' R U R U2 R' U' R' U R U' R U' R'","R U R' U' R' U' R U R U' R' U' R' U R",],
+	"AS6":["R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2","R U R' U R' U' R2 U' R2 U2 R","R' U' R U R U2 R' U' R' U R U' R U' R'","U' R U R' U' R' U' R U R U' R' U' R' U R",],
 };
 
 var ttll = {
@@ -433,6 +432,6 @@ window.algs = {
     
 	"1LLL (Micki Kanaiya Harning, WIP)" : oneLookLastLayer,
 	
-	"ZZLL (WIP)": zzll,
+	"ZZLL": zzll,
 	"OLLCP (Justin Taylor, WIP)": ollcp ,
 };
