@@ -209,8 +209,8 @@ function generateAlgScramble(raw_alg){
     var set = document.getElementById("algsetpicker").value;
     
     var obfusticateAlg = document.getElementById("realScrambles").checked;
-    
-    if (!obfusticateAlg){
+    var shouldPrescramble = document.getElementById("prescramble").checked;
+    if (!obfusticateAlg || !shouldPrescramble){
         return alg.cube.invert(raw_alg);
     }
     
@@ -254,6 +254,7 @@ function generateAlgScramble(raw_alg){
 
 
 function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
+    
     var genArray = generator.split(",");
     
     var scramble = "";
