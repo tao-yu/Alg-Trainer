@@ -6,6 +6,7 @@ var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
+var currentAlgIndex;
 
 createAlgsetPicker();
 drawCube(cube.cubestate);
@@ -350,9 +351,17 @@ function displayAlgorithm(){
 	}*/
 	y.innerHTML = currentScramble;
 }
-function testRandomFromList(set){
-	var x = document.getElementById("algdisp");
+function testFromList(set){
+    
+    var x = document.getElementById("algdisp");
 	x.innerHTML = "";
+    
+    if (document.getElementById("goInOrder").checked){
+        testAlg(set[currentAlgIndex%set.length], document.getElementById("randAUF").checked);
+        currentAlgIndex++;
+        return set[currentAlgIndex];
+    }   
+	
 	size = set.length;
 	rand = Math.floor(Math.random()*size);
 	testAlg(set[rand], document.getElementById("randAUF").checked);
@@ -394,7 +403,7 @@ function createCheckboxes(){
 		var label = document.createElement("label");
 		checkBox.type = "checkbox";
 		checkBox.value = subsets[i];
-
+        checkBox.onclick = function(){currentAlgIndex = 0;}
 		checkBox.setAttribute("id", set.toLowerCase() +  subsets[i]);
 		
 		myDiv.appendChild(checkBox);
@@ -464,10 +473,10 @@ listener.simple_combo("space", function() {
 
 });
 listener.simple_combo("enter", function() {
-	testRandomFromList(createAlgList());
+	testFromList(createAlgList());
 });
 listener.simple_combo("tab", function() {
-	testRandomFromList(createAlgList());
+	testFromList(createAlgList());
 });
 
 //CUBE OBJECT
