@@ -408,7 +408,7 @@ var CPLS = {
 	"CW in Place":["U D' L2 U L U2 L D R' F2 R","U2 D' L2 U L U2 L D R' F2 R","D' L2 U L U2 L D R' F2 R","U' D' L2 U L U2 L D R' F2 R","R2 D R' U' R D' R2 U' R U2 R'","R U R' U' R U2 R' U' R U R'",],
 	"ACW":["U R' F2 R D' L' U2 L' U' L2 D","U2 R' F2 R D' L' U2 L' U' L2 D","R' F2 R D' L' U2 L' U' L2 D","U' R' F2 R D' L' U2 L' U' L2 D","R U R' U2 R2 D R' U R D' R2","R U R' U2' R U' R' U R U R'",],
 	"Pair formed":["U R U' R'","U2 R U L' U R' U' L","U R U2 L' U R' U' L","U2 L' U R U' L U2 R'","U' L U' R U L' U R'","U2 R U R' U2 R L U' R' U L'",],
-	"Solved":["U2 r U R' U' r' F R F'","U' r U R' U' r' F R F'","U r U R' U' r' F R F'","r U R' U' r' F R F'","r U2' R2' F R F' R U2 r'",],
+	//"Solved":["U2 r U R' U' r' F R F'","U' r U R' U' r' F R F'","U r U R' U' r' F R F'","r U R' U' r' F R F'","r U2' R2' F R F' R U2 r'",],
 };
 
 window.algs = {
