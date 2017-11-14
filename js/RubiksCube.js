@@ -211,9 +211,11 @@ function generateAlgScramble(raw_alg){
     
     var obfusticateAlg = document.getElementById("realScrambles").checked;
     var shouldPrescramble = document.getElementById("prescramble").checked;
-    if (!obfusticateAlg || !shouldPrescramble){
+    if (!obfusticateAlg){
         return alg.cube.invert(raw_alg);
-    }
+    } else if (!shouldPrescramble){//if realscrambles not checked but should not prescramble, just obfusticate the inverse
+		return obfusticate(alg.cube.invert(raw_alg));
+	}
     
     switch(set){
         case "ZBLS (Chad Batten)":
@@ -295,9 +297,6 @@ function testAlg(algstr, auf){
 	var scrP = document.getElementById("scramble");
 	if (document.getElementById("showScramble").checked){
 		scramble = alg.cube.simplify(inverse);
-		if(document.getElementById("realScrambles").checked){
-			scramble = obfusticate(scramble);
-		}
 		scrP.innerHTML = scramble;
 	} else{
 		scrP.innerHTML = "";
