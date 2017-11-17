@@ -414,6 +414,7 @@ var CPLS = {
 var L5E = {
 		"FR":["(U2) R' U' R' U' R U R U R","(U') R2 U2 R2 U' R U R U2 R' U' R'/U2 r' S2 r U2 r' S2 r","(U') r M' U M2 U M' U2 M2 U2 M' U2 R'/R' F' R U2 R U' R' U' R' F R2 U R'","U2 R' F' R U R U R' U2 R' F R U R U' R'","r M' U M2 U2 M2 U M2 R'","R' D' R' F2 R2 U' R2 F2 R2 U' R' D R/(U2) M2 U M2 U R U M2 U' R' U2 M2","M2 U' M2 U R U M2 U' M2 R'/U2 R' D' R' F2 R2 U R2 F2 R2 U R' D R U","(U') R U' R' U' R U2 R' U R U R'","(U2) R U R' U2 R U R' U' R' U' R2 U' R2 U2 R","R' U' R' U' R' U R U R","(U) R U R' U2 R U' R' U' R U2 R'","(U) R U2 R' U R U R' U2 R U' R'",],
 	//"BR ":["R U R U R U' R' U' R'","(U') R2 U2 R2 U R' U' R' U2 R U R/U2 r S2 r' U2 r S2 r'","(U) R' M2 U M2 U M' U2 M2 U2 M' U2 R/U R U R' U R2 U2 R2 U2 R2 U R U' R'","U' R' U' R' F' R U2 R U' R' U' R' F R2","R' M2 U M2 U2 M2 U M' r/y U2 R2 F R2 U' R2 U2 R2 U2 R2 U' R2 F' R2","M2 U M2 U' R' U' M2 U M2 R","M2 U' M2 U R' U M2 U' M' r/U' R U' R' U R U R' U2 R2 U R' U' R' U2 R' U2","R' U' M U2 M' U' r U2 M U' M2 U' M' U2 M'","(U') R' U R U R' U2 R U' R' U' R","(U2) R U R U R' U' R' U' R'","(U') R' U2 R U' R' U' R U2 R' U R","(U') R' U' R U2 R' U R U R' U2 R",],}
+};
 
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
