@@ -282,8 +282,12 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     
 }
 function generateOrientation(){
-    var colourNeutrality = document.getElementById("colourneutrality").value.split("/");
-    localStorage.setItem("colourneutrality", document.getElementById("colourneutrality").value);
+    var cnString = document.getElementById("colourneutrality").value;
+    if (cnString = ""){
+        return "";
+    }
+    var colourNeutrality = cnString.split("/");
+    localStorage.setItem("colourneutrality", cnString);
     var rand1 = Math.floor(Math.random()*4);
     var rand2 = Math.floor(Math.random()*4);
     
