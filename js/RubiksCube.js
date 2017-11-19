@@ -279,6 +279,14 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     }
     
 }
+function generateOrientation(){
+    var colourNeutrality = document.getElementById("colourneutrality").value.split("/");
+    var rand1 = Math.floor(Math.random()*4);
+    var rand2 = Math.floor(Math.random()*4);
+    
+    
+    return colourNeutrality[0] + colourNeutrality[1].repeat(rand1) + colourNeutrality[2].repeat(rand2);
+}
 
 function testAlg(algstr, auf){
 	algArr = algstr.split("/");
@@ -287,7 +295,7 @@ function testAlg(algstr, auf){
 	cube.resetCube();
 	if (auf){
 		algArr = addAUFs(algArr);
-		currentRotation = getRandAuf("y")
+		currentRotation = generateOrientation();
 		doAlg(currentRotation);
 	}
 
