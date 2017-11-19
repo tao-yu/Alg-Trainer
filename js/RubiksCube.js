@@ -7,6 +7,8 @@ var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = 50;
 var currentAlgIndex;
+var myStorage = window.localStorage;
+document.getElementById("colourneutrality").value = myStorage.getItem('colourneutrality');
 
 createAlgsetPicker();
 drawCube(cube.cubestate);
@@ -281,6 +283,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
 }
 function generateOrientation(){
     var colourNeutrality = document.getElementById("colourneutrality").value.split("/");
+    localStorage.setItem("colourneutrality", document.getElementById("colourneutrality").value);
     var rand1 = Math.floor(Math.random()*4);
     var rand2 = Math.floor(Math.random()*4);
     
@@ -296,6 +299,7 @@ function testAlg(algstr, auf){
 	if (auf){
 		algArr = addAUFs(algArr);
 		currentRotation = generateOrientation();
+        
 		doAlg(currentRotation);
 	}
 
