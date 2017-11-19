@@ -283,7 +283,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
 }
 function generateOrientation(){
     var cnString = document.getElementById("colourneutrality").value;
-    if (cnString = ""){
+    if (cnString == ""){
         return "";
     }
     var colourNeutrality = cnString.split("/");
@@ -433,6 +433,10 @@ function createAlgList(){
 	algList = [];
 
 	var set = document.getElementById("algsetpicker").value;
+    
+    if (set == ""){
+        return ["R U R' U' R' F R2 U' R' U' R U R' F'"];
+    }
     
 	for (var subset in window.algs[set]){
 		
