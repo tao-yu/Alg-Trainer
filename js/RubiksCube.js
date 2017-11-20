@@ -284,7 +284,7 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
 function generateOrientation(){
     var cnString = document.getElementById("colourneutrality").value;
     
-    if (cnString = "cn"){
+    if (cnString == "cn"){
         return getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
     }
     if (cnString == ""){
