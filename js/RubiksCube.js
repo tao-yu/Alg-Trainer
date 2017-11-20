@@ -327,7 +327,7 @@ function testAlg(algstr, auf){
 
 	doAlg(inverse);
 	drawCube(cube.cubestate)
-	console.log(algorithm);
+	//console.log("current alg:" + algorithm);
 	currentAlgorithm = algorithm;
     currentScramble = inverse;
 	updateVisualCube("x2" + currentRotation + inverse)
@@ -391,6 +391,17 @@ function testFromList(set){
 	//TODO Allow commutators to be parsed by alg.js.
 	return set[rand];
 
+}
+var starttime;
+function startTimer(){
+    starttime = new Date().getTime();
+}
+
+function stopTimer(){
+    if (starttime != null){
+        console.log((new Date().getTime() - starttime)/1000);
+    }
+    starttime = null;
 }
 
 //Create Checkboxes for each subset
@@ -495,14 +506,16 @@ listener.simple_combo("esc", function() {
 });
 
 listener.simple_combo("space", function() {
-
+    stopTimer();
 	displayAlgorithm();
 
 });
 listener.simple_combo("enter", function() {
+    startTimer();
 	testFromList(createAlgList());
 });
 listener.simple_combo("tab", function() {
+    startTimer();
 	testFromList(createAlgList());
 });
 
