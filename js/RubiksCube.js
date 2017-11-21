@@ -308,10 +308,11 @@ function testAlg(algstr, auf){
 	cube.resetCube();
 	if (auf){
 		algArr = addAUFs(algArr);
-		currentRotation = generateOrientation();
-        
-		doAlg(currentRotation);
+		
 	}
+    currentRotation = generateOrientation();
+        
+    doAlg(currentRotation);
 
 	algorithm = algArr[0];
 	var inverse = generateAlgScramble(algorithm);
