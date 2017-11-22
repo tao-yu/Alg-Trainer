@@ -399,10 +399,10 @@ function startTimer(){
 }
 
 function stopTimer(){
-    if (starttime != null){
-        console.log((new Date().getTime() - starttime)/1000);
+    if (starttime == null){
+        return;
     }
-    starttime = null;
+    console.log((new Date().getTime() - starttime)/1000);
 }
 
 //Create Checkboxes for each subset
