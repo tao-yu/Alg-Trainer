@@ -531,6 +531,18 @@ function RubiksCube() {
 		var gcube = Cube.fromString(this.toString());
 		return gcube.solve();
 	}
+    
+    this.isSolved = function(){
+        for (var i = 0; i<6;i++){
+            colour1 = this.cubestate[9*i];
+            for (var j = 0; j<8; j++){
+                if (this.cubestate[9*i + j + 1]!=colour1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 	this.wcaOrient = function() {
 		// u-r--f--d--l--b
 		// 4 13 22 31 40 49
