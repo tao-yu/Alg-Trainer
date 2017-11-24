@@ -104,6 +104,14 @@ var ZBLS = {
 	"40":["F2 r U r' F U2' R U R' ", "R' F R D R U R U' R2 D' F' "],
 	"41":["R U R' U' R U' R' U2 F' U' F", "R U' M' U' r' U2 r U r'"],
 };
+
+var VHLS = {
+	"1":["(U) R U' R'", "U R U R' U2 M' U R U' r'", "M' U R U' r'/R' F R F'", "M U R U' R' U' M'", "(U2) F2 r U r' F", "R' F R2 U R' U' F' ", "R' U' F U R U' F'", "M' U R U' r2 U2' R U R' U r"],
+	"2":["y U' L' U L", "U' R2 D r' U r D' R2  ", "r U R' U' M", "U' F2 r U r' U F", "U2 R2 B' R' B R'/(U2 l R U' R' U l')", "R U2 R D r' U' r D' R2", "d' F R U R' F'", "r U r' U2 M' U M "],
+	"3":["y L' U' L", "y' S' (R' U' R) S", "R U' R' F' r U' r' F2 ", "U R2 D r' U' r D' R2", "F' r U' r' F2 R U' R'", "U2 R' D' r U' r' D R2 U' R' ", "U' R' F R U R U' R2 F' R", "R' F R2 U' M' U2 r' U' F'"],
+	"4":["R U R'", "R U R' U' F R U R' U' F'", "R U R' F R U R' U' F' ", "R U R' U' r' U2 R U R' U r", "R U R' F U R U' R' F' ", "R U' R' F2 r U r' F  ", "R U' R' U2 R' F R F'  ", "R' D' r U' r' D R2 U R'  "],
+};
+
 var taoCOLL = {
 	"S":["R U R' U R U2' R' ","R U' L' U R' U' L ","U2' R' U' R U' R2' D' R U2 R' D R2 ","U' R U R' U R U' R D R' U' R D' R2' /U2' R2' D' R U' R' D R U' R U R' U R","R2' F R U R U' R' F' R U' R' U R /U2 R2' D' R U2 R' D R2 U R' U R /U R' D' R U R' D R2 U R' U2' R U R'","U2' R U R' F' R U R' U R U2' R' F R U' R' ",],
 	"AS":["R' U' R U' R' U2 R ","U2' L' U R U' L U R' ","U2' R' U' R U' R2' D' R U2 R' D R2 ","R U R' F' R U2 R' U' R U' R' F R U' R' ","R U R' F' R U2 R' U2' R' F R2 U' R' /U2 R2 D R' U2' R D' R2' U' R U' R'","U R' U' R U' R' U R' D' R U R' D R2 ",],
@@ -446,6 +454,7 @@ var L5E = {
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLL (algdb)" : algdbZBLL,
+	"VHLS (Chad Batten)": VHLS,
 	"ZBLS (Chad Batten)": ZBLS ,
 	
 	"OLLCP": algdbOLLCP,
