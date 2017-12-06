@@ -154,7 +154,7 @@ var ollcp = {
 };
 
 var olfc = {
-	"Full":["U R U2 D R' U R D R", "U' R' U' R D2 R", "D2 R' U' R U' D2 R' D2 R", "U R U' R U' D2 R'", "R2 U2 R U' R U R2D2 U R", "U' R' U2 R D2 R", "R U R' U' R U' D2 R", "R D R' U RU2' D R", "D R U' D R", "D R U RU2' D R", "U R U2' D2 R", "R U R2 U' R U' D2 R", "U' R U2 R'D2 R", "R U R' U' R2U' D2 R", "U' D' R U' R'D' R", "R D' R D R U' D2 R", "D R' D' R'  D2 U' R", "D R' D' R'  D2 U' R", "U' R U' R'D2 R", "R U D R U' RU' D R", "R D' R' U RD' U2' R", "U2 R U2 R2U' D2 R", "R D R U R'U2' D R"]
+	"Full":["U R U2 D R' U R D R", "U' R' U' R D2 R", "D2 R' U' R U' D2 R' D2 R", "U R U' R U' D2 R'", "R2 U2 R U' R U R2 D2 U R", "U' R' U2 R D2 R", "R U R' U' R U' D2 R", "R D R' U R U2' D R", "D R U' D R", "D R U R U2' D R", "U R U2' D2 R", "R U R2 U' R U' D2 R", "U' R U2 R' D2 R", "R U R' U' R2 U' D2 R", "U' D' R U' R' D' R", "R D' R D R U' D2 R", "D R' D' R' D2 U' R", "D R' D' R' D2 U' R", "U' R U' R' D2 R", "R U D R U' R U' D R", "R D' R' U R D' U2' R", "U2 R U2 R2 U' D2 R", "R D R U R' U2' D R"]
 };
 
 var CR = {
