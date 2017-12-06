@@ -450,6 +450,10 @@ var L5E = {
 	//"BR ":["R U R U R U' R' U' R'","(U') R2 U2 R2 U R' U' R' U2 R U R/U2 r S2 r' U2 r S2 r'","(U) R' M2 U M2 U M' U2 M2 U2 M' U2 R/U R U R' U R2 U2 R2 U2 R2 U R U' R'","U' R' U' R' F' R U2 R U' R' U' R' F R2","R' M2 U M2 U2 M2 U M' r/y U2 R2 F R2 U' R2 U2 R2 U2 R2 U' R2 F' R2","M2 U M2 U' R' U' M2 U M2 R","M2 U' M2 U R' U M2 U' M' r/U' R U' R' U R U R' U2 R2 U R' U' R' U2 R' U2","R' U' M U2 M' U' r U2 M U' M2 U' M' U2 M'","(U') R' U R U R' U2 R U' R' U' R","(U2) R U R U R' U' R' U' R'","(U') R' U2 R U' R' U' R U2 R' U R","(U') R' U' R U2 R' U R U R' U2 R",],}
 };
 
+var pseudo2gll = {
+    "full":[""],
+};
+
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLL (algdb)" : algdbZBLL,
@@ -492,5 +496,6 @@ window.algs = {
 	"ZZLL": zzll,
 	"OLLCP (Justin Taylor, WIP)": ollcp ,
 	"EG1 (Finn Ickler)": eg_full,
+    "Pseudo2GLL (no algs)": pseudo2gll,
     "test": test,
 };

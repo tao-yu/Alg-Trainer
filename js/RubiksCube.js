@@ -252,7 +252,10 @@ function generateAlgScramble(raw_alg){
 			return generatePreScramble(raw_alg, "R F' R B2 R' F R B2 R2,R'FR'B2'RF'R'B2'R2,U,D", 100, true);
 		case "CPLS (Arc)":
 			return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L", 100, true);
-        default: 
+        
+        case "Pseudo2GLL (no algs)":
+            return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L, F R' F' M F R F' M'", 10000, true);
+        default:  
             return obfusticate(alg.cube.invert(raw_alg));
     }
     
@@ -467,9 +470,10 @@ function createAlgList(){
 		for (var subset in window.algs[set]){
 			algList = algList.concat(window.algs[set][subset]);
 		}
+        console.log(algList.length + " algs in list");
 		return algList;
 	}
-
+    console.log(algList.length + " algs in list");
 	return algList;
 }
 
@@ -597,9 +601,8 @@ function RubiksCube() {
 	}
 
 	this.doAlgorithm = function(alg) {
-        /*if(!alg || /^\s*$/.test(alg)){
-            return;
-        }*/
+        if (alg == "") return;
+        
 		var moveArr = alg.split(/(?=[A-Za-z])/);
 		var i;
 
@@ -681,7 +684,7 @@ function RubiksCube() {
 				}
 			} else {
 
-				console.log("Invalid alg, or no alg specified:" + alg);
+				console.log("Invalid alg, or no alg specified:" + alg + "|");
 
 			}
 
