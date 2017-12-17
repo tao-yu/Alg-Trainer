@@ -238,6 +238,9 @@ function generateAlgScramble(raw_alg){
             
         case "CMLL":
             return generatePreScramble(raw_alg, "U,M", 100, true);//LSE scramble
+			
+		case "fortytwo":
+            return generatePreScramble(raw_alg, "U,M,RUMU'R'", 100, true);//L7E scramble
             
         case "OL5C (SqAree)":
             return generatePreScramble(raw_alg, "R2,U,D", 100, true);//<U, D, R2> scramble
@@ -350,7 +353,7 @@ function fixAlgorithms(algorithms){
 	//for now this just removes brackets
 	var i = 0;
 	for (;i<algArr.length;i++){
-		algorithms[i] = algorithms[i].replace(/\[|\]|\)|\(/g, "");
+		algorithms[i] = alg.cube.simplify(algorithms[i].replace(/\[|\]|\)|\(/g, ""));
 	}
 	return algorithms;
 	//TODO Allow commutators
