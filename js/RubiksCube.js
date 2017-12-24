@@ -240,7 +240,7 @@ function generateAlgScramble(raw_alg){
             return generatePreScramble(raw_alg, "U,M", 100, true);//LSE scramble
 			
 		case "fortytwo":
-            return generatePreScramble(raw_alg, "U,M,RUMU'R'", 100, true);//L7E scramble
+            return generatePreScramble(raw_alg, "M'UM, M'U'M, MUM', MU'M',M2, RUMU'R'M", 500, true);//L7E scramble
             
         case "OL5C (SqAree)":
             return generatePreScramble(raw_alg, "R2,U,D", 100, true);//<U, D, R2> scramble
