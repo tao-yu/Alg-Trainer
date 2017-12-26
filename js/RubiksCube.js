@@ -227,6 +227,7 @@ function generateAlgScramble(raw_alg){
         case "VLS":
         case "WVLS":
         case "OH OLL":
+		case "CLS":
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
             
         case "OLLCP":
