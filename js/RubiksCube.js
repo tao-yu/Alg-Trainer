@@ -235,6 +235,7 @@ function generateAlgScramble(raw_alg){
         case "COLL":
         case "COLL (Tao Yu)":
         case "CP solved OLLCP":
+		case "Briggs-Taylor Reduction COLL":
             return generatePreScramble(raw_alg, "F2U'R'LF2RL'U'F2,U", 5000, true);//EPLL scramble
             
         case "CMLL":
