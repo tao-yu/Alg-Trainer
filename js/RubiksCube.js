@@ -301,6 +301,7 @@ function generateOrientation(){
 		var colourNeutrality = cnString.split("/");
     }
     else {
+		alert("Invalid colour neutrality string");
         var colourNeutrality = ["", "", "y"];
     }
     localStorage.setItem("colourneutrality", cnString);
