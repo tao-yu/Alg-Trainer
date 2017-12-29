@@ -291,16 +291,17 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     
 }
 function generateOrientation(){
+	
+	
     var cnString = document.getElementById("colourneutrality").value;
-    
     if (cnString == "cn"){
         return getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
     }
-    if (cnString == ""){
-        var colourNeutrality = ["", "", "y"];
+    if (/(.*)\/(.*)\/(.*)/.test(cnString)){
+		var colourNeutrality = cnString.split("/");
     }
     else {
-        var colourNeutrality = cnString.split("/");
+        var colourNeutrality = ["", "", "y"];
     }
     localStorage.setItem("colourneutrality", cnString);
     var rand1 = Math.floor(Math.random()*4);

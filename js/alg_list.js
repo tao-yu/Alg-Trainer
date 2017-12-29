@@ -482,7 +482,7 @@ var L5E = {
 
 var pseudo2gll = {
 	"full":[""],
-}
+};
 
 var cpOLLCP = {
 "1": ["r U R' U R' r2 U' R' U R' r2 U2' r'/U r' U2' r2 R' U R' U' r2 R' U R' U r/r' U' R U' r2' R U R U' r2' R U2 r/U r U2 R r2' U' R U R r2' U' R U' r'"],
