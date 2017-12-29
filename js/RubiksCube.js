@@ -303,6 +303,7 @@ function generateOrientation(){
     else {
 		alert("Invalid colour neutrality string");
         var colourNeutrality = ["", "", "y"];
+		document.getElementById("colourneutrality").value="//y";
     }
     localStorage.setItem("colourneutrality", cnString);
     var rand1 = Math.floor(Math.random()*4);
