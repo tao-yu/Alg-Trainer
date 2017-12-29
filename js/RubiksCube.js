@@ -8,7 +8,22 @@ var ctx = canvas.getContext("2d");
 var stickerSize = 50;
 var currentAlgIndex;
 var myStorage = window.localStorage;
-document.getElementById("colourneutrality").value = myStorage.getItem('colourneutrality');
+var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
+
+if(!notfirstTime) {
+    document.getElementById("colourneutrality1").value = "";
+    document.getElementById("colourneutrality2").value = "x2";
+    document.getElementById("colourneutrality3").value = "y";
+    localStorage.setItem("colourneutrality1", "");
+    localStorage.setItem("colourneutrality2", "x2");
+    localStorage.setItem("colourneutrality3", "y");
+    localStorage.setItem("not_first_time","1");
+}
+else {
+    document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
+    document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
+    document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
+}
 
 createAlgsetPicker();
 drawCube(cube.cubestate);
@@ -291,26 +306,26 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
     
 }
 function generateOrientation(){
-	
-	
-    var cnString = document.getElementById("colourneutrality").value.replace(/\s*/g,"");
-    if (cnString == "cn"){
+    
+    if (document.getElementById("fullCN").checked){
         return getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
     }
-    else if (/(([xyz]\d?'?)*)\/([xyz]\d?'?)\/([xyz]\d?'?)/.test(cnString)){
-		var colourNeutrality = cnString.split("/");
-    }
-    else {
-		alert("Invalid colour neutrality string");
-        var colourNeutrality = ["", "", "y"];
-		document.getElementById("colourneutrality").value="//y";
-    }
-    localStorage.setItem("colourneutrality", cnString);
+	
+    var cn1 = document.getElementById("colourneutrality1").value;
+    var cn2 = document.getElementById("colourneutrality2").value;
+    var cn3 = document.getElementById("colourneutrality3").value;
+
+    //todo: warn if user enters invalid strings
+    
+    localStorage.setItem("colourneutrality1", cn1);
+    localStorage.setItem("colourneutrality2", cn2);
+    localStorage.setItem("colourneutrality3", cn3);
+    
     var rand1 = Math.floor(Math.random()*4);
     var rand2 = Math.floor(Math.random()*4);
     
-    
-    return colourNeutrality[0] + colourNeutrality[1].repeat(rand1) + colourNeutrality[2].repeat(rand2);
+    console.log(cn1 + cn2.repeat(rand1) + cn3.repeat(rand2));
+    return cn1 + cn2.repeat(rand1) + cn3.repeat(rand2);
 }
 
 function testAlg(algstr, auf){
