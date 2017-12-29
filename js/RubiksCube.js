@@ -293,11 +293,11 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
 function generateOrientation(){
 	
 	
-    var cnString = document.getElementById("colourneutrality").value;
+    var cnString = document.getElementById("colourneutrality").value.replace(/\s*/g,"");
     if (cnString == "cn"){
         return getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
     }
-    if (/(.*)\/(.*)\/(.*)/.test(cnString)){
+    else if (/(([xyz]\d?'?)*)\/([xyz]\d?'?)\/([xyz]\d?'?)/.test(cnString)){
 		var colourNeutrality = cnString.split("/");
     }
     else {
