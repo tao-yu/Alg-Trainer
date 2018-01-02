@@ -61,6 +61,16 @@ var zbll_full = {
 
 };
 
+var twoGenLL ={
+	"T": ["(U') R U R' U R U2 R' U2 R' U' R U' R' U2 R", "R' U R U2 R' U' R U' R U R' U' R' U' R U R U' R'", "(U2) R' U2 R U R' U R2 U2 R' U' R U' R'", "R U2 R' U' R U' R2 U2 R U R' U R", "R' U R U2 R' U' R U2 R' U' R U' R' U R", "(U2) R U' R' U2 R U R' U2 R U R' U R U' R'", "R' U R2 U R' U R' U' R U' R' U' R U R U' R'", "(U') R U R' U R U' R' U R' U' R2 U' R2 U2 R", "(U2) R' U2 R U R' U R U' R' U' R U' R' U2 R", "R U2 R' U' R U' R' U R U R'U R U2 R'", "(U') R' U' R2 U R2 U R2 U2 R' U R' U R ", "(U') R U R2 U' R2 U' R2 U2 R U' R U' R'"],
+	"U": ["(U) R U2 R' U' R U' R' U2 R' U2 R U R' U R", "R U R' U' R U' R U2 R2 U' R U R' U' R2 U' R2", "R' U' R U' R' U2 R2 U R' U R U2 R'", "(U2) R U R' U R U2 R2 U' R U' R' U2 R", "(U') R U R' U' R U' R' U2 R U' R' U2 R U R'", "(U') R' U' R U R' U R U2 R' U R U2 R' U' R", "(U) R U2 R2 U' R2 U' R' U R' U' R U R' U R", "(U) R' U2 R2 U R2 U R U' R U R' U' R U' R'", "(U) R' U2 R U R' U R U R' U' R U' R' U2 R", "(U) R U2 R' U' R U' R' U' R U R' U R U2 R'", "R' U' R U' R U2 R2 U' R2 U' R2 U R", "(U2) R U R' U R' U2 R2 U R2 U R2 U' R'"],
+	"L": ["R U2 R' U2 R' U' R U R U' R' U2 R' U2 R", "R U R' U R U' R' U R U' R' U R U2 R'", "(U2) R U2 R' U' R U' R' U2 R U R' U R U2 R'", "(U2) R U R' U R U2 R' U2 R U2 R' U' R U' R'", "R2 U R' U R' U' R U' R' U' R U R U' R2", "(U') R2 U' R U' R U R' U R U R' U' R' U R2", "(U) R' U2 R U R' U R U' R U2 R' U' R U' R'", "(U2) R U2 R' U' R U' R' U R' U2 R U R' U R", "(U) R2 U R' U' R' U R U R' U R U' R U' R2", "(U2) R2 U' R U R U' R' U' R U' R' U R' U R2", "(U2) R U R' U R U2 R' U R' U' R U' R' U2 R", "(U) R' U' R U' R' U2 R U' R U R' U R U2 R'"],
+	"Pi": ["R' U' R U R U2 R' U' R U' R2 U2 R", "R U R' U' R' U2 R U R' U R2 U2 R'", "(U') R' U2 R U R' U R2 U R' U R U2 R'", "(U) R U2 R' U' R U' R2 U' R U' R' U2 R", "(U') R U2 R' U2 R U' R' U2 R U' R' U2 R U R'", "(U) R' U2 R U2 R' U R U2 R' U R U2 R' U' R", "(U2) R U' R' U2 R U R' U2 R U R' U2 R U2 R'", "(U2) R' U R U2 R' U' R U2 R' U' R U2 R' U2 R", "R' U2 R2 U R2 U R2 U2 R'", "R U2 R2 U' R2 U' R2 U2 R", "R U R' U' R' U' R U R U R' U' R' U R U' R U' R'", "R U2 R' U' R U' R' U' R U2 R' U' R U' R'"],
+	"H": ["R U2 R' U' R U' R' U' R' U' R U' R' U2 R", "R' U2 R U R' U R U R U R' U R U2 R'", "(U) R' U' R U' R' U R U' R' U2 R", "(U') R U R' U R U' R' U R U2 R'", "R' U2 R U R' U' R U R' U R", "R U2 R' U' R U R' U' R U' R'", "(U) R U R' U R U' R' U R U' R' U R' U' R2 U' R' U R' U R", "(U) R U R' U R U2 R' U' R' U2 R U R' U R"],
+	"S": ["(U') R' U R2 U R' U R U2 R U2 R U R' U R2", "(U') R' U2 R2 U R  U' R' U R U R2 U' R'", "R U R' U R U2 R'", "(U') R' U2 R U R' U R", "R U R2 U' R2 U' R2 U2 R2 U2 R'", "(U2) R' U' R U' R U R2 U R2 U2 R'", "(U') R U R' U' R' U2 R U R U' R' U R' U R", "(U') R' U' R U R U R' U' R' U R U R U' R'", "R U R' U R U' R' U R' U' R2 U' R' U R' U R", "R U R' U R U R U R U R U' R' U' R2", "(U) R U R' U R' U' R2 U' R' U R' U' R U R' U R", "R U R' U R U' R' U R' U' R' U R U' R' U' R2 U R"],
+	"AS": ["(U) R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2", "(U) R U2 R2 U' R' U R U' R' U' R2 U R", "R' U' R U' R' U2 R", "(U) R U2 R' U' R U' R'", "R' U' R2 U R2 U R2 U2 R2 U2 R", "(U2) R U R' U R' U' R2 U' R2 U2 R", "(U) R' U' R U R U2 R' U' R' U R U' R U' R'", "(U) R U R' U' R' U' R U R U' R' U' R' U R", "(U) R U R' U R' U' R U R' U' R2 U' R2 U R U' R' U R", "R' U' R U' R' U' R' U' R' U' R' U R U R2", "(U) R U R' U' R U R2 U' R2 U' R' U R U' R' U R' U R", "(U2) R U R' U R' U' R' U R U' R' U' R' U' R' U2 R"],
+};
+
 var ZBLS = {
 	"1":["(U) R U' R'", "U R U R' U2 M' U R U' r'", "M' U R U' r'/R' F R F'", "M U R U' R' U' M'", "(U2) F2 r U r' F", "R' F R2 U R' U' F' ", "R' U' F U R U' F'", "M' U R U' r2 U2' R U R' U r"],
 	"2":["y U' L' U L", "U' R2 D r' U r D' R2  ", "r U R' U' M", "U' F2 r U r' U F", "U2 R2 B' R' B R'/(U2 l R U' R' U l')", "R U2 R D r' U' r D' R2", "d' F R U R' F'", "r U r' U2 M' U M "],
@@ -539,6 +549,7 @@ var cpOLLCP = {
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLL (algdb)" : algdbZBLL,
+	"2GLL": twoGenLL,
 	"VHLS (Chad Batten)": VHLS,
 	"ZBLS (Chad Batten)": ZBLS ,
 	
