@@ -577,9 +577,9 @@ window.algs = {
 	"OH PLL": OHPLL,
 	"WVLS": WVLS,
 	"VLS": VLS,
-	"CLS": cls,
-	"ELS (FR)": els_fr,
-	"ELS (BR)": els_br,
+	"CLS (Justin Taylor)": cls,
+	"ELS (FR) (Justin Taylor)": els_fr,
+	"ELS (BR) (Justin Taylor)": els_br,
 	
 	"CPLS (Arc)": CPLS,
 	

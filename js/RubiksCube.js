@@ -243,12 +243,12 @@ function generateAlgScramble(raw_alg){
         case "VLS":
         case "WVLS":
         case "OH OLL":
-		case "CLS":
+		case "CLS (Justin Taylor)":
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
 			
-		case "ELS (FR)":
+		case "ELS (FR) (Justin Taylor)":
 			return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R' D' R U R' D R,R F' L F R' F' L' F,R2 U R2' U R2 U2' R2',R U' R' U R U2' R' U R U' R'", 100, true);//CLS FR scramble
-        case "ELS (BR)":
+        case "ELS (BR) (Justin Taylor)":
 			return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R2' U' R2 U' R2 U2' R2,R' U2 R U' R' U' R,R' U R U2' R' U R,R' U R U' R' U2' R U' R' U R", 100, true);//CLS FR scramble
 			
         case "OLLCP":
