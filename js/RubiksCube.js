@@ -236,7 +236,8 @@ function generateAlgScramble(raw_alg){
     
     switch(set){
         case "ZBLS (Chad Batten)":
-            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U", 100, true);//ZBLLscramble
+		case "VHLS (Chad Batten)":
+            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true);//ZBLLscramble
             
         case "OLL":
         case "VLS":
@@ -244,7 +245,12 @@ function generateAlgScramble(raw_alg){
         case "OH OLL":
 		case "CLS":
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
-            
+			
+		case "ELS (FR)":
+			return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R' D' R U R' D R,R F' L F R' F' L' F,R2 U R2' U R2 U2' R2',R U' R' U R U2' R' U R U' R'", 100, true);//CLS FR scramble
+        case "ELS (BR)":
+			return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R2' U' R2 U' R2 U2' R2,R' U2 R U' R' U' R,R' U R U2' R' U R,R' U R U' R' U2' R U' R' U R", 100, true);//CLS FR scramble
+			
         case "OLLCP":
         case "OLLCP (Justin Taylor, WIP)":
         case "COLL":
