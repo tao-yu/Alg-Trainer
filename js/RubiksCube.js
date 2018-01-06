@@ -244,6 +244,7 @@ function generateAlgScramble(raw_alg){
         case "WVLS":
         case "OH OLL":
 		case "CLS (Justin Taylor)":
+		case "VLS (Jayden McNeill)":
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
 			
 		case "ELS (FR) (Justin Taylor)":
@@ -568,7 +569,7 @@ function RubiksCube() {
     
     this.isSolved = function(){
         for (var i = 0; i<6;i++){
-            colour1 = this.cubestate[9*i];
+            var colour1 = this.cubestate[9*i];
             for (var j = 0; j<8; j++){
                 if (this.cubestate[9*i + j + 1]!=colour1){
                     return false;
