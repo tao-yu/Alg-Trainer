@@ -10,57 +10,56 @@
 
         <style>
             body {
-                /*background: #002B36;*/
                 background: black;
                 font-family: Arial;
                 color: white;
             }
+            
             p {
                 font-family: Arial;
                 font-size: 20px;
                 color: white;
-
             }
 
-            p.big {
+            p.algdisp {
                 line-height: 200%;
+                height: 140px;
             }
 
             .column_left {
-
                 float: left;
                 width: 30%;
-                padding: 10px;
-
             }
 
 			.column_middle {
                 text-align: center;
                 float: left;
-                width: 35%;
-                padding: 10px;
-
+                width: 40%;        
             }
 
-
             .column_right {
+                margin-top: 40px;
                 text-align: center;
                 float: left;
                 width: 30%;
-                padding: 10px;
-
+            }
+            
+            .hundred{
+                width:100%;
             }
 
             a:link {
                 color: cornflowerblue
             }
+            
             a:visited {
                 color: darkslateblue
             }
         </style>
+        
         <div class=column_left>
 
-            <select id="algsetpicker" size=19 onchange="createCheckboxes()">
+            <select id="algsetpicker" size=19 onchange="createCheckboxes()" class=hundred>
             </select>
             <div id="cboxes"></div>
             <br>Leave all checkboxes blank to test on the full algset.
@@ -83,6 +82,7 @@
             <br>
             Other algorithms from <a href="http://algdb.net/">algdb</a> unless stated otherwise.
             <br>
+            
             <h2>Settings</h2>
             <form action="javascript:void(0);">
                 <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
@@ -120,21 +120,13 @@
 
 
         <div class=column_middle>
-            <p id="scramble" style="height: 40px">Scramble</p>
-
+            <p id="scramble">Scramble</p>
             <canvas id="cube" width="250" height="300" ></canvas>
-            
-            
-            <p id="algdisp" style="height: 140px" class=big>Solution</p> 
-            
-
-
-
-
+            <p id="algdisp" class=algdisp>Solution</p> 
         </div>
 
         <div class=column_right>
-            <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=250&view=plan&bg=black&alg=x2" id="visualcube"/>
+            <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
         </div>
 
         <script src="js/cube.js"></script>
