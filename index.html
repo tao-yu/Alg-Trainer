@@ -20,6 +20,11 @@
                 font-size: 20px;
                 color: white;
             }
+            
+            p.scramble {
+                vertical-align: middle; 
+                text-align: center;
+            }
 
             p.algdisp {
                 line-height: 200%;
@@ -38,14 +43,13 @@
             }
 
             .column_right {
-                margin-top: 40px;
                 text-align: center;
                 float: left;
                 width: 30%;
             }
             
-            .hundred{
-                width:100%;
+            .algsetpicker{
+                width:70%;
             }
 
             a:link {
@@ -56,31 +60,14 @@
                 color: darkslateblue
             }
         </style>
-        
+        <p id="scramble" class=scramble>Scramble</p>
         <div class=column_left>
 
-            <select id="algsetpicker" size=19 onchange="createCheckboxes()" class=hundred>
+            <select id="algsetpicker" size=18 onchange="createCheckboxes()" class=algsetpicker>
             </select>
             <div id="cboxes"></div>
             <br>Leave all checkboxes blank to test on the full algset.
 
-            <br>
-
-            <h2>Instructions</h2>
-            Enter/Tab: New scramble<br>
-            Space: Reset case and show algorithm<br>
-            Esc: Reset case without showing algorithm<br> 
-            Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
-            <br><br>
-            ZBLL Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d/0B5wWQGM9R38gMXBCV1NtVlluekU/view">PDF</a>
-            <br>
-            ZBLS Algorithms from Chad Battens <a href="https://docs.google.com/spreadsheets/d/15uhCNM_GUj2KvyDda8zoCIIweVjWrC2AppaxRiHf2t4/edit?usp=sharing">Spreadsheet</a>
-            <br>
-            Ribbon Algorithms by Justin Taylor: <a href="https://drive.google.com/file/d/15pjMnEGbF3hkn_YBq2ZeNxIF3GajyoiU/view">TOLS</a>, <a href="https://drive.google.com/file/d/148i4z9K--45G_-RH0f5ayC5Za8cPMyy5/view">TTLL</a>
-            <br>
-            One Look Wednesdays: Daniel Rose-Levine's <a href="https://www.youtube.com/watch?v=F7X8qLCBvUQ">Youtube series</a>
-            <br>
-            Other algorithms from <a href="http://algdb.net/">algdb</a> unless stated otherwise.
             <br>
             
             <h2>Settings</h2>
@@ -116,11 +103,31 @@
 
             </form>
 
+            <h2>Instructions</h2>
+            Enter/Tab: New scramble<br>
+            Space: Reset case and show algorithm<br>
+            Esc: Reset case without showing algorithm<br> 
+            Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
+            <br><br>
+            
+            <h2>Algorithm Credits</h2>
+            ZBLL Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d/0B5wWQGM9R38gMXBCV1NtVlluekU/view">PDF</a>
+            <br>
+            ZBLS Algorithms from Chad Battens <a href="https://docs.google.com/spreadsheets/d/15uhCNM_GUj2KvyDda8zoCIIweVjWrC2AppaxRiHf2t4/edit?usp=sharing">Spreadsheet</a>
+            <br>
+            Ribbon Algorithms by Justin Taylor: <a href="https://drive.google.com/file/d/15pjMnEGbF3hkn_YBq2ZeNxIF3GajyoiU/view">TOLS</a>, <a href="https://drive.google.com/file/d/148i4z9K--45G_-RH0f5ayC5Za8cPMyy5/view">TTLL</a>
+            <br>
+            One Look Wednesdays: Daniel Rose-Levine's <a href="https://www.youtube.com/watch?v=F7X8qLCBvUQ">Youtube series</a>
+            <br>
+            Other algorithms from <a href="http://algdb.net/">algdb</a> unless stated otherwise.
+            <br>
+            
+            
+
         </div>
 
 
         <div class=column_middle>
-            <p id="scramble">Scramble</p>
             <canvas id="cube" width="250" height="300" ></canvas>
             <p id="algdisp" class=algdisp>Solution</p> 
         </div>
