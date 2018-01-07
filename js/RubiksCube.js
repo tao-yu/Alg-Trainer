@@ -5,7 +5,7 @@ var currentScramble = "";
 var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
-var stickerSize = 50;
+var stickerSize = canvas.width/5;
 var currentAlgIndex;
 var myStorage = window.localStorage;
 var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
@@ -450,7 +450,7 @@ function createAlgsetPicker(){
 		algsetPicker.add(option);
 
 	}
-	algsetPicker.size = Object.keys(window.algs).length
+	//algsetPicker.size = Object.keys(window.algs).length
 }
 
 
