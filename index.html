@@ -7,84 +7,135 @@
         <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
     </head>
     <body>
-        <div id="right">
-
-            <select id="algsetpicker" size=19 onchange="createCheckboxes()">
-            </select>
-            <div id="cboxes"></div>
-            <br>Leave all checkboxes blank to test on the full algset.
-        </div>
 
         <style>
             body {
-                /*background: #002B36;*/
                 background: black;
                 font-family: Arial;
                 color: white;
             }
+            
             p {
                 font-family: Arial;
                 font-size: 20px;
                 color: white;
+            }
+            
+            p.scramble {
+                vertical-align: middle; 
+                text-align: center;
+            }
 
+            p.algdisp {
+                line-height: 200%;
+                height: 140px;
             }
-            #right {
-                float: right;
-                width: 65%;
-                text-align: left;
-            }
-            .picture div{
+
+            .column_left {
                 float: left;
+                width: 30%;
             }
+
+			.column_middle {
+                text-align: center;
+                float: left;
+                width: 40%;        
+            }
+
+            .column_right {
+                text-align: center;
+                float: left;
+                width: 30%;
+            }
+            
+            .algsetpicker{
+                width:70%;
+            }
+
             a:link {
                 color: cornflowerblue
             }
+            
             a:visited {
                 color: darkslateblue
             }
         </style>
+        <p id="scramble" class=scramble>Scramble</p>
+        <div class=column_left>
 
-        <p id="scramble" style="height: 30px">Scramble</p>
-        <canvas id="cube" width="250" height="300" ></canvas>
-        <p id="algdisp" style="height: 140px">Solution</p> 
+            <select id="algsetpicker" size=18 onchange="createCheckboxes()" class=algsetpicker>
+            </select>
+            <div id="cboxes"></div>
+            <br>Leave all checkboxes blank to test on the full algset.
 
-        <form action="javascript:void(0);">
-            <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
-            <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
-            <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
-            <input id="prescramble" type="checkbox">Scramble subsequent steps (requires real scrambles)<br>
-            <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0">Go in order<br>
-            <select id="cubeType" onchange="drawCube(cube.cubestate)">
-                <option value="3x3" default>3x3</option>
-                <option value="2x2">2x2</option>
-            </select><br><br>
+            <br>
             
+            <h2>Settings</h2>
+            <form action="javascript:void(0);">
+                <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
+                <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
+                <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
+                <input id="prescramble" type="checkbox">Scramble subsequent steps (requires real scrambles)<br>
+                <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0">Go in order<br>
+                <select id="cubeType" onchange="drawCube(cube.cubestate)">
+                    <option value="3x3" default>3x3</option>
+                    <option value="2x2">2x2</option>
+                </select><br><br>
+
+
+                Preorientation: <br>
+
+                <input id="fullCN" type="checkbox"> Full colour neutrality<br>
+                or<br>
+                Starting from WCA orientation: <br>
+                First do one
+                <input type="text" id="colourneutrality1" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
+                rotation<br>
+
+                then do a random number of 
+                <input type="text" id="colourneutrality2" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
+                rotations, <br>
+
+                and finally do a random number of 
+                <input type="text" id="colourneutrality3" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
+                rotations.<br>
+
+
+            </form>
+
+            <h2>Instructions</h2>
+            Enter/Tab: New scramble<br>
+            Space: Reset case and show algorithm<br>
+            Esc: Reset case without showing algorithm<br> 
+            Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
+            <br><br>
             
-            Preorientation: <br>
+            <h2>Algorithm Credits</h2>
+            ZBLL Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d/0B5wWQGM9R38gMXBCV1NtVlluekU/view">PDF</a>
+            <br>
+            ZBLS Algorithms from Chad Battens <a href="https://docs.google.com/spreadsheets/d/15uhCNM_GUj2KvyDda8zoCIIweVjWrC2AppaxRiHf2t4/edit?usp=sharing">Spreadsheet</a>
+            <br>
+            Ribbon Algorithms by Justin Taylor: <a href="https://drive.google.com/file/d/15pjMnEGbF3hkn_YBq2ZeNxIF3GajyoiU/view">TOLS</a>, <a href="https://drive.google.com/file/d/148i4z9K--45G_-RH0f5ayC5Za8cPMyy5/view">TTLL</a>
+            <br>
+            One Look Wednesdays: Daniel Rose-Levine's <a href="https://www.youtube.com/watch?v=F7X8qLCBvUQ">Youtube series</a>
+            <br>
+            Other algorithms from <a href="http://algdb.net/">algdb</a> unless stated otherwise.
+            <br>
             
-            <input id="fullCN" type="checkbox"> Full colour neutrality<br>
-            or<br>
-            Starting from WCA orientation: <br>
-            First do one
-            <input type="text" id="colourneutrality1" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
-            rotation<br>
-            
-            then do a random number of 
-            <input type="text" id="colourneutrality2" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
-            rotations, <br>
-            
-            and finally do a random number of 
-            <input type="text" id="colourneutrality3" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
-            rotations.<br>
             
 
-        </form>
+        </div>
 
-        <DIV STYLE = "POSITION: absolute; TOP: 0px; RIGHT: 0px">
-            <img src="http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
-        </DIV>
 
-        <!-- <input id="allsets" type="checkbox">All<br> -->
+
+        <div class=column_middle>
+            <canvas id="cube" width="250" height="300" ></canvas>
+            <p id="algdisp" class=algdisp>Solution</p> 
+        </div>
+
+        <div class=column_right>
+            <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
+        </div>
 
         <script src="js/cube.js"></script>
         <script src="js/solve.js"></script>
@@ -93,24 +144,5 @@
         <script src="js/keypress.js"></script>
         <script src="js/alg_list.js"></script>
         <script src="js/RubiksCube.js"></script>
-
-        <br>
-
-        <h2>Instructions</h2>
-        Enter/Tab: New scramble<br>
-        Space: Reset case and show algorithm<br>
-        Esc: Reset case without showing algorithm<br> 
-        Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
-        <br><br>
-        ZBLL Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d/0B5wWQGM9R38gMXBCV1NtVlluekU/view">PDF</a>
-        <br>
-        ZBLS Algorithms from Chad Battens <a href="https://docs.google.com/spreadsheets/d/15uhCNM_GUj2KvyDda8zoCIIweVjWrC2AppaxRiHf2t4/edit?usp=sharing">Spreadsheet</a>
-        <br>
-		Ribbon Algorithms by Justin Taylor: <a href="https://drive.google.com/file/d/15pjMnEGbF3hkn_YBq2ZeNxIF3GajyoiU/view">TOLS</a>, <a href="https://drive.google.com/file/d/148i4z9K--45G_-RH0f5ayC5Za8cPMyy5/view">TTLL</a>
-		<br>
-		One Look Wednesdays: Daniel Rose-Levine's <a href="https://www.youtube.com/watch?v=F7X8qLCBvUQ">Youtube series</a>
-		<br>
-        Other algorithms from <a href="http://algdb.net/">algdb</a> unless stated otherwise.
-        <br>
     </body>
 </html>

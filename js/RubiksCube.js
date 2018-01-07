@@ -5,7 +5,7 @@ var currentScramble = "";
 var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
-var stickerSize = 50;
+var stickerSize = canvas.width/5;
 var currentAlgIndex;
 var myStorage = window.localStorage;
 var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
@@ -357,7 +357,7 @@ function testAlg(algstr, auf){
 		scramble = alg.cube.simplify(inverse);
 		scrP.innerHTML = scramble;
 	} else{
-		scrP.innerHTML = "";
+		scrP.innerHTML = "&nbsp;";
 	}
 
 
@@ -451,7 +451,7 @@ function createAlgsetPicker(){
 		algsetPicker.add(option);
 
 	}
-	algsetPicker.size = Object.keys(window.algs).length
+	//algsetPicker.size = Object.keys(window.algs).length
 }
 
 
@@ -537,7 +537,7 @@ listener.simple_combo("p", function() {	doAlg("z");});
 listener.simple_combo("q", function() {	doAlg("z'");});
 listener.simple_combo("esc", function() {
 	reTestAlg();
-	document.getElementById("scramble").innerHTML = "";
+	document.getElementById("scramble").innerHTML = "&nbsp;";
 	document.getElementById("algdisp").innerHTML = "";
 
 });
