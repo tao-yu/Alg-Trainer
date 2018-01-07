@@ -279,7 +279,8 @@ function generateAlgScramble(raw_alg){
         case "Ortega OLL":
 			return generatePreScramble(raw_alg, "R F' R B2 R' F R B2 R2,R'FR'B2'RF'R'B2'R2,U,D", 100, true);
 		case "CPLS (Arc)":
-			return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L", 100, true);
+		case "CPEOLL":
+			return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L", 100, true);//2GLL scramble
         
         case "Pseudo2GLL (no algs)":
             return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L, F R' F' M F R F' M'", 10000, true);

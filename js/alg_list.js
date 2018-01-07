@@ -578,6 +578,12 @@ var one_look_wednesdays_daniel_roselevine = {
 	"Ep7":["R U R' U' F' U2 F U R U R'", "R U2 R2 U' F' U F R U R U2 R'", "R U' R2 F R F' U (R U R' U') (R U R' U')"],
 };
 
+var cpeoll = {
+	"LINE":["r U r' R U R' U' r U' r'/R U R' U' r R' U R U' r'", "(U2) r U' r' U' r U r' y' R' U R", "(U) R U R' U' R' F R F'", "FRUR'U'F'"],
+	"L":["r' U2 R U R' U r/ (U') r U2 R' U' R U' r' /U2' r U R' U' M U R U' R' /U2' r U R' U R U2' r'", "U2 F U R  U' R' F'", "(U') R U2 R' U2 R' F R F'", "(U) F R U' R' U' R U R' F'", "F R' F' R U R U' R'", "(U) R' U2 R U2 x' R U' R' U x"],
+	"DOTS":["r U r' U2 R U2' R' U2 r U' r' / r' U' r R' U' R U' R' U R U2 r' U r", "F R' F' R2 r' U R U' R' U' M'/U R U R' U R' F R F' U2 R' F R F' /U' R U2' R2' F R F' U2 R' F R F'", "L' U2 L F R U2 R' F' L' U2 L/R U2' R2' F R F' U2 M' U R U' r'"],
+};
+
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLL (algdb)" : algdbZBLL,
@@ -603,7 +609,7 @@ window.algs = {
 	"ELS (BR) (Justin Taylor)": els_br,
 	
 	"CPLS (Arc)": CPLS,
-	
+	"CPEOLL" : cpeoll,
 	"L5E (Justin, Micki)": L5E,
 	"TTLL (Justin Taylor)": ttll,
 	"TSLE": tsle,
