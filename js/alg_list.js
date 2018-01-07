@@ -570,7 +570,7 @@ var vls_jayden_mcneill = {
 };
 
 var one_look_wednesdays_daniel_roselevine = {
-	"Ep1":["(r U R' U R U2 r') U (R' U' R U' R' U2 R)", "l' U (R U R' F' R U R' U' R' F R2 U' R') U2 R"],
+	"Ep1":["(r U R' U R U2 r') U (R' U' R U' R' U2 R)", "l' U (R U R' F' R U R' U' R' F R2 U' R') U2 R x'"],
 	"Ep2":["F U' R2 D R' U2 R D' R2 U F'", "F U' R2 D R' U' R D' R2 U F'", "F U' R2 D R' U R D' R2 U F'"],
 	"Ep3":["R U2 R' U' R U R' U2 R' F R F'", "r U2 R' U' R U R' U2 r' F R F'", "r U R' U' r' F R2 U R' U' R U R' U' F'", "F R' F' r U2 R U' R' U R U2 r'"],
 	"Ep5":["F U R U' F' r U R' U' r'", "R U2 R2 U' F' U F R2 U' R'", "F U R' U' R' F' R' U' R2 U2 R2 U2 R'"],
