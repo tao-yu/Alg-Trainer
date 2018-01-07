@@ -356,7 +356,7 @@ function testAlg(algstr, auf){
 		scramble = alg.cube.simplify(inverse);
 		scrP.innerHTML = scramble;
 	} else{
-		scrP.innerHTML = "";
+		scrP.innerHTML = "&nbsp;";
 	}
 
 
@@ -536,7 +536,7 @@ listener.simple_combo("p", function() {	doAlg("z");});
 listener.simple_combo("q", function() {	doAlg("z'");});
 listener.simple_combo("esc", function() {
 	reTestAlg();
-	document.getElementById("scramble").innerHTML = "";
+	document.getElementById("scramble").innerHTML = "&nbsp;";
 	document.getElementById("algdisp").innerHTML = "";
 
 });
