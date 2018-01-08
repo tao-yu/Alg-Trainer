@@ -7,6 +7,21 @@ var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = canvas.width/5;
 var currentAlgIndex;
+
+
+createAlgsetPicker();
+drawCube(cube.cubestate);
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+Cube.initSolver();
+
+document.getElementById("loader").style.display = "none";
+var myVar = setTimeout(showPage, 1);
+function showPage(){
+    document.getElementById("page").style.display = "block";
+}
+
 var myStorage = window.localStorage;
 var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
 
@@ -23,17 +38,6 @@ else {
     document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
     document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
-}
-
-createAlgsetPicker();
-drawCube(cube.cubestate);
-
-Cube.initSolver();
-
-document.getElementById("loader").style.display = "none";
-var myVar = setTimeout(showPage, 1);
-function showPage(){
-    document.getElementById("page").style.display = "block";
 }
 
 function fillSticker(x, y, colour) {
