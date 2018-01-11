@@ -584,6 +584,12 @@ var cpeoll = {
 	"DOTS":["r U r' U2 R U2' R' U2 r U' r' / r' U' r R' U' R U' R' U R U2 r' U r", "F R' F' R2 r' U R U' R' U' M'/U R U R' U R' F R F' U2 R' F R F' /U' R U2' R2' F R F' U2 R' F R F'", "L' U2 L F R U2 R' F' L' U2 L/R U2' R2' F R F' U2 M' U R U' r'"],
 };
 
+var ribbon_multislotting = {
+	"Oriented":["R U R' D R U' R' D'", "R' F' R2 U' R' U2 R U2 R' F R U R'", "F r U' r' F r U' r' F r U' r'", "L' U' R U L U' R'", "r' F' R F r U' R'", "R2 D2 R' U' R D2 R' U R'", "R U R' D' R U' R' D", "R2 U R' U' R2 U' R' U R U' R U2 R'", "R2 U' R U2 R' U' R U' R", "R U2 R U2 R U R U' R' U2 R2", "y R' D R U R' D2 R U' R' D R", "R U R' D2 R U' R' D2", "R' D' R' D R D' R' D R D' R' D R2", "R' D2 R U R' D2 R2 U' R' D2 R U R' D2", "R D' R' U' R' D' R U2 R' D R U R D R'", "l U2 R' D' R U2 R' D x", "R2 D' R' U' R D R' U R'"],
+	"ORIENTED EDGE U LAYER":["R U L' U' M'", "R' D' R U2 R' D R U' r' F' r", "R L' U L U' R'", "R D' R2 D R D' R D", "R U' R' U' R U2 R2 U' R", "R U R2 U2 R2 U R'", "x' U2 R' U2 F2 U2 R U2", "R2 U' L U R2 L'"],
+	"MISORIENTED EDGE U LAYER":["l' U' R U' R' U2 R U' x'", "r U' r' U r' F' r U' r U r'", "M2 F r U' R2 r", "r' D' R U R' U2 R U' R' D r", "r U' r2 U R U' R' U' r2 U r'", "F R2 F' R2 B' R2 B R2", "y  F U2 R' U' R U' F'", "l U' R U' R' U2 R U' R' U l'", "R U L U' r' U' r' F r U R'"],
+};
+
 window.algs = {
 	"ZBLL (Jabari Nuruddin)" :zbll_full,
 	"ZBLL (algdb)" : algdbZBLL,
@@ -614,6 +620,7 @@ window.algs = {
 	"TTLL (Justin Taylor)": ttll,
 	"TSLE": tsle,
 	"TOLS (Justin Taylor)": tols,
+	"Ribbon Multislotting":  ribbon_multislotting,
 	
 	"CMLL": CMLL,
 	"42 (Shadowslice)": fortytwo,
