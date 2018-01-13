@@ -393,7 +393,7 @@ function reTestAlg(){
 function fixAlgorithms(algorithms){
     //for now this just removes brackets
     var i = 0;
-    for (;i<algArr.length;i++){
+    for (;i<algorithms.length;i++){
         algorithms[i] = alg.cube.simplify(algorithms[i].replace(/\[|\]|\)|\(/g, ""));
     }
     return algorithms;
