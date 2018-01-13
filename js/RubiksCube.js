@@ -38,7 +38,13 @@ else {
     document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
     document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
+    document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
 }
+
+var scramble_subsequent = document.getElementById("prescramble");
+scramble_subsequent.addEventListener("click", function(){
+    localStorage.setItem("scramble_subsequent", this.checked);
+});
 
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
