@@ -382,7 +382,7 @@ function testAlg(algstr, auf){
 
     doAlg(inverse);
     drawCube(cube.cubestate)
-    //console.log("current alg:" + algorithm);
+    console.log("current alg:" + algorithm);
     currentAlgorithm = algorithm;
     currentScramble = inverse;
     updateVisualCube("x2" + currentRotation + inverse)
