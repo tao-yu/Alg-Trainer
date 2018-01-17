@@ -417,7 +417,7 @@ function displayAlgorithm(){
     }
     //show solution
     var x = document.getElementById("algdisp");
-    x.innerHTML = algArr.join("<br>");
+    x.innerHTML = algArr.join("<br><br>");
     reTestAlg();
 
     //show scramble
