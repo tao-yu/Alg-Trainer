@@ -270,6 +270,7 @@ function generateAlgScramble(raw_alg){
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R2' U' R2 U' R2 U2' R2,R' U2 R U' R' U' R,R' U R U2' R' U R,R' U R U' R' U2' R U' R' U R", 100, true);//CLS FR scramble
 
         case "OLLCP":
+		case "OLLCP (Cale Schoon)":
         case "OLLCP (Justin Taylor, WIP)":
         case "COLL":
         case "COLL (Tao Yu)":
