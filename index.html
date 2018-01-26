@@ -27,8 +27,8 @@
             }
 
             p.algdisp {
-                
-                
+
+
             }
 
             .column_left {
@@ -41,6 +41,7 @@
                 float: left;
                 width: 40%;        
             }
+
 
             .column_right {
                 text-align: center;
@@ -115,12 +116,12 @@
 
             }
 
-            
-                border-top: 16px solid blue;
-                border-right: 16px solid green;
-                border-bottom: 16px solid red;
-                border-left: 16px solid yellow;
-            
+
+            border-top: 16px solid blue;
+            border-right: 16px solid green;
+            border-bottom: 16px solid red;
+            border-left: 16px solid yellow;
+
 
         </style>
         <div id="loader"></div>
@@ -138,6 +139,7 @@
 
                 <h2>Settings</h2>
                 <form action="javascript:void(0);">
+                    <input id="useVirtual" type="checkbox" checked = "true" onclick="setVirtualCube(this.checked)">Use Virtual Cube<br>
                     <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
                     <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
                     <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
@@ -195,9 +197,20 @@
 
 
             <div class=column_middle>
-                <canvas id="cube" width="250" height="300" ></canvas>
-                <p id="algdisp" class=algdisp>Solution</p> 
+                <div id="simcube"> 
+                    <canvas id="cube" width="250" height="300" ></canvas>
+                </div>
+                
+                <div id="timer_div">
+                <p id="timer">0.00</p>
+                </div>
+
+                <div id="algdisplayer"> 
+                    <p id="algdisp" class=algdisp>Solution</p>
+                </div>
             </div>
+
+
 
             <div class=column_right>
                 <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>

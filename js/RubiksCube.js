@@ -202,10 +202,18 @@ function drawCube(cubeArray) {
     }
 }
 
-
+var timerShouldStartOnNextMove = false;
 function doAlg(algorithm){
     cube.doAlgorithm(algorithm);
     drawCube(cube.cubestate);
+    
+    if (timerShouldStartOnNextMove && isUsingVirtualCube()){
+        startTimer();
+        timerShouldStartOnNextMove = false;
+    }
+    if (timerIsRunning && cube.isSolved()){
+        var time = stopTimer();
+    }
 }
 
 
@@ -387,6 +395,9 @@ function testAlg(algstr, auf){
     currentAlgorithm = algorithm;
     currentScramble = inverse;
     updateVisualCube("x2" + currentRotation + inverse)
+    if(isUsingVirtualCube()){
+        startTimer();
+    }
 
 }
 
@@ -449,15 +460,22 @@ function testFromList(set){
 
 }
 var starttime;
+var timerUpdateInterval;
+var timerIsRunning = false;
 function startTimer(){
-    starttime = new Date().getTime();
+    starttime = Date.now();
+    timerUpdateInterval = setInterval(updateTimer, 1);
+    timerIsRunning = true;
+}
+
+function updateTimer(){
+    document.getElementById("timer").innerHTML = ((Date.now()-starttime)/1000).toFixed(2);
 }
 
 function stopTimer(){
-    if (starttime == null){
-        return;
-    }
-    console.log((new Date().getTime() - starttime)/1000);
+    clearInterval(timerUpdateInterval);
+    timerIsRunning = false;
+    return parseFloat(document.getElementById("timer").innerHTML);
 }
 
 //Create Checkboxes for each subset
@@ -529,6 +547,38 @@ function createAlgList(){
     return algList;
 }
 
+function toggleVirtualCube(){
+    var sim = document.getElementById("simcube");
+    
+    if (sim.style.display == 'none'){
+        sim.style.display = 'block';
+    }
+    else {
+        sim.style.display = 'none';
+    }
+}
+
+function setVirtualCube(setting){
+    var sim = document.getElementById("simcube");
+    if (setting){
+        sim.style.display = 'block';
+    } else {
+        sim.style.display = 'none';
+    }
+}
+
+function isUsingVirtualCube(){
+    var sim = document.getElementById("simcube")
+    
+    if (sim.style.display == 'none'){
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+
 var listener = new window.keypress.Listener();
 listener.simple_combo("i", function() {	doAlg("R");});
 listener.simple_combo("k", function() {	doAlg("R'");});
@@ -563,17 +613,46 @@ listener.simple_combo("esc", function() {
 });
 
 listener.simple_combo("space", function() {
-    stopTimer();
-    displayAlgorithm();
+    
+    if (isUsingVirtualCube()){
+        var time = stopTimer();
+        displayAlgorithm();
+    }
+    else {
+        if(timerIsRunning){//If timer is running, stop timer
+            var time = stopTimer();
+            displayAlgorithm();
+        }
+        else if (document.getElementById("algdisp").innerHTML == ""){
+            //If timer is not running, but the algdisp is empty, starttimer
+            startTimer();
+        }
+        else {
+            testFromList(createAlgList()); //If the solutions are currently displayed, space should test on the next alg.
+        }
+    }
 
 });
 listener.simple_combo("enter", function() {
-    startTimer();
-    testFromList(createAlgList());
+    stopTimer();
+    document.getElementById("timer").innerHTML = 'Ready';
+    if (isUsingVirtualCube()){
+        startTimer();
+        testFromList(createAlgList());
+    }
+    else {
+        testFromList(createAlgList());
+    }
 });
 listener.simple_combo("tab", function() {
-    startTimer();
-    testFromList(createAlgList());
+    stopTimer();
+    document.getElementById("timer").innerHTML = 'Ready';
+    if (isUsingVirtualCube()){
+        testFromList(createAlgList());
+    }
+    else {
+        testFromList(createAlgList());
+    }
 });
 
 //CUBE OBJECT
