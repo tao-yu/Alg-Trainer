@@ -466,16 +466,29 @@ function updateTimer(){
     document.getElementById("timer").innerHTML = ((Date.now()-starttime)/1000).toFixed(2);
 }
 var timeArray = [];
+
+
 function stopTimer(logTime=true){
     console.log('logtime is ' + logTime);
     clearInterval(timerUpdateInterval);
     timerIsRunning = false;
     var time = parseFloat(document.getElementById("timer").innerHTML);
     if (logTime){
-        timeArray.push(time);
+        timeArray.push(new SolveTime(time,''));
         console.log(timeArray);
+        updateTimeList();
     }
     return time;
+}
+
+function updateTimeList(){
+    var i;
+    var timeList = document.getElementById("timeList");
+    timeList.innerHTML = "";
+    for (i=0; i<timeArray.length;i++){
+        timeList.innerHTML += timeArray[i].timeValue();
+        timeList.innerHTML += " ";
+    }
 }
 
 //Create Checkboxes for each subset
@@ -628,6 +641,7 @@ listener.simple_combo("space", function() {
             startTimer();
         }
         else {
+            document.getElementById("timer").innerHTML = 'Ready';
             testFromList(createAlgList()); //If the solutions are currently displayed, space should test on the next alg.
         }
     }
@@ -670,7 +684,7 @@ class SolveTime {
         }
     }
 
-    value() {
+    timeValue() {
 
         switch (this.penalty) {
             case '+2':
