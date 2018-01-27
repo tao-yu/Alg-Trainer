@@ -202,15 +202,11 @@ function drawCube(cubeArray) {
     }
 }
 
-var timerShouldStartOnNextMove = false;
+
 function doAlg(algorithm){
     cube.doAlgorithm(algorithm);
     drawCube(cube.cubestate);
 
-    if (timerShouldStartOnNextMove && isUsingVirtualCube()){
-        startTimer();
-        timerShouldStartOnNextMove = false;
-    }
     if (timerIsRunning && cube.isSolved() && isUsingVirtualCube()){
         var time = stopTimer();
     }
@@ -360,7 +356,7 @@ function generateOrientation(){
     var rand1 = Math.floor(Math.random()*4);
     var rand2 = Math.floor(Math.random()*4);
 
-    console.log(cn1 + cn2.repeat(rand1) + cn3.repeat(rand2));
+    //console.log(cn1 + cn2.repeat(rand1) + cn3.repeat(rand2));
     return cn1 + cn2.repeat(rand1) + cn3.repeat(rand2);
 }
 
@@ -395,9 +391,7 @@ function testAlg(algstr, auf){
     currentAlgorithm = algorithm;
     currentScramble = inverse;
     updateVisualCube("x2" + currentRotation + inverse)
-    if(isUsingVirtualCube()){
-        startTimer();
-    }
+    
 
 }
 
@@ -473,7 +467,7 @@ function updateTimer(){
 }
 var timeArray = [];
 function stopTimer(logTime=true){
-    console.log(logTime);
+    console.log('logtime is ' + logTime);
     clearInterval(timerUpdateInterval);
     timerIsRunning = false;
     var time = parseFloat(document.getElementById("timer").innerHTML);
@@ -644,8 +638,8 @@ function nextScramble(){
     stopTimer(false);
     document.getElementById("timer").innerHTML = 'Ready';
     if (isUsingVirtualCube()){
-        startTimer();
         testFromList(createAlgList());
+        startTimer();
     }
     else {
         testFromList(createAlgList());
