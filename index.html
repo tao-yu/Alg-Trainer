@@ -21,6 +21,28 @@
                 color: white;
             }
 
+            hr { 
+                display: block;
+                margin-top: 0.5em;
+                margin-bottom: 0.5em;
+                margin-left: auto;
+                margin-right: auto;
+                border-style: inset;
+                border-width: 0.5px;
+                border-color:#303030;
+            }
+
+
+            #timer {
+                font-family: Arial;
+                font-size: 30px;
+                color: white;
+            }
+
+            #statistics {
+                font-size: 20px;
+            }
+
             p.scramble {
                 vertical-align: middle; 
                 text-align: center;
@@ -128,6 +150,7 @@
         <div style="display:none;" id="page" class="animate-bottom">
 
             <p id="scramble" class=scramble>Scramble</p>
+            <hr>
             <div class=column_left>
 
                 <select id="algsetpicker" size=18 onchange="createCheckboxes()" class=algsetpicker>
@@ -140,6 +163,7 @@
                 <h2>Settings</h2>
                 <form action="javascript:void(0);">
                     <input id="useVirtual" type="checkbox" checked = "true" onclick="setVirtualCube(this.checked)">Use Virtual Cube<br>
+                    <input id="useTimer" type="checkbox" onclick="setTimerDisplay(!this.checked)">Hide timer<br>
                     <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
                     <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
                     <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
@@ -200,9 +224,9 @@
                 <div id="simcube"> 
                     <canvas id="cube" width="250" height="300" ></canvas>
                 </div>
-                
+
                 <div id="timer_div">
-                <p id="timer">0.00</p>
+                    <p id="timer">0.00</p>
                 </div>
 
                 <div id="algdisplayer"> 
@@ -214,7 +238,9 @@
 
             <div class=column_right>
                 <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
-                <p id="timeList">hello</p>
+                <p id="timeList"></p>
+                <p>Stats:</p>
+                <p id="statistics"></p>
             </div>
 
         </div>

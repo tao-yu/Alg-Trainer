@@ -467,17 +467,35 @@ function updateTimer(){
 }
 var timeArray = [];
 
+function getMean(timeArray){
+    var i;
+    var total = 0;
+    for(i=0;i<timeArray.length;i++){
+        total += timeArray[i].timeValue();
+    }
+    return total/timeArray.length;
+}
+
+function updateStats(){
+    document.getElementById("statistics").innerHTML = "Mean: " + getMean(timeArray).toFixed(2);
+}
 
 function stopTimer(logTime=true){
-    console.log('logtime is ' + logTime);
+    var time = parseFloat(document.getElementById("timer").innerHTML);
+    if (isNaN(time)){
+        return NaN;
+    }
     clearInterval(timerUpdateInterval);
     timerIsRunning = false;
-    var time = parseFloat(document.getElementById("timer").innerHTML);
+    
+    
     if (logTime){
         timeArray.push(new SolveTime(time,''));
         console.log(timeArray);
         updateTimeList();
     }
+    
+    updateStats();
     return time;
 }
 
@@ -486,7 +504,7 @@ function updateTimeList(){
     var timeList = document.getElementById("timeList");
     timeList.innerHTML = "";
     for (i=0; i<timeArray.length;i++){
-        timeList.innerHTML += timeArray[i].timeValue();
+        timeList.innerHTML += timeArray[i].toString();
         timeList.innerHTML += " ";
     }
 }
@@ -577,6 +595,19 @@ function setVirtualCube(setting){
         sim.style.display = 'block';
     } else {
         sim.style.display = 'none';
+        document.getElementById("timer").style.display = 'block'; //timer has to be shown when simulator cube is not used
+    }
+}
+
+function setTimerDisplay(setting){
+    var timer = document.getElementById("timer");
+    if (!isUsingVirtualCube()){
+        alert("The timer can only be hidden when using the simulator cube.")
+    }
+    if (setting){
+        timer.style.display = 'block';
+    } else {
+        timer.style.display = 'none';
     }
 }
 
@@ -628,21 +659,21 @@ listener.simple_combo("esc", function() {
 listener.simple_combo("space", function() {
 
     if (isUsingVirtualCube()){
-        var time = stopTimer();
+        var time = stopTimer();//space always stops timer in virtual cube mode
         displayAlgorithm();
     }
     else {
-        if(timerIsRunning){//If timer is running, stop timer
+        if (timerIsRunning){//If timer is running, stop timer
             var time = stopTimer();
             displayAlgorithm();
         }
         else if (document.getElementById("algdisp").innerHTML == ""){
-            //If timer is not running, but the algdisp is empty, starttimer
+            //Right after a new scramble is displayed, space starts the timer
             startTimer();
         }
         else {
-            document.getElementById("timer").innerHTML = 'Ready';
-            testFromList(createAlgList()); //If the solutions are currently displayed, space should test on the next alg.
+            nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
+            
         }
     }
 
@@ -672,15 +703,15 @@ class SolveTime {
         this.penalty = penalty;
     }
 
-    toString() {
-
+    toString(decimals=2) {
+        var timeString = this.time.toFixed(decimals)
         switch (this.penalty) {
             case '+2':
-                return this.time + 2 + '+';
+                return (this.time + 2).toFixed(decimals) + '+';
             case 'DNF':
-                return 'DNF' + "(" + this.time + ")";
+                return 'DNF' + "(" + timeString + ")";
             default:
-                return this.time;
+                return timeString;
         }
     }
 
@@ -697,6 +728,7 @@ class SolveTime {
     }
 
 }
+
 
 
 
