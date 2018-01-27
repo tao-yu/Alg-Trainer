@@ -25,7 +25,7 @@ function showPage(){
 var myStorage = window.localStorage;
 var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
 
-if(!notfirstTime) {
+if(!notfirstTime) {//If it is the first time loading
     document.getElementById("colourneutrality1").value = "";
     document.getElementById("colourneutrality2").value = "x2";
     document.getElementById("colourneutrality3").value = "y";
@@ -38,7 +38,10 @@ else {
     document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
     document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
+    
     document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
+    document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
+    setVirtualCube(document.getElementById("useVirtual").checked);
 }
 
 var scramble_subsequent = document.getElementById("prescramble");
@@ -46,10 +49,30 @@ scramble_subsequent.addEventListener("click", function(){
     localStorage.setItem("scramble_subsequent", this.checked);
 });
 
+var useVirtual = document.getElementById("useVirtual");
+useVirtual.addEventListener("click", function(){
+    localStorage.setItem("useVirtual", this.checked);
+});
+
+var clearTimes = document.getElementById("clearTimes");
+clearTimes.addEventListener("click", function(){
+    timeArray = [];
+    updateTimeList();
+    updateStats();
+});
+
+var deleteLast = document.getElementById("deleteLast");
+deleteLast.addEventListener("click", function(){
+    timeArray.pop();
+    updateTimeList();
+    updateStats();
+});
+
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
     ctx.fillRect(stickerSize * x, stickerSize * y, stickerSize, stickerSize);
 }
+
 function fillWithIndex(x, y, face, index, cubeArray, shouldBeCleared = false) {
     index--;
     switch (face) {
@@ -470,11 +493,19 @@ function getMean(timeArray){
     for(i=0;i<timeArray.length;i++){
         total += timeArray[i].timeValue();
     }
+
     return total/timeArray.length;
 }
 
 function updateStats(){
-    document.getElementById("statistics").innerHTML = "Mean: " + getMean(timeArray).toFixed(2);
+    var statistics = document.getElementById("statistics");
+    
+    statistics.innerHTML = "&nbsp";
+    
+    if (timeArray.length!=0){
+        statistics.innerHTML += "Mean of " + timeArray.length + ": " + getMean(timeArray).toFixed(2) + "<br>";
+    }
+
 }
 
 function stopTimer(logTime=true){

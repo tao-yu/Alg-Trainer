@@ -162,7 +162,7 @@
 
                 <h2>Settings</h2>
                 <form action="javascript:void(0);">
-                    <input id="useVirtual" type="checkbox" checked = "true" onclick="setVirtualCube(this.checked)">Use Virtual Cube<br>
+                    <input id="useVirtual" type="checkbox" onclick="setVirtualCube(this.checked)">Use Virtual Cube<br>
                     <input id="useTimer" type="checkbox" onclick="setTimerDisplay(!this.checked)">Hide timer<br>
                     <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
                     <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
@@ -238,9 +238,13 @@
 
             <div class=column_right>
                 <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
-                <p id="timeList"></p>
-                <p>Stats:</p>
-                <p id="statistics"></p>
+                <p id="timeList">&nbsp</p>
+                
+                <p id="statistics">&nbsp</p>
+                
+                <button id="deleteLast">Delete last solve</button>
+                <button id="clearTimes">Clear</button>
+
             </div>
 
         </div>
