@@ -428,12 +428,9 @@ function displayAlgorithm(){
 
     //show scramble
     var y = document.getElementById("scramble");
-    /*
-	scramble = alg.cube.simplify(alg.cube.invert(algArr[0]));
-	if(document.getElementById("realScrambles").checked){
-		scramble = obfusticate(scramble);
-	}*/
+      
     y.innerHTML = currentScramble;
+    y.style.color = 'grey';
 }
 function testFromList(set){
 
@@ -650,6 +647,9 @@ listener.simple_combo("a", function() {	doAlg("y'");});
 listener.simple_combo("p", function() {	doAlg("z");});
 listener.simple_combo("q", function() {	doAlg("z'");});
 listener.simple_combo("esc", function() {
+    if (isUsingVirtualCube()){
+        stopTimer(false);
+    }
     reTestAlg();
     document.getElementById("scramble").innerHTML = "&nbsp;";
     document.getElementById("algdisp").innerHTML = "";
@@ -659,7 +659,10 @@ listener.simple_combo("esc", function() {
 listener.simple_combo("space", function() {
 
     if (isUsingVirtualCube()){
-        var time = stopTimer();//space always stops timer in virtual cube mode
+        if (timerIsRunning){
+             var time = stopTimer();
+        }
+       
         displayAlgorithm();
     }
     else {
@@ -680,6 +683,7 @@ listener.simple_combo("space", function() {
 });
 
 function nextScramble(){
+    document.getElementById("scramble").style.color = "white";
     stopTimer(false);
     document.getElementById("timer").innerHTML = 'Ready';
     if (isUsingVirtualCube()){
