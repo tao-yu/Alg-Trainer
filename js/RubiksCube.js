@@ -7,7 +7,7 @@ var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = canvas.width/5;
 var currentAlgIndex;
-
+var algorithmHistory = [];
 
 createAlgsetPicker();
 drawCube(cube.cubestate);
@@ -38,7 +38,7 @@ else {
     document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
     document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
-    
+
     document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
     document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
     setVirtualCube(document.getElementById("useVirtual").checked);
@@ -56,9 +56,13 @@ useVirtual.addEventListener("click", function(){
 
 var clearTimes = document.getElementById("clearTimes");
 clearTimes.addEventListener("click", function(){
-    timeArray = [];
-    updateTimeList();
-    updateStats();
+
+    if (confirm("Clear all times?")){
+        timeArray = [];
+        updateTimeList();
+        updateStats();
+    }
+
 });
 
 var deleteLast = document.getElementById("deleteLast");
@@ -415,6 +419,10 @@ function testAlg(algstr, auf){
     currentScramble = inverse;
     updateVisualCube("x2" + currentRotation + inverse)
     
+    var hist = [currentAlgorithm, currentScramble, currentRotation, algArr];
+    
+    algorithmHistory.push(hist);
+
 
 }
 
@@ -451,7 +459,7 @@ function displayAlgorithm(){
 
     //show scramble
     var y = document.getElementById("scramble");
-      
+
     y.innerHTML = currentScramble;
     y.style.color = 'grey';
 }
@@ -499,9 +507,9 @@ function getMean(timeArray){
 
 function updateStats(){
     var statistics = document.getElementById("statistics");
-    
+
     statistics.innerHTML = "&nbsp";
-    
+
     if (timeArray.length!=0){
         statistics.innerHTML += "Mean of " + timeArray.length + ": " + getMean(timeArray).toFixed(2) + "<br>";
     }
@@ -515,14 +523,14 @@ function stopTimer(logTime=true){
     }
     clearInterval(timerUpdateInterval);
     timerIsRunning = false;
-    
-    
+
+
     if (logTime){
         timeArray.push(new SolveTime(time,''));
         console.log(timeArray);
         updateTimeList();
     }
-    
+
     updateStats();
     return time;
 }
@@ -530,7 +538,7 @@ function stopTimer(logTime=true){
 function updateTimeList(){
     var i;
     var timeList = document.getElementById("timeList");
-    timeList.innerHTML = "";
+    timeList.innerHTML = "&nbsp";
     for (i=0; i<timeArray.length;i++){
         timeList.innerHTML += timeArray[i].toString();
         timeList.innerHTML += " ";
@@ -677,6 +685,7 @@ listener.simple_combo(";", function() {	doAlg("y");});
 listener.simple_combo("a", function() {	doAlg("y'");});
 listener.simple_combo("p", function() {	doAlg("z");});
 listener.simple_combo("q", function() {	doAlg("z'");});
+listener.simple_combo("right", function() {	nextScramble();});
 listener.simple_combo("esc", function() {
     if (isUsingVirtualCube()){
         stopTimer(false);
@@ -691,9 +700,9 @@ listener.simple_combo("space", function() {
 
     if (isUsingVirtualCube()){
         if (timerIsRunning){
-             var time = stopTimer();
+            var time = stopTimer();
         }
-       
+
         displayAlgorithm();
     }
     else {
@@ -707,7 +716,7 @@ listener.simple_combo("space", function() {
         }
         else {
             nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
-            
+
         }
     }
 
