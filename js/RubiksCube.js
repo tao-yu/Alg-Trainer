@@ -12,7 +12,7 @@ var currentAlgIndex;
 createAlgsetPicker();
 drawCube(cube.cubestate);
 window.onbeforeunload = function () {
-  window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 }
 Cube.initSolver();
 
@@ -206,12 +206,12 @@ var timerShouldStartOnNextMove = false;
 function doAlg(algorithm){
     cube.doAlgorithm(algorithm);
     drawCube(cube.cubestate);
-    
+
     if (timerShouldStartOnNextMove && isUsingVirtualCube()){
         startTimer();
         timerShouldStartOnNextMove = false;
     }
-    if (timerIsRunning && cube.isSolved()){
+    if (timerIsRunning && cube.isSolved() && isUsingVirtualCube()){
         var time = stopTimer();
     }
 }
@@ -278,7 +278,7 @@ function generateAlgScramble(raw_alg){
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R2' U' R2 U' R2 U2' R2,R' U2 R U' R' U' R,R' U R U2' R' U R,R' U R U' R' U2' R U' R' U R", 100, true);//CLS FR scramble
 
         case "OLLCP":
-		case "OLLCP (Cale Schoon)":
+        case "OLLCP (Cale Schoon)":
         case "OLLCP (Justin Taylor, WIP)":
         case "COLL":
         case "COLL (Tao Yu)":
@@ -310,8 +310,8 @@ function generateAlgScramble(raw_alg){
 
         case "Pseudo2GLL (no algs)":
             return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L, F R' F' M F R F' M'", 10000, true);
-		case "Ribbon Multislotting":
-			return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R U' R' U2 R U' R' ,R U2' R' U R U R' ,R U R' U R U2' R' ,R U2 R' U' R U' R' ", 10000, true);
+        case "Ribbon Multislotting":
+            return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R U' R' U2 R U' R' ,R U2' R' U R U R' ,R U R' U R U2' R' ,R U2 R' U' R U' R' ", 10000, true);
         default:  
             return obfusticate(alg.cube.invert(raw_alg));
     }
@@ -471,11 +471,17 @@ function startTimer(){
 function updateTimer(){
     document.getElementById("timer").innerHTML = ((Date.now()-starttime)/1000).toFixed(2);
 }
-
-function stopTimer(){
+var timeArray = [];
+function stopTimer(logTime=true){
+    console.log(logTime);
     clearInterval(timerUpdateInterval);
     timerIsRunning = false;
-    return parseFloat(document.getElementById("timer").innerHTML);
+    var time = parseFloat(document.getElementById("timer").innerHTML);
+    if (logTime){
+        timeArray.push(time);
+        console.log(timeArray);
+    }
+    return time;
 }
 
 //Create Checkboxes for each subset
@@ -549,7 +555,7 @@ function createAlgList(){
 
 function toggleVirtualCube(){
     var sim = document.getElementById("simcube");
-    
+
     if (sim.style.display == 'none'){
         sim.style.display = 'block';
     }
@@ -569,7 +575,7 @@ function setVirtualCube(setting){
 
 function isUsingVirtualCube(){
     var sim = document.getElementById("simcube")
-    
+
     if (sim.style.display == 'none'){
         return false;
     }
@@ -613,7 +619,7 @@ listener.simple_combo("esc", function() {
 });
 
 listener.simple_combo("space", function() {
-    
+
     if (isUsingVirtualCube()){
         var time = stopTimer();
         displayAlgorithm();
@@ -633,8 +639,9 @@ listener.simple_combo("space", function() {
     }
 
 });
-listener.simple_combo("enter", function() {
-    stopTimer();
+
+function nextScramble(){
+    stopTimer(false);
     document.getElementById("timer").innerHTML = 'Ready';
     if (isUsingVirtualCube()){
         startTimer();
@@ -643,17 +650,48 @@ listener.simple_combo("enter", function() {
     else {
         testFromList(createAlgList());
     }
+}
+listener.simple_combo("enter", function() {
+    nextScramble();
 });
 listener.simple_combo("tab", function() {
-    stopTimer();
-    document.getElementById("timer").innerHTML = 'Ready';
-    if (isUsingVirtualCube()){
-        testFromList(createAlgList());
-    }
-    else {
-        testFromList(createAlgList());
-    }
+    nextScramble();
 });
+
+class SolveTime {
+    constructor(time, penalty) {
+        this.time = time;
+        this.penalty = penalty;
+    }
+
+    toString() {
+
+        switch (this.penalty) {
+            case '+2':
+                return this.time + 2 + '+';
+            case 'DNF':
+                return 'DNF' + "(" + this.time + ")";
+            default:
+                return this.time;
+        }
+    }
+
+    value() {
+
+        switch (this.penalty) {
+            case '+2':
+                return this.time + 2;
+            case 'DNF':
+                return Infinity;
+            default:
+                return this.time;
+        }
+    }
+
+}
+
+
+
 
 //CUBE OBJECT
 function RubiksCube() {
