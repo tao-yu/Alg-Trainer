@@ -235,7 +235,7 @@ function doAlg(algorithm){
     drawCube(cube.cubestate);
 
     if (timerIsRunning && cube.isSolved() && isUsingVirtualCube()){
-        var time = stopTimer();
+        stopTimer();
     }
 }
 
@@ -448,14 +448,20 @@ function updateVisualCube(algorithm){
     imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
     document.getElementById("visualcube").src=imgsrc;
 }
-function displayAlgorithm(){
+function displayAlgorithm(reTest=true){
+    
+    
     if (algArr == null){
         return;
     }
     //show solution
     var x = document.getElementById("algdisp");
     x.innerHTML = algArr.join("<br><br>");
-    reTestAlg();
+    
+    //If reTest is true, the scramble will also be setup on the virtual cube
+    if (reTest){
+        reTestAlg();
+    }
 
     //show scramble
     var y = document.getElementById("scramble");
@@ -490,6 +496,25 @@ function startTimer(){
     timerIsRunning = true;
 }
 
+function stopTimer(logTime=true){
+    var time = parseFloat(document.getElementById("timer").innerHTML);
+    if (isNaN(time)){
+        return NaN;
+    }
+    clearInterval(timerUpdateInterval);
+    timerIsRunning = false;
+
+
+    if (logTime){
+        timeArray.push(new SolveTime(time,''));
+        console.log(timeArray);
+        updateTimeList();
+    }
+
+    updateStats();
+    return time;
+}
+
 function updateTimer(){
     document.getElementById("timer").innerHTML = ((Date.now()-starttime)/1000).toFixed(2);
 }
@@ -516,24 +541,7 @@ function updateStats(){
 
 }
 
-function stopTimer(logTime=true){
-    var time = parseFloat(document.getElementById("timer").innerHTML);
-    if (isNaN(time)){
-        return NaN;
-    }
-    clearInterval(timerUpdateInterval);
-    timerIsRunning = false;
 
-
-    if (logTime){
-        timeArray.push(new SolveTime(time,''));
-        console.log(timeArray);
-        updateTimeList();
-    }
-
-    updateStats();
-    return time;
-}
 
 function updateTimeList(){
     var i;
@@ -700,14 +708,18 @@ listener.simple_combo("space", function() {
 
     if (isUsingVirtualCube()){
         if (timerIsRunning){
-            var time = stopTimer();
+            stopTimer();
+            displayAlgorithm(false);
+            //window.setTimeout(function (){reTestAlg();}, 250);
         }
-
-        displayAlgorithm();
+        else {
+            displayAlgorithm();
+        }
+        
     }
     else {
         if (timerIsRunning){//If timer is running, stop timer
-            var time = stopTimer();
+            stopTimer();
             displayAlgorithm();
         }
         else if (document.getElementById("algdisp").innerHTML == ""){
