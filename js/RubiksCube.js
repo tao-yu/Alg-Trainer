@@ -53,16 +53,18 @@ scramble_subsequent.addEventListener("click", function(){
 
 var useVirtual = document.getElementById("useVirtual");
 useVirtual.addEventListener("click", function(){
+    setVirtualCube(this.checked);
     localStorage.setItem("useVirtual", this.checked);
     stopTimer(false);
-    document.getElementById("timer").innerHTML = "Ready";
+    document.getElementById("timer").innerHTML = "0.00";
 });
 
 var hideTimer = document.getElementById("hideTimer");
 hideTimer.addEventListener("click", function(){
+    setTimerDisplay(!this.checked);
     localStorage.setItem("hideTimer", this.checked);
     stopTimer(false);
-    document.getElementById("timer").innerHTML = "Ready";
+    document.getElementById("timer").innerHTML = "0.00";
     
 });
 
@@ -83,6 +85,7 @@ deleteLast.addEventListener("click", function(){
     updateTimeList();
     updateStats();
 });
+
 
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;

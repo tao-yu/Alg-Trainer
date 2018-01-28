@@ -162,13 +162,13 @@
 
                 <h2>Settings</h2>
                 <form action="javascript:void(0);">
-                    <input id="useVirtual" type="checkbox" onclick="setVirtualCube(this.checked)">Use Virtual Cube<br>
-                    <input id="hideTimer" type="checkbox" onclick="setTimerDisplay(!this.checked)">Hide timer<br>
+                    <input id="useVirtual" type="checkbox">Use Virtual Cube<br>
+                    <input id="hideTimer" type="checkbox">Hide timer<br>
                     <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
                     <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
                     <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
                     <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real scrambles)<br>
-                    <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0">Go in order<br>
+                    <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0;">Go in order<br>
                     <select id="cubeType" onchange="drawCube(cube.cubestate)">
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
