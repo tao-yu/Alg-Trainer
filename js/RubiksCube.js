@@ -39,9 +39,11 @@ else {
     document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
 
+    document.getElementById("hideTimer").checked = myStorage.getItem("hideTimer") == "true"? true : false;
     document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
     document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
     setVirtualCube(document.getElementById("useVirtual").checked);
+
 }
 
 var scramble_subsequent = document.getElementById("prescramble");
@@ -52,6 +54,16 @@ scramble_subsequent.addEventListener("click", function(){
 var useVirtual = document.getElementById("useVirtual");
 useVirtual.addEventListener("click", function(){
     localStorage.setItem("useVirtual", this.checked);
+    stopTimer(false);
+    document.getElementById("timer").innerHTML = "Ready";
+});
+
+var hideTimer = document.getElementById("hideTimer");
+hideTimer.addEventListener("click", function(){
+    localStorage.setItem("hideTimer", this.checked);
+    stopTimer(false);
+    document.getElementById("timer").innerHTML = "Ready";
+    
 });
 
 var clearTimes = document.getElementById("clearTimes");
@@ -491,12 +503,23 @@ var starttime;
 var timerUpdateInterval;
 var timerIsRunning = false;
 function startTimer(){
+    
+    if (document.getElementById("timer").style.display == 'none'){
+        //don't do anything if timer is hidden
+        return;
+    }
     starttime = Date.now();
     timerUpdateInterval = setInterval(updateTimer, 1);
     timerIsRunning = true;
 }
 
 function stopTimer(logTime=true){
+    
+    if (document.getElementById("timer").style.display == 'none'){
+        //don't do anything if timer is hidden
+        return;
+    }
+    
     var time = parseFloat(document.getElementById("timer").innerHTML);
     if (isNaN(time)){
         return NaN;
@@ -646,9 +669,9 @@ function setVirtualCube(setting){
 function setTimerDisplay(setting){
     var timer = document.getElementById("timer");
     if (!isUsingVirtualCube()){
-        alert("The timer can only be hidden when using the simulator cube.")
+        alert("The timer can only be hidden when using the simulator cube.");
     }
-    if (setting){
+    else if (setting){
         timer.style.display = 'block';
     } else {
         timer.style.display = 'none';
