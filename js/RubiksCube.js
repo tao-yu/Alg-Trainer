@@ -286,11 +286,8 @@ function addAUFs(algArr){
     return algArr;
 }
 
-function generateAlgScramble(raw_alg){
-    var set = document.getElementById("algsetpicker").value;
-
-    var obfusticateAlg = document.getElementById("realScrambles").checked;
-    var shouldPrescramble = document.getElementById("prescramble").checked;
+function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
+    
     if (!obfusticateAlg){
         return alg.cube.invert(raw_alg);
     } else if (!shouldPrescramble){//if realscrambles not checked but should not prescramble, just obfusticate the inverse
@@ -402,6 +399,44 @@ function generateOrientation(){
     return cn1 + cn2.repeat(rand1) + cn3.repeat(rand2);
 }
 
+class AlgTest {
+    constructor(rawAlg, scramble, solution, preorientation, solveTime, time, set, visualCubeView, cubeType) {
+        this.rawAlgs = rawAlgs;
+        this.scramble = scramble;
+        this.solutions = solutions;
+        this.preorientation = preorientation;
+        this.solveTime = solveTime;
+        this.time = time;
+        this.set = set;
+        this.visualCubeView = visualCubeView;
+        this.cubeType = cubeType;
+    }
+}
+
+function generateAlgTest(){
+    
+    var set = document.getElementById("algsetpicker").value;
+    var obfusticateAlg = document.getElementById("realScrambles").checked;
+    var shouldPrescramble = document.getElementById("prescramble").checked;
+    var randAUF = document.getElementById("randAUF").checked;
+    
+    var rawAlgStr = testFromList(createAlgList());
+    var rawAlgs = rawAlgStr.split("/");
+    rawAlgs = fixAlgorithms(rawAlgs);
+    
+    var solutions;
+    if (randAUF){
+        solutions = addAUFs(rawAlgs);
+    }
+    
+    var scramble = generateAlgScramble(solutions[0],set,obfusticateAlg,shouldPrescramble);
+    
+    var preorientation = generateOrientation();
+        
+    var cubeType = document.getElementById("cubeType");
+    var algTest = new AlgTest(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType);
+    return algTest;
+}
 function testAlg(algstr, auf){
     algArr = algstr.split("/");
     algArr = fixAlgorithms(algArr);
@@ -819,6 +854,8 @@ class SolveTime {
     }
 
 }
+
+
 
 
 
