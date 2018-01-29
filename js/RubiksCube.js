@@ -745,8 +745,17 @@ listener.simple_combo("space", function() {
     }
     else {
         if (timerIsRunning){//If timer is running, stop timer
-            stopTimer();
-            displayAlgorithm();
+            var time = stopTimer();
+            
+            if (document.getElementById("goToNextCase").checked){
+                nextScramble();
+                document.getElementById("timer").innerHTML = time;
+            } else {
+                displayAlgorithm();
+            }
+            
+            
+            
         }
         else if (document.getElementById("algdisp").innerHTML == ""){
             //Right after a new scramble is displayed, space starts the timer
