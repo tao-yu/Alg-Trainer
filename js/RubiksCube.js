@@ -400,7 +400,7 @@ function generateOrientation(){
 }
 
 class AlgTest {
-    constructor(rawAlg, scramble, solution, preorientation, solveTime, time, set, visualCubeView, cubeType) {
+    constructor(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType) {
         this.rawAlgs = rawAlgs;
         this.scramble = scramble;
         this.solutions = solutions;
@@ -420,7 +420,7 @@ function generateAlgTest(){
     var shouldPrescramble = document.getElementById("prescramble").checked;
     var randAUF = document.getElementById("randAUF").checked;
     
-    var rawAlgStr = testFromList(createAlgList());
+    var rawAlgStr = randomFromList(createAlgList());
     var rawAlgs = rawAlgStr.split("/");
     rawAlgs = fixAlgorithms(rawAlgs);
     
@@ -434,54 +434,70 @@ function generateAlgTest(){
     var preorientation = generateOrientation();
         
     var cubeType = document.getElementById("cubeType");
+    
+    var solveTime = null;
+    var time = Date.now();
+    var visualCubeView = "plan";
+    
     var algTest = new AlgTest(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType);
     return algTest;
 }
-function testAlg(algstr, auf){
-    algArr = algstr.split("/");
-    algArr = fixAlgorithms(algArr);
+function testAlg(algTest, addToHistory=true){
+
+    var scramble = document.getElementById("scramble");
+    
+    if (document.getElementById("showScramble").checked){
+        scramble.innerHTML = algTest.scramble;
+    } else{
+        scramble.innerHTML = "&nbsp;";
+    }
+    
+    document.getElementById("algdisp").innerHTML = "&nbsp";
 
     cube.resetCube();
-    if (auf){
-        algArr = addAUFs(algArr);
-
-    }
-    currentRotation = generateOrientation();
-
-    doAlg(currentRotation);
-
-    algorithm = algArr[0];
-    var inverse = generateAlgScramble(algorithm);
-
-    var scrP = document.getElementById("scramble");
-    if (document.getElementById("showScramble").checked){
-        scramble = alg.cube.simplify(inverse);
-        scrP.innerHTML = scramble;
-    } else{
-        scrP.innerHTML = "&nbsp;";
-    }
-
-
-    doAlg(inverse);
+    doAlg(algTest.preorientation);
+    doAlg(algTest.scramble);
     drawCube(cube.cubestate)
-    console.log("current alg:" + algorithm);
-    currentAlgorithm = algorithm;
-    currentScramble = inverse;
-    updateVisualCube("x2" + currentRotation + inverse)
     
-    var hist = [currentAlgorithm, currentScramble, currentRotation, algArr];
+    updateVisualCube("x2" + algTest.preorientation + algTest.scramble);
     
-    algorithmHistory.push(hist);
-
+    if (addToHistory){
+        algorithmHistory.push(algTest);
+    }
+    console.log(algTest);
 
 }
 
 function reTestAlg(){
+    
+    var lastTest = algorithmHistory[algorithmHistory.length-1];
+    if (lastTest==undefined){
+        return;
+    }
     cube.resetCube();
-    doAlg(currentRotation);
-    doAlg(currentScramble);
-    drawCube(cube.cubestate)
+    doAlg(lastTest.preorientation);
+    doAlg(lastTest.scramble);
+    drawCube(cube.cubestate);
 
+}
+
+function updateTrainer(scramble, solutions, algorithm, timer){
+    if (scramble!=null){
+        document.getElementById("scramble").innerHTML = scramble;
+    }
+    if (solutions!=null){
+        document.getElementById("algdisp").innerHTML = solutions;
+    }
+    
+    if (algorithm!=null){
+        cube.resetCube();
+        doAlg(algorithm);
+        updateVisualCube("x2" + algorithm);
+    }
+    
+    if (timer!=null){
+        document.getElementById("timer").innerHTML = timer;
+    }
 }
 function fixAlgorithms(algorithms){
     //for now this just removes brackets
@@ -498,42 +514,54 @@ function updateVisualCube(algorithm){
     imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
     document.getElementById("visualcube").src=imgsrc;
 }
-function displayAlgorithm(reTest=true){
-    
-    
-    if (algArr == null){
-        return;
-    }
-    //show solution
-    var x = document.getElementById("algdisp");
-    x.innerHTML = algArr.join("<br><br>");
-    
+function displayAlgorithm(algTest, reTest=true){    
+
     //If reTest is true, the scramble will also be setup on the virtual cube
     if (reTest){
         reTestAlg();
     }
-
-    //show scramble
-    var y = document.getElementById("scramble");
-
-    y.innerHTML = currentScramble;
-    y.style.color = 'grey';
+    
+    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), null, null);
+    
+    scramble.style.color = 'grey';
 }
-function testFromList(set){
 
-    var x = document.getElementById("algdisp");
-    x.innerHTML = "";
+function displayAlgorithmFromHistory(index){    
+
+    var algTest = algorithmHistory[index];
+    //If reTest is true, the scramble will also be setup on the virtual cube
+    
+    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.scramble, algTest.time.toString());
+    
+    scramble.style.color = 'grey';
+}
+
+function displayAlgorithmForPreviousTest(reTest=true){//not a great name
+    
+    var lastTest = algorithmHistory[algorithmHistory.length-1];
+    if (lastTest==undefined){
+        return;
+    }
+    //If reTest is true, the scramble will also be setup on the virtual cube
+    if (reTest){
+        reTestAlg();
+    }
+    
+    updateTrainer(lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
+    
+    scramble.style.color = 'grey';
+}
+
+function randomFromList(set){
 
     if (document.getElementById("goInOrder").checked){
-        testAlg(set[currentAlgIndex%set.length], document.getElementById("randAUF").checked);
         currentAlgIndex++;
         return set[currentAlgIndex];
     }   
 
     size = set.length;
     rand = Math.floor(Math.random()*size);
-    testAlg(set[rand], document.getElementById("randAUF").checked);
-    //TODO Allow commutators to be parsed by alg.js.
+    
     return set[rand];
 
 }
@@ -567,7 +595,10 @@ function stopTimer(logTime=true){
 
 
     if (logTime){
-        timeArray.push(new SolveTime(time,''));
+        var lastTest = algorithmHistory[algorithmHistory.length-1];
+        var solveTime = new SolveTime(time,'');
+        lastTest.time = solveTime;
+        timeArray.push(solveTime);
         console.log(timeArray);
         updateTimeList();
     }
@@ -754,7 +785,6 @@ listener.simple_combo(";", function() {	doAlg("y");});
 listener.simple_combo("a", function() {	doAlg("y'");});
 listener.simple_combo("p", function() {	doAlg("z");});
 listener.simple_combo("q", function() {	doAlg("z'");});
-listener.simple_combo("right", function() {	nextScramble();});
 listener.simple_combo("esc", function() {
     if (isUsingVirtualCube()){
         stopTimer(false);
@@ -770,11 +800,11 @@ listener.simple_combo("space", function() {
     if (isUsingVirtualCube()){
         if (timerIsRunning){
             stopTimer();
-            displayAlgorithm(false);
+            displayAlgorithmForPreviousTest(false);
             //window.setTimeout(function (){reTestAlg();}, 250);
         }
         else {
-            displayAlgorithm();
+            displayAlgorithmForPreviousTest();
         }
         
     }
@@ -786,7 +816,7 @@ listener.simple_combo("space", function() {
                 nextScramble();
                 document.getElementById("timer").innerHTML = time;
             } else {
-                displayAlgorithm();
+                displayAlgorithmForPreviousTest();
             }
             
             
@@ -809,11 +839,11 @@ function nextScramble(){
     stopTimer(false);
     document.getElementById("timer").innerHTML = 'Ready';
     if (isUsingVirtualCube()){
-        testFromList(createAlgList());
+        testAlg(generateAlgTest());
         startTimer();
     }
     else {
-        testFromList(createAlgList());
+        testAlg(generateAlgTest());
     }
 }
 listener.simple_combo("enter", function() {
@@ -822,6 +852,11 @@ listener.simple_combo("enter", function() {
 listener.simple_combo("tab", function() {
     nextScramble();
 });
+var historyIndex;
+listener.simple_combo("left", function() {	
+    displayAlgorithmFromHistory(algorithmHistory.length-1)
+});
+listener.simple_combo("right", function() {	nextScramble();});
 
 class SolveTime {
     constructor(time, penalty) {
