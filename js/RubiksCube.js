@@ -452,7 +452,7 @@ function testAlg(algTest, addToHistory=true){
         scramble.innerHTML = "&nbsp;";
     }
     
-    document.getElementById("algdisp").innerHTML = "&nbsp";
+    document.getElementById("algdisp").innerHTML = "";
 
     cube.resetCube();
     doAlg(algTest.preorientation);
@@ -529,9 +529,16 @@ function displayAlgorithm(algTest, reTest=true){
 function displayAlgorithmFromHistory(index){    
 
     var algTest = algorithmHistory[index];
-    //If reTest is true, the scramble will also be setup on the virtual cube
+    console.log( algTest );
     
-    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.scramble, algTest.time.toString());
+    var timerText;
+    if (algTest.solveTime == null){
+        timerText = 'n/a'
+    } else {
+        timerText = algTest.solveTime.toString()
+    }
+    
+    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.scramble, timerText);
     
     scramble.style.color = 'grey';
 }
@@ -597,7 +604,7 @@ function stopTimer(logTime=true){
     if (logTime){
         var lastTest = algorithmHistory[algorithmHistory.length-1];
         var solveTime = new SolveTime(time,'');
-        lastTest.time = solveTime;
+        lastTest.solveTime = solveTime;
         timeArray.push(solveTime);
         console.log(timeArray);
         updateTimeList();
@@ -852,9 +859,17 @@ listener.simple_combo("enter", function() {
 listener.simple_combo("tab", function() {
     nextScramble();
 });
-var historyIndex;
-listener.simple_combo("left", function() {	
-    displayAlgorithmFromHistory(algorithmHistory.length-1)
+
+listener.simple_combo("left", function() {
+    if (timerIsRunning){
+        return;
+    }
+    var len = algorithmHistory.length;
+    if (len<2){
+        return;
+    }
+    stopTimer(false);
+    displayAlgorithmFromHistory(algorithmHistory.length-2)
 });
 listener.simple_combo("right", function() {	nextScramble();});
 
