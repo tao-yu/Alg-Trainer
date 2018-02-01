@@ -529,6 +529,7 @@ function displayAlgorithm(algTest, reTest=true){
 function displayAlgorithmFromHistory(index){    
 
     var algTest = algorithmHistory[index];
+    
     console.log( algTest );
     
     var timerText;
@@ -807,7 +808,7 @@ listener.simple_combo("space", function() {
     if (isUsingVirtualCube()){
         if (timerIsRunning){
             stopTimer();
-            displayAlgorithmForPreviousTest(false);
+            displayAlgorithmForPreviousTest();//put false here if you don't want the cube to retest.
             //window.setTimeout(function (){reTestAlg();}, 250);
         }
         else {
@@ -825,9 +826,7 @@ listener.simple_combo("space", function() {
             } else {
                 displayAlgorithmForPreviousTest();
             }
-            
-            
-            
+
         }
         else if (document.getElementById("algdisp").innerHTML == ""){
             //Right after a new scramble is displayed, space starts the timer
@@ -852,6 +851,7 @@ function nextScramble(){
     else {
         testAlg(generateAlgTest());
     }
+    historyIndex = algorithmHistory.length - 1;
 }
 listener.simple_combo("enter", function() {
     nextScramble();
@@ -860,18 +860,30 @@ listener.simple_combo("tab", function() {
     nextScramble();
 });
 
+var historyIndex;
 listener.simple_combo("left", function() {
+    if (algorithmHistory.length<=1 || timerIsRunning){
+        return;
+    }
+    historyIndex--;
+    
+    if (historyIndex<0){
+        alert('Reached end of solve log');
+    }
+    displayAlgorithmFromHistory(historyIndex);
+});
+listener.simple_combo("right", function() {	
     if (timerIsRunning){
         return;
     }
-    var len = algorithmHistory.length;
-    if (len<2){
+    historyIndex++;
+    if (historyIndex>=algorithmHistory.length){
+        nextScramble();
         return;
     }
-    stopTimer(false);
-    displayAlgorithmFromHistory(algorithmHistory.length-2)
+    
+    displayAlgorithmFromHistory(historyIndex);
 });
-listener.simple_combo("right", function() {	nextScramble();});
 
 class SolveTime {
     constructor(time, penalty) {
