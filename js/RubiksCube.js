@@ -869,6 +869,7 @@ listener.simple_combo("left", function() {
     
     if (historyIndex<0){
         alert('Reached end of solve log');
+        historyIndex = 0;
     }
     displayAlgorithmFromHistory(historyIndex);
 });
