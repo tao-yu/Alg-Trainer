@@ -33,6 +33,8 @@ if(!notfirstTime) {//If it is the first time loading
     localStorage.setItem("colourneutrality2", "x2");
     localStorage.setItem("colourneutrality3", "y");
     localStorage.setItem("not_first_time","1");
+    
+    setVirtualCube(false);
 }
 else {
     document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
