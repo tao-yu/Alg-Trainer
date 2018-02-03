@@ -580,6 +580,10 @@ var timerUpdateInterval;
 var timerIsRunning = false;
 function startTimer(){
     
+    if (timerIsRunning){
+        return;
+    }
+    
     if (document.getElementById("timer").style.display == 'none'){
         //don't do anything if timer is hidden
         return;
