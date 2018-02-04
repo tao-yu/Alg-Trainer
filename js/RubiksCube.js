@@ -600,12 +600,14 @@ function stopTimer(logTime=true){
         return;
     }
     
+    
+    clearInterval(timerUpdateInterval);
+    timerIsRunning = false;
+    
     var time = parseFloat(document.getElementById("timer").innerHTML);
     if (isNaN(time)){
         return NaN;
     }
-    clearInterval(timerUpdateInterval);
-    timerIsRunning = false;
 
 
     if (logTime){
