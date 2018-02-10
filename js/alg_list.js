@@ -575,14 +575,18 @@ var vls_jayden_mcneill = {
 	"UFUB":["R' F' U' F U R2 U2' R'", "F R' F' R2 U2' R' F R U R' U' F'/y' R' U' R U R D r' U r D' R'/R U' M' U R' U' M U R U R'", "R U' R' U' R' F R F'", "R U2 x' U' R' F' R U R' U' F U x/U R L' U L U2 R' L' B' U B L /R' D' R U R' D R2 U' R' U' R' F R F'", "R' F' R U R U' R' U' F R U' R'", "M' U R U' r' F R U R' U' F'/y' R' U' R2 D r' U' r D' R'", "R U' R' U' r' U' R U' R' U2 r", "R U R' U' R U R' U2 R' F R F'", "R U2 R' U2 R U R' U' R' F R F'", "R' F R2 U R' U' F'", "R' F R2 U R' y' U R' U' R U' R'", "R U' M' U R' U R U2' r' / (U) R U' R' U' M' U R U' r'", "F R U R' U' F' U R U R'", "R U2 R' F R U R' U' F'", "R U' R' F U R U' R' F'", "R U' R2' U' F' U F R", "R U' R' F' U' F R U R'", "F R U' R' U R U2 R' U' R' F' R", "R U' R' U R' U' F U R U' R' F' R", "L' R U R' U' L y' R2' F R F' R", "R U' R' U' y' r' U' R U M'", "R U' R2' U' R' F R2 F' R' U R", "R U R' F' U' F U' R U2 R'", "R U2 R2' F R U R' U' F' U R", "R U' R2' F2 r U r' F R", "R U' R' F R U' R' U' R U R' F'", "R U' R' F x' R2 U' R' U R' D' x"],
 };
 
-var one_look_wednesdays_daniel_roselevine = {
-	"Ep1":["(r U R' U R U2 r') U (R' U' R U' R' U2 R)", "l' U (R U R' F' R U R' U' R' F R2 U' R') U2 R x'"],
+
+var one_look_wednesdays_daniel_roselevine_luigi_soriano = {
+	"Ep1":["(r U R' U R U2 r') U (R' U' R U' R' U2 R)", "l' U (R U R' F' R U R' U' R' F R2 U' R') U2 R"],
 	"Ep2":["F U' R2 D R' U2 R D' R2 U F'", "F U' R2 D R' U' R D' R2 U F'", "F U' R2 D R' U R D' R2 U F'"],
 	"Ep3":["R U2 R' U' R U R' U2 R' F R F'", "r U2 R' U' R U R' U2 r' F R F'", "r U R' U' r' F R2 U R' U' R U R' U' F'", "F R' F' r U2 R U' R' U R U2 r'"],
 	"Ep5":["F U R U' F' r U R' U' r'", "R U2 R2 U' F' U F R2 U' R'", "F U R' U' R' F' R' U' R2 U2 R2 U2 R'"],
 	"Ep6":["r U R' U R U2 r'", "R U' R' F' U F R U R' U (R2 D R' U' R D' R2)", "F U R U2 (L' U R' U' L U) F'", "F' r' F r F U (R2 D R' U2 R D' R2)", "R U' R' U' F' U2 F U2 R U2 R'", "F R' F' R U (R' U' R U' R' U2 R) U R U R'"],
 	"Ep7":["R U R' U' F' U2 F U R U R'", "R U2 R2 U' F' U F R U R U2 R'", "R U' R2 F R F' U (R U R' U') (R U R' U')"],
+	"Ep8":["(U) (R' U2 R U R' U R) (F R U R' U' F')", "(U') (R U2 R' U' R U' R') U' (R' U' F' U F R)", "r U D' R U R' D R2 U' R' U' r' R' U2 R"],
+	"Ep9":["(R U R' U) (R U' R' U') (R' F R F')", "(r U R' U) (R U' R' U') (r' F R F')", "(r U R' U' r' F R) (U R U' R') F'"],
 };
+
 
 var cpeoll = {
 	"LINE":["r U r' R U R' U' r U' r'/R U R' U' r R' U R U' r'", "(U2) r U' r' U' r U r' y' R' U R", "(U) R U R' U' R' F R F'", "FRUR'U'F'"],
@@ -679,7 +683,7 @@ window.algs = {
 	"Ortega PBL": OrtegaPBL,
     
 	"1LLL (Micki Kanaiya Harning, WIP)" : oneLookLastLayer,
-	"One Look Wednesdays (Daniel Rose-Levine)" : one_look_wednesdays_daniel_roselevine,
+	"One Look Wednesdays (Daniel Rose-Levine)" : one_look_wednesdays_daniel_roselevine_luigi_soriano,
 	"ZZLL": zzll,
 	"OLLCP (Justin Taylor, WIP)": ollcp ,
 	"EG1 (Finn Ickler)": eg_full,
