@@ -84,6 +84,7 @@ clearTimes.addEventListener("click", function(){
 var deleteLast = document.getElementById("deleteLast");
 deleteLast.addEventListener("click", function(){
     timeArray.pop();
+    algorithmHistory.pop();
     updateTimeList();
     updateStats();
 });
