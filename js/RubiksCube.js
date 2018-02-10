@@ -748,6 +748,7 @@ function setVirtualCube(setting){
     } else {
         sim.style.display = 'none';
         document.getElementById("timer").style.display = 'block'; //timer has to be shown when simulator cube is not used
+        document.getElementById("hideTimer").checked = false;
     }
 }
 
