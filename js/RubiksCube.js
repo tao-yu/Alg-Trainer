@@ -90,6 +90,12 @@ deleteLast.addEventListener("click", function(){
     updateStats();
 });
 
+var goToNextCase = document.getElementById("goToNextCase");
+goToNextCase.addEventListener("click", function(){
+    if (isUsingVirtualCube()){
+        alert("Note: This option has no effect when using the virtual cube.")
+    }
+});
 
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
