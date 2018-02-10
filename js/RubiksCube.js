@@ -566,7 +566,7 @@ function randomFromList(set){
 
     if (document.getElementById("goInOrder").checked){
         currentAlgIndex++;
-        return set[currentAlgIndex];
+        return set[currentAlgIndex%set.length];
     }   
 
     size = set.length;
