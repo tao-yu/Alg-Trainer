@@ -757,6 +757,7 @@ function setTimerDisplay(setting){
     var timer = document.getElementById("timer");
     if (!isUsingVirtualCube()){
         alert("The timer can only be hidden when using the simulator cube.");
+        document.getElementById("hideTimer").checked = false;
     }
     else if (setting){
         timer.style.display = 'block';
