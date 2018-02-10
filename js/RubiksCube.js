@@ -526,7 +526,7 @@ function displayAlgorithm(algTest, reTest=true){
     
     updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), null, null);
     
-    scramble.style.color = 'grey';
+    scramble.style.color = '#e6e6e6';
 }
 
 function displayAlgorithmFromHistory(index){    
@@ -544,7 +544,7 @@ function displayAlgorithmFromHistory(index){
     
     updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.scramble, timerText);
     
-    scramble.style.color = 'grey';
+    scramble.style.color = '#e6e6e6';
 }
 
 function displayAlgorithmForPreviousTest(reTest=true){//not a great name
@@ -560,7 +560,7 @@ function displayAlgorithmForPreviousTest(reTest=true){//not a great name
     
     updateTrainer(lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
     
-    scramble.style.color = 'grey';
+    scramble.style.color = '#e6e6e6';
 }
 
 function randomFromList(set){
