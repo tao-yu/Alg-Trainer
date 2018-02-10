@@ -169,7 +169,7 @@
                     <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
                     <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real scrambles)<br>
                     <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0;">Go in order<br>
-                    <input id="goToNextCase" type="checkbox">Immediately go to next case while timing<br>
+                    <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer (press the left arrow key to view previous case)<br>
                     <select id="cubeType" onchange="drawCube(cube.cubestate)">
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
@@ -196,12 +196,7 @@
 
                 </form>
 
-                <h2>Instructions</h2>
-                Enter/Tab: New scramble<br>
-                Space: Reset case and show algorithm<br>
-                Esc: Reset case without showing algorithm<br> 
-                Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
-                <br><br>
+                
 
                 <h2>Algorithm Credits</h2>
                 ZBLL Algorithms from Jabari Nuruddin's <a href ="https://drive.google.com/file/d/0B5wWQGM9R38gMXBCV1NtVlluekU/view">PDF</a>
@@ -238,13 +233,31 @@
 
 
             <div class=column_right>
-                <img src="http://stachu.cubing.net/v/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
-                <p id="timeList">&nbsp</p>
+                <img src="http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
                 
+                <div style="overflow-y: scroll; height:150px;">
+                <p id="timeList" style="text-align: left">&nbsp</p>
+                </div>
                 <p id="statistics">&nbsp</p>
                 
+                
+                <div style="text-align: left">
                 <button id="deleteLast">Delete last solve</button>
                 <button id="clearTimes">Clear all</button>
+                <h2>Instructions</h2>
+                Enter/Tab/Space: New scramble.<br>
+                Space: Stop timer and show algorithm.<br>
+                Left and right arrow keys: View previously tested algs. 
+                
+                <h3>Virtual cube controls</h3>
+                Space: Stop timer, show algorithm and reset case.<br>
+                Timer will automatically stop if the cube is solved.<br>
+                Esc: Reset case without showing algorithm.<br> 
+                Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
+                <br><br>
+                
+                Please report bugs by filing an issue <a href="https://github.com/tao-yu/Alg-Trainer/issues">here</a>, or by messaging me on discord, Speedsolving.com or Reddit. 
+                </div>
 
             </div>
 
