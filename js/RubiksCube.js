@@ -42,6 +42,7 @@ else {
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
 
     document.getElementById("hideTimer").checked = myStorage.getItem("hideTimer") == "true"? true : false;
+    setTimerDisplay(document.getElementById("hideTimer").checked);
     document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
     document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
     setVirtualCube(document.getElementById("useVirtual").checked);
