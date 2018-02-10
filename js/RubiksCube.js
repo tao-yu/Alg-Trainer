@@ -513,7 +513,7 @@ function fixAlgorithms(algorithms){
 }
 
 function updateVisualCube(algorithm){
-    imgsrc = "http://cube.crider.co.uk/visualcube.php?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
+    imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
     document.getElementById("visualcube").src=imgsrc;
 }
 function displayAlgorithm(algTest, reTest=true){    
