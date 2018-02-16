@@ -813,6 +813,7 @@ listener.simple_combo(";", function() {	doAlg("y");});
 listener.simple_combo("a", function() {	doAlg("y'");});
 listener.simple_combo("p", function() {	doAlg("z");});
 listener.simple_combo("q", function() {	doAlg("z'");});
+listener.simple_combo("backspace", function() {	displayAlgorithmForPreviousTest();});
 listener.simple_combo("esc", function() {
     if (isUsingVirtualCube()){
         stopTimer(false);
