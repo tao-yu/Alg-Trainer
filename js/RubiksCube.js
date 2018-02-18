@@ -437,6 +437,8 @@ function generateAlgTest(){
     var solutions;
     if (randAUF){
         solutions = addAUFs(rawAlgs);
+    } else {
+        solutions = rawAlgs;
     }
     
     var scramble = generateAlgScramble(solutions[0],set,obfusticateAlg,shouldPrescramble);
