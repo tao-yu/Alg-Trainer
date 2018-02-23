@@ -605,6 +605,10 @@ function startTimer(){
 
 function stopTimer(logTime=true){
 
+    if (!timerIsRunning){
+        return;
+    }
+
     if (document.getElementById("timer").style.display == 'none'){
         //don't do anything if timer is hidden
         return;
@@ -828,10 +832,12 @@ listener.simple_combo("esc", function() {
 
 
 
-function nextScramble(){
+function nextScramble(displayReady=true){
     document.getElementById("scramble").style.color = "white";
     stopTimer(false);
-    document.getElementById("timer").innerHTML = 'Ready';
+    if (displayReady){
+        document.getElementById("timer").innerHTML = 'Ready';
+    };
     if (isUsingVirtualCube()){
         testAlg(generateAlgTest());
         startTimer();
@@ -876,6 +882,29 @@ listener.simple_combo("right", function() {
 
 document.onkeyup = function(event) {
     if (event.keyCode == 32) { //space
+        document.getElementById("timer").style.color = "white"; //Timer should never be any color other than white when space is not pressed down
+        if (!isUsingVirtualCube()){
+            if (document.getElementById("algdisp").innerHTML == ""){
+                //Right after a new scramble is displayed, space starts the timer
+                
+                
+                if (doNothingOnKeyUp){
+                    doNothingOnKeyUp = false;
+                }
+                else {
+                    startTimer(); 
+                }
+            }
+        }
+    }
+};
+
+var doNothingOnKeyUp = true;
+document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
+    
+    if (event.keyCode == 32) { //space
+        console.log("spacePressed");
+        event.preventDefault();
         if (isUsingVirtualCube()){
             if (timerIsRunning){
                 stopTimer();
@@ -887,34 +916,31 @@ document.onkeyup = function(event) {
             }
 
         }
-        else {
+        else { //If not using virtual cube
             if (timerIsRunning){//If timer is running, stop timer
                 var time = stopTimer();
-
+                doNothingOnKeyUp = true;
                 if (document.getElementById("goToNextCase").checked){
-                    nextScramble();
-                    document.getElementById("timer").innerHTML = time;
+                    nextScramble(false);
+                    
+                    //document.getElementById("timer").innerHTML = time;
                 } else {
                     displayAlgorithmForPreviousTest();
                 }
 
             }
-            else if (document.getElementById("algdisp").innerHTML == ""){
-                //Right after a new scramble is displayed, space starts the timer
-                startTimer();
-            }
-            else {
+            else if (document.getElementById("algdisp").innerHTML != ""){
                 nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
-
+                
+                doNothingOnKeyUp = true;
+            }
+            
+            else if (document.getElementById("timer").innerHTML == "Ready"){
+                document.getElementById("timer").style.color = "green";
             }
         }
     }
-};
 
-document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
-    if (event.keyCode == 32) { //space
-        event.preventDefault();
-    }
 };
 
 class SolveTime {
