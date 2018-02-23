@@ -33,7 +33,7 @@ if(!notfirstTime) {//If it is the first time loading
     localStorage.setItem("colourneutrality2", "x2");
     localStorage.setItem("colourneutrality3", "y");
     localStorage.setItem("not_first_time","1");
-    
+
     setVirtualCube(false);
 }
 else {
@@ -68,7 +68,7 @@ hideTimer.addEventListener("click", function(){
     localStorage.setItem("hideTimer", this.checked);
     stopTimer(false);
     document.getElementById("timer").innerHTML = "0.00";
-    
+
 });
 
 var clearTimes = document.getElementById("clearTimes");
@@ -297,7 +297,7 @@ function addAUFs(algArr){
 }
 
 function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
-    
+
     if (!obfusticateAlg){
         return alg.cube.invert(raw_alg);
     } else if (!shouldPrescramble){//if realscrambles not checked but should not prescramble, just obfusticate the inverse
@@ -424,55 +424,55 @@ class AlgTest {
 }
 
 function generateAlgTest(){
-    
+
     var set = document.getElementById("algsetpicker").value;
     var obfusticateAlg = document.getElementById("realScrambles").checked;
     var shouldPrescramble = document.getElementById("prescramble").checked;
     var randAUF = document.getElementById("randAUF").checked;
-    
+
     var rawAlgStr = randomFromList(createAlgList());
     var rawAlgs = rawAlgStr.split("/");
     rawAlgs = fixAlgorithms(rawAlgs);
-    
+
     var solutions;
     if (randAUF){
         solutions = addAUFs(rawAlgs);
     } else {
         solutions = rawAlgs;
     }
-    
+
     var scramble = generateAlgScramble(solutions[0],set,obfusticateAlg,shouldPrescramble);
-    
+
     var preorientation = generateOrientation();
-        
+
     var cubeType = document.getElementById("cubeType");
-    
+
     var solveTime = null;
     var time = Date.now();
     var visualCubeView = "plan";
-    
+
     var algTest = new AlgTest(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType);
     return algTest;
 }
 function testAlg(algTest, addToHistory=true){
 
     var scramble = document.getElementById("scramble");
-    
+
     if (document.getElementById("showScramble").checked){
         scramble.innerHTML = algTest.scramble;
     } else{
         scramble.innerHTML = "&nbsp;";
     }
-    
+
     document.getElementById("algdisp").innerHTML = "";
 
     cube.resetCube();
     doAlg(algTest.preorientation);
     doAlg(algTest.scramble);
     drawCube(cube.cubestate)
-    
+
     updateVisualCube("x2" + algTest.preorientation + algTest.scramble);
-    
+
     if (addToHistory){
         algorithmHistory.push(algTest);
     }
@@ -481,7 +481,7 @@ function testAlg(algTest, addToHistory=true){
 }
 
 function reTestAlg(){
-    
+
     var lastTest = algorithmHistory[algorithmHistory.length-1];
     if (lastTest==undefined){
         return;
@@ -500,13 +500,13 @@ function updateTrainer(scramble, solutions, algorithm, timer){
     if (solutions!=null){
         document.getElementById("algdisp").innerHTML = solutions;
     }
-    
+
     if (algorithm!=null){
         cube.resetCube();
         doAlg(algorithm);
         updateVisualCube("x2" + algorithm);
     }
-    
+
     if (timer!=null){
         document.getElementById("timer").innerHTML = timer;
     }
@@ -532,32 +532,32 @@ function displayAlgorithm(algTest, reTest=true){
     if (reTest){
         reTestAlg();
     }
-    
+
     updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), null, null);
-    
+
     scramble.style.color = '#e6e6e6';
 }
 
 function displayAlgorithmFromHistory(index){    
 
     var algTest = algorithmHistory[index];
-    
+
     console.log( algTest );
-    
+
     var timerText;
     if (algTest.solveTime == null){
         timerText = 'n/a'
     } else {
         timerText = algTest.solveTime.toString()
     }
-    
+
     updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.scramble, timerText);
-    
+
     scramble.style.color = '#e6e6e6';
 }
 
 function displayAlgorithmForPreviousTest(reTest=true){//not a great name
-    
+
     var lastTest = algorithmHistory[algorithmHistory.length-1];
     if (lastTest==undefined){
         return;
@@ -566,9 +566,9 @@ function displayAlgorithmForPreviousTest(reTest=true){//not a great name
     if (reTest){
         reTestAlg();
     }
-    
+
     updateTrainer(lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
-    
+
     scramble.style.color = '#e6e6e6';
 }
 
@@ -581,7 +581,7 @@ function randomFromList(set){
 
     size = set.length;
     rand = Math.floor(Math.random()*size);
-    
+
     return set[rand];
 
 }
@@ -589,11 +589,11 @@ var starttime;
 var timerUpdateInterval;
 var timerIsRunning = false;
 function startTimer(){
-    
+
     if (timerIsRunning){
         return;
     }
-    
+
     if (document.getElementById("timer").style.display == 'none'){
         //don't do anything if timer is hidden
         return;
@@ -604,16 +604,16 @@ function startTimer(){
 }
 
 function stopTimer(logTime=true){
-    
+
     if (document.getElementById("timer").style.display == 'none'){
         //don't do anything if timer is hidden
         return;
     }
-    
-    
+
+
     clearInterval(timerUpdateInterval);
     timerIsRunning = false;
-    
+
     var time = parseFloat(document.getElementById("timer").innerHTML);
     if (isNaN(time)){
         return NaN;
@@ -826,42 +826,7 @@ listener.simple_combo("esc", function() {
 
 });
 
-listener.simple_combo("space", function() {
 
-    if (isUsingVirtualCube()){
-        if (timerIsRunning){
-            stopTimer();
-            displayAlgorithmForPreviousTest();//put false here if you don't want the cube to retest.
-            //window.setTimeout(function (){reTestAlg();}, 250);
-        }
-        else {
-            displayAlgorithmForPreviousTest();
-        }
-        
-    }
-    else {
-        if (timerIsRunning){//If timer is running, stop timer
-            var time = stopTimer();
-            
-            if (document.getElementById("goToNextCase").checked){
-                nextScramble();
-                document.getElementById("timer").innerHTML = time;
-            } else {
-                displayAlgorithmForPreviousTest();
-            }
-
-        }
-        else if (document.getElementById("algdisp").innerHTML == ""){
-            //Right after a new scramble is displayed, space starts the timer
-            startTimer();
-        }
-        else {
-            nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
-
-        }
-    }
-
-});
 
 function nextScramble(){
     document.getElementById("scramble").style.color = "white";
@@ -889,7 +854,7 @@ listener.simple_combo("left", function() {
         return;
     }
     historyIndex--;
-    
+
     if (historyIndex<0){
         alert('Reached end of solve log');
         historyIndex = 0;
@@ -905,9 +870,52 @@ listener.simple_combo("right", function() {
         nextScramble();
         return;
     }
-    
+
     displayAlgorithmFromHistory(historyIndex);
 });
+
+document.onkeyup = function(event) {
+    if (event.keyCode == 32) { //space
+        if (isUsingVirtualCube()){
+            if (timerIsRunning){
+                stopTimer();
+                displayAlgorithmForPreviousTest();//put false here if you don't want the cube to retest.
+                //window.setTimeout(function (){reTestAlg();}, 250);
+            }
+            else {
+                displayAlgorithmForPreviousTest();
+            }
+
+        }
+        else {
+            if (timerIsRunning){//If timer is running, stop timer
+                var time = stopTimer();
+
+                if (document.getElementById("goToNextCase").checked){
+                    nextScramble();
+                    document.getElementById("timer").innerHTML = time;
+                } else {
+                    displayAlgorithmForPreviousTest();
+                }
+
+            }
+            else if (document.getElementById("algdisp").innerHTML == ""){
+                //Right after a new scramble is displayed, space starts the timer
+                startTimer();
+            }
+            else {
+                nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
+
+            }
+        }
+    }
+};
+
+document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
+    if (event.keyCode == 32) { //space
+        event.preventDefault();
+    }
+};
 
 class SolveTime {
     constructor(time, penalty) {
