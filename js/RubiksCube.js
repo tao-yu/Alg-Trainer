@@ -886,8 +886,8 @@ document.onkeyup = function(event) {
         if (!isUsingVirtualCube()){
             if (document.getElementById("algdisp").innerHTML == ""){
                 //Right after a new scramble is displayed, space starts the timer
-                
-                
+
+
                 if (doNothingOnKeyUp){
                     doNothingOnKeyUp = false;
                 }
@@ -901,42 +901,43 @@ document.onkeyup = function(event) {
 
 var doNothingOnKeyUp = true;
 document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
-    
-    if (event.keyCode == 32) { //space
-        console.log("spacePressed");
-        event.preventDefault();
-        if (isUsingVirtualCube()){
-            if (timerIsRunning){
-                stopTimer();
-                displayAlgorithmForPreviousTest();//put false here if you don't want the cube to retest.
-                //window.setTimeout(function (){reTestAlg();}, 250);
-            }
-            else {
-                displayAlgorithmForPreviousTest();
-            }
 
-        }
-        else { //If not using virtual cube
-            if (timerIsRunning){//If timer is running, stop timer
-                var time = stopTimer();
-                doNothingOnKeyUp = true;
-                if (document.getElementById("goToNextCase").checked){
-                    nextScramble(false);
-                    
-                    //document.getElementById("timer").innerHTML = time;
-                } else {
+    if (event.keyCode == 32) { //space
+        event.preventDefault();
+        if (!event.repeat){
+            if (isUsingVirtualCube()){
+                if (timerIsRunning){
+                    stopTimer();
+                    displayAlgorithmForPreviousTest();//put false here if you don't want the cube to retest.
+                    //window.setTimeout(function (){reTestAlg();}, 250);
+                }
+                else {
                     displayAlgorithmForPreviousTest();
                 }
 
             }
-            else if (document.getElementById("algdisp").innerHTML != ""){
-                nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
-                
-                doNothingOnKeyUp = true;
-            }
-            
-            else if (document.getElementById("timer").innerHTML == "Ready"){
-                document.getElementById("timer").style.color = "green";
+            else { //If not using virtual cube
+                if (timerIsRunning){//If timer is running, stop timer
+                    var time = stopTimer();
+                    doNothingOnKeyUp = true;
+                    if (document.getElementById("goToNextCase").checked){
+                        nextScramble(false);
+
+                        //document.getElementById("timer").innerHTML = time;
+                    } else {
+                        displayAlgorithmForPreviousTest();
+                    }
+
+                }
+                else if (document.getElementById("algdisp").innerHTML != ""){
+                    nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
+
+                    doNothingOnKeyUp = true;
+                }
+
+                else if (document.getElementById("timer").innerHTML == "Ready"){
+                    document.getElementById("timer").style.color = "green";
+                }
             }
         }
     }
