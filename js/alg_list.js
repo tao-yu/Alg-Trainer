@@ -655,6 +655,17 @@ var d2ublocks = {
 
 };
 
+var pureoll = {
+	"1":["M' U' M U2 M' U' M' U' M' U2 M U' M2", "M' U' M' U' M' U' M2 U' M' U' M' U' M'", "M' U' M' U' M' U' M' U M' U' M' U' M' U' M'"],
+	"2":["(U') R' U R2 U R' U R U2 R U2 R U R' U R2", "(U) R' U' R U' y x' R2 U' R' U l'", "(U) r' U' R U' R' U2 F' r U' r' F2 r", "(U') R' U R U2 R' U R U2 R' U2 r' R2 U' R' U' R U2 M'", "L U2 L' U' L U' x U2 R' U' R U' r'", "(U') R' U2 R U R' U R r' U' R U M' U' R' U R", "R U R' U' M' U R U' r' R U R' U R U2 R'"],
+	"3":["(U) R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2", "(U') R U R' U y' x R2 U R U' l", "(U') r U R' U R U2 x' U L' U L U2 L'", "(U) R U' R' U2 R U' R' U2 R U2 R' U2 M U' R U R2 r", "r' F2 r U r' F U2 R U R' U r", "(U) R U2 R' U' R U' M' U R' U' M U R U' R'", "R' U' R U M U' R' U r R' U' R U' R' U2 R"],
+	"4":["(U') R U2 R' U' R U' R' U2 R' U2 R U R' U R", "(U') r U' r' U r U' r' U2 r U r' U2 r U r' U r U r'", "(U') F U R U2 R' U' R U R' F' R U R' U' R' F R F'", "R' U2 R U R' U R F U R U' R' U R U' R' F'", "R U R' U R U' R' U R U' y R U' R' U R U' R' F'", "(U) F U R U' R' U R U' R' U y' R' U R U' R' U R U2 R'", "(U2) r U2 R' U' R U' r' F U R U' R' U R U' R' F'"],
+	"5":["(U) R U R' U R U2 R' U2 R' U' R U' R' U2 R U'", "r U' r' U' r U' r' U2 r U' r' U2 r U r' U' r U r'", "F R U' R' U' R U R' F' R U R' U' R' F R2 U R' U' F'", "(U2) F R U R' U' R U R' U' F' R' U' R U' R' U2 R", "(U) F R U R' U' R U R' y' U R' U' R U R' U' R U' R'", "R U2 R' U' R U R' F R' F' R F R' F' R U' R U' R'", "(U) R' U' R U' R' U R U' R' U R' F R F' R' F R F' U R"],
+	"6":["R U2 R' U2 R' U' R U R U' R' U2 R' U2 R", "(U') r' U2 r U2 R' U' R U' r' U R U' M' U' r' U2 r", "(U') R U R' U' R' F R U R' U' R U R U' R' F' U' R' U R", "R' F R U' R' U' R U R' F' R U R' U' R' F R2 U R' U' F' U R", "(U') r U2 r' U' M' U' R U r' U' R U' R' U2 r U2 r'", "(U') R U2 F R U R' U' R U R' U' F' r U R' U R U2 R' r'", "R' F R U R' U' F' U2 L' U2  R U' R' U2 R L"],
+	"7":["R U R' U R U' R' U R U' R' U R' U' R2 U' R' U R' U R", "(U) F U R U' R2 F R F r U r' U r' F r", "(U') F' U' r' F r2 U' r' F' R' F' R U' R U' R'", "(U') R U2 R' U' R U R' U' y r' U' R' F' R U r", "(U') r' U' R' F R U r y' U R U' R' U R U2 R'"],
+	"8":["R U R' U' R' U' R U R U R' U' R' U R U' R U' R'", "(U) r U2 R' U' R U' r' R' U' R U' R' U2 R", "(U) R U2 R' U' R U' R' r' U' R U' R' U2 r", "(U') R' U2 R U R' U R r U R' U R U2 r'", "(U') r' U2 R U R' U r R U R' U R U2 R'", "(U') x U R' U' M U' L U2 R U' M' U' r' F", "(U) r U' r' U' r U r' U2 r U' r' U2 r U r' U2 r U' r' U r U r'"],
+};
+
 window.algs = {
     "ZBLL (Jabari Nuruddin)" :zbll_full,
     "2UBlocks (Jabari Nuruddin)": d2ublocks,
@@ -662,6 +673,8 @@ window.algs = {
     "2GLL": twoGenLL,
     "VHLS (Chad Batten)": VHLS,
     "ZBLS (Chad Batten, Tao Yu)": ZBLS ,
+    
+    "Pure OLL (minus dots)": pureoll,
 
     "OLLCP (Cale Schoon)": ollcp_cale,
     "OLLCP": algdbOLLCP,
