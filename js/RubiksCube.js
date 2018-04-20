@@ -718,7 +718,7 @@ function createCheckboxes(){
 }
 
 function createAlgList(){
-    algList = [];
+    var algList = [];
 
     var set = document.getElementById("algsetpicker").value;
 
@@ -742,6 +742,28 @@ function createAlgList(){
     }
     console.log(algList.length + " algs in list");
     return algList;
+}
+
+function averageMovecount(metric){
+    var algList = createAlgList();
+    
+    var totalmoves = 0;
+    var i = 0;
+    for (; i<algList.length; i++){
+        var topAlg = algList[i].split("/")[0];
+        topAlg = alg.cube.simplify(topAlg.replace(/\[|\]|\)|\(/g, ""))
+        
+        var moves = alg.cube.countMoves(topAlg,  {metric: metric})
+        if (topAlg.startsWith("U") || topAlg.startsWith("y")){
+            moves--;
+        }
+        if (topAlg.endsWith("U") || topAlg.endsWith("y")|| topAlg.endsWith("U2")|| topAlg.endsWith("U'")){
+            moves--;
+        }
+        totalmoves += moves;
+    }
+    
+    return totalmoves/algList.length;
 }
 
 function toggleVirtualCube(){
