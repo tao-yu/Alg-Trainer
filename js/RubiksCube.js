@@ -45,6 +45,11 @@ else {
     setTimerDisplay(!document.getElementById("hideTimer").checked);
     document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
     document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
+    document.getElementById("userDefined").checked = myStorage.getItem("userDefined") == "true"? true : false;
+    if (document.getElementById("userDefined").checked){
+        document.getElementById("userAlgs").style.display = "block";
+    }
+    document.getElementById("userAlgs").value = myStorage.getItem("userDefinedAlgs");
     setVirtualCube(document.getElementById("useVirtual").checked);
 
 }
@@ -95,6 +100,12 @@ goToNextCase.addEventListener("click", function(){
     if (isUsingVirtualCube()){
         alert("Note: This option has no effect when using the virtual cube.")
     }
+});
+
+var userDefined = document.getElementById("userDefined");
+userDefined.addEventListener("click", function(){
+    document.getElementById("userAlgs").style.display = this.checked? "block":"none";
+    localStorage.setItem("userDefined", this.checked);
 });
 
 function fillSticker(x, y, colour) {
@@ -717,7 +728,46 @@ function createCheckboxes(){
     }
 }
 
+function clearSelectedAlgsets(){
+    var elements = document.getElementById("algsetpicker").options;
+    for(var i = 0; i < elements.length; i++){
+      elements[i].selected = false;
+    }
+  }
+
+function findMistakesInUserAlgs(userAlgs){
+    var errorMessage = "";
+    var newList = [];
+    for (var i = 0; i < userAlgs.length; i++){
+        try {
+            alg.cube.simplify(userAlgs[i]);
+            if (userAlgs[i].trim()!=""){
+                newList.push(userAlgs[i]);
+            }
+        }
+        catch(err){
+            errorMessage += "\"" + userAlgs[i] + "\"" + " is an invalid alg and has been removed\n";
+        }
+    }
+    
+    if (errorMessage!=""){
+        alert(errorMessage);
+    }
+    
+    document.getElementById("userAlgs").value = newList.join("\n");
+    localStorage.setItem("userDefinedAlgs", newList.join("\n"));
+    return newList;
+}
+
 function createAlgList(){
+    
+    if (document.getElementById("userDefined").checked){
+        algList = findMistakesInUserAlgs(document.getElementById("userAlgs").value.split("\n"));
+        if (algList.length==0){
+            alert("No algs found");
+        }
+        return algList;
+    }
     var algList = [];
 
     var set = document.getElementById("algsetpicker").value;
@@ -904,6 +954,10 @@ listener.simple_combo("right", function() {
 
 document.onkeyup = function(event) {
     if (event.keyCode == 32) { //space
+        
+        if (document.activeElement.type == "textarea"){
+            return;
+        }
         document.getElementById("timer").style.color = "white"; //Timer should never be any color other than white when space is not pressed down
         if (!isUsingVirtualCube()){
             if (document.getElementById("algdisp").innerHTML == ""){
@@ -925,6 +979,9 @@ var doNothingOnKeyUp = true;
 document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
 
     if (event.keyCode == 32) { //space
+        if (document.activeElement.type == "textarea"){
+            return;
+        }
         event.preventDefault();
         if (!event.repeat){
             if (isUsingVirtualCube()){
