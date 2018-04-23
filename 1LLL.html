@@ -156,7 +156,7 @@
                 <select id="algsetpicker" size=18 onchange="createCheckboxes()" class=algsetpicker>
                 </select>
                 <div id="cboxes"></div>
-                <br>Leave all checkboxes blank to test on the full algset.
+                <br>Leave all checkboxes unchecked to test on the full algset.
 
                 <br>
 
@@ -174,6 +174,10 @@
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
                     </select><br><br>
+                    
+                    <input id="userDefined" type="checkbox">Use user defined algset<br>
+                    <textarea id="userAlgs" cols=50 rows=50 style="display:none" onfocus="listener.stop_listening();" onblur="listener.listen();" placeholder="Place one alg per line"></textarea>
+                    <br><br>
 
 
                     Preorientation: <br>
@@ -199,8 +203,8 @@
                 
 
                 <h2>Algorithm Credits</h2>
-                Algs from <a href ="http://birdflu.lar5.com/">http://birdflu.lar5.com/</a>
-                
+                Algs from http://birdflu.lar5.com/.
+
 
 
             </div>
@@ -240,7 +244,7 @@
                 <b>Space</b>: Stop timer and show algorithm.<br>
                 <b>Left and right arrow keys</b>: View previously tested algs. <br>
                 <b>Backspace</b>: Show algorithm without starting timer. <mark> New! </mark>
-                
+
                 <h3>Virtual cube controls</h3>
                 Space: Stop timer, show algorithm and reset case.<br>
                 Timer will automatically stop if the cube is solved.<br>
@@ -250,8 +254,10 @@
                 
                 Please report bugs by filing an issue <a href="https://github.com/tao-yu/Alg-Trainer/issues">here</a>, or by messaging me on discord, Speedsolving.com or Reddit. 
                 
+                <br>
+                
                 <br><br>
-                Note: Some adblockers (ublock origin, for example) may cause this site to stop working. If you are experiencing problems, try whitelisting this site on your adblocker. I will look into why this is happening.
+                Note: Some adblockers (ublock origin, for example) may cause this site to stop working. If you are experiencing problems, try whitelisting this site on your adblocker. I will look into why this is happening. 
                 </div>
                 
                 
