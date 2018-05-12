@@ -921,11 +921,11 @@ function nextScramble(displayReady=true){
 }
 listener.simple_combo("enter", function() {
     nextScramble();
-    doNothingOnKeyUp = false;
+    doNothingNextTimeSpaceIsPressed = false;
 });
 listener.simple_combo("tab", function() {
     nextScramble();
-    doNothingOnKeyUp = false;
+    doNothingNextTimeSpaceIsPressed = false;
 });
 
 var historyIndex;
@@ -966,8 +966,8 @@ document.onkeyup = function(event) {
                 //Right after a new scramble is displayed, space starts the timer
 
 
-                if (doNothingOnKeyUp){
-                    doNothingOnKeyUp = false;
+                if (doNothingNextTimeSpaceIsPressed){
+                    doNothingNextTimeSpaceIsPressed = false;
                 }
                 else {
                     startTimer(); 
@@ -977,7 +977,7 @@ document.onkeyup = function(event) {
     }
 };
 
-var doNothingOnKeyUp = true;
+var doNothingNextTimeSpaceIsPressed = true;
 document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
 
     if (event.keyCode == 32) { //space
@@ -1000,7 +1000,7 @@ document.onkeydown = function(event) { //Stops the screen from scrolling down wh
             else { //If not using virtual cube
                 if (timerIsRunning){//If timer is running, stop timer
                     var time = stopTimer();
-                    doNothingOnKeyUp = true;
+                    doNothingNextTimeSpaceIsPressed = true;
                     if (document.getElementById("goToNextCase").checked){
                         nextScramble(false);
 
@@ -1013,7 +1013,7 @@ document.onkeydown = function(event) { //Stops the screen from scrolling down wh
                 else if (document.getElementById("algdisp").innerHTML != ""){
                     nextScramble(); //If the solutions are currently displayed, space should test on the next alg.
 
-                    doNothingOnKeyUp = true;
+                    doNothingNextTimeSpaceIsPressed = true;
                 }
 
                 else if (document.getElementById("timer").innerHTML == "Ready"){
