@@ -921,9 +921,11 @@ function nextScramble(displayReady=true){
 }
 listener.simple_combo("enter", function() {
     nextScramble();
+    doNothingOnKeyUp = false;
 });
 listener.simple_combo("tab", function() {
     nextScramble();
+    doNothingOnKeyUp = false;
 });
 
 var historyIndex;
