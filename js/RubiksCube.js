@@ -586,8 +586,7 @@ function displayAlgorithmForPreviousTest(reTest=true){//not a great name
 function randomFromList(set){
 
     if (document.getElementById("goInOrder").checked){
-        currentAlgIndex++;
-        return set[currentAlgIndex%set.length];
+        return set[currentAlgIndex++%set.length];
     }   
 
     size = set.length;
