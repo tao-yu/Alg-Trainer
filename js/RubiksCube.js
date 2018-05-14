@@ -321,6 +321,7 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true);//ZBLLscramble
 
         case "OLL":
+        case "OLL (Feliks Zemdegs - Cubeskills)":
         case "VLS":
         case "WVLS":
         case "OH OLL":
