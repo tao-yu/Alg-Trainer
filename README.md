@@ -1,8 +1,6 @@
-# Alg Trainer
-
 # [tao-yu.github.io/Alg-Trainer/](https://tao-yu.github.io/Alg-Trainer/)
 
-Alg-Trainer is a website that makes it easy to memorize Rubik's Cube algorithms. 
+Alg Trainer is a website that makes it easy to memorize Rubik's Cube algorithms. 
 
 In July 2017, I used this trainer to memorize full ZBLL (493 algorithms) in only 58 days, a feat which I describe in [this video](https://www.youtube.com/watch?v=5TEtHB5eoZw). 
 
