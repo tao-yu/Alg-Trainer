@@ -1,6 +1,6 @@
 # Alg Trainer
 
-# [Try It Here!](https://tao-yu.github.io/Alg-Trainer/)
+# [tao-yu.github.io/Alg-Trainer/](https://tao-yu.github.io/Alg-Trainer/)
 
 Alg-Trainer is a website that makes it easy to memorize Rubik's Cube algorithms. 
 
