@@ -61,7 +61,7 @@
             .column_middle {
                 text-align: center;
                 float: left;
-                width: 40%;        
+                width: 40%;  
             }
 
 
@@ -136,6 +136,25 @@
             #page {
                 display: none;
 
+            }
+            
+            #controls {   
+                position: fixed;
+                left: 50%;
+                bottom: 1px;
+                transform: translate(-50%, -50%);
+                margin: 0 auto;
+            }
+            
+            #controls > button {
+                background-color: grey; 
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
             }
 
 
@@ -232,6 +251,11 @@
                 <div id="algdisplayer"> 
                     <p id="algdisp" class=algdisp>Solution</p>
                 </div>
+                
+                <div id="controls">
+                <button onclick="nextScramble()">Next Scramble</button>
+                <button onclick="displayAlgorithmForPreviousTest()">Show Solution</button>
+            </div>
             </div>
 
 
@@ -273,6 +297,7 @@
                 
 
             </div>
+            
 
         </div>
 
