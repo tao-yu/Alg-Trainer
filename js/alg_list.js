@@ -114,6 +114,7 @@ var ZBLS = {
     "40":["U R U' R' F R U R' U' F' R U' R' /F2 r U r' F U2' R U R' ", "r U' r' U2' r U r' R U R' /R' F R D R U R U' R2 D' F' "],
     "41":["U' R U R' F U R U' R' F' R U R' /R U R' U' R U' R' U2 F' U' F", "R U' M' U' r' U2 r U r'"],
 
+
 };
 
 var VHLS = {
