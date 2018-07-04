@@ -729,6 +729,10 @@ var pureoll = {
     "8":["R U R' U' R' U' R U R U R' U' R' U R U' R U' R'", "(U) r U2 R' U' R U' r' R' U' R U' R' U2 R", "(U) R U2 R' U' R U' R' r' U' R U' R' U2 r", "(U') R' U2 R U R' U R r U R' U R U2 r'", "(U') r' U2 R U R' U r R U R' U R U2 R'", "(U') x U R' U' M U' L U2 R U' M' U' r' F", "(U) r U' r' U' r U r' U2 r U' r' U2 r U r' U2 r U' r' U r U r'"],
 };
 
+var double_edge_flips = {
+	"Double edge flips":["R' F R U' M' U2 M U' S R' F' R S'", "U' S R' F' R S' R' F R U' M' U2 M", "L F' L' U M' U2 M U S' L F L' S", "R U' R' E' R2 E2 R' U R E2 R2 E", "R S' R' F R U' M' U2 M U' S R' F'", "E' R' U' R E R2 E2 R U R' E2 R2", "R' E R U' R' E' R2 E2 R' U R E2 R'", "U L F L' S' L F' L' S U' M' U2 M U2", "R' F R S' U M' U2 M U R' F' R S", "U2 M U' S R' F' R S' R' F R U' M'", "L F' L' S U' M' U2 M U' L F L' S'", "U R' E2 R2 E' R' U' R E R2' E2 R", "S R' F' R S' R' F R U' M' U2 M U'", "U R U' R' E' R2 E2 R' U R E2 R2 u'", "U' R' U R E R2 E2 R U' R' E2 R2 u", "R E' R2' F2 R S' R' F2 R S R' E R", "U' R' E R U R' E' R2 E2 R' U' R E2 R' U", "U' M' U2 M U' S R' F' R S' R' F R", "R' F' R S' R' F R U' M' U2 M U' S", "U M U R' F' R S R' F R S' U M' U", "R2 S' R2 U2 R E R' U2 R E' R' S", "M' U M U' S R' F' R S' R' F R U' M' U M", "R U R' E2 R2 E' R' U' R E R2' E2", "R' U R E2 R2 E R U' R' E' R2 E2", "R' E2 R U R' E2 R2 E' R' U' R E R'", "R E2 R' U R E2 R2 E R U' R' E' R", "M' U2 M U' S R' F' R S' R' F R U'", "U R' F' R S' R' F R U' M' U2 M U' S U'", "M U' S R' F' R S' R' F RU' M' U2", "U' L F L' S L F' L' U M' U2 M U S' U", "R U M' U2 M U R' F' R S R' F R S' R'", "R' U M' U2 M U R' F' R S R' F R S' R", "U R' E2 R U R' E2 R2 E' R' U' R E R' U'", "U R E2 R' U R E2 R2 E R U' R' E' R U'", "U M' U2 M U S' L F L' S L F' L'", "S R2 S' R2 U2 R E R' U2 R E' R'", "U' M U R' F' R S R' F R S' U M' U'", "S U' M' U2 M U' L F L' S' L F' L'", "F' R S' R' F R U' M' U2 M U' S R'", "R2 E' R2' F2 R S' R' F2 R S R' E", "R S R' F2 R2 E R2 E' R S' R' F2", "R U' M' U2 M U' S R' F' R S' R' F", "f' R' F RU' M' U2 M U' S R' F' R S' f", "x U' M' U2 M U' S R' F' R S' R' F R x'", "R' S' R2 U2 R E R' U2 R E' R' S R'", "x' S R' F' R S' R' F R U' M' U2 M U' x", "E R2 E' R2' F2 R S' R' F2 R S R'", "R' U' M' U2 M U' S R' F' R S' R' F R2", "D' R' U' M' U2 M U' S R' F' R S' R' F R2 D", "U2 M2 U' R' U M2 U2 M U R U' M'", "D R' U' M' U2 M U' S R' F' R S' R' F R2 D'", "L' S U' M' U2 M U' L F L' S' L F'", "L U M' U2 M U S' L F L' S L F' L2", "R E' R2 E R2 B2 R' S' R B2 R' S", "M2 U L U' M2 U2 M U' L' U M' U2", "y' L' U M' U2 M U S' L F L' S L F'", "L' U M' U2 M U S' L F L' S L F'", "R' E R2 E' R2 F2 R S' R' F2 R S", "l' U M' U2 M U S' L F L' S L F' M", "y' R U' M' U2 M U' S R' F' R S' R' F", "R' F' R S' R' F R S R F' R' S R F R' S'", "M' U M U M U2 M' U M' U M' U2 M2", "L F L' S L F' L' S' L' F L S' L' F' L S", "x R U' M' U2 M U' S R' F' R S' R' F x'", "S' R2 U2 R E R' U2 R E' R' S R2", "Rl E' R' U R E R2' E2 R U' R' E2 x"],
+};
+
 window.algs = {
     "ZBLL (Jabari Nuruddin, Justin Taylor, Tao Yu)" :zbll_jabari_justin_tao,
     "ZBLL (Jabari Nuruddin)" :zbll_full,
@@ -758,7 +762,9 @@ window.algs = {
     "CLS (Justin Taylor)": cls,
     "ELS (FR) (Justin Taylor)": els_fr,
     "ELS (BR) (Justin Taylor)": els_br,
-
+    
+    "Double Edge Flips (Ishaan Agrawal)": double_edge_flips,
+    
     "CPLS (Arc)": cpls_arc,
     "CPEOLL" : cpeoll,
     "L5E (Justin, Micki)": L5E,
