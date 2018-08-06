@@ -8,15 +8,24 @@ var eg_full = {
     "H" : ["R' F R2 U' R2 U' F U R", "F' U R U' R2 F2 R U' F", " R' U' R' F2 U F' R F'", "R U R' F' R U R' U' R U R' U'"]
 };
 
+var ell_justin_tao = {
+    "EPLL": ["M2 U M U2 M' U M2", "M2 U' M U2 M' U' M2", "M2 U M2 U M' U2 M2 U2 M'", 'M2 U M2 U2 M2 U M2'],
+    "L3E": ["M' U' M U2 M' U' M", "R' F R S R' F' R S' ", "r U R' U' M U R U' R'", "M' U M U2 M' U M", "S R' F R S' R' F' R", "R U R' U' M' U R U' r' "],
+    "Pure Flips": ["r U R' U' r' U2 R U R U' R2 U2 R", "M' U2' M U R' F' R S R' F R S'", "M' U2 M U2 M' U M U2 M' U2 M"],
+    "U": ["(U') M' U M' U2 M U M2 U M'", "M' U M U2 M' U M R U R' U' M' U R U' r'", "M' U M R U R' U' M' U R U' r' U2 M' U M", "(U2) R U R' U M' U' R U' r' U2 M' U' M", "r' U r U' r' U M' U' R U r' U2 M' U R", "(U) M' U M U2 M' U M S R' F R S' R' F' R", "(U2) M' U' M2 U' M U2 M' U' M'", "(U') M' U M U2 r U R' U M U' R U' R'"],
+    "Z": ["R' U' F' U F R U' f R U R' U' f'", "M' U' M U' M' U2 M U M' U M", "M' U' M U M' U' M U' M' U2 M", "M' U2 M U M' U M U' M' U M", "M' U' M U2 M' U' M2 U M' U2 M U M'"],
+    "H": ["M' U M U M' U M U M' U M", "R' U2 R U' R' U' R' F R2 U R' U' R' F' R2", "r U R' U' M2 U R U' R' U' M'"],
+};
+
 var cll_333 = {
-	"T":["F R' F R2 U' R' U' R U R' F2", "(U2) R U' R' U2 R L U' R' U L'", "(U) L' U' L U L F' L' F", "F U R U2 R' U' R U2 R' U' F'", "(U') R U R' U' R' F R F'", "(U2) r2 D' r U r' D r2 U' r' U' r"],
-	"U":["(U') R U R' U' R U' R' U2 R U' R' U2 R U R'", "(U') F R2 D R' U R D' R2' U' F'", "(U2) R2 D R' U2 R D' R' U2 R'", "R' D U R D R' U2' R D' R' U D' R", "R2' D' R U2 R' D R U2 R", "(U') F R U R' U' F'"],
-	"L":["(U2) R U2 R' U' R U R' U' R U R' U' R U' R'", "R U2 R D R' U2 R D' R2", "F R' F' R U R U' R'", "F R U' R' U' R U R' F'", "(U') R' U2 R' D' R U2 R' D R2", "R U2 R2 F R F' R U2 R'"],
-	"S":["R U R' U R U2 R'", "r' F2 r U2 r U' r' F", "F R' F' R U2 R U2 R'", "(U2) R2 D' R U' R' D R U' R U R' U R", "R U' L' U R' U' L", "(U2) R U R' U R' F R F' R U2 R'"],
-	"AS":["(U') R U2 R' U' R U' R'", "R U2 R' U2 R' F R F'", "L' U R U' L U R'", "R2 D R' U R D' R' U R' U' R U' R'", "F' r U r' U2 r' F2 r", "(U2) R U R' F' R U2 R' U' R U' R' F R U' R'"],
-	"Pi":["F R U R' U' R U R' U' F'", "(U) F R' F' R U2 R U' R' U R U2' R'", "(U') F R U' R' U' R U R' U R U' R' F'", "R U2 R' U' R U R' U2' R' F R F'", "(U2) R' U R U' R2' F R2 U R' U' F' R", "(U') R' U' R' F R F' R U' R' U2 R"],
-	"H":["R U2 R' U' R U R' U' R U' R'", "r U' r' F U2' r2' F r U' r", "(U') F R U R' U' R U' R' U R U R' F'", "F R U R' U' R U R' U' R U R' U' F'"],
-	"O":["R U R' F' R U R' U' R' F R2 U' R'", "R2 D' r U' r' D R2 U f R f'"],
+	"T": ["F R' F R2 U' R' U' R U R' F2", "(U2) R U' R' U2 R L U' R' U L'", "(U) L' U' L U L F' L' F", "F U R U2 R' U' R U2 R' U' F'", "(U') R U R' U' R' F R F'", "(U2) r2 D' r U r' D r2 U' r' U' r"],
+	"U": ["(U') R U R' U' R U' R' U2 R U' R' U2 R U R' ", "(U') F R2 D R' U R D' R2' U' F'", "(U2) R2 D R' U2 R D' R' U2 R'", "R' D U R D R' U2 R D' R' U D' R", "R2' D' R U2 R' D R U2 R", "(U') F R U R' U' F'"],
+	"L": ["(U2) R U2 R' U' R U R' U' R U R' U' R U' R'", "R U2 R D R' U2 R D' R2", "F R' F' R U R U' R'", "F R U' R' U' R U R' F'", "(U') R' U2 R' D' R U2 R' D R2", "R U2 R2 F R F' R U2 R'"],
+	"S": ["R U R' U R U2 R'", "r' F2 r U2 r U' r' F", "F R' F' R U2 R U2 R'", "(U2) R2 D' R U' R' D R U' R U R' U R", "R U' L' U R' U' L", "(U2) R U R' U R' F R F' R U2 R'"],
+	"AS": ["(U') R U2 R' U' R U' R'", "R U2 R' U2 R' F R F'", "L' U R U' L U R'", "R2 D R' U R D' R' U R' U' R U' R'", "F' r U r' U2 r' F2 r", "(U2) R U R' F' R U2 R' U' R U' R' F R U' R'"],
+	"Pi": ["F R U R' U' R U R' U' F'", "(U) F U R U' R' U R U' R2 F' R U R U' R'", "(U') F R U' R' U' R U R' U R U' R' F'", "R U2 R' U' R U R' U2' R' F R F'", "(U2) R' U R U' R2' F R2 U R' U' F' R", "(U') R' U' R' F R F' R U' R' U2 R"],
+	"H": ["R U2 R' U' R U R' U' R U' R'", "r U' r' F U2' r2' F r U' r", "(U') F R U R' U' R U' R' U R U R' F'", "F R U R' U' R U R' U' R U R' U' F'"],
+	"O": ["R U R' F' R U R' U' R' F R2 U' R'", "R2 D' r U' r' D R2 U f R f'"],
 };
 
 var zbll_full = {
@@ -758,8 +767,9 @@ window.algs = {
     "OLLCP (Cale Schoon)": ollcp_cale,
     "OLLCP": algdbOLLCP,
 
-    "ELL": ELL,
     "3x3 CLL (Justin Taylor)": cll_333, 
+    "ELL(Justin Taylor & Tao Yu)": ell_justin_tao,
+    "ELL": ELL,
     "F2L": F2L,
     "PLL": PLL,
     "OLL (Feliks Zemdegs - Cubeskills)": oll_cubeskills,
