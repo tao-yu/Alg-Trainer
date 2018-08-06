@@ -44,6 +44,7 @@ else {
     document.getElementById("hideTimer").checked = myStorage.getItem("hideTimer") == "true"? true : false;
     setTimerDisplay(!document.getElementById("hideTimer").checked);
     document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
+    document.getElementById("mirrorAllAlgs").checked = myStorage.getItem("mirrorAllAlgs") == "true"? true : false;
     document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
     document.getElementById("userDefined").checked = myStorage.getItem("userDefined") == "true"? true : false;
     if (document.getElementById("userDefined").checked){
@@ -57,6 +58,11 @@ else {
 var scramble_subsequent = document.getElementById("prescramble");
 scramble_subsequent.addEventListener("click", function(){
     localStorage.setItem("scramble_subsequent", this.checked);
+});
+
+var mirrorAllAlgs = document.getElementById("mirrorAllAlgs");
+mirrorAllAlgs.addEventListener("click", function(){
+    localStorage.setItem("mirrorAllAlgs", this.checked);
 });
 
 var useVirtual = document.getElementById("useVirtual");
@@ -448,7 +454,9 @@ function generateAlgTest(){
     var rawAlgStr = randomFromList(createAlgList());
     var rawAlgs = rawAlgStr.split("/");
     rawAlgs = fixAlgorithms(rawAlgs);
-
+    if (mirrorAllAlgs.checked){
+        rawAlgs = mirrorAlgsAcrossM(rawAlgs);
+    }
     var solutions;
     if (randAUF){
         solutions = addAUFs(rawAlgs);
@@ -794,7 +802,13 @@ function createAlgList(){
         return algList;
     }
     console.log(algList.length + " algs in list");
+    
     return algList;
+}
+
+function mirrorAlgsAcrossM(algList){
+    algList = fixAlgorithms(algList);
+    return algList.map(x => alg.cube.mirrorAcrossM(x));
 }
 
 function averageMovecount(metric){
