@@ -816,5 +816,5 @@ window.algs = {
     "EG1 (Finn Ickler)": eg_full,
     "Pseudo2GLL (no algs)": pseudo2gll,
     "CP solved OLLCP": cpOLLCP,
-    "test": test,
+    //"test": test,
 };
