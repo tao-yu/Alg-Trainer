@@ -1,0 +1,154 @@
+body {
+    background: black;
+    font-family: Arial;
+    color: white;
+}
+
+p {
+    font-family: Arial;
+    font-size: 20px;
+    color: white;
+}
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 0.5px;
+    border-color:#303030;
+}
+
+
+#timer {
+    font-family: Arial;
+    font-size: 30px;
+    color: white;
+}
+
+#statistics {
+    font-size: 20px;
+}
+
+p.scramble {
+    vertical-align: middle; 
+    text-align: center;
+}
+
+p.algdisp {
+
+
+}
+
+.column_left {
+    float: left;
+    width: 30%;
+}
+
+.column_middle {
+    text-align: center;
+    float: left;
+    width: 40%;  
+}
+
+
+.column_right {
+    text-align: center;
+    float: left;
+    width: 30%;
+}
+
+.algsetpicker{
+    width:70%;
+}
+
+a:link {
+    color: cornflowerblue
+}
+
+a:visited {
+    color: darkslateblue
+}
+
+
+#loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid white;
+    border-right: 16px solid red;
+    border-bottom: 16px solid green;
+    border-left: 16px solid orange;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+    from { bottom:-100px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+}
+
+#page {
+    display: none;
+
+}
+
+#controls {   
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    margin: 0 auto;
+}
+
+#controls > button {
+    background-color: grey; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+
+border-top: 16px solid blue;
+border-right: 16px solid green;
+border-bottom: 16px solid red;
+border-left: 16px solid yellow;
+

@@ -5,147 +5,11 @@
         <title>Algorithm trainer</title>
         <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-
-        <style>
-            body {
-                background: black;
-                font-family: Arial;
-                color: white;
-            }
-
-            p {
-                font-family: Arial;
-                font-size: 20px;
-                color: white;
-            }
-
-            hr { 
-                display: block;
-                margin-top: 0.5em;
-                margin-bottom: 0.5em;
-                margin-left: auto;
-                margin-right: auto;
-                border-style: inset;
-                border-width: 0.5px;
-                border-color:#303030;
-            }
-
-
-            #timer {
-                font-family: Arial;
-                font-size: 30px;
-                color: white;
-            }
-
-            #statistics {
-                font-size: 20px;
-            }
-
-            p.scramble {
-                vertical-align: middle; 
-                text-align: center;
-            }
-
-            p.algdisp {
-
-
-            }
-
-            .column_left {
-                float: left;
-                width: 30%;
-            }
-
-            .column_middle {
-                text-align: center;
-                float: left;
-                width: 40%;        
-            }
-
-
-            .column_right {
-                text-align: center;
-                float: left;
-                width: 30%;
-            }
-
-            .algsetpicker{
-                width:70%;
-            }
-
-            a:link {
-                color: cornflowerblue
-            }
-
-            a:visited {
-                color: darkslateblue
-            }
-
-
-            #loader {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                z-index: 1;
-                width: 150px;
-                height: 150px;
-                margin: -75px 0 0 -75px;
-                border: 16px solid #f3f3f3;
-                border-radius: 50%;
-                border-top: 16px solid white;
-                border-right: 16px solid red;
-                border-bottom: 16px solid green;
-                border-left: 16px solid orange;
-                width: 120px;
-                height: 120px;
-                -webkit-animation: spin 2s linear infinite;
-                animation: spin 2s linear infinite;
-            }
-
-            @-webkit-keyframes spin {
-                0% { -webkit-transform: rotate(0deg); }
-                100% { -webkit-transform: rotate(360deg); }
-            }
-
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-
-            /* Add animation to "page content" */
-            .animate-bottom {
-                position: relative;
-                -webkit-animation-name: animatebottom;
-                -webkit-animation-duration: 1s;
-                animation-name: animatebottom;
-                animation-duration: 1s
-            }
-
-            @-webkit-keyframes animatebottom {
-                from { bottom:-100px; opacity:0 } 
-                to { bottom:0px; opacity:1 }
-            }
-
-            @keyframes animatebottom { 
-                from{ bottom:-100px; opacity:0 } 
-                to{ bottom:0; opacity:1 }
-            }
-
-            #page {
-                display: none;
-
-            }
-
-
-            border-top: 16px solid blue;
-            border-right: 16px solid green;
-            border-bottom: 16px solid red;
-            border-left: 16px solid yellow;
-
-
-        </style>
+        
+        
         <div id="loader"></div>
         <div style="display:none;" id="page" class="animate-bottom">
 
@@ -170,6 +34,7 @@
                     <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real scrambles)<br>
                     <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0;">Go in order<br>
                     <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer (press the left arrow key to view previous case)<br>
+                    <input id="mirrorAllAlgs" type="checkbox">Mirror all algs across the M slice<br>
                     <select id="cubeType" onchange="drawCube(cube.cubestate)">
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
@@ -203,7 +68,7 @@
                 
 
                 <h2>Algorithm Credits</h2>
-                Algs from http://birdflu.lar5.com/.
+                Algorithms from <a href="http://birdflu.lar5.com/">birdflu</a>.
 
 
 
@@ -223,6 +88,11 @@
                 <div id="algdisplayer"> 
                     <p id="algdisp" class=algdisp>Solution</p>
                 </div>
+                
+                <div id="controls">
+                <button onclick="nextScramble()">Next Scramble</button>
+                <button onclick="displayAlgorithmForPreviousTest()">Show Solution</button>
+            </div>
             </div>
 
 
@@ -243,7 +113,7 @@
                 <b>Enter/Tab/Space</b>: New scramble.<br>
                 <b>Space</b>: Stop timer and show algorithm.<br>
                 <b>Left and right arrow keys</b>: View previously tested algs. <br>
-                <b>Backspace</b>: Show algorithm without starting timer. <mark> New! </mark>
+                <b>Backspace</b>: Show algorithm without starting timer. 
 
                 <h3>Virtual cube controls</h3>
                 Space: Stop timer, show algorithm and reset case.<br>
@@ -255,6 +125,7 @@
                 Please report bugs by filing an issue <a href="https://github.com/tao-yu/Alg-Trainer/issues">here</a>, or by messaging me on discord, Speedsolving.com or Reddit. 
                 
                 <br>
+                <a href="1LLL.html">Full 1LLL trainer</a> 
                 
                 <br><br>
                 Note: Some adblockers (ublock origin, for example) may cause this site to stop working. If you are experiencing problems, try whitelisting this site on your adblocker. I will look into why this is happening. 
@@ -263,6 +134,7 @@
                 
 
             </div>
+            
 
         </div>
 
