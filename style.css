@@ -42,6 +42,11 @@ p.algdisp {
 
 }
 
+table, th, td {
+   border: 1px solid white;
+   border-collapse: collapse;
+}
+
 .column_left {
     float: left;
     width: 30%;
