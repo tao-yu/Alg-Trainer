@@ -6,7 +6,7 @@ var algArr;//This is the array of alternatives to currentAlgorithm
 var canvas = document.getElementById("cube");
 var ctx = canvas.getContext("2d");
 var stickerSize = canvas.width/5;
-var currentAlgIndex;
+var currentAlgIndex = 0;
 var algorithmHistory = [];
 
 createAlgsetPicker();
@@ -22,8 +22,8 @@ function showPage(){
     document.getElementById("page").style.display = "block";
 }
 
-var myStorage = window.localStorage;
-var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
+
+/*var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
 
 if(!notfirstTime) {//If it is the first time loading
     document.getElementById("colourneutrality1").value = "";
@@ -42,28 +42,64 @@ else {
     document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
 
     document.getElementById("hideTimer").checked = myStorage.getItem("hideTimer") == "true"? true : false;
-    setTimerDisplay(!document.getElementById("hideTimer").checked);
-    document.getElementById("prescramble").checked = myStorage.getItem("scramble_subsequent") == "true"? true : false;
+    document.getElementById("prescramble").checked = myStorage.getItem("prescramble") == "true"? true : false;
     document.getElementById("mirrorAllAlgs").checked = myStorage.getItem("mirrorAllAlgs") == "true"? true : false;
     document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
     document.getElementById("userDefined").checked = myStorage.getItem("userDefined") == "true"? true : false;
+    document.getElementById("userAlgs").value = myStorage.getItem("userDefinedAlgs");
+
+
+    setTimerDisplay(!document.getElementById("hideTimer").checked);
     if (document.getElementById("userDefined").checked){
         document.getElementById("userAlgs").style.display = "block";
     }
-    document.getElementById("userAlgs").value = myStorage.getItem("userDefinedAlgs");
     setVirtualCube(document.getElementById("useVirtual").checked);
 
+}*/
+
+var defaults = {"useVirtual":false,
+                "hideTimer":false,
+                "showScramble":true,
+                "realScrambles":true,
+                "randAUF":true,
+                "prescramble":true,
+                "goInOrder":false,
+                "goToNextCase":false,
+                "mirrorAllAlgs":false,
+                "colourneutrality1":"",
+                "colourneutrality2":"x2",
+                "colourneutrality3":"y",
+                "userDefined":false,
+                "userDefinedAlgs":"",
+                "fullCN":false};
+
+for (var setting in defaults){
+    if (typeof(defaults[setting]) === "boolean"){
+        var previousSetting = localStorage.getItem(setting);
+            if (previousSetting == null){
+                document.getElementById(setting).checked = defaults[setting];
+            }
+            else {
+                document.getElementById(setting).checked = previousSetting == "true"? true : false;
+            }
+    }
+    else {
+        var previousSetting = localStorage.getItem(setting);
+            if (previousSetting == null){
+                document.getElementById(setting).value = defaults[setting];
+            }
+            else {
+                document.getElementById(setting).value = previousSetting;
+            }
+    }
 }
 
-var scramble_subsequent = document.getElementById("prescramble");
-scramble_subsequent.addEventListener("click", function(){
-    localStorage.setItem("scramble_subsequent", this.checked);
-});
+setTimerDisplay(!document.getElementById("hideTimer").checked);
+if (document.getElementById("userDefined").checked){
+    document.getElementById("userDefinedAlgs").style.display = "block";
+}
+setVirtualCube(document.getElementById("useVirtual").checked);
 
-var mirrorAllAlgs = document.getElementById("mirrorAllAlgs");
-mirrorAllAlgs.addEventListener("click", function(){
-    localStorage.setItem("mirrorAllAlgs", this.checked);
-});
 
 var useVirtual = document.getElementById("useVirtual");
 useVirtual.addEventListener("click", function(){
@@ -80,6 +116,55 @@ hideTimer.addEventListener("click", function(){
     stopTimer(false);
     document.getElementById("timer").innerHTML = "0.00";
 
+});
+
+var showScramble = document.getElementById("showScramble");
+showScramble.addEventListener("click", function(){
+    localStorage.setItem("showScramble", this.checked);
+});
+
+var realScrambles = document.getElementById("realScrambles");
+realScrambles.addEventListener("click", function(){
+    localStorage.setItem("realScrambles", this.checked);
+});
+
+var randAUF = document.getElementById("randAUF");
+randAUF.addEventListener("click", function(){
+    localStorage.setItem("randAUF", this.checked);
+});
+
+var prescramble = document.getElementById("prescramble");
+prescramble.addEventListener("click", function(){
+    localStorage.setItem("prescramble", this.checked);
+});
+
+var goInOrder = document.getElementById("goInOrder");
+goInOrder.addEventListener("click", function(){
+    localStorage.setItem("goInOrder", this.checked);
+});
+
+var goToNextCase = document.getElementById("goToNextCase");
+goToNextCase.addEventListener("click", function(){
+    if (isUsingVirtualCube()){
+        alert("Note: This option has no effect when using the virtual cube.")
+    }
+    localStorage.setItem("goToNextCase", this.checked);
+});
+
+var mirrorAllAlgs = document.getElementById("mirrorAllAlgs");
+mirrorAllAlgs.addEventListener("click", function(){
+    localStorage.setItem("mirrorAllAlgs", this.checked);
+});
+
+var userDefined = document.getElementById("userDefined");
+userDefined.addEventListener("click", function(){
+    document.getElementById("userDefinedAlgs").style.display = this.checked? "block":"none";
+    localStorage.setItem("userDefined", this.checked);
+});
+
+var fullCN = document.getElementById("fullCN");
+fullCN.addEventListener("click", function(){
+    localStorage.setItem("fullCN", this.checked);
 });
 
 var clearTimes = document.getElementById("clearTimes");
@@ -99,19 +184,6 @@ deleteLast.addEventListener("click", function(){
     algorithmHistory.pop();
     updateTimeList();
     updateStats();
-});
-
-var goToNextCase = document.getElementById("goToNextCase");
-goToNextCase.addEventListener("click", function(){
-    if (isUsingVirtualCube()){
-        alert("Note: This option has no effect when using the virtual cube.")
-    }
-});
-
-var userDefined = document.getElementById("userDefined");
-userDefined.addEventListener("click", function(){
-    document.getElementById("userAlgs").style.display = this.checked? "block":"none";
-    localStorage.setItem("userDefined", this.checked);
 });
 
 function fillSticker(x, y, colour) {
@@ -351,7 +423,7 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
 
         case "CMLL":
             return generatePreScramble(raw_alg, "U,M", 100, true);//LSE scramble
-            
+
         case "3x3 CLL (Justin Taylor)":
             return generatePreScramble(raw_alg, "F2 U' R' L F2 L' R U' F2, R' U2' R2 U R' U' R' U2' r U R U' r', U", 100, true);//ELL scramble
 
@@ -742,9 +814,9 @@ function createCheckboxes(){
 function clearSelectedAlgsets(){
     var elements = document.getElementById("algsetpicker").options;
     for(var i = 0; i < elements.length; i++){
-      elements[i].selected = false;
+        elements[i].selected = false;
     }
-  }
+}
 
 function findMistakesInUserAlgs(userAlgs){
     var errorMessage = "";
@@ -760,20 +832,20 @@ function findMistakesInUserAlgs(userAlgs){
             errorMessage += "\"" + userAlgs[i] + "\"" + " is an invalid alg and has been removed\n";
         }
     }
-    
+
     if (errorMessage!=""){
         alert(errorMessage);
     }
-    
-    document.getElementById("userAlgs").value = newList.join("\n");
+
+    document.getElementById("userDefinedAlgs").value = newList.join("\n");
     localStorage.setItem("userDefinedAlgs", newList.join("\n"));
     return newList;
 }
 
 function createAlgList(){
-    
+
     if (document.getElementById("userDefined").checked){
-        algList = findMistakesInUserAlgs(document.getElementById("userAlgs").value.split("\n"));
+        algList = findMistakesInUserAlgs(document.getElementById("userDefinedAlgs").value.split("\n"));
         if (algList.length==0){
             alert("No algs found");
         }
@@ -802,7 +874,7 @@ function createAlgList(){
         return algList;
     }
     console.log(algList.length + " algs in list");
-    
+
     return algList;
 }
 
@@ -813,13 +885,13 @@ function mirrorAlgsAcrossM(algList){
 
 function averageMovecount(metric){
     var algList = createAlgList();
-    
+
     var totalmoves = 0;
     var i = 0;
     for (; i<algList.length; i++){
         var topAlg = algList[i].split("/")[0];
         topAlg = alg.cube.simplify(topAlg.replace(/\[|\]|\)|\(/g, ""))
-        
+
         var moves = alg.cube.countMoves(topAlg,  {metric: metric})
         if (topAlg.startsWith("U") || topAlg.startsWith("y")){
             moves--;
@@ -829,7 +901,7 @@ function averageMovecount(metric){
         }
         totalmoves += moves;
     }
-    
+
     return totalmoves/algList.length;
 }
 
@@ -985,7 +1057,7 @@ listener.simple_combo("right", function() {
 
 document.onkeyup = function(event) {
     if (event.keyCode == 32) { //space
-        
+
         if (document.activeElement.type == "textarea"){
             return;
         }

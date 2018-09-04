@@ -8,8 +8,8 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
-        
-        
+
+
         <div id="loader"></div>
         <div style="display:none;" id="page" class="animate-bottom">
 
@@ -28,10 +28,10 @@
                 <form action="javascript:void(0);">
                     <input id="useVirtual" type="checkbox">Use Virtual Cube<br>
                     <input id="hideTimer" type="checkbox">Hide timer<br>
-                    <input id="showScramble" type="checkbox" checked = "true">Show Scramble<br>
-                    <input id="realScrambles" type="checkbox" checked = "true">Use Real Scrambles<br>
-                    <input id="randAUF" type="checkbox" checked = "true">Random AUF<br>
-                    <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real scrambles)<br>
+                    <input id="showScramble" type="checkbox">Show Scramble<br>
+                    <input id="realScrambles" type="checkbox">Use Real Scrambles<br>
+                    <input id="randAUF" type="checkbox">Random AUF<br>
+                    <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real scrambles to be checked)<br>
                     <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0;">Go in order<br>
                     <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer (press the left arrow key to view previous case)<br>
                     <input id="mirrorAllAlgs" type="checkbox">Mirror all algs across the M slice<br>
@@ -39,9 +39,9 @@
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
                     </select><br><br>
-                    
+
                     <input id="userDefined" type="checkbox">Use user defined algset<br>
-                    <textarea id="userAlgs" cols=50 rows=50 style="display:none" onfocus="listener.stop_listening();" onblur="listener.listen();" placeholder="Place one alg per line"></textarea>
+                    <textarea id="userDefinedAlgs" cols=50 rows=50 style="display:none" onfocus="listener.stop_listening();" onblur="listener.listen();" placeholder="Place one alg per line"></textarea>
                     <br><br>
 
 
@@ -65,12 +65,8 @@
 
                 </form>
 
-                
-
                 <h2>Algorithm Credits</h2>
                 Algorithms from <a href="http://birdflu.lar5.com/">birdflu</a>.
-
-
 
             </div>
 
@@ -88,53 +84,56 @@
                 <div id="algdisplayer"> 
                     <p id="algdisp" class=algdisp>Solution</p>
                 </div>
-                
+
                 <div id="controls">
-                <button onclick="nextScramble()">Next Scramble</button>
-                <button onclick="displayAlgorithmForPreviousTest()">Show Solution</button>
-            </div>
+                    <button onclick="nextScramble()">Next Scramble</button>
+                    <button onclick="displayAlgorithmForPreviousTest()">Show Solution</button>
+                </div>
             </div>
 
 
 
             <div class=column_right>
                 <img src="http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"/>
-                
+
                 <div style="overflow-y: scroll; height:150px;">
-                <p id="timeList" style="text-align: left">&nbsp</p>
+                    <p id="timeList" style="text-align: left">&nbsp</p>
                 </div>
                 <p id="statistics">&nbsp</p>
-                
-                
-                <div style="text-align: left">
-                <button id="deleteLast">Delete last solve</button>
-                <button id="clearTimes">Clear all</button>
-                <h2>Instructions</h2>
-                <b>Enter/Tab/Space</b>: New scramble.<br>
-                <b>Space</b>: Stop timer and show algorithm.<br>
-                <b>Left and right arrow keys</b>: View previously tested algs. <br>
-                <b>Backspace</b>: Show algorithm without starting timer. 
 
-                <h3>Virtual cube controls</h3>
-                Space: Stop timer, show algorithm and reset case.<br>
-                Timer will automatically stop if the cube is solved.<br>
-                Esc: Reset case without showing algorithm.<br> 
-                Keyboard Controls: See <a href="http://www.ryanheise.com/cube/speed.html">here</a>. ' is M and [ is M'
-                <br><br>
-                
-                Please report bugs by filing an issue <a href="https://github.com/tao-yu/Alg-Trainer/issues">here</a>, or by messaging me on discord, Speedsolving.com or Reddit. 
-                
-                <br>
-                <a href="1LLL.html">Full 1LLL trainer</a> 
-                
-                <br><br>
-                Note: Some adblockers (ublock origin, for example) may cause this site to stop working. If you are experiencing problems, try whitelisting this site on your adblocker. I will look into why this is happening. 
+
+                <div style="text-align: left">
+                    <button id="deleteLast">Delete last solve</button>
+                    <button id="clearTimes">Clear all</button>
+                    <h2>Instructions</h2>
+                    <b>Enter/Tab/Space</b>: New scramble.<br>
+                    <b>Space</b>: Stop timer and show algorithm.<br>
+                    <b>Left and right arrow keys</b>: View previously tested algs. <br>
+                    <b>Backspace</b>: Show algorithm without starting timer. 
+
+                    <h3>Virtual cube controls</h3>
+                    Space: Stop timer, show algorithm and reset case.<br>
+                    Timer will automatically stop if the cube is solved.<br>
+                    Esc: Reset case without showing algorithm.<br> 
+                    Keyboard Controls: See <a href="controls.html">here</a>.
+                    <br><br>
+
+                    <a href="https://discord.gg/K7tpCJs">Join my Discord server!</a>
+                    <br><br>
+
+                    Please report bugs by filing an issue <a href="https://github.com/tao-yu/Alg-Trainer/issues">here</a>, or by messaging me on discord, Speedsolving.com or Reddit. 
+
+                    <br>
+                    <a href="1LLL.html">Full 1LLL trainer</a> 
+
+                    <br><br>
+                    Note: Some adblockers (ublock origin, for example) may cause this site to stop working. If you are experiencing problems, try whitelisting this site on your adblocker. I will look into why this is happening. 
                 </div>
-                
-                
+
+
 
             </div>
-            
+
 
         </div>
 
