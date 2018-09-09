@@ -10,7 +10,7 @@ var currentAlgIndex = 0;
 var algorithmHistory = [];
 
 createAlgsetPicker();
-drawCube(cube.cubestate);
+
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
@@ -36,7 +36,9 @@ var defaults = {"useVirtual":false,
                 "colourneutrality3":"y",
                 "userDefined":false,
                 "userDefinedAlgs":"",
-                "fullCN":false};
+                "fullCN":false,
+                "cubeType":"3x3",
+                "algsetpicker":"ZBLL (Jabari Nuruddin, Justin Taylor, Tao Yu)"};
 
 for (var setting in defaults){
     if (typeof(defaults[setting]) === "boolean"){
@@ -64,8 +66,9 @@ if (document.getElementById("userDefined").checked){
     document.getElementById("userDefinedAlgs").style.display = "block";
 }
 setVirtualCube(document.getElementById("useVirtual").checked);
-
-
+createCheckboxes();
+drawCube(cube.cubestate);
+updateVisualCube("");
 var useVirtual = document.getElementById("useVirtual");
 useVirtual.addEventListener("click", function(){
     setVirtualCube(this.checked);
@@ -130,6 +133,19 @@ userDefined.addEventListener("click", function(){
 var fullCN = document.getElementById("fullCN");
 fullCN.addEventListener("click", function(){
     localStorage.setItem("fullCN", this.checked);
+});
+
+var cubeType = document.getElementById("cubeType");
+cubeType.addEventListener("change", function(){
+    localStorage.setItem("cubeType", this.value);
+    drawCube(cube.cubestate);
+    updateVisualCube("");
+});
+
+var algsetpicker = document.getElementById("algsetpicker");
+algsetpicker.addEventListener("change", function(){
+    createCheckboxes();
+    localStorage.setItem("algsetpicker", this.value);
 });
 
 var clearTimes = document.getElementById("clearTimes");
@@ -531,7 +547,7 @@ function testAlg(algTest, addToHistory=true){
     doAlg(algTest.scramble);
     drawCube(cube.cubestate)
 
-    updateVisualCube("x2" + algTest.preorientation + algTest.scramble);
+    updateVisualCube(algTest.preorientation + algTest.scramble);
 
     if (addToHistory){
         algorithmHistory.push(algTest);
@@ -564,7 +580,7 @@ function updateTrainer(scramble, solutions, algorithm, timer){
     if (algorithm!=null){
         cube.resetCube();
         doAlg(algorithm);
-        updateVisualCube("x2" + algorithm);
+        updateVisualCube(algorithm);
     }
 
     if (timer!=null){
@@ -593,7 +609,7 @@ function updateVisualCube(algorithm){
             break;
     }
     
-    imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=" + algorithm;
+    imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
     document.getElementById("visualcube").src=imgsrc;
 }
 function displayAlgorithm(algTest, reTest=true){    
