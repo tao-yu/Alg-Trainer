@@ -768,7 +768,7 @@ window.algs = {
     "OLLCP": algdbOLLCP,
 
     "3x3 CLL (Justin Taylor)": cll_333, 
-    "ELL(Justin Taylor & Tao Yu)": ell_justin_tao,
+    "ELL (Justin Taylor & Tao Yu)": ell_justin_tao,
     "ELL": ELL,
     "F2L": F2L,
     "PLL": PLL,
@@ -785,7 +785,7 @@ window.algs = {
     "ELS (FR) (Justin Taylor)": els_fr,
     "ELS (BR) (Justin Taylor)": els_br,
     
-    "Double Edge Flips (Ishaan Agrawal)": double_edge_flips,
+    "Floating two edge flips (Ishaan Agrawal)": double_edge_flips,
     
     "CPLS (Arc)": cpls_arc,
     "CPEOLL" : cpeoll,
