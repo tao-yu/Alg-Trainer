@@ -583,7 +583,17 @@ function fixAlgorithms(algorithms){
 }
 
 function updateVisualCube(algorithm){
-    imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&alg=" + algorithm;
+    
+    switch (document.getElementById("cubeType").value){
+        case "2x2":
+            var pzl = "2";
+            break;
+        case "3x3":
+            var pzl = "3";
+            break;
+    }
+    
+    imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=" + algorithm;
     document.getElementById("visualcube").src=imgsrc;
 }
 function displayAlgorithm(algTest, reTest=true){    
