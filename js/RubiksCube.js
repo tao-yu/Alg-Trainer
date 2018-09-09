@@ -38,7 +38,7 @@ var defaults = {"useVirtual":false,
                 "userDefinedAlgs":"",
                 "fullCN":false,
                 "cubeType":"3x3",
-                "algsetpicker":"ZBLL (Jabari Nuruddin, Justin Taylor, Tao Yu)"};
+                "algsetpicker":document.getElementById("algsetpicker").options[0].value};
 
 for (var setting in defaults){
     if (typeof(defaults[setting]) === "boolean"){
@@ -109,6 +109,7 @@ prescramble.addEventListener("click", function(){
 var goInOrder = document.getElementById("goInOrder");
 goInOrder.addEventListener("click", function(){
     localStorage.setItem("goInOrder", this.checked);
+    currentAlgIndex=0;
 });
 
 var goToNextCase = document.getElementById("goToNextCase");
