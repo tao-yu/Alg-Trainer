@@ -783,6 +783,12 @@ function createCheckboxes(){
 
 
     var full_set = window.algs[set];
+    
+    if (!full_set){
+        set = document.getElementById("algsetpicker").options[0].value;
+        document.getElementById("algsetpicker").value = set;
+        full_set = window.algs[set]
+    }
     var subsets = Object.keys(full_set);
 
     var myDiv = document.getElementById("cboxes");

@@ -17,7 +17,7 @@
             <hr>
             <div class=column_left>
 
-                <select id="algsetpicker" size=18 onchange="createCheckboxes()" class=algsetpicker>
+                <select id="algsetpicker" size=18 class=algsetpicker>
                 </select>
                 <div id="cboxes"></div>
                 <br>Leave all checkboxes unchecked to test on the full algset.
@@ -32,10 +32,10 @@
                     <input id="realScrambles" type="checkbox">Use Real Scrambles<br>
                     <input id="randAUF" type="checkbox">Random AUF<br>
                     <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real scrambles to be checked)<br>
-                    <input id="goInOrder" type="checkbox" onclick="currentAlgIndex=0;">Go in order<br>
+                    <input id="goInOrder" type="checkbox">Go in order<br>
                     <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer (press the left arrow key to view previous case)<br>
                     <input id="mirrorAllAlgs" type="checkbox">Mirror all algs across the M slice<br>
-                    <select id="cubeType" onchange="drawCube(cube.cubestate)">
+                    <select id="cubeType">
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
                     </select><br><br>
@@ -65,8 +65,13 @@
 
                 </form>
 
+
+
                 <h2>Algorithm Credits</h2>
-                Algorithms from <a href="http://birdflu.lar5.com/">birdflu</a>.
+                
+                Algs from birdflu.lar5.com. Transformed and ranked by algexplorer.
+
+
 
             </div>
 
