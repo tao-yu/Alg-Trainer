@@ -22,41 +22,6 @@ function showPage(){
     document.getElementById("page").style.display = "block";
 }
 
-
-/*var notfirstTime = localStorage.getItem("not_first_time"); //"" if first time page is visited, "1" otherwise
-
-if(!notfirstTime) {//If it is the first time loading
-    document.getElementById("colourneutrality1").value = "";
-    document.getElementById("colourneutrality2").value = "x2";
-    document.getElementById("colourneutrality3").value = "y";
-    localStorage.setItem("colourneutrality1", "");
-    localStorage.setItem("colourneutrality2", "x2");
-    localStorage.setItem("colourneutrality3", "y");
-    localStorage.setItem("not_first_time","1");
-
-    setVirtualCube(false);
-}
-else {
-    document.getElementById("colourneutrality1").value = myStorage.getItem("colourneutrality1");
-    document.getElementById("colourneutrality2").value = myStorage.getItem("colourneutrality2");
-    document.getElementById("colourneutrality3").value = myStorage.getItem("colourneutrality3");
-
-    document.getElementById("hideTimer").checked = myStorage.getItem("hideTimer") == "true"? true : false;
-    document.getElementById("prescramble").checked = myStorage.getItem("prescramble") == "true"? true : false;
-    document.getElementById("mirrorAllAlgs").checked = myStorage.getItem("mirrorAllAlgs") == "true"? true : false;
-    document.getElementById("useVirtual").checked = myStorage.getItem("useVirtual") == "true"? true : false;
-    document.getElementById("userDefined").checked = myStorage.getItem("userDefined") == "true"? true : false;
-    document.getElementById("userAlgs").value = myStorage.getItem("userDefinedAlgs");
-
-
-    setTimerDisplay(!document.getElementById("hideTimer").checked);
-    if (document.getElementById("userDefined").checked){
-        document.getElementById("userAlgs").style.display = "block";
-    }
-    setVirtualCube(document.getElementById("useVirtual").checked);
-
-}*/
-
 var defaults = {"useVirtual":false,
                 "hideTimer":false,
                 "showScramble":true,
