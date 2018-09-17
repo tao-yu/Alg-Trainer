@@ -38,7 +38,15 @@ var defaults = {"useVirtual":false,
                 "userDefinedAlgs":"",
                 "fullCN":false,
                 "cubeType":"3x3",
-                "algsetpicker":document.getElementById("algsetpicker").options[0].value};
+                "algsetpicker":document.getElementById("algsetpicker").options[0].value,
+                "useCustomColourScheme":false,
+                "customColourU":"white",
+                "customColourD":"yellow",
+                "customColourF":"green",
+                "customColourB":"blue",
+                "customColourR":"red",
+                "customColourL":"orange"
+                };
 
 for (var setting in defaults){
     if (typeof(defaults[setting]) === "boolean"){
@@ -65,10 +73,59 @@ setTimerDisplay(!document.getElementById("hideTimer").checked);
 if (document.getElementById("userDefined").checked){
     document.getElementById("userDefinedAlgs").style.display = "block";
 }
+
+var useCustomColourScheme = document.getElementById("useCustomColourScheme");
+useCustomColourScheme.addEventListener("click", function(){
+    localStorage.setItem("useCustomColourScheme", this.checked);
+});
+
+var customColourU = document.getElementById("customColourU");
+customColourU.addEventListener("input", function(){
+    localStorage.setItem("customColourU", this.value);
+});
+
+var customColourD = document.getElementById("customColourD");
+customColourD.addEventListener("input", function(){
+    localStorage.setItem("customColourD", this.value);
+});
+
+var customColourF = document.getElementById("customColourF");
+customColourF.addEventListener("input", function(){
+    localStorage.setItem("customColourF", this.value);
+});
+
+var customColourB = document.getElementById("customColourB");
+customColourB.addEventListener("input", function(){
+    localStorage.setItem("customColourB", this.value);
+});
+
+var customColourR = document.getElementById("customColourR");
+customColourR.addEventListener("input", function(){
+    localStorage.setItem("customColourR", this.value);
+});
+
+var customColourL = document.getElementById("customColourL");
+customColourL.addEventListener("input", function(){
+    localStorage.setItem("customColourL", this.value);
+});
+
+var resetCustomColourScheme = document.getElementById("resetCustomColourScheme");
+resetCustomColourScheme.addEventListener("click", function(){
+    if (confirm("Reset custom colour scheme?")){
+        for (var setting in defaults){
+            if (setting.indexOf( "customColour" ) > -1){
+                document.getElementById(setting).value = defaults[setting];
+                localStorage.setItem(setting, defaults[setting]);
+            }
+        }
+    }
+});
+
 setVirtualCube(document.getElementById("useVirtual").checked);
 createCheckboxes();
 drawCube(cube.cubestate);
 updateVisualCube("");
+
 var useVirtual = document.getElementById("useVirtual");
 useVirtual.addEventListener("click", function(){
     setVirtualCube(this.checked);
@@ -199,22 +256,46 @@ function fillWithIndex(x, y, face, index, cubeArray, shouldBeCleared = false) {
     var colour;
     switch (sticker) {
         case 1:
-            colour = "white";
+            if (useCustomColourScheme.checked){
+                colour = customColourU.value;
+            } else {
+                colour = defaults["customColourU"];
+            }
             break;
         case 2:
-            colour = "red";
+            if (useCustomColourScheme.checked){
+                colour = customColourR.value;
+            } else {
+                colour = defaults["customColourR"];
+            }
             break;
         case 3:
-            colour = "green";
+            if (useCustomColourScheme.checked){
+                colour = customColourF.value;
+            } else {
+                colour = defaults["customColourF"];
+            }
             break;
         case 4:
-            colour = "yellow";
+            if (useCustomColourScheme.checked){
+                colour = customColourD.value;
+            } else {
+                colour = defaults["customColourD"];
+            }
             break;
         case 5:
-            colour = "orange";
+            if (useCustomColourScheme.checked){
+                colour = customColourL.value;
+            } else {
+                colour = defaults["customColourL"];
+            }
             break;
         case 6:
-            colour = "blue";
+            if (useCustomColourScheme.checked){
+                colour = customColourB.value;
+            } else {
+                colour = defaults["customColourB"];
+            }
             break;
     }
     if(shouldBeCleared){
@@ -599,6 +680,55 @@ function fixAlgorithms(algorithms){
 
 }
 
+function validTextColour(stringToTest) {
+    if (stringToTest === "") { return false; }
+    if (stringToTest === "inherit") { return false; }
+    if (stringToTest === "transparent") { return false; }
+    
+    var visualCubeColoursArray = ['black', 'dgrey', 'grey', 'silver', 'white', 'yellow', 
+                                  'red', 'orange', 'blue', 'green', 'purple', 'pink'];
+    
+    if (stringToTest[0] !== '#') {
+        return visualCubeColoursArray.indexOf(stringToTest) > -1;
+    } else {
+        // generic colour test, but we're using it here only for #RRGGBB because of VisualCube hardcoded colours
+        var image = document.createElement("img");
+        image.style.color = "rgb(0, 0, 0)";
+        image.style.color = stringToTest;
+        if (image.style.color !== "rgb(0, 0, 0)") { return true; }
+        image.style.color = "rgb(255, 255, 255)";
+        image.style.color = stringToTest;
+        return image.style.color !== "rgb(255, 255, 255)";
+    }
+}
+
+function validateCustomColourScheme(){
+    var invalidColours = [];
+    var customColours = [customColourU, customColourD, customColourF,
+                         customColourB, customColourR, customColourL];
+    
+    for (var i = 0; i < customColours.length; i++) {
+        if (!validTextColour(customColours[i].value)) {
+            invalidColours.push(customColours[i].value);
+        }
+    }
+    
+    if (invalidColours.length > 0) {
+        alert("The following custom colours are not supported and will cause unexpected behaviour:\n" + invalidColours.join(", ") + "\n\n" +
+               "Either use #RRGGBB, or one of the following colour names:\n" +
+               "black, dgrey, grey, silver, white, yellow, red, orange, blue, green, purple, pink."
+            );
+    }
+}
+
+function stripLeadingHashtag(colour){
+    if (colour[0] == '#'){
+        return colour.substring(1);
+    }
+
+    return colour;
+}
+
 function updateVisualCube(algorithm){
     
     switch (document.getElementById("cubeType").value){
@@ -610,9 +740,22 @@ function updateVisualCube(algorithm){
             break;
     }
     
-    imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
-    document.getElementById("visualcube").src=imgsrc;
+    var imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
+
+    if (useCustomColourScheme.checked){
+        validateCustomColourScheme();
+        
+        imgsrc += "&sch=" + stripLeadingHashtag(customColourD.value) + "," + 
+                            stripLeadingHashtag(customColourR.value) + "," +
+                            stripLeadingHashtag(customColourB.value) + "," +
+                            stripLeadingHashtag(customColourU.value) + "," +
+                            stripLeadingHashtag(customColourL.value) + "," + 
+                            stripLeadingHashtag(customColourF.value);
+    }
+    
+    document.getElementById("visualcube").src = imgsrc;
 }
+
 function displayAlgorithm(algTest, reTest=true){    
 
     //If reTest is true, the scramble will also be setup on the virtual cube
@@ -987,10 +1130,10 @@ var keymaps = [
 keymaps.forEach(function(keymap){
     listener.register_combo({
         "keys"              : keymap[0],
-        "on_keydown"        : function() {	doAlg(keymap[1]);},     
+        "on_keydown"        : function() {  doAlg(keymap[1]);},     
     });
 });
-listener.simple_combo("backspace", function() {	displayAlgorithmForPreviousTest();});
+listener.simple_combo("backspace", function() { displayAlgorithmForPreviousTest();});
 listener.simple_combo("esc", function() {
     if (isUsingVirtualCube()){
         stopTimer(false);
@@ -1040,7 +1183,7 @@ listener.simple_combo("left", function() {
     }
     displayAlgorithmFromHistory(historyIndex);
 });
-listener.simple_combo("right", function() {	
+listener.simple_combo("right", function() { 
     if (timerIsRunning){
         return;
     }
