@@ -691,14 +691,7 @@ function validTextColour(stringToTest) {
     if (stringToTest[0] !== '#') {
         return visualCubeColoursArray.indexOf(stringToTest) > -1;
     } else {
-        // generic colour test, but we're using it here only for #RRGGBB because of VisualCube hardcoded colours
-        var image = document.createElement("img");
-        image.style.color = "rgb(0, 0, 0)";
-        image.style.color = stringToTest;
-        if (image.style.color !== "rgb(0, 0, 0)") { return true; }
-        image.style.color = "rgb(255, 255, 255)";
-        image.style.color = stringToTest;
-        return image.style.color !== "rgb(255, 255, 255)";
+        return /^#[0-9A-F]{6}$/i.test(stringToTest)
     }
 }
 
