@@ -80,32 +80,38 @@ useCustomColourScheme.addEventListener("click", function(){
 });
 
 var customColourU = document.getElementById("customColourU");
-customColourU.addEventListener("input", function(){
+customColourU.addEventListener("change", function(){
+    this.value = this.value.trim();
     localStorage.setItem("customColourU", this.value);
 });
 
 var customColourD = document.getElementById("customColourD");
-customColourD.addEventListener("input", function(){
+customColourD.addEventListener("change", function(){
+    this.value = this.value.trim();
     localStorage.setItem("customColourD", this.value);
 });
 
 var customColourF = document.getElementById("customColourF");
-customColourF.addEventListener("input", function(){
+customColourF.addEventListener("change", function(){
+    this.value = this.value.trim();
     localStorage.setItem("customColourF", this.value);
 });
 
 var customColourB = document.getElementById("customColourB");
-customColourB.addEventListener("input", function(){
+customColourB.addEventListener("change", function(){
+    this.value = this.value.trim();
     localStorage.setItem("customColourB", this.value);
 });
 
 var customColourR = document.getElementById("customColourR");
-customColourR.addEventListener("input", function(){
+customColourR.addEventListener("change", function(){
+    this.value = this.value.trim();
     localStorage.setItem("customColourR", this.value);
 });
 
 var customColourL = document.getElementById("customColourL");
-customColourL.addEventListener("input", function(){
+customColourL.addEventListener("change", function(){
+    this.value = this.value.trim();
     localStorage.setItem("customColourL", this.value);
 });
 
