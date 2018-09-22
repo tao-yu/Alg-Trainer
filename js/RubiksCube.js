@@ -80,40 +80,27 @@ useCustomColourScheme.addEventListener("click", function(){
 });
 
 var customColourU = document.getElementById("customColourU");
-customColourU.addEventListener("change", function(){
-    this.value = this.value.trim();
-    localStorage.setItem("customColourU", this.value);
-});
-
 var customColourD = document.getElementById("customColourD");
-customColourD.addEventListener("change", function(){
-    this.value = this.value.trim();
-    localStorage.setItem("customColourD", this.value);
-});
-
 var customColourF = document.getElementById("customColourF");
-customColourF.addEventListener("change", function(){
-    this.value = this.value.trim();
-    localStorage.setItem("customColourF", this.value);
-});
-
 var customColourB = document.getElementById("customColourB");
-customColourB.addEventListener("change", function(){
-    this.value = this.value.trim();
-    localStorage.setItem("customColourB", this.value);
-});
-
 var customColourR = document.getElementById("customColourR");
-customColourR.addEventListener("change", function(){
-    this.value = this.value.trim();
-    localStorage.setItem("customColourR", this.value);
-});
-
 var customColourL = document.getElementById("customColourL");
-customColourL.addEventListener("change", function(){
-    this.value = this.value.trim();
-    localStorage.setItem("customColourL", this.value);
-});
+
+var customColours = [customColourU, customColourD, customColourF,
+                     customColourB, customColourR, customColourL];
+
+for (var i = 0; i < customColours.length; i++) {
+    customColours[i].addEventListener("change", function(){
+            this.value = this.value.trim();
+            validateCustomColourScheme();
+            localStorage.setItem(this.id, this.value);
+            
+            drawCube(cube.cubestate);
+            
+            var algTest = algorithmHistory[historyIndex];
+            updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+        });
+}
 
 var resetCustomColourScheme = document.getElementById("resetCustomColourScheme");
 resetCustomColourScheme.addEventListener("click", function(){
@@ -703,8 +690,6 @@ function validTextColour(stringToTest) {
 
 function validateCustomColourScheme(){
     var invalidColours = [];
-    var customColours = [customColourU, customColourD, customColourF,
-                         customColourB, customColourR, customColourL];
     
     for (var i = 0; i < customColours.length; i++) {
         if (!validTextColour(customColours[i].value)) {
