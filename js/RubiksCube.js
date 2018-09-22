@@ -765,7 +765,7 @@ function displayAlgorithmFromHistory(index){
         timerText = algTest.solveTime.toString()
     }
 
-    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.scramble, timerText);
+    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
 
     scramble.style.color = '#e6e6e6';
 }
