@@ -92,7 +92,6 @@ var customColours = [customColourU, customColourD, customColourF,
 for (var i = 0; i < customColours.length; i++) {
     customColours[i].addEventListener("change", function(){
             this.value = this.value.trim();
-            validateCustomColourScheme();
             localStorage.setItem(this.id, this.value);
             
             drawCube(cube.cubestate);
@@ -111,6 +110,11 @@ resetCustomColourScheme.addEventListener("click", function(){
                 localStorage.setItem(setting, defaults[setting]);
             }
         }
+        
+        drawCube(cube.cubestate);
+            
+        var algTest = algorithmHistory[historyIndex];
+        updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
     }
 });
 
