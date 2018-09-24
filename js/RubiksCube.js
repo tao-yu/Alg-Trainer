@@ -77,6 +77,11 @@ if (document.getElementById("userDefined").checked){
 var useCustomColourScheme = document.getElementById("useCustomColourScheme");
 useCustomColourScheme.addEventListener("click", function(){
     localStorage.setItem("useCustomColourScheme", this.checked);
+    
+    var algTest = algorithmHistory[historyIndex];
+    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+
+    drawCube(cube.cubestate);    
 });
 
 var customColourU = document.getElementById("customColourU");
@@ -94,10 +99,10 @@ for (var i = 0; i < customColours.length; i++) {
             this.value = this.value.trim();
             localStorage.setItem(this.id, this.value);
             
-            drawCube(cube.cubestate);
-            
             var algTest = algorithmHistory[historyIndex];
             updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+            
+            drawCube(cube.cubestate);
         });
 }
 
@@ -110,11 +115,11 @@ resetCustomColourScheme.addEventListener("click", function(){
                 localStorage.setItem(setting, defaults[setting]);
             }
         }
-        
-        drawCube(cube.cubestate);
-            
+
         var algTest = algorithmHistory[historyIndex];
         updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+
+        drawCube(cube.cubestate);                
     }
 });
 
@@ -698,13 +703,16 @@ function validateCustomColourScheme(){
     for (var i = 0; i < customColours.length; i++) {
         if (!validTextColour(customColours[i].value)) {
             invalidColours.push(customColours[i].value);
+            customColours[i].value = defaults[customColours[i].id];
+            localStorage.setItem(customColours[i].id, customColours[i].value);
         }
     }
     
     if (invalidColours.length > 0) {
-        alert("The following custom colours are not supported and will cause unexpected behaviour:\n" + invalidColours.join(", ") + "\n\n" +
-               "Either use #RRGGBB, or one of the following colour names:\n" +
-               "black, dgrey, grey, silver, white, yellow, red, orange, blue, green, purple, pink."
+        alert("The following custom colours are not supported and were reset to default:\n" + 
+                invalidColours.join(", ") + "\n\n" +
+                "Either use #RRGGBB, or one of the following colour names:\n" +
+                "black, dgrey, grey, silver, white, yellow, red, orange, blue, green, purple, pink."
             );
     }
 }
