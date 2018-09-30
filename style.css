@@ -41,9 +41,12 @@ p.algdisp {
 
 }
 
-table, th, td, tr {
-   border: none;
-   border-collapse: collapse;
+table {
+    border-collapse: collapse;
+}
+
+th, td, tr{
+    border: none;
 }
 
 .column_left {
