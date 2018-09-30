@@ -378,6 +378,7 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
     switch(set){
         case "ZBLS (Chad Batten, Tao Yu)":
         case "VHLS (Chad Batten)":
+        case "ZBLSE (John McWilliams)":
             return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true);//ZBLLscramble
 
         case "OLL":
