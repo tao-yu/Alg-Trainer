@@ -21,7 +21,6 @@ hr {
     border-color:#303030;
 }
 
-
 #timer {
     font-family: Arial;
     font-size: 30px;
@@ -42,8 +41,8 @@ p.algdisp {
 
 }
 
-table, th, td {
-   border: 1px solid white;
+table, th, td, tr {
+   border: none;
    border-collapse: collapse;
 }
 
