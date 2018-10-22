@@ -768,6 +768,10 @@ var zblse = {
 	"2a/2": ["M2 U' M' U M'", "M2 U' M' U' M'", "U' M2 U M U M", "U' M2 U M U' M", "U M2 U M' U M'", "U M2 U M' U' M'", "U2 M2 U' M U M", "U2 M2 U' M U' M", "M U2 M U M' U M'", "M' U' M U M U' M'/U2 M2 U' M U' M' U' M2/U' M2 U M U M' U' M2/U M2 U M' U' M U' M2", "U2 M U M U M U M/M' U M' U M' U M'/U M' U' M' U' M' U' M'/U' M U' M U' M U' M", "U' M U M' U' M' U' M/M' U2 M U' M U M'/U2 r D2 r' U M' U' M2 r D2 R'", "U2 M U' M' U M' U M/U M' U2 M U M U' M'", "U2 M U' M' U M' U' M/M2 U' M' U' M U' M2/U' M2 U M U' M' U' M2/U M' U M U' M U M'", "U M U2 M U' M' U' M'/U2 R U' r' U' r U R' U r U r'/R' D R' D r' U R D' R D' r", "U' M U2 M' U M' U' M/M' U' M U M U M'/U2 D r2 U' M' U r2 U D' M/U r' D2 r U' M U M' R' D2 R", "U2 M U2 M' U' M' U M/U M' U M U' M U' M'", "U2 M' U2 M' U M U M/U R' U r U r' U' R U' r' U' r/U' R D' R D' r U' R' D R' D r'", "U' M' U2 M' U' M U' M", "U D r2 U M U' r2 U' D' M'/U2 M U' M U M2 U' M U' M'/U' M2 U M U' M U' M U2 M'", "U2 D r2 U' M' U r2 U' D' M/M2 U' M' U' M U2 M U2 M/U' M2 U M U' M' U2 M' U2 M'/U D' r2 U M U' r2 U D M'", "U' D' R2 D M' D' R2 U D M/U M2 U M' U' M U2 M U2 M/M2 U' M' U' M' U2 M U2 M'/U2 M2 U' M U' M' U2 M' U2 M'", "U2 D' r2 U' M' U r2 U D M/M2 U' M' U' M U M' U2 M'/U M U M2 U' M' U M U M", "U2 M U M U M U M2 U2 M'/U' M2 U M U M U' M U2 M'/U M U2 M2 U M' U M' U M'", "U' M U M U M2 U M' U' M/U M2 U M' U' M U' M' U2 M'/M U2 M U M' U M U' M2", "U' M U M U' M2 U M U M'/U2 M2 U' M U M U M U2 M'/M U2 M U M' U' M U' M2", "U2 M U M' U2 M2 U M' U' M'/U M U M2 U M' U' M U' M/M U' M2 U' M' U M U M/U' M U' M U M2 U2 M U M'", "U' M U' M U' M U' M2 U2 M'/U2 M2 U' M U' M U M U2 M'/M U2 M2 U' M' U' M' U' M'", "U2 M U' M' U M' U' M2 U2 M'/U M U2 M U' M' U M U' M2/M2 U' M' U M U M' U2 M'", "U' M U' M' U' M2 U M' U' M'/U M2 U M' U M U' M' U2 M'/M U' M2 U M' U' M U' M"],
 };
 
+var f3l = {
+    "First Three Layers":[""]
+};
+
 window.algs = {
     "ZBLL (Jabari Nuruddin, Justin Taylor, Tao Yu)" :zbll_jabari_justin_tao,
     "ZBLL (Jabari Nuruddin)" :zbll_full,
@@ -832,5 +836,6 @@ window.algs = {
     "EG1 (Finn Ickler)": eg_full,
     "Pseudo2GLL (no algs)": pseudo2gll,
     "CP solved OLLCP": cpOLLCP,
+    "F3L": f3l,
     //"test": test,
 };

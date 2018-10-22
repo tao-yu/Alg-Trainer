@@ -451,7 +451,10 @@ function addAUFs(algArr){
 }
 
 function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
-
+    
+    if (set == "F3L"){
+        return Cube.random().solve();
+    }
     if (!obfusticateAlg){
         return alg.cube.invert(raw_alg);
     } else if (!shouldPrescramble){//if realscrambles not checked but should not prescramble, just obfusticate the inverse
@@ -516,6 +519,8 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L, F R' F' M F R F' M'", 10000, true);
         case "Ribbon Multislotting":
             return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R U' R' U2 R U' R' ,R U2' R' U R U R' ,R U R' U R U2' R' ,R U2 R' U' R U' R' ", 10000, true);
+
+
         default:  
             return obfusticate(alg.cube.invert(raw_alg));
     }
@@ -605,7 +610,9 @@ function generateAlgTest(){
     }
 
     var scramble = generateAlgScramble(solutions[0],set,obfusticateAlg,shouldPrescramble);
-
+    if (set == "F3L"){
+        solutions = [alg.cube.invert(scramble).replace(/2'/g, "2")];
+    }
     var preorientation = generateOrientation();
 
     var cubeType = document.getElementById("cubeType");
@@ -644,11 +651,16 @@ function testAlg(algTest, addToHistory=true){
 }
 
 function updateAlgsetStatistics(algList){
-    var stats = {"STM": averageMovecount(algList, "btm", false).toFixed(3),
+    if (document.getElementById("algsetpicker").value == "F3L"){
+        var stats = {"Number of algs": "43,252,003,274,489,856,000"};
+    }
+    else {
+        var stats = {"STM": averageMovecount(algList, "btm", false).toFixed(3),
                  "SQTM": averageMovecount(algList, "bqtm", false).toFixed(3),
                  "STM (including AUF)": averageMovecount(algList, "btm", true).toFixed(3),
                  "SQTM (including AUF)": averageMovecount(algList, "bqtm", true).toFixed(3),
-                 "Number of algs": algList.length}
+                 "Number of algs": algList.length};
+    }
     var table = document.getElementById("algsetStatistics");
     table.innerHTML = "";
     var th = document.createElement("th");
@@ -1056,7 +1068,7 @@ function averageMovecount(algList, metric, includeAUF){
         topAlg = topAlg.replace(/\[|\]|\)|\(/g, "");
 
         var moves = alg.cube.simplify(alg.cube.expand(alg.cube.fromString(topAlg)));
-
+        
         if (!includeAUF){
             while (moves[0].base === "U" || moves[0].base === "y") {
                 moves.splice(0, 1)
@@ -1177,7 +1189,7 @@ function nextScramble(displayReady=true){
     if (displayReady){
         document.getElementById("timer").innerHTML = 'Ready';
     };
-    if (isUsingVirtualCube()){
+    if (isUsingVirtualCube() ){
         testAlg(generateAlgTest());
         startTimer();
     }
