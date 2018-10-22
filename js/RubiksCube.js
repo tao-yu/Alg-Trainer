@@ -775,7 +775,7 @@ function updateVisualCube(algorithm){
             break;
     }
 
-    var imgsrc = "http://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
+    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
 
     if (useCustomColourScheme.checked){
         validateCustomColourScheme();
