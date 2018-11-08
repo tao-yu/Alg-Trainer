@@ -1,0 +1,6 @@
+| File                                   | From Repository                                       | License            |
+|----------------------------------------|-------------------------------------------------------|--------------------|
+| cube.js and solve.js                   | [ldez/cubejs](https://github.com/ldez/cubejs)         | MIT                |
+| controls.js (renamed from keypress.js) | [dmauro/Keypress](https://github.com/dmauro/Keypress) | Apache License 2.0 |
+| alg.js and alg_jison.js                | [cubing/alg.js](https://github.com/cubing/alg.js)     | MIT                |
+
