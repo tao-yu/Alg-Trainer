@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>Algorithm trainer</title>
+        <title>Full 1LLL Trainer</title>
         <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
         <link rel="stylesheet" type="text/css" href="style.css">
@@ -61,15 +61,51 @@
                     and finally do a random number of 
                     <input type="text" id="colourneutrality3" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="1"> 
                     rotations.<br>
+                    <br><br><br>
 
+
+                    <input id="useCustomColourScheme" type="checkbox"><label for="useCustomColourScheme"> Use custom colour scheme:</label><br>
+                    Enter colour names, or RGB values as #RRGGBB.<br>
+                    <table>
+                        <tr>
+                            <td><label for="customColourU">U:</label></td>
+                            <td><input type="text" id="customColourU" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="8"> </td>
+                        </tr>
+                        <tr>
+                            <td><label for="customColourD">D:</label></td>
+                            <td><input type="text" id="customColourD" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="8"> </td>
+                        </tr>
+                        <tr>
+                            <td><label for="customColourF">F:</label></td>
+                            <td><input type="text" id="customColourF" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="8"> </td>
+                        </tr>
+                        <tr>
+                            <td><label for="customColourB">B:</label></td>
+                            <td><input type="text" id="customColourB" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="8"> </td>
+                        </tr>
+                        <tr>
+                            <td><label for="customColourR">R:</label></td>
+                            <td><input type="text" id="customColourR" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="8"> </td>
+                        </tr>
+                        <tr>
+                            <td><label for="customColourL">L:</label></td>
+                            <td><input type="text" id="customColourL" value="" onfocus="listener.stop_listening();" onblur="listener.listen();" size="8"> </td>
+                        </tr>
+                    </table>
+                    <button id="resetCustomColourScheme" type="button">Reset</button>
 
                 </form>
 
 
 
                 <h2>Algorithm Credits</h2>
-                
-                Algs from birdflu.lar5.com. Transformed and ranked by algexplorer.
+
+                Algorithms kindly provided by Jack Love: 
+                <br>
+                <a href="https://drive.google.com/file/d/1TkCEyg4TJRM_4KJv1lPDctvSiSAtUNMm/view">Spreadsheet</a>
+                <br>
+                <a href="https://drive.google.com/file/d/1-kf9bSQwUEMFOkyuCuLZj9XNQLzkuk_L/view">pdf</a>
+                <br><br>
 
 
 
@@ -110,6 +146,9 @@
                 <div style="text-align: left">
                     <button id="deleteLast">Delete last solve</button>
                     <button id="clearTimes">Clear all</button>
+                    <br><br>
+                    <table id="algsetStatistics">
+                    </table>
                     <h2>Instructions</h2>
                     <b>Enter/Tab/Space</b>: New scramble.<br>
                     <b>Space</b>: Stop timer and show algorithm.<br>
@@ -127,9 +166,6 @@
                     <br><br>
 
                     Please report bugs by filing an issue <a href="https://github.com/tao-yu/Alg-Trainer/issues">here</a>, or by messaging me on discord, Speedsolving.com or Reddit. 
-
-                    <br>
-                    <a href="1LLL.html">Full 1LLL trainer</a> 
 
                     <br><br>
                     Note: Some adblockers (ublock origin, for example) may cause this site to stop working. If you are experiencing problems, try whitelisting this site on your adblocker. I will look into why this is happening. 
