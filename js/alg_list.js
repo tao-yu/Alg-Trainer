@@ -8,6 +8,19 @@ var eg_full = {
     "H" : ["R' F R2 U' R2 U' F U R", "F' U R U' R2 F2 R U' F", " R' U' R' F2 U F' R F'", "R U R' F' R U R' U' R U R' U'"]
 };
 
+var tripod = {
+	"O":["(U') R' U L' U2 R U' R' U2 R L", "(U) R U R' F' R U R' U' R' F R2 U' R'", "x R' U R' D2 R U' R' D2 R2 x'", "x R2 D2 R U R' D2 R U' R x'", "R' U R' U' y R' F' R2 U' R' U R' F R F", "(U) r U R' U' r' U2 R U R U' R2 U2 R", "(U) x R2 U2 R U R' U2 L U' R U M", "l R U R' F' R U R' U' R' F R2 U' R' U' l'", "(U2) R' D' r U r' D R U2 r' D' r U r' D r", "r' D' r U' r' D r U2 R' D' r U' r' D R", "F' U2 F U R U R' U R' F R F' R U R' U' R U R' U'"],
+	"U":["(U') R U2 R' U' R U' R' U2 R' U2 R U R' U R/(U)' R U2 R' U' R U' R' r' F2 r U r' F r", "(U2) R' F R U' R' U' R U R' F' R U R' U' R' F R F' R/(U2) R U' R2 U' R2 U R' F' R U R2 U' R' F R2", "(U2) R2 D' r U2 r' D R U2 R", "R2 D R' U2 R D' R' U2 R'", "(U2) x' R2 D2 R' U2 R D2 R' U2 R' x", "R' U' R U' F U' R' U R U R' U R U' F'", "(U) F2 R U' R' U' R U R' F' R U R' U' R' F R F2", "R2 D r' U2 r D' R' U2 R'", "(U2) R2 D' R U2 R' D R U2 R", "x R2 D2 R U2 R' D2 R U2 R x'", "(U2) R U R' U L' U R U' M' x' U' R U' R'"],
+	"T":["(U) R U R' U R U2 R' U2 R' U' R U' R' U2 R", "(U2) R' U R U2 L' R' U R U' L", "x' R2 U2 l' U2 R' U2 l U2 l' U R U' R'/R2 B2 R' U2 R' U2 R B2 R' U R U' R'", "(U2) R U R D R' U' R D' R2", "(U2) R' U2 R U' R' F R U R' U' R' F' R U' R", "R U R' F' R U R' U' R' F R U' R' F R U R U' R' F'/(U') R U R' U R U R2 D' r U2 r' D R2 U R'", "R' F R U R' U' R' F' R2 U' R' U2 R", "U2 R2 F2 R U2 R U2 R' F2 R U' R' U R/(U2) x R2 U2 l U2 R U2 l' U2 l U' R' U R", "R' U' R' D' R U R' D R2/(U2) x' U' R' D R U R' D' R x", "U l' U2 R' D2 R U2 R' D2 R2 x'", "(U') R' U' R U' R' U' R2 D r' U2 r D' R2 U' R"],
+	"L":["R U2 R' U2 R' U' R U R U' R' U2 R' U2 R/(U') R U' r' F R' F' R F R' F' r U R U' R'", "R' U' R U R' F2 R U2 R' U2 R' F2 R2", "(U') R U R' U' R B2 R' U2 R U2 R B2 R2", "U' F' r U R' U' r' F R", "(U2) R U2 R D R' U2 R D' R2", "F R U' R' U' R U R D R' U' R D' R' U2 R' U' F'", "(U2) R U2 R D r' U2 r D' R2", "(U) R' U2 R' D' r U2 r' D R2", "U2 F R' F' r U R U' r'/(U') R2 D R' U R D' R' U' R'", "R2 D' R U' R' D R U R/U2 F R U R2' F R F' R U' R' F'", "(U2) F R U R2 F R F' R U' R' F'"],
+	"OLL 43/44":["(U') R U2 R2 F R F' R U2 R' U2 R' U' F' U F R/(U') r U' r' U r U' r' U2 r U r' U2 r U r' U r U r'", "R' U F' U F R U R2 F R F' R U' R' U' R/x R2 U R' U' y R' F' R2 U' R' U R' F R F2", "(U') R' F R U2 r U' r' y' U2 R2 U2 R", "F' r' F r U r' F' r2 U r' U' r' F r", "R U' r D r' U' r D' r' U R'", "(U) F U' R U R' r U' R' U R U r' U' F'", "R U2 R2 F R F' R U2 R' F U R U' R' F'/(U') F U R U2 R' U' R U R' F' R U R' U' R' F R F'", "F R F' U R U R' U' R' U' R U F' U' F U' R'/(U2) x' R2 U2 R' U2 L' U R U' L U' L' U R' U' M'", "(U) r U' r' U2 R' F R y' U2 R2 U2 R'", "F R U' R' U' R U R2 F' R U R U' R'", "(U2) R' U r' D' r U r' D r U' R", "(U') F U r U' R' U' R U r' R U' R' U F'/(U2) R U R' U' M' U R U' r' U F U R U' R' F'"],
+	"OLL 31/32":["(U') F U R U' R' U y' R' U R U' R' U R U' y R U' R' F'", "F R U' R' U' R U R' F' U2 R' U' R U' R' U2 R/(U2) B' U R' U' R' F R2 U' R' U' R U R' F' R B", "(U) F R2 U2 R' U2 R' U' F R F' R' U F'/(U) F R U' R' U' R U R' F' U R' U' F R' F' R U R", "R' U' R U R' U R U R U R' U' R' U' F R F'", "R' U r' D' r U' r' D r U' R", "(U') R U2 R2 F R F' r U' R' U R U2 R' U' M", "F R U' R' U' R U R' F' R U R' U' R' F R2 U R' U' F'", "R U2 R' U' R U' R' U2 R U R' U' R' F R F'/F R2 U R' U' R' F R2 U' R' U' R U R' F' R' F'", "(U') F U' R U R2 D' R U' R' D R U2 F'", "(U2) R U R2 F' U' F U R U' F' U2 F R U' R'", "(U2) R U' r D r' U r D' r' U R'", "(U2) R' U R U R' U F' r' F' r U' r' F r U F R"],
+	"Sunes":["(U') R' U R2 U R' U R U2 R U2 R U R' U R2", "f R' F' R U2 R U2 R' U2 S'", "(U2) R U R' U' R U R2 D' R U2 R' D R2 U2 R'", "R' D R2 D' R2 U R2 D R2 D' R2 U' R'", "R U' L' U R' U' L", "F U' R' U R U F' R U R2 U R2 U2 R'", "(U) R U' R2 U' R U' R' U2 R' U2 R' U' R U' R2", "(U') R U2 R2 D' R U2 R' D R2 U' R' U R U' R'", "(U) R U2 R' U' F' R U R' U' R' F R2 U' R'", "(U') R U R2 D R2 D' R2 U' R2 D R2 D' R", "R' U L U' R U L'", "(U') R U2 R2 U' R2 U' R' F U' R' U' R U F'"],
+	"Squares":["(U) R' U' R U' y x' R2 U' R' U l'", "r' D R2 U R' U R U' R2 D' r", "(U') r D' R2 U' R U R' U R2 D r'", "(U) F U' R2 D R' U R D' R2 U F'", "(U') R' U2 R U R2 F' U' F U R2 U2 R' U' R", "l U' R' U R U R' F' R U R' U' R' F R2 U' R' U' x", "(U') R U R' U y' x R2 U R U' l", "r D' R2 U' R U' R' U R2 D r'", "(U) r' D R2 U R' U' R U' R2 D' r", "(U) F U' R2 D R' U' R D' R2 U F'", "F R' F' R U' R' D' R U R' D R2 U' R' U R U' R'", "(U) r R U2 R D r' U2 r D' R2 U r'/(U2) r' U L R' U L' U2 R U' R' U2 L R U2 x"],
+	"OLL 37":["(U') r U2 r' U' M' U' R U r' U' R U' R' U2 r U2 r'", "(U2) F R U' R' U R U R' F' U R U2 R2 F R F' U' R U' R' /(U) x' U' R U x U' R' U' R' U R U R U R' U R U' R'", "(U2) F R' F' U R U R U' R' U' R' U' R U' R' U R/(U) R U R' U' R' F R F' U2 R' U2 R U R' F' U F R", "(U2) R U R' U' R' F R2 U' R' U R U R' F'", "(U) F R U' R' U R U R' U F' U' F' r U r'/(U') r' F' r U r U' r2 F r U' r' F' r F", "(U2) l' U R U R' F' R U R' U' R' F R2 U' R' U2 l"],
+	"OLL 35":["F' U' r' F2 r F R U R' U' R U R' U' R U' R'/(U') r' U2 r U2 R' U' R U' r' U R U' M' U' r' U2 r", "(U) R U2 R' U' R U' R' U2 F R U R' U' F'/l' U2 R U' R' U2 R L U' R' U M", "R' U2 R2 U2 y r U r' U2 R' F' R", "(U) F U2 R' D' R U R' D R2 U' R' U F'", "(U) R' U' R' F R F' U R U' F R U' R' U R U R' F'", "(U') R U2 R2 U2 y R' F' R U2 r U r' /(U') R U2 R2 U2 y l' U' l U2 r U r'"],
+};
+
 var ell_justin_tao = {
     "EPLL": ["M2 U M U2 M' U M2", "M2 U' M U2 M' U' M2", "M2 U M2 U M' U2 M2 U2 M'", 'M2 U M2 U2 M2 U M2'],
     "L3E": ["M' U' M U2 M' U' M", "R' F R S R' F' R S' ", "r U R' U' M U R U' R'", "M' U M U2 M' U M", "S R' F R S' R' F' R", "R U R' U' M' U R U' r' "],
@@ -774,10 +787,12 @@ window.algs = {
     "2UBlocks (Jabari Nuruddin)": d2ublocks,
     "ZBLL (algdb)" : algdbZBLL,
     "2GLL": twoGenLL,
-    "VHLS (Chad Batten)": VHLS,
-    "ZBLS (Chad Batten, Tao Yu)": ZBLS ,
 
     "Pure OLL (minus dots)": pureoll,
+    "Tripod (akanearcane)": tripod,
+
+    "VHLS (Chad Batten)": VHLS,
+    "ZBLS (Chad Batten, Tao Yu)": ZBLS ,
 
     "OLLCP (Cale Schoon)": ollcp_cale,
     "OLLCP": algdbOLLCP,
