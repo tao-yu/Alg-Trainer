@@ -20,16 +20,25 @@ var connectGiiker = document.getElementById("connectGiiker");
 connectGiiker.addEventListener('click', async () => {
 
     connectGiiker.disabled = true;
-  
-    const giiker = await connect();
-    connectGiiker.textContent = 'Connected!';
-  
-    giiker.on('move', (move) => {
-      doAlg(move.notation)
-    });
-  
-    // Expose giiker object for testing on console
-    window.giiker = giiker;
+    try {
+        const giiker = await connect();
+        connectGiiker.textContent = 'Connected!';
+    
+        giiker.on('move', (move) => {
+            doAlg(move.notation);
+        });
+
+        giiker.on('disconnected', () => {
+            connectGiiker.textContent = 'Connect Giiker Cube';
+            connectGiiker.disabled = false;
+        })
+    
+    } catch(e) {
+
+        alert("Giiker Cube not connected");
+        connectGiiker.textContent = 'Connect Giiker Cube';
+        connectGiiker.disabled = false;
+    }
 });
 
 document.getElementById("loader").style.display = "none";
