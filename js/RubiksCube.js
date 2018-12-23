@@ -16,6 +16,22 @@ window.onbeforeunload = function () {
 }
 Cube.initSolver();
 
+var connectGiiker = document.getElementById("connectGiiker");
+connectGiiker.addEventListener('click', async () => {
+
+    connectGiiker.disabled = true;
+  
+    const giiker = await connect();
+    connectGiiker.textContent = 'Connected!';
+  
+    giiker.on('move', (move) => {
+      doAlg(move.notation)
+    });
+  
+    // Expose giiker object for testing on console
+    window.giiker = giiker;
+});
+
 document.getElementById("loader").style.display = "none";
 var myVar = setTimeout(showPage, 1);
 function showPage(){
