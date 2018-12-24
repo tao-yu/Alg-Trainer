@@ -35,11 +35,14 @@
                     <input id="goInOrder" type="checkbox">Go in order<br>
                     <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer (press the left arrow key to view previous case)<br>
                     <input id="mirrorAllAlgs" type="checkbox">Mirror all algs across the M slice<br>
-                    <button id="connectGiiker">Connect Giiker Cube</button><br>
-                    <select id="cubeType">
+                    Virtual cube size: <select id="cubeType">
                         <option value="3x3" default>3x3</option>
                         <option value="2x2">2x2</option>
                     </select><br><br>
+                    <button id="connectGiiker">Connect Giiker Cube</button><br>
+                    When a giiker cube is connected, all moves made on the giiker will be reflected on the virtual cube. The giiker cube should be held with white on top and green in front. 
+                    <br><br>
+                    
 
                     <input id="userDefined" type="checkbox">Use user defined algset<br>
                     <textarea id="userDefinedAlgs" cols=50 rows=50 style="display:none" onfocus="listener.stop_listening();" onblur="listener.listen();" placeholder="Place one alg per line"></textarea>
