@@ -23,7 +23,7 @@ connectGiiker.addEventListener('click', async () => {
     try {
         const giiker = await connect();
         connectGiiker.textContent = 'Connected!';
-    
+        setVirtualCube(true);
         giiker.on('move', (move) => {
             doAlg(move.notation);
         });
@@ -35,7 +35,6 @@ connectGiiker.addEventListener('click', async () => {
     
     } catch(e) {
 
-        alert("Giiker Cube not connected");
         connectGiiker.textContent = 'Connect Giiker Cube';
         connectGiiker.disabled = false;
     }
