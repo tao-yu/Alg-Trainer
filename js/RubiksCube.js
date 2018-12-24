@@ -29,6 +29,7 @@ connectGiiker.addEventListener('click', async () => {
         });
 
         giiker.on('disconnected', () => {
+            alert("Giiker cube disconnected");
             connectGiiker.textContent = 'Connect Giiker Cube';
             connectGiiker.disabled = false;
         })
