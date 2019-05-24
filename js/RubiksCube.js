@@ -8,6 +8,7 @@ var ctx = canvas.getContext("2d");
 var stickerSize = canvas.width/5;
 var currentAlgIndex = 0;
 var algorithmHistory = [];
+var shouldRecalculateStatistics = true;
 
 createAlgsetPicker();
 
@@ -620,7 +621,10 @@ function generateAlgTest(){
     var randAUF = document.getElementById("randAUF").checked;
 
     var algList = createAlgList()
-    updateAlgsetStatistics(algList);
+    if (shouldRecalculateStatistics){
+        updateAlgsetStatistics(algList);
+        shouldRecalculateStatistics = false;
+    }
     var rawAlgStr = randomFromList(algList);
     var rawAlgs = rawAlgStr.split("/");
     rawAlgs = fixAlgorithms(rawAlgs);
@@ -1003,7 +1007,11 @@ function createCheckboxes(){
         var label = document.createElement("label");
         checkBox.type = "checkbox";
         checkBox.value = subsets[i];
-        checkBox.onclick = function(){currentAlgIndex = 0;}
+        checkBox.onclick = function(){
+            currentAlgIndex = 0;
+            shouldRecalculateStatistics=true; 
+            //Every time a checkbox is pressed, the algset statistics should be updated.
+        }
         checkBox.setAttribute("id", set.toLowerCase() +  subsets[i]);
 
         myDiv.appendChild(checkBox);
