@@ -1031,6 +1031,8 @@ function findMistakesInUserAlgs(userAlgs){
     var errorMessage = "";
     var newList = [];
     for (var i = 0; i < userAlgs.length; i++){
+        userAlgs[i] = userAlgs[i].replace(/[\u2018\u0060\u2019\u00B4]/g, "'"); 
+        //replace astrophe like characters with '
         try {
             alg.cube.simplify(userAlgs[i]);
             if (userAlgs[i].trim()!=""){
