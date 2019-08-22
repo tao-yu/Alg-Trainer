@@ -12,6 +12,17 @@ var alg_2lookl5efreo = {
     "2-Look L5E: FR+EO": ["(U) R' S2 R U' R' S2 R/(U) r' S2 r U' r' S2 r/(U2) R' U' R' U' R' U R U R", "(U) r U r' U2 M' U M U R U' R'/R2 D R' U R r' U' r D' R2", "(U) R S' R' U' R S R'/(U) r S' r' U' r S r'/(U) L E' L' U' L E L'", "R M U M' U2 M U R' M'", "(U) M' U R U' M U R'", "r U' M U2 M' U' r'", "(U) r U M U2 M' U r'", "R U' M' U R' U' M/R U M U' R' U M'", "r U' R' U M U' r U r'", "F U' R U' M' U r' U F'/(U2) r U' r' U' M' U M U' M' U R U r'", "(U) F U' r U' M U R' U F'/M' U M U r U M U M' U2 R' U' M/(U') r U' R' U' M U M' U' M U r U r'", "r' U' R' U' R U R U r/M U r U' M U R' U' M'", "R U R' U' M' U' M U2 r U' r'/(U') R2 D r' U r R' U' R D' R2", "(U') S R S' R' U R S R' S'/(U') M' U M U' r U' M U' M' U2 r'", "(U2) M' U' M U2 r U' M U R'/M U' r U2 M U' M' U' R'", "(U) S R S' R' U' R S R' S'/R' D' r U' M U R' D R/r U2 M U M' U r' U M' U' M", "(U') r U' R' U' R U M U R' U R U R'", "(U') R U' M' U r' U' R U' M' U r'/(U') R U' R' r U r' U' R U' R' r U r'"],
 };
 
+var oh_cmll = {
+	"T": ["R U2 R' U' R U' R2 U2 R U R' U R", "r' U r U2 R2 F R F' R/R' U R U2 R' L' U R U' r x'", "(U') F R U' R' U R U R' F'", "(U2) F R U R' U' R U' R' U' R U R' F'", "(U') R U R' U' R' F R F'", "R' U' R U' R' U R U' R' U F' U F R/(U2) R' F' U' F U' R U R' U' R U R' U R"],
+	"U": ["(U') R' U' R U R' U R U2' R' U R U2' R' U' R/R' U' R U' R' U2' R2 U R' U R U2' R'", "(U2) F R U R' U' R' U R U' F' U R' U' R", "R' U2' R U2 F U' R' U R U F'", "F R U' R' U R U R' U R U' R' F'", "R2 D' R U2 R' D R U2 R", "(U') F R U R' U' F'/(U) F U R U' R' F'"],
+	"L": ["(U) R' U' R U' R' U R U' R' U R U' R' U2' R/(U2) R U R' U R U' R' U R U' R' U R U2 R'", "R' U' R U' R' U2' R2 U R' U' R' F R F'/F U' R' U' R U F' U2' R' U2 R", "F R' F' R U R U' R'", "F R U' R' U' R U R' F'", "(U') R' U2 R' D' R U2 R' D R2", "R U2 R2 F R F' R U2 R'/(U2) R' U' R U' F U' R' U' R U F'/R U2 r2 F R F' R U2' R'"],
+	"S": ["(U) R U R' U R U2' R'/R' U2' R U R' U R", "(U) F R' F' R U2' R U2 R'", "(U2) R' U' R U' R' U2 F R F' r U r'/(U) R U R' U' R' F R F' R U R' U R U2' R'", "(U) r U' r' F R' F' R/(U) R U' r' F R' F' r/(U) R U' L' U R' U' L", "(U') R' U2 R U2 R f' U' f/(U) F U R U2 R' U' R U R' F'", "(U2) R U R' U R' F R F' R U2 R'"],
+	"AS": ["(U2) R U2 R' U' R U' R'/(U) R' U' R U' R' U2 R", "(U2) F R U' R' U R U2 R' U' F'", "(U') R U2 R' U2 R' F R F'", "(U') R' F R F' r U r'/(U') r' F R F' r U R'", "r U' r' F R' F' U2 R U R' U R", "R' U' R U' R' U R' F R F' U R"],
+	"Pi": ["F R U R' U' R U R' U' F'/(U2) F U R U' R' U R U' R' F'", "(U) F U R U' R2' F' R U2 R U2' R'/(U) F R' F' R U2 R U' R' U R U2 R'", "(U') F R U' R' U' R U R' U R U' R' F'", "R U2 R' U' R U R' U2' R' F R F'/R U2' R' U2 R' F R2 U R' U' F'", "(U2) R' F R F' r U' R' U' R U' r'/(U2) R' F R F' r U' r' U' R U' R'/(U2) r' F R F' r U' R' U' R U' R'", "(U') R' U' R' F R F' R U' R' U2' R/(U2) R' U' R U' R' U F' U F R"],
+	"H": ["(U) R' U' R U' R' U R U' R' U2 R/R' U2' R U' R' U' R U R' U R/(U) R U R' U R U' R' U R U2' R'", "(U') R U R' U R U r' F R' F' r/(U') R' U' R U' R' U' z U R' D R U' z'", "(U) F R U' R' U R U2 R' U' R U R' U' F'/(U') F R U R' U' R U' R' U R U R' F'", "F R U R' U' R U R' U' R U R' U' F'"],
+	"O": ["R U2 R' U' R U2 L' U R' U' L/R U2 R' U' R U2 r' F R' F' r/R U R' F' R U R' U' R' F R2 U' R'/R U R' U' R' F R2 U' R' U' R U R' F'/R' U2' R U R' U' U' z U R' D R U' z'", "F R U' R' U' R U R' F' R U R' U' R' F R F'/x U' R' U R U' x' R U R' F U2' R U2 R'"],
+};
+
 var l5e_full = {
 	"0 Flip":["U' r' S2 r U r' S2 r/R' U' R' U' R U R U R/U' R' S2 R U R' S2 R", "U' R U' R' U R U R' U2 R U' R' U' R U' R'", "U2 R' F' R U R U R' U2 R' F R U R U' R'/U2 r U r' U2 r U' r' U' R U' M' U' r'/U r U M U R' U r U r' U2 r U' r'", "U' R U' R' U' R U2 R' U R U R'/U r U' r' U2 M' U' M U' r U r'", "R' D' R' F2 R2 U' R2 F2 R2 U' R' D R/R U' R' U' R' U2 R2 U R2 U R U R U' R'", "R M2 U M2 U2 M2 U M2 R'/R U M2 U2 M2 U M2 U2 M2 U2 R'/R U R2 S2 R2 U' R2 S2 R", "U R U' R' F2 U' L' U r U2 x'/R' F' R U2 R U' R' U' R' F R2 U R'/U' R M2 U M2 U M' U2 M2 U2 M' U2 R'", "U R U R' U2 R U' R' U' R U2 R'", "U R U2 R' U R U R' U2 R U' R'", "U R' S2 R U' R' S2 R/U r' S2 r U' r' S2 r/U2 R' U' R' U' R' U R U R", "U2 R' S2 R U2 R' S2 R/U2 r' S2 r U2 r' S2 r/U R' U' S R2 S' R2 U R", "U R U' R' U2 R U' R' U' R U2 R' U R U2 R'"],
 	"1B":["r U' M U2 M' U' r'", "U r U r' U' r' U r2 U r2 U' r2 U' r' U r U' r'", "R U' R' U' R' U2 R2 U R2 U r U R U' r'/r U R' M' U2 r U M U2 r' U' R U2 r'/U M2 U M U2 M2 U R U M U' R' M2", "r U2 R' U R U r' U2 r U' r'/U R U M' U' r' U r U M U' R'", "U M U M' U R M U2 M' U M U R' M'", "U r U' M U R' U M' U' M", "U' r U2 M U M' U M U' M' U r'/r U' M U' R' U' M' U R U2 r'", "U' R M U R' M' U M U' R U' R' M'/U2 M' U' M U r U M U M' U2 r'", "M U r U' r' U' M' U R U R'", "U S' r U' r' S U M' U' R U r'/U2 M' U' r U' r' U M' U' R U R' M2", "U2 R U R' U R U R' U2 r U' R' U' R U r'", "U2 R U r' U R U' M' U r' U' r U' R'/U' R U M' U' M U M' U' r' U' M' U2 M"],
@@ -825,7 +836,8 @@ window.algs = {
 	"ELL (Justin Taylor & Tao Yu)": ell_justin_tao,
 	"L5EP (Justin, Micki)": L5E,
 	"L5E (Justin Taylor)":l5e_full,
-	"2-Look L5E FR+EO": alg_2lookl5efreo,
+    "2-Look L5E FR+EO": alg_2lookl5efreo,
+    "OH CMLL": oh_cmll,
     
     "ELL": ELL,
     "F2L": F2L,
