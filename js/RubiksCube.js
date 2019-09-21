@@ -231,6 +231,7 @@ cubeType.addEventListener("change", function(){
 var algsetpicker = document.getElementById("algsetpicker");
 algsetpicker.addEventListener("change", function(){
     createCheckboxes();
+	shouldRecalculateStatistics = true;
     localStorage.setItem("algsetpicker", this.value);
 });
 
