@@ -1263,6 +1263,7 @@ listener.simple_combo("right", function() {
     historyIndex++;
     if (historyIndex>=algorithmHistory.length){
         nextScramble();
+        doNothingNextTimeSpaceIsPressed = false;
         return;
     }
 
