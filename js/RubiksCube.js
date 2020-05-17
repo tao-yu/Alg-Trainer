@@ -518,7 +518,8 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "F2U'R'LF2RL'U'F2,U", 5000, true);//EPLL scramble
 
         case "CMLL":
-            return generatePreScramble(raw_alg, "U,M", 100, true);//LSE scramble
+        case "OH CMLL":
+            return generatePreScramble(raw_alg, "M2,MUM,MUM',MU'M,MU'M',MU2M,MU2M',M'UM,M'UM',M'U'M,M'U'M',M'U2M,M'U2M'", 100, true);//LSE scramble
 
         case "3x3 CLL (Justin Taylor)":
             return generatePreScramble(raw_alg, "F2 U' R' L F2 L' R U' F2, R' U2' R2 U R' U' R' U2' r U R U' r', U", 100, true);//ELL scramble
