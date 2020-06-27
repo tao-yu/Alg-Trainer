@@ -501,6 +501,7 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
         case "OH OLL":
         case "CLS (Justin Taylor)":
         case "VLS (Jayden McNeill)":
+		case "ZZ OLS (Egide Hirwa)":
             return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
 
         case "ELS (FR) (Justin Taylor)":
@@ -547,8 +548,6 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L, F R' F' M F R F' M'", 10000, true);
         case "Ribbon Multislotting":
             return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R U' R' U2 R U' R' ,R U2' R' U R U R' ,R U R' U R U2' R' ,R U2 R' U' R U' R' ", 10000, true);
-		case "OLS":
-			return generatePreScramble(raw_alg, "R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U", 100, true);//PLL scramble
         default:  
             return obfusticate(alg.cube.invert(raw_alg));
     }
