@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Algorithm trainer</title>
+        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+<body>
+<div style="width:30%">
+
+If one has the following preorientation settings: <br><br><br>
+
+Starting from WCA orientation: <br>
+First do one
+<input type="text" value="z2" size="1" readonly> 
+rotation<br>
+
+then do a random number of 
+<input type="text" value="x2" size="1" readonly> 
+rotations, <br>
+
+and finally do a random number of 
+<input type="text" value="y" size="1" readonly> 
+rotations.<br>
+<br><br>
+
+In order to ensure that the orientation of one's scrambled cube matches that of the one displayed on screen to the right of the trainer, one should apply the rotation from the first box, z2 in this case, to their cube, starting from default orientation (that is, white top, green front, or the custom color scheme being used), before applying the scramble.
+
+<br><br>
+If one uses a cube with the standard western colour scheme, our example here simply means starting every scramble with yellow top, green front, instead of white top, green front. Thus, the first box allows you to define a different default orientation. For example, if you are a CFOP solver who only solves cross on white, putting a z2 in the first box, and leaving other boxes empty, ensures that you will get the correct scramble orientations by ensuring your cube is in the yellow top, green front orientation before every scramble.
+
+<br><br>
+
+The second and third boxes let you define your type of colour neutrality. In this case, a random number of y rotations and a random number of x2 rotations will be applied before each scramble. For Roux solvers, for example, this corresponds to x2/y colour neutrality.
+
+<br><br>
+
+For many algsets, applying rotations before the alg does not significantly affect the difficulty of recognition. As such, it is often enough to leave the last two boxes boxes blank and simply train the algs from one orientation. The random orientation is perhaps more useful for virtual cube training, where all matters of preorientation are handled automatically.
+
+
+
+</div>
+</body>
+</html>
