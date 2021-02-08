@@ -580,7 +580,8 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
 function generateOrientation(){
 
     if (document.getElementById("fullCN").checked){
-        return getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
+        var preorientation = getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
+        return [preorientation, preorientation];
     }
 
     var cn1 = document.getElementById("colourneutrality1").value;
@@ -597,11 +598,13 @@ function generateOrientation(){
     var rand2 = Math.floor(Math.random()*4);
 
     //console.log(cn1 + cn2.repeat(rand1) + cn3.repeat(rand2));
-    return cn1 + cn2.repeat(rand1) + cn3.repeat(rand2);
+    var randomPart = cn2.repeat(rand1) + cn3.repeat(rand2); // Random part of the orientation
+    var fullOrientation = cn1 + randomPart; // Preorientation to perform starting from white top green front
+    return [fullOrientation, randomPart];
 }
 
 class AlgTest {
-    constructor(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType) {
+    constructor(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType, orientRandPart) {
         this.rawAlgs = rawAlgs;
         this.scramble = scramble;
         this.solutions = solutions;
@@ -611,6 +614,7 @@ class AlgTest {
         this.set = set;
         this.visualCubeView = visualCubeView;
         this.cubeType = cubeType;
+        this.orientRandPart = orientRandPart;
     }
 }
 
@@ -643,7 +647,8 @@ function generateAlgTest(){
     if (set == "F3L"){
         solutions = [alg.cube.invert(scramble).replace(/2'/g, "2")];
     }
-    var preorientation = generateOrientation();
+    var [preorientation, orientRandPart] = generateOrientation();
+    orientRandPart = alg.cube.simplify(orientRandPart);
 
     var cubeType = document.getElementById("cubeType");
 
@@ -651,7 +656,7 @@ function generateAlgTest(){
     var time = Date.now();
     var visualCubeView = "plan";
 
-    var algTest = new AlgTest(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType);
+    var algTest = new AlgTest(rawAlgs, scramble, solutions, preorientation, solveTime, time, set, visualCubeView, cubeType, orientRandPart);
     return algTest;
 }
 function testAlg(algTest, addToHistory=true){
@@ -659,7 +664,7 @@ function testAlg(algTest, addToHistory=true){
     var scramble = document.getElementById("scramble");
 
     if (document.getElementById("showScramble").checked){
-        scramble.innerHTML = "<span style=\"color: #90f182\">" + algTest.preorientation + "</span>" + " " + algTest.scramble;
+        scramble.innerHTML = "<span style=\"color: #90f182\">" + algTest.orientRandPart + "</span>" + " " + algTest.scramble;
     } else{
         scramble.innerHTML = "&nbsp;";
     }
@@ -846,7 +851,7 @@ function displayAlgorithmFromHistory(index){
         timerText = algTest.solveTime.toString()
     }
 
-    updateTrainer("<span style=\"color: #90f182\">" + algTest.preorientation + "</span>" + " "+ algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
+    updateTrainer("<span style=\"color: #90f182\">" + algTest.orientRandPart + "</span>" + " "+ algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
 
     scramble.style.color = '#e6e6e6';
 }
@@ -862,7 +867,7 @@ function displayAlgorithmForPreviousTest(reTest=true){//not a great name
         reTestAlg();
     }
 
-    updateTrainer("<span style=\"color: #90f182\">" + lastTest.preorientation + "</span>" + " "+ lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
+    updateTrainer("<span style=\"color: #90f182\">" + lastTest.orientRandPart + "</span>" + " "+ lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
 
     scramble.style.color = '#e6e6e6';
 }
