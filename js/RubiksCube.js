@@ -659,7 +659,7 @@ function testAlg(algTest, addToHistory=true){
     var scramble = document.getElementById("scramble");
 
     if (document.getElementById("showScramble").checked){
-        scramble.innerHTML = algTest.scramble;
+        scramble.innerHTML = "<span style=\"color: #90f182\">" + algTest.preorientation + "</span>" + " " + algTest.scramble;
     } else{
         scramble.innerHTML = "&nbsp;";
     }
@@ -846,7 +846,7 @@ function displayAlgorithmFromHistory(index){
         timerText = algTest.solveTime.toString()
     }
 
-    updateTrainer(algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
+    updateTrainer("<span style=\"color: #90f182\">" + algTest.preorientation + "</span>" + " "+ algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
 
     scramble.style.color = '#e6e6e6';
 }
@@ -862,7 +862,7 @@ function displayAlgorithmForPreviousTest(reTest=true){//not a great name
         reTestAlg();
     }
 
-    updateTrainer(lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
+    updateTrainer("<span style=\"color: #90f182\">" + lastTest.preorientation + "</span>" + " "+ lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
 
     scramble.style.color = '#e6e6e6';
 }
