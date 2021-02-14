@@ -548,6 +548,8 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "R U R' U R U2' R', U, L' U' L U' L' U2 L, F R' F' M F R F' M'", 10000, true);
         case "Ribbon Multislotting":
             return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R U' R' U2 R U' R' ,R U2' R' U R U R' ,R U R' U R U2' R' ,R U2 R' U' R U' R' ", 10000, true);
+        case "TDR (Trangium, Yash Mehta)":
+            return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true, getRandAuf("D")); // ZBLL-ABF scramble
         default:  
             return obfusticate(alg.cube.invert(raw_alg));
     }
@@ -556,11 +558,11 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
 
 
 
-function generatePreScramble(raw_alg, generator, times, obfusticateAlg){
+function generatePreScramble(raw_alg, generator, times, obfusticateAlg, premoves=""){
 
     var genArray = generator.split(",");
 
-    var scramble = "";
+    var scramble = premoves;
     var i = 0;
 
     for (; i<times; i++){
