@@ -3,136 +3,150 @@
 
     <head>
         <title>Algorithm trainer</title>
+        <meta charset="utf-8">
+
         <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
         <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+
+td {
+    width: 5em;
+}
+input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#save {
+    visibility: hidden;
+    padding: 1em;
+}
+       </style>
     </head>
     <body>
-        <table>
+        <button id="save">Save!</button>
+        <table id="currentKeymap">
+            <tr>
+                <th>Key</th>
+                <th>Move</th>
+            </tr>
 
+            <tbody id="keymapsbody">
                 <tr>
-                    <td>Key</td>
-                    <td>Move</td>
+                    <td><input value="."/></td>
+                    <td><input value="E'" /></td>
+                    <td><button> ✅ </button></td>
+                    <td><button> ❌ </button></td>
                 </tr>
-
-
-                <tr>
-                    <td>i</td>
-                    <td>R</td>
-                </tr>
-                <tr>
-                    <td>k</td>
-                    <td>R'</td>
-                </tr>
-                <tr>
-                    <td>j</td>
-                    <td>U</td>
-                </tr>
-                <tr>
-                    <td>f</td>
-                    <td>U'</td>
-                </tr>
-                <tr>
-                    <td>h</td>
-                    <td>F</td>
-                </tr>
-                <tr>
-                    <td>g</td>
-                    <td>F'</td>
-                </tr>
-                <tr>
-                    <td>w</td>
-                    <td>B</td>
-                </tr>
-                <tr>
-                    <td>o</td>
-                    <td>B'</td>
-                </tr>
-                <tr>
-                    <td>d</td>
-                    <td>L</td>
-                </tr>
-                <tr>
-                    <td>e</td>
-                    <td>L'</td>
-                </tr>
-                <tr>
-                    <td>s</td>
-                    <td>D</td>
-                </tr>
-                <tr>
-                    <td>l</td>
-                    <td>D'</td>
-                </tr>
-                <tr>
-                    <td>u</td>
-                    <td>r</td>
-                </tr>
-                <tr>
-                    <td>m</td>
-                    <td>r'</td>
-                </tr>
-                <tr>
-                    <td>v</td>
-                    <td>l</td>
-                </tr>
-                <tr>
-                    <td>r</td>
-                    <td>l'</td>
-                </tr>
-                <tr>
-                    <td>`</td>
-                    <td>M</td>
-                </tr>
-                <tr>
-                    <td>'</td>
-                    <td>M</td>
-                </tr>
-                <tr>
-                    <td>[</td>
-                    <td>M'</td>
-                </tr>
-                <tr>
-                    <td>t</td>
-                    <td>x</td>
-                </tr>
-                <tr>
-                    <td>n</td>
-                    <td>x'</td>
-                </tr>
-                <tr>
-                    <td>;</td>
-                    <td>y</td>
-                </tr>
-                <tr>
-                    <td>p</td>
-                    <td>z</td>
-                </tr>
-                <tr>
-                    <td>q</td>
-                    <td>z'</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>y'</td>
-                </tr>
-                <tr>
-                    <td>Shift h</td>
-                    <td>S</td>
-                </tr>
-                <tr>
-                    <td>Shift g</td>
-                    <td>S'</td>
-                </tr>
-                <tr>
-                    <td>x</td>
-                    <td>E</td>
-                </tr>
-                <tr>
-                    <td>.</td>
-                    <td>E'</td>
-                </tr>
-
+            </tbody>
         </table>
+        <button id="add-new"> Add another! </button>
+        <button id="reset"> Reset to default! </button>
     </body>
+
+    <script src="js/keymaps.js"></script>
+    <script>
+
+let keymapsBody = document.getElementById("keymapsbody");
+let saveButton = document.getElementById("save");
+
+let currentKeymap = getKeyMaps();
+
+let isChanging = false;
+
+function notifySaveButton() {
+    if (JSON.stringify(currentKeymap) === JSON.stringify(getKeyMaps())) {
+        saveButton.style.visibility = "hidden";
+    } else {
+        saveButton.style.visibility = "visible";
+    }
+}
+
+function editField(i) {
+    let [k, v] = currentKeymap[i];
+    let tr = keymapsBody.children[i];
+    let key = tr.children[0];
+    let move = tr.children[1];
+
+    if (isChanging) {
+        rerender(); return;
+    }
+    isChanging = true;
+    key.innerHTML = "";
+    let keyField = document.createElement("input");
+    keyField.value = k;
+    key.appendChild(keyField);
+
+    move.innerHTML = "";
+    let moveField = document.createElement("input");
+    moveField.value = v;
+    move.appendChild(moveField);
+
+    let acceptButton = document.createElement("button");
+    acceptButton.innerText = "✅";
+    acceptButton.onclick = _e => {
+        currentKeymap[i] = [keyField.value, moveField.value];
+        rerender();
+    };
+
+    let acceptButtonTd = document.createElement("td");
+    acceptButtonTd.appendChild(acceptButton);
+    tr.appendChild(acceptButtonTd);
+
+    let removeButton = document.createElement("button");
+    removeButton.innerText = "❌";
+    removeButton.onclick = _e => {
+        currentKeymap.splice(i, 1);
+        rerender();
+    };
+
+    let removeButtonTd = document.createElement("td");
+    removeButtonTd.appendChild(removeButton);
+    tr.appendChild(removeButtonTd);
+
+    tr.onclick = null;
+
+}
+
+function rerender(quiet=false) {
+    if (!quiet) {
+        notifySaveButton();
+    }
+    keymapsBody.innerHTML = "";
+    isChanging = false;
+
+    for (let i = 0; i < currentKeymap.length; i++) {
+        let [k, v] = currentKeymap[i];
+        let key = document.createElement("td");
+        key.innerText = k;
+        let move = document.createElement("td");
+        move.innerText = v;
+
+        let tr = document.createElement("tr");
+        tr.appendChild(key);
+        tr.appendChild(move);
+
+        keymapsBody.appendChild(tr);
+        tr.onclick = _e => editField(i);
+    }
+}
+document.getElementById("add-new").onclick = _ => {
+    currentKeymap.push(["keys", "alg"]);
+    rerender(true);
+    editField(currentKeymap.length - 1);
+};
+
+document.getElementById("reset").onclick = _ => {
+    currentKeymap = defaultKeymaps;
+    rerender(false);
+};
+saveButton.onclick = _ => {
+    localStorage.setItem("keymaps", JSON.stringify(currentKeymap));
+    rerender();
+}
+
+rerender();
+
+    </script>
 </html>
