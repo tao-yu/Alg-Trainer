@@ -18,14 +18,17 @@ input {
     box-sizing: border-box;
 }
 
-#save {
+#changed {
     visibility: hidden;
     padding: 1em;
 }
        </style>
     </head>
     <body>
-        <button id="save">Save!</button>
+        <div id="changed">
+            <button id="save">Save!</button>
+            <button id="undo">Go back!</button>
+        </div>
         <table id="currentKeymap">
             <tr>
                 <th>Key</th>
@@ -49,17 +52,17 @@ input {
     <script>
 
 let keymapsBody = document.getElementById("keymapsbody");
-let saveButton = document.getElementById("save");
+let changedDiv = document.getElementById("changed");
 
 let currentKeymap = getKeyMaps();
 
 let isChanging = false;
 
-function notifySaveButton() {
+function notifyChanged() {
     if (JSON.stringify(currentKeymap) === JSON.stringify(getKeyMaps())) {
-        saveButton.style.visibility = "hidden";
+        changedDiv.style.visibility = "hidden";
     } else {
-        saveButton.style.visibility = "visible";
+        changedDiv.style.visibility = "visible";
     }
 }
 
@@ -83,6 +86,16 @@ function editField(i) {
     moveField.value = v;
     move.appendChild(moveField);
 
+    let escapeButton = document.createElement("button");
+    escapeButton.innerText = "❌";
+    escapeButton.onclick = _e => {
+        rerender();
+    };
+
+    let escapeButtonTd = document.createElement("td");
+    escapeButtonTd.appendChild(escapeButton);
+    tr.appendChild(escapeButtonTd);
+
     let acceptButton = document.createElement("button");
     acceptButton.innerText = "✅";
     acceptButton.onclick = _e => {
@@ -95,7 +108,7 @@ function editField(i) {
     tr.appendChild(acceptButtonTd);
 
     let removeButton = document.createElement("button");
-    removeButton.innerText = "❌";
+    removeButton.innerText = "🗑";
     removeButton.onclick = _e => {
         currentKeymap.splice(i, 1);
         rerender();
@@ -111,7 +124,7 @@ function editField(i) {
 
 function rerender(quiet=false) {
     if (!quiet) {
-        notifySaveButton();
+        notifyChanged();
     }
     keymapsBody.innerHTML = "";
     isChanging = false;
@@ -141,10 +154,16 @@ document.getElementById("reset").onclick = _ => {
     currentKeymap = defaultKeymaps;
     rerender(false);
 };
-saveButton.onclick = _ => {
+
+document.getElementById("save").onclick = _ => {
     localStorage.setItem("keymaps", JSON.stringify(currentKeymap));
     rerender();
 }
+
+document.getElementById("undo").onclick = _ => {
+    currentKeymap = getKeyMaps();
+    rerender();
+};
 
 rerender();
 
