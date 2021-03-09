@@ -1174,56 +1174,40 @@ function isUsingVirtualCube(){
 
 
 var listener = new window.keypress.Listener();
-var keymaps = [
 
-    ["i", "R"], 
-    ["k" , "R'"],
-    ["j" , "U"],
-    ["f" , "U'"],
-    ["h" , "F"],
-    ["g" , "F'"],
-    ["w" , "B"],
-    ["o" , "B'"],
-    ["d" , "L"],
-    ["e" , "L'"],
-    ["s" , "D"],
-    ["l" , "D'"],
-    ["u" , "r"],
-    ["m" , "r'"],
-    ["v" , "l"],
-    ["r" , "l'"],
-    ["`" , "M"],
-    ["'" , "M"],
-    ["[" , "M'"],
-    ["t" , "x"],
-    ["n" , "x'"],
-    [";" , "y"],
-    ["p" , "z"],
-    ["q" , "z'"],
-    ["a" , "y'"],
-    ["shift h", "S F'"],
-    ["shift g", "S' F"],
-    ["x", "E"],
-    [".", "E'"]];
+lastKeyMap = null;
 
+function updateControls() {
+    let keymaps = getKeyMaps();
 
-keymaps.forEach(function(keymap){
-    listener.register_combo({
-        "keys"              : keymap[0],
-        "on_keydown"        : function() {  doAlg(keymap[1]);},     
-    });
-});
-listener.simple_combo("backspace", function() { displayAlgorithmForPreviousTest();});
-listener.simple_combo("esc", function() {
-    if (isUsingVirtualCube()){
-        stopTimer(false);
+    if (JSON.stringify(keymaps) === JSON.stringify(lastKeyMap)) {
+        return false;
     }
-    reTestAlg();
-    document.getElementById("scramble").innerHTML = "&nbsp;";
-    document.getElementById("algdisp").innerHTML = "";
 
-});
+    lastKeyMap = keymaps;
 
+    listener.reset();
+
+    keymaps.forEach(function(keymap){
+        listener.register_combo({
+            "keys"              : keymap[0],
+            "on_keydown"        : function() {  doAlg(keymap[1]);},     
+        });
+    });
+    listener.simple_combo("backspace", function() { displayAlgorithmForPreviousTest();});
+    listener.simple_combo("esc", function() {
+        if (isUsingVirtualCube()){
+            stopTimer(false);
+        }
+        reTestAlg();
+        document.getElementById("scramble").innerHTML = "&nbsp;";
+        document.getElementById("algdisp").innerHTML = "";
+    });
+
+    return true;
+}
+
+setInterval(updateControls, 300);
 
 
 function nextScramble(displayReady=true){
