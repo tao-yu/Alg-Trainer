@@ -432,6 +432,20 @@ function drawCube(cubeArray) {
         fillWithIndex(2, 5, "f", 8, cubeArray);
         fillWithIndex(3, 5, "f", 9, cubeArray);
         fillWithIndex(4, 5, "r", 7, cubeArray);
+
+        // Draw outlines
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "#ccc";
+        ctx.strokeRect(-1, -1, 1 + stickerSize * 2, 1 + stickerSize);
+        ctx.strokeRect(-1, stickerSize * 2, 1 + stickerSize * 2, stickerSize * 2);
+        ctx.strokeRect(-1, stickerSize * 5, 1 + stickerSize * 2, 1 + stickerSize);
+
+        ctx.strokeRect(stickerSize * 2, stickerSize, stickerSize, stickerSize);
+        ctx.strokeRect(stickerSize * 2, stickerSize * 4, stickerSize, stickerSize);
+
+        ctx.strokeRect(stickerSize * 3, -1, stickerSize * 2 + 1, 1 + stickerSize);
+        ctx.strokeRect(stickerSize * 3, stickerSize * 2, stickerSize * 2 + 1, stickerSize * 2);
+        ctx.strokeRect(stickerSize * 3, stickerSize * 5, stickerSize * 2 + 1, 1 + stickerSize);
     }
 }
 
