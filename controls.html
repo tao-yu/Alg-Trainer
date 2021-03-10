@@ -48,6 +48,7 @@ input {
         <button id="reset"> Reset to default! </button>
     </body>
 
+    <script src="js/controls.js"></script>
     <script src="js/keymaps.js"></script>
     <script>
 
@@ -72,14 +73,24 @@ function editField(i) {
     let key = tr.children[0];
     let move = tr.children[1];
 
+    let newKc = k;
+
     if (isChanging) {
         rerender(); return;
     }
     isChanging = true;
     key.innerHTML = "";
     let keyField = document.createElement("input");
-    keyField.value = k;
+    keyField.value = k.toString();
     key.appendChild(keyField);
+
+    keyField.addEventListener("keydown", e => {
+        e.preventDefault();
+        let kc = keyEventToKeyCombo(e, true);
+
+        newKc = keyEventToKeyCombo(e, false) || newKc;
+        keyField.value = kc.toString();
+    });
 
     move.innerHTML = "";
     let moveField = document.createElement("input");
@@ -99,7 +110,7 @@ function editField(i) {
     let acceptButton = document.createElement("button");
     acceptButton.innerText = "✅";
     acceptButton.onclick = _e => {
-        currentKeymap[i] = [keyField.value, moveField.value];
+        currentKeymap[i] = [newKc, moveField.value];
         rerender();
     };
 
@@ -119,7 +130,6 @@ function editField(i) {
     tr.appendChild(removeButtonTd);
 
     tr.onclick = null;
-
 }
 
 function rerender(quiet=false) {
@@ -132,7 +142,7 @@ function rerender(quiet=false) {
     for (let i = 0; i < currentKeymap.length; i++) {
         let [k, v] = currentKeymap[i];
         let key = document.createElement("td");
-        key.innerText = k;
+        key.innerText = k.toString();
         let move = document.createElement("td");
         move.innerText = v;
 
