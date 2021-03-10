@@ -11,7 +11,15 @@
         <style>
 
 td {
-    width: 5em;
+    width: 8em;
+    padding: 0.4em;
+}
+tr {
+    border: 1px solid #888888;
+}
+td:nth-child(1) {
+    text-align: right;
+    border-right: 1px solid #888888;
 }
 input {
     width: 100%;
@@ -25,6 +33,13 @@ input {
        </style>
     </head>
     <body>
+        <h2> Control Config </h2>
+
+        <p>
+            Click a key binding to change it! The Move-colunm specifies the move(s) to make upon that
+            key combo.
+        </p>
+
         <div id="changed">
             <button id="save">Save!</button>
             <button id="undo">Go back!</button>
@@ -44,7 +59,10 @@ input {
                 </tr>
             </tbody>
         </table>
+        <br />
         <button id="add-new"> Add another! </button>
+        <br />
+        <br />
         <button id="reset"> Reset to default! </button>
     </body>
 
@@ -155,7 +173,7 @@ function rerender(quiet=false) {
     }
 }
 document.getElementById("add-new").onclick = _ => {
-    currentKeymap.push(["keys", "alg"]);
+    currentKeymap.push([new KeyCombo(""), "alg"]);
     rerender(true);
     editField(currentKeymap.length - 1);
 };
