@@ -24,8 +24,8 @@ var defaultKeymaps = [
     [new KeyCombo("KeyP") , "z"],
     [new KeyCombo("KeyQ") , "z'"],
     [new KeyCombo("KeyA") , "y'"],
-    [new KeyCombo("KeyH", {"shift": true}), "S F'"],
-    [new KeyCombo("KeyG", {"shift": true}), "S' F"],
+    [new KeyCombo("KeyH", {"shift": true}), "S"],
+    [new KeyCombo("KeyG", {"shift": true}), "S'"],
     [new KeyCombo("KeyX"), "E"],
     [new KeyCombo("Period"), "E'"]];
 
