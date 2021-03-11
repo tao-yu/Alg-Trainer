@@ -1173,57 +1173,69 @@ function isUsingVirtualCube(){
 }
 
 
-var listener = new window.keypress.Listener();
-var keymaps = [
+var listener = new Listener();
 
-    ["i", "R"], 
-    ["k" , "R'"],
-    ["j" , "U"],
-    ["f" , "U'"],
-    ["h" , "F"],
-    ["g" , "F'"],
-    ["w" , "B"],
-    ["o" , "B'"],
-    ["d" , "L"],
-    ["e" , "L'"],
-    ["s" , "D"],
-    ["l" , "D'"],
-    ["u" , "r"],
-    ["m" , "r'"],
-    ["v" , "l"],
-    ["r" , "l'"],
-    ["`" , "M"],
-    ["'" , "M"],
-    ["[" , "M'"],
-    ["t" , "x"],
-    ["n" , "x'"],
-    [";" , "y"],
-    ["p" , "z"],
-    ["q" , "z'"],
-    ["a" , "y'"],
-    ["shift h", "S F'"],
-    ["shift g", "S' F"],
-    ["x", "E"],
-    [".", "E'"]];
+lastKeyMap = null;
 
+function updateControls() {
+    let keymaps = getKeyMaps();
 
-keymaps.forEach(function(keymap){
-    listener.register_combo({
-        "keys"              : keymap[0],
-        "on_keydown"        : function() {  doAlg(keymap[1]);},     
-    });
-});
-listener.simple_combo("backspace", function() { displayAlgorithmForPreviousTest();});
-listener.simple_combo("esc", function() {
-    if (isUsingVirtualCube()){
-        stopTimer(false);
+    if (JSON.stringify(keymaps) === JSON.stringify(lastKeyMap)) {
+        return false;
     }
-    reTestAlg();
-    document.getElementById("scramble").innerHTML = "&nbsp;";
-    document.getElementById("algdisp").innerHTML = "";
 
-});
+    lastKeyMap = keymaps;
 
+    listener.reset();
+
+    keymaps.forEach(function(keymap){
+        listener.register(keymap[0], function() {  doAlg(keymap[1]) });
+    });
+    listener.register(new KeyCombo("Backspace"), function() { displayAlgorithmForPreviousTest();});
+    listener.register(new KeyCombo("Escape"), function() {
+        if (isUsingVirtualCube()){
+            stopTimer(false);
+        }
+        reTestAlg();
+        document.getElementById("scramble").innerHTML = "&nbsp;";
+        document.getElementById("algdisp").innerHTML = "";
+    });
+    listener.register(new KeyCombo("Enter"), function() {
+        nextScramble();
+        doNothingNextTimeSpaceIsPressed = false;
+    });
+    listener.register(new KeyCombo("Tab"), function() {
+        nextScramble();
+        doNothingNextTimeSpaceIsPressed = false;
+    });
+    listener.register(new KeyCombo("ArrowLeft"), function() {
+        if (algorithmHistory.length<=1 || timerIsRunning){
+            return;
+        }
+        historyIndex--;
+
+        if (historyIndex<0){
+            alert('Reached end of solve log');
+            historyIndex = 0;
+        }
+        displayAlgorithmFromHistory(historyIndex);
+    });
+    listener.register(new KeyCombo("right"), function() {
+        if (timerIsRunning){
+            return;
+        }
+        historyIndex++;
+        if (historyIndex>=algorithmHistory.length){
+            nextScramble();
+            doNothingNextTimeSpaceIsPressed = false;
+            return;
+        }
+
+        displayAlgorithmFromHistory(historyIndex);
+    });
+}
+
+setInterval(updateControls, 300);
 
 
 function nextScramble(displayReady=true){
@@ -1241,41 +1253,8 @@ function nextScramble(displayReady=true){
     }
     historyIndex = algorithmHistory.length - 1;
 }
-listener.simple_combo("enter", function() {
-    nextScramble();
-    doNothingNextTimeSpaceIsPressed = false;
-});
-listener.simple_combo("tab", function() {
-    nextScramble();
-    doNothingNextTimeSpaceIsPressed = false;
-});
 
 var historyIndex;
-listener.simple_combo("left", function() {
-    if (algorithmHistory.length<=1 || timerIsRunning){
-        return;
-    }
-    historyIndex--;
-
-    if (historyIndex<0){
-        alert('Reached end of solve log');
-        historyIndex = 0;
-    }
-    displayAlgorithmFromHistory(historyIndex);
-});
-listener.simple_combo("right", function() { 
-    if (timerIsRunning){
-        return;
-    }
-    historyIndex++;
-    if (historyIndex>=algorithmHistory.length){
-        nextScramble();
-        doNothingNextTimeSpaceIsPressed = false;
-        return;
-    }
-
-    displayAlgorithmFromHistory(historyIndex);
-});
 
 document.onkeyup = function(event) {
     if (event.keyCode == 32) { //space

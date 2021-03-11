@@ -3,136 +3,197 @@
 
     <head>
         <title>Algorithm trainer</title>
+        <meta charset="utf-8">
+
         <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
         <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+
+td {
+    width: 8em;
+    padding: 0.4em;
+}
+tr {
+    border: 1px solid #888888;
+}
+td:nth-child(1) {
+    text-align: right;
+    border-right: 1px solid #888888;
+}
+input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#changed {
+    visibility: hidden;
+    padding: 1em;
+}
+       </style>
     </head>
     <body>
-        <table>
+        <h2> Control Config </h2>
 
-                <tr>
-                    <td>Key</td>
-                    <td>Move</td>
-                </tr>
+        <p>
+            Click a key binding to change it! The Move-colunm specifies the move(s) to make upon that
+            key combo.
+        </p>
 
+        <div id="changed">
+            <button id="save">Save!</button>
+            <button id="undo">Go back!</button>
+        </div>
+        <table id="currentKeymap">
+            <tr>
+                <th>Key</th>
+                <th>Move</th>
+            </tr>
 
+            <tbody id="keymapsbody">
                 <tr>
-                    <td>i</td>
-                    <td>R</td>
+                    <td><input value="."/></td>
+                    <td><input value="E'" /></td>
+                    <td><button> ✅ </button></td>
+                    <td><button> ❌ </button></td>
                 </tr>
-                <tr>
-                    <td>k</td>
-                    <td>R'</td>
-                </tr>
-                <tr>
-                    <td>j</td>
-                    <td>U</td>
-                </tr>
-                <tr>
-                    <td>f</td>
-                    <td>U'</td>
-                </tr>
-                <tr>
-                    <td>h</td>
-                    <td>F</td>
-                </tr>
-                <tr>
-                    <td>g</td>
-                    <td>F'</td>
-                </tr>
-                <tr>
-                    <td>w</td>
-                    <td>B</td>
-                </tr>
-                <tr>
-                    <td>o</td>
-                    <td>B'</td>
-                </tr>
-                <tr>
-                    <td>d</td>
-                    <td>L</td>
-                </tr>
-                <tr>
-                    <td>e</td>
-                    <td>L'</td>
-                </tr>
-                <tr>
-                    <td>s</td>
-                    <td>D</td>
-                </tr>
-                <tr>
-                    <td>l</td>
-                    <td>D'</td>
-                </tr>
-                <tr>
-                    <td>u</td>
-                    <td>r</td>
-                </tr>
-                <tr>
-                    <td>m</td>
-                    <td>r'</td>
-                </tr>
-                <tr>
-                    <td>v</td>
-                    <td>l</td>
-                </tr>
-                <tr>
-                    <td>r</td>
-                    <td>l'</td>
-                </tr>
-                <tr>
-                    <td>`</td>
-                    <td>M</td>
-                </tr>
-                <tr>
-                    <td>'</td>
-                    <td>M</td>
-                </tr>
-                <tr>
-                    <td>[</td>
-                    <td>M'</td>
-                </tr>
-                <tr>
-                    <td>t</td>
-                    <td>x</td>
-                </tr>
-                <tr>
-                    <td>n</td>
-                    <td>x'</td>
-                </tr>
-                <tr>
-                    <td>;</td>
-                    <td>y</td>
-                </tr>
-                <tr>
-                    <td>p</td>
-                    <td>z</td>
-                </tr>
-                <tr>
-                    <td>q</td>
-                    <td>z'</td>
-                </tr>
-                <tr>
-                    <td>a</td>
-                    <td>y'</td>
-                </tr>
-                <tr>
-                    <td>Shift h</td>
-                    <td>S</td>
-                </tr>
-                <tr>
-                    <td>Shift g</td>
-                    <td>S'</td>
-                </tr>
-                <tr>
-                    <td>x</td>
-                    <td>E</td>
-                </tr>
-                <tr>
-                    <td>.</td>
-                    <td>E'</td>
-                </tr>
-
+            </tbody>
         </table>
+        <br />
+        <button id="add-new"> Add another! </button>
+        <br />
+        <br />
+        <button id="reset"> Reset to default! </button>
     </body>
+
+    <script src="js/controls.js"></script>
+    <script src="js/keymaps.js"></script>
+    <script>
+
+let keymapsBody = document.getElementById("keymapsbody");
+let changedDiv = document.getElementById("changed");
+
+let currentKeymap = getKeyMaps();
+
+let isChanging = false;
+
+function notifyChanged() {
+    if (JSON.stringify(currentKeymap) === JSON.stringify(getKeyMaps())) {
+        changedDiv.style.visibility = "hidden";
+    } else {
+        changedDiv.style.visibility = "visible";
+    }
+}
+
+function editField(i) {
+    let [k, v] = currentKeymap[i];
+    let tr = keymapsBody.children[i];
+    let key = tr.children[0];
+    let move = tr.children[1];
+
+    let newKc = k;
+
+    if (isChanging) {
+        rerender(); return;
+    }
+    isChanging = true;
+    key.innerHTML = "";
+    let keyField = document.createElement("input");
+    keyField.value = k.toString();
+    key.appendChild(keyField);
+
+    keyField.addEventListener("keydown", e => {
+        e.preventDefault();
+        let kc = keyEventToKeyCombo(e, true);
+
+        newKc = keyEventToKeyCombo(e, false) || newKc;
+        keyField.value = kc.toString();
+    });
+
+    move.innerHTML = "";
+    let moveField = document.createElement("input");
+    moveField.value = v;
+    move.appendChild(moveField);
+
+    let escapeButton = document.createElement("button");
+    escapeButton.innerText = "❌";
+    escapeButton.onclick = _e => {
+        rerender();
+    };
+
+    let escapeButtonTd = document.createElement("td");
+    escapeButtonTd.appendChild(escapeButton);
+    tr.appendChild(escapeButtonTd);
+
+    let acceptButton = document.createElement("button");
+    acceptButton.innerText = "✅";
+    acceptButton.onclick = _e => {
+        currentKeymap[i] = [newKc, moveField.value];
+        rerender();
+    };
+
+    let acceptButtonTd = document.createElement("td");
+    acceptButtonTd.appendChild(acceptButton);
+    tr.appendChild(acceptButtonTd);
+
+    let removeButton = document.createElement("button");
+    removeButton.innerText = "🗑";
+    removeButton.onclick = _e => {
+        currentKeymap.splice(i, 1);
+        rerender();
+    };
+
+    let removeButtonTd = document.createElement("td");
+    removeButtonTd.appendChild(removeButton);
+    tr.appendChild(removeButtonTd);
+
+    tr.onclick = null;
+}
+
+function rerender(quiet=false) {
+    if (!quiet) {
+        notifyChanged();
+    }
+    keymapsBody.innerHTML = "";
+    isChanging = false;
+
+    for (let i = 0; i < currentKeymap.length; i++) {
+        let [k, v] = currentKeymap[i];
+        let key = document.createElement("td");
+        key.innerText = k.toString();
+        let move = document.createElement("td");
+        move.innerText = v;
+
+        let tr = document.createElement("tr");
+        tr.appendChild(key);
+        tr.appendChild(move);
+
+        keymapsBody.appendChild(tr);
+        tr.onclick = _e => editField(i);
+    }
+}
+document.getElementById("add-new").onclick = _ => {
+    currentKeymap.push([new KeyCombo(""), "alg"]);
+    rerender(true);
+    editField(currentKeymap.length - 1);
+};
+
+document.getElementById("reset").onclick = _ => {
+    currentKeymap = defaultKeymaps;
+    rerender(false);
+};
+
+document.getElementById("save").onclick = _ => {
+    localStorage.setItem("keymaps", JSON.stringify(currentKeymap));
+    rerender();
+}
+
+document.getElementById("undo").onclick = _ => {
+    currentKeymap = getKeyMaps();
+    rerender();
+};
+
+rerender();
+
+    </script>
 </html>
