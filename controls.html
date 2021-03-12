@@ -85,6 +85,8 @@ function editField(i) {
     let tr = keymapsBody.children[i];
     let key = tr.children[0];
     let move = tr.children[1];
+    let buttonsTd = tr.children[2];
+
 
     let newKc = k;
 
@@ -110,8 +112,7 @@ function editField(i) {
     moveField.value = v;
     move.appendChild(moveField);
 
-    let buttonsTd = document.createElement("td");
-
+    buttonsTd.innerHTML = "";
     let escapeButton = document.createElement("button");
     escapeButton.innerText = "❌";
     escapeButton.onclick = _e => {
@@ -137,8 +138,6 @@ function editField(i) {
     };
 
     buttonsTd.appendChild(removeButton);
-
-    tr.appendChild(buttonsTd);
 
     tr.onclick = null;
 }
