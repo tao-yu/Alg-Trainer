@@ -48,15 +48,10 @@ input {
             <tr>
                 <th>Key</th>
                 <th>Move</th>
+                <th></th>
             </tr>
 
             <tbody id="keymapsbody">
-                <tr>
-                    <td><input value="."/></td>
-                    <td><input value="E'" /></td>
-                    <td><button> ✅ </button></td>
-                    <td><button> ❌ </button></td>
-                </tr>
             </tbody>
         </table>
         <br />
@@ -115,15 +110,15 @@ function editField(i) {
     moveField.value = v;
     move.appendChild(moveField);
 
+    let buttonsTd = document.createElement("td");
+
     let escapeButton = document.createElement("button");
     escapeButton.innerText = "❌";
     escapeButton.onclick = _e => {
         rerender();
     };
 
-    let escapeButtonTd = document.createElement("td");
-    escapeButtonTd.appendChild(escapeButton);
-    tr.appendChild(escapeButtonTd);
+    buttonsTd.appendChild(escapeButton);
 
     let acceptButton = document.createElement("button");
     acceptButton.innerText = "✅";
@@ -132,9 +127,7 @@ function editField(i) {
         rerender();
     };
 
-    let acceptButtonTd = document.createElement("td");
-    acceptButtonTd.appendChild(acceptButton);
-    tr.appendChild(acceptButtonTd);
+    buttonsTd.appendChild(acceptButton);
 
     let removeButton = document.createElement("button");
     removeButton.innerText = "🗑";
@@ -143,9 +136,9 @@ function editField(i) {
         rerender();
     };
 
-    let removeButtonTd = document.createElement("td");
-    removeButtonTd.appendChild(removeButton);
-    tr.appendChild(removeButtonTd);
+    buttonsTd.appendChild(removeButton);
+
+    tr.appendChild(buttonsTd);
 
     tr.onclick = null;
 }
@@ -167,6 +160,8 @@ function rerender(quiet=false) {
         let tr = document.createElement("tr");
         tr.appendChild(key);
         tr.appendChild(move);
+
+        tr.appendChild(document.createElement("td"));
 
         keymapsBody.appendChild(tr);
         tr.onclick = _e => editField(i);
