@@ -1220,7 +1220,7 @@ function updateControls() {
         }
         displayAlgorithmFromHistory(historyIndex);
     });
-    listener.register(new KeyCombo("right"), function() {
+    listener.register(new KeyCombo("ArrowRight"), function() {
         if (timerIsRunning){
             return;
         }
