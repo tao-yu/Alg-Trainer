@@ -100,6 +100,10 @@ if (document.getElementById("userDefined").checked){
     document.getElementById("userDefinedAlgs").style.display = "block";
 }
 
+document.getElementById("lines").addEventListener("change", function(){
+    drawCube(cube.cubestate);    
+});
+
 var useCustomColourScheme = document.getElementById("useCustomColourScheme");
 useCustomColourScheme.addEventListener("click", function(){
     localStorage.setItem("useCustomColourScheme", this.checked);
@@ -432,6 +436,33 @@ function drawCube(cubeArray) {
         fillWithIndex(2, 5, "f", 8, cubeArray);
         fillWithIndex(3, 5, "f", 9, cubeArray);
         fillWithIndex(4, 5, "r", 7, cubeArray);
+
+        let lineValue = document.getElementById("lines").value;
+        if (lineValue === "none") return;
+        // Draw outlines
+        if (lineValue === "thin-gray") {
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = "#ccc";
+        } else if (lineValue === "thick-gray") {
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = "#ccc";
+        } else if (lineValue === "thin-black") {
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = "#000";
+        } else if (lineValue === "thick-black") {
+            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = "#000";
+        }
+        ctx.strokeRect(-1, -1, 1 + stickerSize * 2, 1 + stickerSize);
+        ctx.strokeRect(-1, stickerSize * 2, 1 + stickerSize * 2, stickerSize * 2);
+        ctx.strokeRect(-1, stickerSize * 5, 1 + stickerSize * 2, 1 + stickerSize);
+
+        ctx.strokeRect(stickerSize * 2, stickerSize, stickerSize, stickerSize);
+        ctx.strokeRect(stickerSize * 2, stickerSize * 4, stickerSize, stickerSize);
+
+        ctx.strokeRect(stickerSize * 3, -1, stickerSize * 2 + 1, 1 + stickerSize);
+        ctx.strokeRect(stickerSize * 3, stickerSize * 2, stickerSize * 2 + 1, stickerSize * 2);
+        ctx.strokeRect(stickerSize * 3, stickerSize * 5, stickerSize * 2 + 1, 1 + stickerSize);
     }
 }
 
