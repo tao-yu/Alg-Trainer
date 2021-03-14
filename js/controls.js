@@ -46,6 +46,7 @@ class Listener {
     }
 
     keydown(e) {
+        if (e.target !== document.body) { return; }
         for (let [combo, fn] of this.combos) {
             if (combo.matches(e)) {
                 fn(e);
