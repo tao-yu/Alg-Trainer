@@ -491,8 +491,9 @@ function obfusticate(algorithm){
     //Cube.initSolver();
     var rc = new RubiksCube();
     rc.doAlgorithm(algorithm);
-    orient = alg.cube.invert(rc.wcaOrient());
-    return (alg.cube.invert(rc.solution()) + " " + orient).replace(/2'/g, "2");
+    var orient = rc.wcaOrient();
+    rc.doAlgorithm(orient);
+    return alg.cube.invert(rc.solution()).replace(/2'/g, "2");
 }
 
 
@@ -651,6 +652,15 @@ class AlgTest {
     }
 }
 
+// Adds extra rotations to the end of an alg to reorient
+function correctRotation(alg) {
+    var rc = new RubiksCube();
+    rc.doAlgorithm(alg);
+    var ori = rc.wcaOrient();
+	
+    return alg + " " + ori;
+}
+
 function generateAlgTest(){
 
     var set = document.getElementById("algsetpicker").value;
@@ -676,7 +686,7 @@ function generateAlgTest(){
         solutions = rawAlgs;
     }
 
-    var scramble = generateAlgScramble(solutions[0],set,obfusticateAlg,shouldPrescramble);
+    var scramble = generateAlgScramble(correctRotation(solutions[0]),set,obfusticateAlg,shouldPrescramble);
     if (set == "F3L"){
         solutions = [alg.cube.invert(scramble).replace(/2'/g, "2")];
     }
