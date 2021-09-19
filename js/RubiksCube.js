@@ -451,17 +451,39 @@ function getRandAuf(letter){
     var aufs = [letter + " ", letter +"' ",letter + "2 ", ""];
     return aufs[rand];
 }
+
+// Returns a random sequence of quarter turns of the specified length. Quarter turns are used to break OLL. Two consecutive moves may not be on the same axis.
+function getPremoves(length) {
+    var previous = "U"; // prevents first move from being U or D
+    var moveset = ['U', 'R', 'F', 'D', 'L', 'B'];
+    var amts = [" ","' "];
+    var randmove = "";
+    var sequence = "";
+    for (let i=0; i<length; i++) {
+        do {
+            randmove = moveset[Math.floor(Math.random()*moveset.length)];
+        } while (previous != "" && (randmove === previous || Math.abs(moveset.indexOf(randmove) - moveset.indexOf(previous)) === 3))
+        previous = randmove;
+        sequence += randmove;
+        sequence += amts[Math.floor(Math.random()*amts.length)];
+    }
+    return sequence;
+}
+
 //This will return an algorithm that has the same effect as algorithm, but with different moves.
 
 //This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
 
-function obfusticate(algorithm){
+function obfusticate(algorithm, numPremoves=3, minLength=16){
 
     //Cube.initSolver();
+    var premoves = getPremoves(numPremoves);
     var rc = new RubiksCube();
-    rc.doAlgorithm(algorithm);
+    rc.doAlgorithm(alg.cube.invert(premoves) + algorithm);
     orient = alg.cube.invert(rc.wcaOrient());
-    return (alg.cube.invert(rc.solution()) + " " + orient).replace(/2'/g, "2");
+    var solution = alg.cube.simplify(premoves + (alg.cube.invert(rc.solution())) + orient).replace(/2'/g, "2");
+    return solution.split(" ").length >= minLength ? solution : obfusticate(algorithm, numPremoves+1, minLength);
+
 }
 
 
@@ -812,7 +834,7 @@ function updateVisualCube(algorithm){
             break;
     }
 
-    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
+    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
 
     if (useCustomColourScheme.checked){
         validateCustomColourScheme();
