@@ -470,10 +470,20 @@ function getPremoves(length) {
     return sequence;
 }
 
-//This will return an algorithm that has the same effect as algorithm, but with different moves.
+/*
 
-//This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
+This will return an algorithm that has the same effect as algorithm, but with different moves.
+This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
 
+Generate the 3 premoves
+Start with a solved cube
+Do (the inverse of the premoves + the scramble algorithm) on the cube
+Find the solution to the cubestate
+Return the premoves + the inverse of the solution, canceling any redundant moves
+If the solution it finds is under 16 moves, it scraps that solution, then starts from scratch,
+but with 4 random premoves. Then if that solution is still under 16 moves, 
+then it starts from scratch again but with 5 random premoves. And so on...
+*/
 function obfusticate(algorithm, numPremoves=3, minLength=16){
 
     //Cube.initSolver();
@@ -1417,7 +1427,7 @@ function RubiksCube() {
     }
     this.solution = function(){
         var gcube = Cube.fromString(this.toString());
-        return gcube.solve();
+        return gcube.solve(20);
     }
 
     this.isSolved = function(){
