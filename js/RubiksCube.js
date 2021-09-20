@@ -483,6 +483,11 @@ Return the premoves + the inverse of the solution, canceling any redundant moves
 If the solution it finds is under 16 moves, it scraps that solution, then starts from scratch,
 but with 4 random premoves. Then if that solution is still under 16 moves, 
 then it starts from scratch again but with 5 random premoves. And so on...
+
+B U F' B2 F2 D' L2 F2 U2 B2 R2 U2 F2 D' F' U' B2 U B U2
+L' U' R L2 R2 D F2 D' R2 U B2 R2 F2 D' L2 R' D' L' B2 R F2 R U2
+
+
 */
 function obfusticate(algorithm, numPremoves=3, minLength=16){
 
@@ -1427,7 +1432,7 @@ function RubiksCube() {
     }
     this.solution = function(){
         var gcube = Cube.fromString(this.toString());
-        return gcube.solve(20);
+        return gcube.solve();
     }
 
     this.isSolved = function(){
