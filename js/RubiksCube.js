@@ -649,12 +649,23 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg, premoves
 }
 function generateOrientation(){
 
-    if (document.getElementById("fullCN").checked){
-        var preorientation = getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
-        return [preorientation, preorientation];
-    }
 
     var cn1 = document.getElementById("colourneutrality1").value;
+    if (document.getElementById("fullCN").checked){
+        var firstRotation = ["", "x", "x'", "x2", "y", "y'"]
+        // each one of these first rotations puts a differnt color face on F
+        var secondRotation = ["", "z", "z'", "z2"]
+        // each second rotation puts a different edge on UF
+        // each unique combination of a first and second rotation 
+        // must result in a unique orientation because a different color is on F
+        // and a different edge is on UF. Hence all 6x4=24 rotations are reached.
+
+        var rand1 = Math.floor(Math.random()*6);
+        var rand2 = Math.floor(Math.random()*4);
+        var randomPart = firstRotation[rand1] + secondRotation[rand2];
+        var fullOrientation = cn1 + randomPart; // Preorientation to perform starting from white top green front
+        return [fullOrientation, randomPart];
+    }
     var cn2 = document.getElementById("colourneutrality2").value;
     var cn3 = document.getElementById("colourneutrality3").value;
 
