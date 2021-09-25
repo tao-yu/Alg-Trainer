@@ -109,7 +109,7 @@ useCustomColourScheme.addEventListener("click", function(){
     localStorage.setItem("useCustomColourScheme", this.checked);
 
     var algTest = algorithmHistory[historyIndex];
-    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+    //updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
 
     drawCube(cube.cubestate);    
 });
