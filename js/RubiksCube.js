@@ -71,14 +71,17 @@ var defaults = {"useVirtual":false,
                 "customColourF":"green",
                 "customColourB":"blue",
                 "customColourR":"red",
-                "customColourL":"orange"
+                "customColourL":"orange",
+                "visualCubeView":"plan"
                };
 
-for (var setting in defaults){
+for (var setting in defaults){ 
+// If no previous setting exists, use default and update localStorage. Otherwise, set to previous setting
     if (typeof(defaults[setting]) === "boolean"){
         var previousSetting = localStorage.getItem(setting);
         if (previousSetting == null){
             document.getElementById(setting).checked = defaults[setting];
+            localStorage.setItem(setting, defaults[setting]);
         }
         else {
             document.getElementById(setting).checked = previousSetting == "true"? true : false;
@@ -87,10 +90,17 @@ for (var setting in defaults){
     else {
         var previousSetting = localStorage.getItem(setting);
         if (previousSetting == null){
-            document.getElementById(setting).value = defaults[setting];
+            var element = document.getElementById(setting)
+            if (element != null){
+                element.value = defaults[setting];
+            }
+            localStorage.setItem(setting, defaults[setting]);
         }
         else {
-            document.getElementById(setting).value = previousSetting;
+            var element = document.getElementById(setting)
+            if (element != null){
+                element.value = previousSetting;
+            }
         }
     }
 }
@@ -109,7 +119,7 @@ useCustomColourScheme.addEventListener("click", function(){
     localStorage.setItem("useCustomColourScheme", this.checked);
 
     var algTest = algorithmHistory[historyIndex];
-    //updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
 
     drawCube(cube.cubestate);    
 });
@@ -174,6 +184,16 @@ hideTimer.addEventListener("click", function(){
     document.getElementById("timer").innerHTML = "0.00";
 
 });
+
+var visualCube = document.getElementById("visualcube");
+visualCube.addEventListener("click", function(){
+    var currentView = localStorage.getItem("visualCubeView")
+    var newView = currentView == ""? "plan": "";
+    localStorage.setItem("visualCubeView", newView);
+    var algTest = algorithmHistory[historyIndex];
+    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+});
+
 
 var showScramble = document.getElementById("showScramble");
 showScramble.addEventListener("click", function(){
@@ -891,7 +911,9 @@ function updateVisualCube(algorithm){
             break;
     }
 
-    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
+    var view = localStorage.getItem("visualCubeView");
+
+    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=" + view + "&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
 
     if (useCustomColourScheme.checked){
         validateCustomColourScheme();
