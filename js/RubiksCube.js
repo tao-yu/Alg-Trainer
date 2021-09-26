@@ -683,6 +683,9 @@ function generateOrientation(){
         var rand1 = Math.floor(Math.random()*6);
         var rand2 = Math.floor(Math.random()*4);
         var randomPart = firstRotation[rand1] + secondRotation[rand2];
+        if (randomPart == "x2z2"){
+            randomPart = "y2";
+        }
         var fullOrientation = cn1 + randomPart; // Preorientation to perform starting from white top green front
         return [fullOrientation, randomPart];
     }
