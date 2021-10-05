@@ -71,14 +71,17 @@ var defaults = {"useVirtual":false,
                 "customColourF":"green",
                 "customColourB":"blue",
                 "customColourR":"red",
-                "customColourL":"orange"
+                "customColourL":"orange",
+                "visualCubeView":"plan"
                };
 
-for (var setting in defaults){
+for (var setting in defaults){ 
+// If no previous setting exists, use default and update localStorage. Otherwise, set to previous setting
     if (typeof(defaults[setting]) === "boolean"){
         var previousSetting = localStorage.getItem(setting);
         if (previousSetting == null){
             document.getElementById(setting).checked = defaults[setting];
+            localStorage.setItem(setting, defaults[setting]);
         }
         else {
             document.getElementById(setting).checked = previousSetting == "true"? true : false;
@@ -87,10 +90,17 @@ for (var setting in defaults){
     else {
         var previousSetting = localStorage.getItem(setting);
         if (previousSetting == null){
-            document.getElementById(setting).value = defaults[setting];
+            var element = document.getElementById(setting)
+            if (element != null){
+                element.value = defaults[setting];
+            }
+            localStorage.setItem(setting, defaults[setting]);
         }
         else {
-            document.getElementById(setting).value = previousSetting;
+            var element = document.getElementById(setting)
+            if (element != null){
+                element.value = previousSetting;
+            }
         }
     }
 }
@@ -174,6 +184,16 @@ hideTimer.addEventListener("click", function(){
     document.getElementById("timer").innerHTML = "0.00";
 
 });
+
+var visualCube = document.getElementById("visualcube");
+visualCube.addEventListener("click", function(){
+    var currentView = localStorage.getItem("visualCubeView")
+    var newView = currentView == ""? "plan": "";
+    localStorage.setItem("visualCubeView", newView);
+    var algTest = algorithmHistory[historyIndex];
+    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+});
+
 
 var showScramble = document.getElementById("showScramble");
 showScramble.addEventListener("click", function(){
@@ -482,18 +502,55 @@ function getRandAuf(letter){
     var aufs = [letter + " ", letter +"' ",letter + "2 ", ""];
     return aufs[rand];
 }
-//This will return an algorithm that has the same effect as algorithm, but with different moves.
 
-//This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
+// Returns a random sequence of quarter turns of the specified length. Quarter turns are used to break OLL. Two consecutive moves may not be on the same axis.
+function getPremoves(length) {
+    var previous = "U"; // prevents first move from being U or D
+    var moveset = ['U', 'R', 'F', 'D', 'L', 'B'];
+    var amts = [" ","' "];
+    var randmove = "";
+    var sequence = "";
+    for (let i=0; i<length; i++) {
+        do {
+            randmove = moveset[Math.floor(Math.random()*moveset.length)];
+        } while (previous != "" && (randmove === previous || Math.abs(moveset.indexOf(randmove) - moveset.indexOf(previous)) === 3))
+        previous = randmove;
+        sequence += randmove;
+        sequence += amts[Math.floor(Math.random()*amts.length)];
+    }
+    return sequence;
+}
 
-function obfusticate(algorithm){
+/*
+
+This will return an algorithm that has the same effect as algorithm, but with different moves.
+This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
+
+Generate the 3 premoves
+Start with a solved cube
+Do (the inverse of the premoves + the scramble algorithm) on the cube
+Find the solution to the cubestate
+Return the premoves + the inverse of the solution, canceling any redundant moves
+If the solution it finds is under 16 moves, it scraps that solution, then starts from scratch,
+but with 4 random premoves. Then if that solution is still under 16 moves, 
+then it starts from scratch again but with 5 random premoves. And so on...
+
+B U F' B2 F2 D' L2 F2 U2 B2 R2 U2 F2 D' F' U' B2 U B U2
+L' U' R L2 R2 D F2 D' R2 U B2 R2 F2 D' L2 R' D' L' B2 R F2 R U2
+
+
+*/
+function obfusticate(algorithm, numPremoves=3, minLength=16){
 
     //Cube.initSolver();
+    var premoves = getPremoves(numPremoves);
     var rc = new RubiksCube();
-    rc.doAlgorithm(algorithm);
-    var orient = rc.wcaOrient();
-    rc.doAlgorithm(orient);
-    return alg.cube.invert(rc.solution()).replace(/2'/g, "2");
+
+    rc.doAlgorithm(alg.cube.invert(premoves) + algorithm);
+    orient = alg.cube.invert(rc.wcaOrient());
+    var solution = alg.cube.simplify(premoves + (alg.cube.invert(rc.solution())) + orient).replace(/2'/g, "2");
+    return solution.split(" ").length >= minLength ? solution : obfusticate(algorithm, numPremoves+1, minLength);
+
 }
 
 
@@ -613,12 +670,26 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg, premoves
 }
 function generateOrientation(){
 
-    if (document.getElementById("fullCN").checked){
-        var preorientation = getRandAuf("x")+getRandAuf("y")+getRandAuf("z");
-        return [preorientation, preorientation];
-    }
 
     var cn1 = document.getElementById("colourneutrality1").value;
+    if (document.getElementById("fullCN").checked){
+        var firstRotation = ["", "x", "x'", "x2", "y", "y'"]
+        // each one of these first rotations puts a differnt color face on F
+        var secondRotation = ["", "z", "z'", "z2"]
+        // each second rotation puts a different edge on UF
+        // each unique combination of a first and second rotation 
+        // must result in a unique orientation because a different color is on F
+        // and a different edge is on UF. Hence all 6x4=24 rotations are reached.
+
+        var rand1 = Math.floor(Math.random()*6);
+        var rand2 = Math.floor(Math.random()*4);
+        var randomPart = firstRotation[rand1] + secondRotation[rand2];
+        if (randomPart == "x2z2"){
+            randomPart = "y2";
+        }
+        var fullOrientation = cn1 + randomPart; // Preorientation to perform starting from white top green front
+        return [fullOrientation, randomPart];
+    }
     var cn2 = document.getElementById("colourneutrality2").value;
     var cn3 = document.getElementById("colourneutrality3").value;
 
@@ -853,7 +924,9 @@ function updateVisualCube(algorithm){
             break;
     }
 
-    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
+    var view = localStorage.getItem("visualCubeView");
+
+    var imgsrc = "https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=" + view + "&bg=black&pzl=" + pzl + "&alg=x2" + algorithm;
 
     if (useCustomColourScheme.checked){
         validateCustomColourScheme();
