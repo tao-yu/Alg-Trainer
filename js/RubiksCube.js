@@ -567,7 +567,7 @@ function addAUFs(algArr){
 
 function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
     
-    if (set == "F3L"){
+    if (set == "F3L" && !document.getElementById("userDefined").checked){
         return Cube.random().solve();
     }
     if (!obfusticateAlg){
