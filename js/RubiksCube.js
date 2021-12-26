@@ -722,6 +722,15 @@ class AlgTest {
     }
 }
 
+// Adds extra rotations to the end of an alg to reorient
+function correctRotation(alg) {
+    var rc = new RubiksCube();
+    rc.doAlgorithm(alg);
+    var ori = rc.wcaOrient();
+	
+    return alg + " " + ori;
+}
+
 function generateAlgTest(){
 
     var set = document.getElementById("algsetpicker").value;
@@ -747,7 +756,7 @@ function generateAlgTest(){
         solutions = rawAlgs;
     }
 
-    var scramble = generateAlgScramble(solutions[0],set,obfusticateAlg,shouldPrescramble);
+    var scramble = generateAlgScramble(correctRotation(solutions[0]),set,obfusticateAlg,shouldPrescramble);
     if (set == "F3L"){
         solutions = [alg.cube.invert(scramble).replace(/2'/g, "2")];
     }
