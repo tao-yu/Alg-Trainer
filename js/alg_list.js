@@ -988,7 +988,7 @@ var zbll_juliette = {'T1': ["R U R' U R U2 R' U2 R' U' R U' R' U2 R/U' R U R' U'
   "R' U R U R' U' R' D' R U2 R' D R U R",
   "U M U R' F' r U r U' r' F (r' R) U' M'/U R' U2 R' U' R' U' R3 F' R' U R U' F U2 R2"],
  'U1': ["U R' F' R U R' U' R' F D' R U R' D R2/U' r U2 R D R' U' R D' R2' U' r' F R F'/U R U2 R' U' R U' R' U2 R' U2 R U R' U R",
-  "U2 (l' R') D2 R U R' D2 R2 D' R' U' R D/(l R) D2 R' U' R D2 R2' D R U R' D'/U2 R' U' R U R U' R' U' R' U R U' R U' R' U2 R U R'/R U R' U' R U' R U2 R2 U' R U R' U' R2 U' R2",
+  "U2 (l' R') D2 R U R' D2 R2 D' R' U' R D x'/(l R) D2 R' U' R D2 R2' D R U R' D' x/U2 R' U' R U R U' R' U' R' U R U' R U' R' U2 R U R'/R U R' U' R U' R U2 R2 U' R U R' U' R2 U' R2",
   "U2 R U R' U R U2 R2 U' R U' R' U2 R/L U L' U L U2 L2 U' L U' L' U2 L",
   "R' U' R U' R' U2 R2 U R' U R U2 R'",
   "U' R' U' R U R' U R U2 R' U R U2 R' U' R/U2 R U R' U R U2 R' U R U2 R' U' R U' R'",
