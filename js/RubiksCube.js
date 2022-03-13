@@ -1151,13 +1151,20 @@ function clearSelectedAlgsets(){
 function findMistakesInUserAlgs(userAlgs){
     var errorMessage = "";
     var newList = [];
+    var newListDisplay = [] // contains all valid algs + commented algs
     for (var i = 0; i < userAlgs.length; i++){
+        if (userAlgs[i].trim().startsWith("#")){
+            // Allow 'commenting' of algs with #, like python
+            newListDisplay.push(userAlgs[i]);
+            continue;
+        }
         userAlgs[i] = userAlgs[i].replace(/[\u2018\u0060\u2019\u00B4]/g, "'"); 
         //replace astrophe like characters with '
         try {
             alg.cube.simplify(userAlgs[i]);
-            if (userAlgs[i].trim()!=""){
+            if (userAlgs[i].trim()!="" ){
                 newList.push(userAlgs[i]);
+                newListDisplay.push(userAlgs[i]);
             }
         }
         catch(err){
@@ -1169,7 +1176,7 @@ function findMistakesInUserAlgs(userAlgs){
         alert(errorMessage);
     }
 
-    document.getElementById("userDefinedAlgs").value = newList.join("\n");
+    document.getElementById("userDefinedAlgs").value = newListDisplay.join("\n");
     localStorage.setItem("userDefinedAlgs", newList.join("\n"));
     return newList;
 }
