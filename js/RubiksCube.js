@@ -278,6 +278,16 @@ deleteLast.addEventListener("click", function(){
     updateStats();
 });
 
+var addSelected = document.getElementById("addSelected");
+addSelected.addEventListener("click", function(){
+
+    algList = createAlgList(true);
+    for (let i = 0; i < algList.length; i++){
+        algList[i] = algList[i].split("/")[0]
+    }
+    document.getElementById("userDefinedAlgs").value += "\n" + algList.join("\n");
+});
+
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
     ctx.fillRect(stickerSize * x, stickerSize * y, stickerSize, stickerSize);
@@ -1181,14 +1191,18 @@ function findMistakesInUserAlgs(userAlgs){
     return newList;
 }
 
-function createAlgList(){
+function createAlgList(overrideUserDefined=false){
 
-    if (document.getElementById("userDefined").checked){
-        algList = findMistakesInUserAlgs(document.getElementById("userDefinedAlgs").value.split("\n"));
-        if (algList.length==0){
-            alert("No algs found");
+    if (!overrideUserDefined){
+        // Sometimes we want to ignore that the userdefined box is checked, and 
+        // retrieve whatever is selected from the trainer itself
+        if (document.getElementById("userDefined").checked){
+            algList = findMistakesInUserAlgs(document.getElementById("userDefinedAlgs").value.split("\n"));
+            if (algList.length==0){
+                alert("Please enter some algs into the User Defined Algs box.");
+            }
+            return algList;
         }
-        return algList;
     }
     var algList = [];
 
