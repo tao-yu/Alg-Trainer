@@ -12,6 +12,8 @@ var shouldRecalculateStatistics = true;
 
 createAlgsetPicker();
 
+const cubingTwistyPromise = import("https://cdn.cubing.net/js/cubing/twisty")
+
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
 }
@@ -119,7 +121,7 @@ useCustomColourScheme.addEventListener("click", function(){
     localStorage.setItem("useCustomColourScheme", this.checked);
 
     var algTest = algorithmHistory[historyIndex];
-    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+    updateVisualCube(algTest ? algTest.preorientation + " " + algTest.scramble : "");
 
     drawCube(cube.cubestate);    
 });
@@ -140,7 +142,7 @@ for (var i = 0; i < customColours.length; i++) {
         localStorage.setItem(this.id, this.value);
 
         var algTest = algorithmHistory[historyIndex];
-        updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+        updateVisualCube(algTest ? algTest.preorientation + " " + algTest.scramble : "");
 
         drawCube(cube.cubestate);
     });
@@ -157,7 +159,7 @@ resetCustomColourScheme.addEventListener("click", function(){
         }
 
         var algTest = algorithmHistory[historyIndex];
-        updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+        updateVisualCube(algTest ? algTest.preorientation + " " + algTest.scramble : "");
 
         drawCube(cube.cubestate);                
     }
@@ -185,13 +187,13 @@ hideTimer.addEventListener("click", function(){
 
 });
 
-var visualCube = document.getElementById("visualcube");
-visualCube.addEventListener("click", function(){
+var caseDisplay = document.getElementById("case-display");
+caseDisplay.addEventListener("click", function(){
     var currentView = localStorage.getItem("visualCubeView")
     var newView = currentView == ""? "plan": "";
     localStorage.setItem("visualCubeView", newView);
     var algTest = algorithmHistory[historyIndex];
-    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+    updateVisualCube(algTest ? algTest.preorientation + " " + algTest.scramble : "");
 });
 
 
@@ -692,8 +694,8 @@ function generateOrientation(){
 
         var rand1 = Math.floor(Math.random()*6);
         var rand2 = Math.floor(Math.random()*4);
-        var randomPart = firstRotation[rand1] + secondRotation[rand2];
-        if (randomPart == "x2z2"){
+        var randomPart = firstRotation[rand1] + " " + secondRotation[rand2];
+        if (randomPart == "x2 z2"){
             randomPart = "y2";
         }
         var fullOrientation = cn1 + randomPart; // Preorientation to perform starting from white top green front
@@ -712,8 +714,8 @@ function generateOrientation(){
     var rand2 = Math.floor(Math.random()*4);
 
     //console.log(cn1 + cn2.repeat(rand1) + cn3.repeat(rand2));
-    var randomPart = cn2.repeat(rand1) + cn3.repeat(rand2); // Random part of the orientation
-    var fullOrientation = cn1 + randomPart; // Preorientation to perform starting from white top green front
+    var randomPart = new Array(rand1).fill(cn2).join(" ") + " " + new Array(rand2).fill(cn3).join(" "); // Random part of the orientation
+    var fullOrientation = cn1 + " " + randomPart; // Preorientation to perform starting from white top green front
     return [fullOrientation, randomPart];
 }
 
@@ -799,7 +801,7 @@ function testAlg(algTest, addToHistory=true){
     doAlg(algTest.scramble);
     drawCube(cube.cubestate)
 
-    updateVisualCube(algTest.preorientation + algTest.scramble);
+    updateVisualCube(algTest.preorientation + " " + algTest.scramble);
 
     if (addToHistory){
         algorithmHistory.push(algTest);
@@ -948,7 +950,12 @@ function updateVisualCube(algorithm){
             stripLeadingHashtag(customColourF.value);
     }
 
-    document.getElementById("visualcube").src = imgsrc;
+    console.log("x2 " + algorithm)
+    console.log(document.getElementById("case-display"))
+    cubingTwistyPromise.then(() => {
+        document.getElementById("case-display").alg = "x2 " + algorithm;
+        document.getElementById("case-display").visualization = (view === "plan" ? "experimental-2D-LL" : "3D");
+    })
 }
 
 function displayAlgorithm(algTest, reTest=true){    
