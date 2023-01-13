@@ -1100,7 +1100,7 @@ var zbll_juliette = {'T1': ["R U R' U R U2 R' U2 R' U' R U' R' U2 R/U' R U R' U'
   "U F U R U2 R' U R2 D R' U R D' R2 F'/U' R' U R U' R' U R U R' U' R2 D R' U R D' R'",
   "U F' R U2 R' U2 R' F R U R U' R'",
   "U2 F R U' R' U' R U2 R' U' F'",
-  "U2 R' F R U R U' R' F' U R U R' U R U' R'/r' R' F R F' M' U' R U' R' U R/U2 r’ D’ F r U’ r’ F’ r U’ r’ F D r",
+  "U2 R' F R U R U' R' F' U R U R' U R U' R'/r' R' F R F' M' U' R U' R' U R/U2 r' D' F r U' r' F' r U' r' F D r",
   "r' F R' F' (r R) U2 R' U R U R' U R",
   "R' U' R F U' R' U' R U F' R' U2 R",
   "U' F R' F' R U R U' R' F U R U' R' U R U' R' F'",
