@@ -57,6 +57,7 @@ var defaults = {"useVirtual":false,
                 "goInOrder":false,
                 "goToNextCase":false,
                 "mirrorAllAlgs":false,
+                "mirrorAllAlgsAcrossS":false,
                 "colourneutrality1":"",
                 "colourneutrality2":"x2",
                 "colourneutrality3":"y",
@@ -232,6 +233,11 @@ goToNextCase.addEventListener("click", function(){
 var mirrorAllAlgs = document.getElementById("mirrorAllAlgs");
 mirrorAllAlgs.addEventListener("click", function(){
     localStorage.setItem("mirrorAllAlgs", this.checked);
+});
+
+var mirrorAllAlgsAcrossS = document.getElementById("mirrorAllAlgsAcrossS");
+mirrorAllAlgsAcrossS.addEventListener("click", function(){
+    localStorage.setItem("mirrorAllAlgsAcrossS", this.checked);
 });
 
 var userDefined = document.getElementById("userDefined");
@@ -757,7 +763,10 @@ function generateAlgTest(){
     var rawAlgs = rawAlgStr.split("/");
     rawAlgs = fixAlgorithms(rawAlgs);
     if (mirrorAllAlgs.checked){
-        rawAlgs = mirrorAlgsAcrossM(rawAlgs);
+        rawAlgs = mirrorAlgsAcrossAxis(rawAlgs, axis="M");
+    }
+    if (mirrorAllAlgsAcrossS.checked){
+        rawAlgs = mirrorAlgsAcrossAxis(rawAlgs, axis="S");
     }
     var solutions;
     if (randAUF){
@@ -1231,9 +1240,14 @@ function createAlgList(overrideUserDefined=false){
     return algList;
 }
 
-function mirrorAlgsAcrossM(algList){
+function mirrorAlgsAcrossAxis(algList, axis="M"){
     algList = fixAlgorithms(algList);
-    return algList.map(x => alg.cube.mirrorAcrossM(x));
+    if (axis=="M"){
+        return algList.map(x => alg.cube.mirrorAcrossM(x));
+    }
+    else {
+        return algList.map(x => alg.cube.mirrorAcrossS(x));
+    }
 }
 
 function averageMovecount(algList, metric, includeAUF){
