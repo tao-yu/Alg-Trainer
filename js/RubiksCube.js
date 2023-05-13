@@ -11,10 +11,10 @@ var algorithmHistory = [];
 var shouldRecalculateStatistics = true;
 
 createAlgsetPicker();
-
+/*
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
-}
+}*/
 Cube.initSolver();
 
 var connectGiiker = document.getElementById("connectGiiker");
@@ -1404,8 +1404,9 @@ function nextScramble(displayReady=true){
 
 var historyIndex;
 
-document.onkeyup = function(event) {
-    if (event.keyCode == 32) { //space
+
+function release(event) {
+    if (event.key == " " || event.type=="touchend") { //space
 
         if (document.activeElement.type == "textarea"){
             return;
@@ -1426,11 +1427,13 @@ document.onkeyup = function(event) {
         }
     }
 };
+document.onkeyup = release
+document.getElementById("touchStartArea").addEventListener("touchend", release);
 
 var doNothingNextTimeSpaceIsPressed = true;
-document.onkeydown = function(event) { //Stops the screen from scrolling down when you press space
+function press(event) { //Stops the screen from scrolling down when you press space
 
-    if (event.keyCode == 32) { //space
+    if (event.key == " " || event.type == "touchstart") { //space
         if (document.activeElement.type == "textarea"){
             return;
         }
@@ -1474,6 +1477,9 @@ document.onkeydown = function(event) { //Stops the screen from scrolling down wh
     }
 
 };
+document.onkeydown = press;
+document.getElementById("touchStartArea").addEventListener("touchstart", press);
+
 
 class SolveTime {
     constructor(time, penalty) {
@@ -1506,7 +1512,6 @@ class SolveTime {
     }
 
 }
-
 
 
 
