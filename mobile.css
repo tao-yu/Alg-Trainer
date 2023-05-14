@@ -1,16 +1,17 @@
 html {
     height: 100%;
-    
+
     overflow: hidden;
 }
 
 body {
-    
+
     font-family: Arial;
     background: black;
     min-height: 100vh;
     overflow: hidden;
     display: flex;
+    margin: 3px;
 }
 
 p {
@@ -19,7 +20,7 @@ p {
     color: white;
 }
 
-hr { 
+hr {
     display: block;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -27,7 +28,7 @@ hr {
     margin-right: auto;
     border-style: inset;
     border-width: 0.5px;
-    border-color:#303030;
+    border-color: #303030;
     width: 100%;
 }
 
@@ -44,12 +45,12 @@ hr {
 #flexbox {
     display: flex;
     flex-direction: column;
-    min-height:100vh
+    min-height: 100vh
 }
 
 p.scramble {
     height: 10%;
-    vertical-align: middle; 
+    vertical-align: middle;
     text-align: center;
 }
 
@@ -57,27 +58,29 @@ table {
     border-collapse: collapse;
 }
 
-th, td, tr{
+th,
+td,
+tr {
     border: none;
 }
 
 #touchStartArea {
-    margin:0;
-    padding:0;
-    width:100%;
-    height:90%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 90%;
     flex: 1;
-    
+
 }
 
 #page {
-    
-    margin:0;
-    padding:0;
-    
+
+    margin: 0;
+    padding: 0;
+
     display: none;
-    height:100%;
-    width:100%;
+    height: 100%;
+    width: 100%;
     min-height: 100vh;
 
 }
@@ -90,7 +93,7 @@ th, td, tr{
 
 .column_middle {
     text-align: center;
-    width: 100%;  
+    width: 100%;
     height: 100%;
 }
 
@@ -102,8 +105,8 @@ th, td, tr{
     display: none;
 }
 
-.algsetpicker{
-    width:70%;
+.algsetpicker {
+    width: 70%;
 }
 
 a:link {
@@ -134,13 +137,23 @@ a:visited {
 }
 
 @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Add animation to "page content" */
@@ -153,34 +166,52 @@ a:visited {
 }
 
 @-webkit-keyframes animatebottom {
-    from { bottom:-100px; opacity:0 } 
-    to { bottom:0px; opacity:1 }
+    from {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0px;
+        opacity: 1
+    }
 }
 
-@keyframes animatebottom { 
-    from{ bottom:-100px; opacity:0 } 
-    to{ bottom:0; opacity:1 }
+@keyframes animatebottom {
+    from {
+        bottom: -100px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
 }
 
 
-#controls {   
-    position: fixed;
-    left: 50%;
-    bottom: 0;
-    transform: translate(-50%, 0);
-    margin: 0 auto;
-}
 
-#controls > button {
-    background-color: grey; 
+.big_button {
+    background-color: grey;
     border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    margin: 3px;
+    font-size: 18px;
+}
+
+.arrow_button {
+    flex: 1;
+    padding: 10px;
 }
 
 
+.on_screen_controls {
+    flex: 0.05;
+    display: flex;
+    
+}
 
+.flex-item {
+    flex: 2;
+    padding: 10px;
+}

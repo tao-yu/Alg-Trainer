@@ -16,6 +16,14 @@
     <div style="display:none;" id="page" class="animate-bottom">
         <div id="flexbox">
 
+            <div class="on_screen_controls">
+                <button id="onscreenLeft" class="big_button arrow_button">&lt</button>
+                <button class="big_button flex-item" onclick="displayAlgorithmForPreviousTest()">Solution</button>
+                <button class="big_button flex-item" onclick="nextScramble()">Next</button>
+                <button id="onscreenRight" class="big_button arrow_button">&gt</button>
+            </div>
+
+
             <p id="scramble" class=scramble>Scramble</p>
             <hr>
             <div id="touchStartArea">
@@ -251,6 +259,11 @@
     <script src="js/alg_list.js"></script>
     <script src="js/keymaps.js"></script>
     <script src="js/RubiksCube.js"></script>
+    <script>
+        var goToNextCase = document.getElementById("goToNextCase");
+        goToNextCase.checked = true;
+
+    </script>
 </body>
 
 </html>

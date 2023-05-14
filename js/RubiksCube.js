@@ -1325,6 +1325,37 @@ var listener = new Listener();
 
 lastKeyMap = null;
 
+
+function handleLeftButton() {
+    if (algorithmHistory.length<=1 || timerIsRunning){
+        return;
+    }
+    historyIndex--;
+
+    if (historyIndex<0){
+        alert('Reached end of solve log');
+        historyIndex = 0;
+    }
+    displayAlgorithmFromHistory(historyIndex);
+}
+
+function handleRightButton() {
+    if (timerIsRunning){
+        return;
+    }
+    historyIndex++;
+    if (historyIndex>=algorithmHistory.length){
+        nextScramble();
+        doNothingNextTimeSpaceIsPressed = false;
+        return;
+    }
+
+    displayAlgorithmFromHistory(historyIndex);
+}
+
+document.getElementById("onscreenLeft").addEventListener("click", handleLeftButton);
+document.getElementById("onscreenRight").addEventListener("click", handleRightButton);
+
 function updateControls() {
     let keymaps = getKeyMaps();
 
@@ -1356,31 +1387,8 @@ function updateControls() {
         nextScramble();
         doNothingNextTimeSpaceIsPressed = false;
     });
-    listener.register(new KeyCombo("ArrowLeft"), function() {
-        if (algorithmHistory.length<=1 || timerIsRunning){
-            return;
-        }
-        historyIndex--;
-
-        if (historyIndex<0){
-            alert('Reached end of solve log');
-            historyIndex = 0;
-        }
-        displayAlgorithmFromHistory(historyIndex);
-    });
-    listener.register(new KeyCombo("ArrowRight"), function() {
-        if (timerIsRunning){
-            return;
-        }
-        historyIndex++;
-        if (historyIndex>=algorithmHistory.length){
-            nextScramble();
-            doNothingNextTimeSpaceIsPressed = false;
-            return;
-        }
-
-        displayAlgorithmFromHistory(historyIndex);
-    });
+    listener.register(new KeyCombo("ArrowLeft"), handleLeftButton);
+    listener.register(new KeyCombo("ArrowRight"), handleRightButton);
 }
 
 setInterval(updateControls, 300);
