@@ -189,6 +189,7 @@ a:visited {
 }
 
 /* Add animation to "page content" */
+/*
 .animate-bottom {
     position: relative;
     -webkit-animation-name: animatebottom;
@@ -219,7 +220,7 @@ a:visited {
         bottom: 0;
         opacity: 1
     }
-}
+}*/
 
 
 
