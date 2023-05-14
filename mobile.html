@@ -13,8 +13,133 @@
 
 
     <div id="loader"></div>
+
+    <div id="left_popup">
+        <div class=column_left>
+
+            <select id="algsetpicker" class=algsetpicker>
+            </select>
+            <div id="cboxes"></div>
+            <br>Leave all checkboxes unchecked to test on the full algset.
+
+            <br>
+
+            <h2>Settings</h2>
+            <form action="javascript:void(0);">
+
+                <input id="useVirtual" type="checkbox">Use Virtual Cube<br>
+                <input id="hideTimer" type="checkbox">Hide timer<br>
+                <input id="showScramble" type="checkbox">Show Scramble<br>
+                <input id="realScrambles" type="checkbox">Use Real Scrambles<br>
+                <input id="randAUF" type="checkbox">Random AUF<br>
+                <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps <br>
+                <input id="goInOrder" type="checkbox">Go in order<br>
+                <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer <br>
+                <input id="mirrorAllAlgs" type="checkbox">Mirror all algs across the M slice<br>
+                <input id="mirrorAllAlgsAcrossS" type="checkbox">Mirror all algs across the S slice<br>
+                Line style <select id="lines">
+                    <option value="none"> None </option>
+                    <option selected value="thin-black"> Thin black </option>
+                    <option value="thick-black"> Thick black </option>
+                    <option value="thin-gray"> Thin gray </option>
+                    <option value="thick-gray"> Thick gray </option>
+                </select> <br>
+                Virtual cube size: <select id="cubeType">
+                    <option value="3x3" default>3x3</option>
+                    <option value="2x2">2x2</option>
+                </select><br><br>
+                <button id="connectGiiker">Connect Giiker Cube</button><br>
+
+
+                <input id="userDefined" type="checkbox">Use user defined algset <button id="addSelected">Add
+                    currently selected algs</button><br>
+                <textarea id="userDefinedAlgs" cols=50 rows=50 style="display:none" onfocus="listener.stop_listening();"
+                    onblur="listener.listen();"
+                    placeholder="Place one alg per line. Lines starting with # will be ignored"></textarea>
+                <br>
+
+                Preorientation: <br>
+
+                <input id="fullCN" type="checkbox"> Full colour neutrality<br>
+                or<br>
+                Starting from WCA orientation: <br>
+                First do one
+                <input type="text" id="colourneutrality1" value="" onfocus="listener.stop_listening();"
+                    onblur="listener.listen();" size="1">
+                rotation<br>
+
+                then do a random number of
+                <input type="text" id="colourneutrality2" value="" onfocus="listener.stop_listening();"
+                    onblur="listener.listen();" size="1">
+                rotations, <br>
+
+                and finally do a random number of
+                <input type="text" id="colourneutrality3" value="" onfocus="listener.stop_listening();"
+                    onblur="listener.listen();" size="1">
+                rotations.<br>
+                <br>
+                <a href="scramblingNote.html">Note on preorientation settings</a>
+                <br><br>
+
+
+                <input id="useCustomColourScheme" type="checkbox"><label for="useCustomColourScheme"> Use
+                    custom
+                    colour scheme:</label><br>
+                Enter colour names, or RGB values as #RRGGBB.<br>
+                <table>
+                    <tr>
+                        <td><label for="customColourU">U:</label></td>
+                        <td><input type="text" id="customColourU" value="" onfocus="listener.stop_listening();"
+                                onblur="listener.listen();" size="8">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="customColourD">D:</label></td>
+                        <td><input type="text" id="customColourD" value="" onfocus="listener.stop_listening();"
+                                onblur="listener.listen();" size="8">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="customColourF">F:</label></td>
+                        <td><input type="text" id="customColourF" value="" onfocus="listener.stop_listening();"
+                                onblur="listener.listen();" size="8">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="customColourB">B:</label></td>
+                        <td><input type="text" id="customColourB" value="" onfocus="listener.stop_listening();"
+                                onblur="listener.listen();" size="8">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="customColourR">R:</label></td>
+                        <td><input type="text" id="customColourR" value="" onfocus="listener.stop_listening();"
+                                onblur="listener.listen();" size="8">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="customColourL">L:</label></td>
+                        <td><input type="text" id="customColourL" value="" onfocus="listener.stop_listening();"
+                                onblur="listener.listen();" size="8">
+                        </td>
+                    </tr>
+                </table>
+                <button id="resetCustomColourScheme" type="button">Reset</button>
+
+            </form>
+
+
+
+        </div>
+    </div>
     <div style="display:none;" id="page" class="animate-bottom">
         <div id="flexbox">
+
+            <div class="sidebar_buttons">
+                <button id="left_popup_button" class="sidebar_button">Settings</button>
+                <p></p>
+                <button id="right_popup_button" class="sidebar_button">Times</button>
+            </div>
 
             <div class="on_screen_controls">
                 <button id="onscreenLeft" class="big_button arrow_button">&lt</button>
@@ -27,150 +152,6 @@
             <p id="scramble" class=scramble>Scramble</p>
             <hr>
             <div id="touchStartArea">
-                <div class=column_left>
-
-                    <select id="algsetpicker" size=18 class=algsetpicker>
-                    </select>
-                    <div id="cboxes"></div>
-                    <br>Leave all checkboxes unchecked to test on the full algset.
-
-                    <br>
-
-                    <h2>Settings</h2>
-                    <form action="javascript:void(0);">
-
-                        <input id="useVirtual" type="checkbox">Use Virtual Cube<br>
-                        <input id="hideTimer" type="checkbox">Hide timer<br>
-                        <input id="showScramble" type="checkbox">Show Scramble<br>
-                        <input id="realScrambles" type="checkbox">Use Real Scrambles<br>
-                        <input id="randAUF" type="checkbox">Random AUF<br>
-                        <input id="prescramble" type="checkbox" checked="true">Scramble subsequent steps (requires real
-                        scrambles to be checked)<br>
-                        <input id="goInOrder" type="checkbox">Go in order<br>
-                        <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer (press the left
-                        arrow
-                        key to view previous case)<br>
-                        <input id="mirrorAllAlgs" type="checkbox">Mirror all algs across the M slice<br>
-                        <input id="mirrorAllAlgsAcrossS" type="checkbox">Mirror all algs across the S slice<br>
-                        Line style <select id="lines">
-                            <option value="none"> None </option>
-                            <option selected value="thin-black"> Thin black </option>
-                            <option value="thick-black"> Thick black </option>
-                            <option value="thin-gray"> Thin gray </option>
-                            <option value="thick-gray"> Thick gray </option>
-                        </select> <br>
-                        Virtual cube size: <select id="cubeType">
-                            <option value="3x3" default>3x3</option>
-                            <option value="2x2">2x2</option>
-                        </select><br><br>
-                        <button id="connectGiiker">Connect Giiker Cube</button><br>
-
-                        This feature works with the Giiker Cube i3S and i3SE versions. Rubik's Connect, Gan i and GoCube
-                        smart cubes will not work with this site.<br><br>
-
-                        When a giiker cube is connected, all moves made on the giiker will be reflected on the virtual
-                        cube.
-                        The giiker cube should be held with white on top and green in front.
-                        <br><br>
-
-                        <input id="userDefined" type="checkbox">Use user defined algset <button id="addSelected">Add
-                            currently selected algs</button><br>
-                        <textarea id="userDefinedAlgs" cols=50 rows=50 style="display:none"
-                            onfocus="listener.stop_listening();" onblur="listener.listen();"
-                            placeholder="Place one alg per line. Lines starting with # will be ignored"></textarea>
-                        <br>
-
-                        Preorientation: <br>
-
-                        <input id="fullCN" type="checkbox"> Full colour neutrality<br>
-                        or<br>
-                        Starting from WCA orientation: <br>
-                        First do one
-                        <input type="text" id="colourneutrality1" value="" onfocus="listener.stop_listening();"
-                            onblur="listener.listen();" size="1">
-                        rotation<br>
-
-                        then do a random number of
-                        <input type="text" id="colourneutrality2" value="" onfocus="listener.stop_listening();"
-                            onblur="listener.listen();" size="1">
-                        rotations, <br>
-
-                        and finally do a random number of
-                        <input type="text" id="colourneutrality3" value="" onfocus="listener.stop_listening();"
-                            onblur="listener.listen();" size="1">
-                        rotations.<br>
-                        <br>
-                        <a href="scramblingNote.html">Note on preorientation settings</a>
-                        <br><br>
-
-
-                        <input id="useCustomColourScheme" type="checkbox"><label for="useCustomColourScheme"> Use custom
-                            colour scheme:</label><br>
-                        Enter colour names, or RGB values as #RRGGBB.<br>
-                        <table>
-                            <tr>
-                                <td><label for="customColourU">U:</label></td>
-                                <td><input type="text" id="customColourU" value="" onfocus="listener.stop_listening();"
-                                        onblur="listener.listen();" size="8"> </td>
-                            </tr>
-                            <tr>
-                                <td><label for="customColourD">D:</label></td>
-                                <td><input type="text" id="customColourD" value="" onfocus="listener.stop_listening();"
-                                        onblur="listener.listen();" size="8"> </td>
-                            </tr>
-                            <tr>
-                                <td><label for="customColourF">F:</label></td>
-                                <td><input type="text" id="customColourF" value="" onfocus="listener.stop_listening();"
-                                        onblur="listener.listen();" size="8"> </td>
-                            </tr>
-                            <tr>
-                                <td><label for="customColourB">B:</label></td>
-                                <td><input type="text" id="customColourB" value="" onfocus="listener.stop_listening();"
-                                        onblur="listener.listen();" size="8"> </td>
-                            </tr>
-                            <tr>
-                                <td><label for="customColourR">R:</label></td>
-                                <td><input type="text" id="customColourR" value="" onfocus="listener.stop_listening();"
-                                        onblur="listener.listen();" size="8"> </td>
-                            </tr>
-                            <tr>
-                                <td><label for="customColourL">L:</label></td>
-                                <td><input type="text" id="customColourL" value="" onfocus="listener.stop_listening();"
-                                        onblur="listener.listen();" size="8"> </td>
-                            </tr>
-                        </table>
-                        <button id="resetCustomColourScheme" type="button">Reset</button>
-
-                    </form>
-
-
-
-                    <h2>Algorithm Credits</h2>
-
-                    For all of the algs in this trainer in spreadsheet form, <a
-                        href="https://drive.google.com/drive/folders/1bK3wUbRcqYZX8IGkp7Lk0V8HLk-KSK6N">click here</a>
-                    <br><br>
-                    ZBLL Algorithms from Jabari Nuruddin's <a
-                        href="https://drive.google.com/file/d/0B5wWQGM9R38gMG9SSi1Jc1VHdk0/view?usp=sharing">PDF</a>
-                    <br>
-                    ZBLS Algorithms from Chad Battens <a
-                        href="https://docs.google.com/spreadsheets/d/1s8Q2VM2c1eV3oLIxFfM4exvABO0AcCeMCUdMiYKnzC0/edit#gid=0">Spreadsheet</a>
-                    with additional algs added and generated by me.
-                    <br>
-                    Ribbon Algorithms by Justin Taylor: <a
-                        href="https://drive.google.com/file/d/15pjMnEGbF3hkn_YBq2ZeNxIF3GajyoiU/view">TOLS</a>, <a
-                        href="https://drive.google.com/file/d/148i4z9K--45G_-RH0f5ayC5Za8cPMyy5/view">TTLL</a>
-                    <br>
-                    One Look Wednesdays: Daniel Rose-Levine's <a
-                        href="https://www.youtube.com/watch?v=F7X8qLCBvUQ">Youtube
-                        series</a>
-                    <br>
-                    Other algorithms from <a href="http://algdb.net/">algdb</a> unless stated otherwise.
-                    <br>
-
-
-
-                </div>
 
 
 

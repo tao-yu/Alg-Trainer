@@ -85,10 +85,26 @@ tr {
 
 }
 
-.column_left {
-    float: left;
-    width: 0%;
+#left_popup {
     display: none;
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    height: 80vh;
+    z-index: 9999;
+    background-color: rgb(90, 90, 90);
+}
+
+.column_left {
+    position: absolute;
+    height: 70vh;
+    overflow: auto;
+    padding: 20px;
+    background-color: rgb(90, 90, 90);
+    color: white;
+    font-size: 18px;
 }
 
 .column_middle {
@@ -208,7 +224,21 @@ a:visited {
 .on_screen_controls {
     flex: 0.05;
     display: flex;
-    
+
+}
+
+.sidebar_buttons {
+    flex: 0.025;
+    display: flex;
+}
+
+.sidebar_button {
+    flex: 1;
+    margin: 3px;
+    background-color: grey;
+    color: white;
+    border: none;
+    font-size: 18px;
 }
 
 .flex-item {

@@ -294,6 +294,18 @@ addSelected.addEventListener("click", function(){
     document.getElementById("userDefinedAlgs").value += "\n" + algList.join("\n");
 });
 
+
+const leftPopUpButton = document.getElementById("left_popup_button");
+leftPopUpButton.addEventListener("click", function(){
+    const leftPopUp = document.getElementById("left_popup");
+    if (leftPopUp.style.display == "block"){
+        leftPopUp.style.display = "none";
+    }
+    else {
+        leftPopUp.style.display = "block";
+    }
+});
+
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
     ctx.fillRect(stickerSize * x, stickerSize * y, stickerSize, stickerSize);
