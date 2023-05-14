@@ -294,18 +294,37 @@ addSelected.addEventListener("click", function(){
     document.getElementById("userDefinedAlgs").value += "\n" + algList.join("\n");
 });
 
+try{ // only for mobile
+    const leftPopUpButton = document.getElementById("left_popup_button");
+    const rightPopUpButton = document.getElementById("right_popup_button");
+    leftPopUpButton.addEventListener("click", function(){
 
-const leftPopUpButton = document.getElementById("left_popup_button");
-leftPopUpButton.addEventListener("click", function(){
-    const leftPopUp = document.getElementById("left_popup");
-    if (leftPopUp.style.display == "block"){
-        leftPopUp.style.display = "none";
-    }
-    else {
-        leftPopUp.style.display = "block";
-    }
-});
+        const leftPopUp = document.getElementById("left_popup");
+        const rightPopUp = document.getElementById("right_popup");
+        if (leftPopUp.style.display == "block"){
+            leftPopUp.style.display = "none";
+        }
+        else {
+            leftPopUp.style.display = "block";
+            rightPopUp.style.display = "none";
+        }
+    });
 
+    rightPopUpButton.addEventListener("click", function(){
+
+        const leftPopUp = document.getElementById("left_popup");
+        const rightPopUp = document.getElementById("right_popup");
+        if (rightPopUp.style.display == "block"){
+            rightPopUp.style.display = "none";
+        }
+        else {
+            rightPopUp.style.display = "block";
+            leftPopUp.style.display = "none";
+        }
+    });
+} catch (error) {
+
+}
 function fillSticker(x, y, colour) {
     ctx.fillStyle = colour;
     ctx.fillRect(stickerSize * x, stickerSize * y, stickerSize, stickerSize);
@@ -1365,8 +1384,12 @@ function handleRightButton() {
     displayAlgorithmFromHistory(historyIndex);
 }
 
+try { //only for mobile
 document.getElementById("onscreenLeft").addEventListener("click", handleLeftButton);
 document.getElementById("onscreenRight").addEventListener("click", handleRightButton);
+} catch (error) {
+
+}
 
 function updateControls() {
     let keymaps = getKeyMaps();
@@ -1448,7 +1471,11 @@ function release(event) {
     }
 };
 document.onkeyup = release
+try { //only for mobile
 document.getElementById("touchStartArea").addEventListener("touchend", release);
+} catch(error) {
+
+}
 
 var doNothingNextTimeSpaceIsPressed = true;
 function press(event) { //Stops the screen from scrolling down when you press space
@@ -1498,7 +1525,11 @@ function press(event) { //Stops the screen from scrolling down when you press sp
 
 };
 document.onkeydown = press;
-document.getElementById("touchStartArea").addEventListener("touchstart", press);
+try { //only for mobile
+    document.getElementById("touchStartArea").addEventListener("touchstart", press);
+} catch (error) {
+
+}
 
 
 class SolveTime {
