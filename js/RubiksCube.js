@@ -73,7 +73,9 @@ var defaults = {"useVirtual":false,
                 "customColourB":"blue",
                 "customColourR":"red",
                 "customColourL":"orange",
-                "visualCubeView":"plan"
+                "visualCubeView":"plan",
+                "randomizeSMirror":false,
+                "randomizeMMirror":false,
                };
 
 for (var setting in defaults){ 
@@ -214,6 +216,16 @@ randAUF.addEventListener("click", function(){
 var prescramble = document.getElementById("prescramble");
 prescramble.addEventListener("click", function(){
     localStorage.setItem("prescramble", this.checked);
+});
+
+var randomizeSMirror = document.getElementById("randomizeSMirror");
+randomizeSMirror.addEventListener("click", function(){
+    localStorage.setItem("randomizeSMirror", this.checked);
+});
+
+var randomizeMMirror = document.getElementById("randomizeMMirror");
+randomizeMMirror.addEventListener("click", function(){
+    localStorage.setItem("randomizeMMirror", this.checked);
 });
 
 var goInOrder = document.getElementById("goInOrder");
@@ -793,12 +805,27 @@ function generateAlgTest(){
     var rawAlgStr = randomFromList(algList);
     var rawAlgs = rawAlgStr.split("/");
     rawAlgs = fixAlgorithms(rawAlgs);
-    if (mirrorAllAlgs.checked){
+
+    //Do non-randomized mirroring first. This allows a user to practise left slots, back slots, front slots, rights slots
+    // etc for F2L like algsets
+    if (mirrorAllAlgs.checked && !randomizeMMirror.checked) {
         rawAlgs = mirrorAlgsAcrossAxis(rawAlgs, axis="M");
     }
-    if (mirrorAllAlgsAcrossS.checked){
+    if (mirrorAllAlgsAcrossS.checked && !randomizeSMirror.checked) {
         rawAlgs = mirrorAlgsAcrossAxis(rawAlgs, axis="S");
     }
+    if (mirrorAllAlgs.checked && randomizeMMirror.checked) {
+        if (Math.random() > 0.5){
+            rawAlgs = mirrorAlgsAcrossAxis(rawAlgs, axis="M");
+        }
+    }
+    if (mirrorAllAlgsAcrossS.checked && randomizeSMirror.checked) {
+        if (Math.random() > 0.5){
+            rawAlgs = mirrorAlgsAcrossAxis(rawAlgs, axis="S");
+        }
+    }
+
+
     var solutions;
     if (randAUF){
         solutions = addAUFs(rawAlgs);
