@@ -604,6 +604,7 @@ function obfusticate(algorithm, numPremoves=3, minLength=16){
     //Cube.initSolver();
     var premoves = getPremoves(numPremoves);
     var rc = new RubiksCube();
+
     rc.doAlgorithm(alg.cube.invert(premoves) + algorithm);
     orient = alg.cube.invert(rc.wcaOrient());
     var solution = alg.cube.simplify(premoves + (alg.cube.invert(rc.solution())) + orient).replace(/2'/g, "2");
