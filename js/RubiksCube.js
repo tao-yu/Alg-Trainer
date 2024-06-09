@@ -599,7 +599,7 @@ L' U' R L2 R2 D F2 D' R2 U B2 R2 F2 D' L2 R' D' L' B2 R F2 R U2
 
 
 */
-function obfusticate(algorithm, numPremoves=3, minLength=16){
+function obfuscate(algorithm, numPremoves=3, minLength=16){
 
     //Cube.initSolver();
     var premoves = getPremoves(numPremoves);
@@ -607,7 +607,7 @@ function obfusticate(algorithm, numPremoves=3, minLength=16){
     rc.doAlgorithm(alg.cube.invert(premoves) + algorithm);
     orient = alg.cube.invert(rc.wcaOrient());
     var solution = alg.cube.simplify(premoves + (alg.cube.invert(rc.solution())) + orient).replace(/2'/g, "2");
-    return solution.split(" ").length >= minLength ? solution : obfusticate(algorithm, numPremoves+1, minLength);
+    return solution.split(" ").length >= minLength ? solution : obfuscate(algorithm, numPremoves+1, minLength);
 
 }
 
@@ -624,15 +624,15 @@ function addAUFs(algArr){
     return algArr;
 }
 
-function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
+function generateAlgScramble(raw_alg,set,obfuscateAlg,shouldPrescramble){
     
     if (set == "F3L" && !document.getElementById("userDefined").checked){
         return Cube.random().solve();
     }
-    if (!obfusticateAlg){
+    if (!obfuscateAlg){
         return alg.cube.invert(raw_alg);
-    } else if (!shouldPrescramble){//if realscrambles not checked but should not prescramble, just obfusticate the inverse
-        return obfusticate(alg.cube.invert(raw_alg));
+    } else if (!shouldPrescramble){//if realscrambles not checked but should not prescramble, just obfuscate the inverse
+        return obfuscate(alg.cube.invert(raw_alg));
     }
 
     switch(set){
@@ -698,14 +698,14 @@ function generateAlgScramble(raw_alg,set,obfusticateAlg,shouldPrescramble){
         case "TDR (Trangium, Yash Mehta)":
             return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true, getRandAuf("D")); // ZBLL-ABF scramble
         default:  
-            return obfusticate(alg.cube.invert(raw_alg));
+            return obfuscate(alg.cube.invert(raw_alg));
     }
 
 }
 
 
 
-function generatePreScramble(raw_alg, generator, times, obfusticateAlg, premoves=""){
+function generatePreScramble(raw_alg, generator, times, obfuscateAlg, premoves=""){
 
     var genArray = generator.split(",");
 
@@ -718,8 +718,8 @@ function generatePreScramble(raw_alg, generator, times, obfusticateAlg, premoves
     }
     scramble += alg.cube.invert(raw_alg);
 
-    if (obfusticateAlg){
-        return obfusticate(scramble);
+    if (obfuscateAlg){
+        return obfuscate(scramble);
     }
     else {
         return scramble;
@@ -793,7 +793,7 @@ function correctRotation(alg) {
 function generateAlgTest(){
 
     var set = document.getElementById("algsetpicker").value;
-    var obfusticateAlg = document.getElementById("realScrambles").checked;
+    var obfuscateAlg = document.getElementById("realScrambles").checked;
     var shouldPrescramble = document.getElementById("prescramble").checked;
     var randAUF = document.getElementById("randAUF").checked;
 
@@ -833,7 +833,7 @@ function generateAlgTest(){
         solutions = rawAlgs;
     }
 
-    var scramble = generateAlgScramble(correctRotation(solutions[0]),set,obfusticateAlg,shouldPrescramble);
+    var scramble = generateAlgScramble(correctRotation(solutions[0]),set,obfuscateAlg,shouldPrescramble);
     if (set == "F3L"){
         solutions = [alg.cube.invert(scramble).replace(/2'/g, "2")];
     }
