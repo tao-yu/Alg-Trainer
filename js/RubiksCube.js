@@ -580,36 +580,158 @@ function getPremoves(length) {
     return sequence;
 }
 
-/*
 
-This will return an algorithm that has the same effect as algorithm, but with different moves.
-This requires https://github.com/ldez/cubejs to work. The Cube.initSolver(); part takes a long time, so I removed it for the time being. 
+function obfuscate(algorithm, numPremoves=3, minLength=16, numPostmoves=0){
 
-Generate the 3 premoves
-Start with a solved cube
-Do (the inverse of the premoves + the scramble algorithm) on the cube
-Find the solution to the cubestate
-Return the premoves + the inverse of the solution, canceling any redundant moves
-If the solution it finds is under 16 moves, it scraps that solution, then starts from scratch,
-but with 4 random premoves. Then if that solution is still under 16 moves, 
-then it starts from scratch again but with 5 random premoves. And so on...
+    /*
 
-B U F' B2 F2 D' L2 F2 U2 B2 R2 U2 F2 D' F' U' B2 U B U2
-L' U' R L2 R2 D F2 D' R2 U B2 R2 F2 D' L2 R' D' L' B2 R F2 R U2
+    Henceforth let A = B, where A and B are algs, mean that A and B are exactly equivalent,
+    both in moves and in effect. 
+    
+    Let A ~ B mean that alg A and alg B have the same effect on a cube, but A=B evaluates to false
+
+    i.e. if A = F R U' R' U2 F' r' F L and B = F2 
+    Then A ~ B is a true statement. However A = B is False (both algs have the same effect but are written differently)
+
+    Let sol(alg)~alg' be a function which returns the solution to a cube scrambled by alg
+    and ob(alg)~alg to be a function which returns a series of moves that has the same effect as alg
+
+    sol and ob are evaluated by using a cube solver - so we want to avoid evaluating them more than necessary. Evaluating alg' is 
+    cheap, despite the fact that alg' ~ sol(alg)
+
+    This function first generates a series of premoves and a random series of postmoves, which are both free from rotations.
+
+    The goal of this function is to generate an algorithm obAlg such that
+
+    obAlg ~ alg
+    and 
+    obAlg = premoves + moves + postmoves
+
+    cube.js provides us with a sol function. However it only works for algorithms that return the cube to their original 
+    orientation. Let orient(alg) be be such that alg + orient(alg), is an alg which ends in its original orientation, and 
+    orient(alg) consists of only rotations
+
+    We can construct obAlg as follows:
+    
+    alg ~ premoves + ob(premoves' + alg + postmoves') + postmoves
+    alg ~ premoves + sol(postmoves + alg' + premoves) + postmoves
+    Let o = orient(postmoves + alg' + premoves)
+    
+    alg ~ premoves + sol(postmoves + alg' + premoves + o + o') + postmoves
+    alg ~ premoves + o + sol(postmoves + alg' + premoves + o) + postmoves
+
+    Having rotations in the middle is ugly, so we use the moveRotationsToStart function
+    to move them to the start using some alg manipulation
+
+    */
 
 
-*/
-function obfuscate(algorithm, numPremoves=3, minLength=16){
 
-    //Cube.initSolver();
     var premoves = getPremoves(numPremoves);
-    var rc = new RubiksCube();
-    rc.doAlgorithm(alg.cube.invert(premoves) + algorithm);
-    orient = alg.cube.invert(rc.wcaOrient());
-    var solution = alg.cube.simplify(premoves + (alg.cube.invert(rc.solution())) + orient).replace(/2'/g, "2");
-    return solution.split(" ").length >= minLength ? solution : obfuscate(algorithm, numPremoves+1, minLength);
+    var postmoves = getPremoves(numPostmoves);
+    console.log(`Premoves: ${premoves}`)
+    console.log(`Postmoves: ${postmoves}`)
+
+    rc = new RubiksCube()
+    rc.doAlgorithm(postmoves + alg.cube.invert(algorithm) + premoves)
+    var o = rc.wcaOrient() 
+    solution = rc.solution()
+    
+
+    var obAlg = moveRotationsToStart(premoves, o) + solution  + postmoves;
+    var obAlg = alg.cube.simplify(obAlg).replace(/2'/g, "2");
+    return obAlg.split(" ").length >= minLength ? obAlg : obfuscate(algorithm, numPremoves+1, minLength, numPostmoves);
 
 }
+
+
+function parseMove(move){
+    if (move.trim() == ""){
+        return [null, null]
+    }
+
+    var myRegexp = /([RUFBLDrufbldxyzEMS])(\d*)('?)/g;
+    var match = myRegexp.exec(move.trim());
+
+    if (match!=null) {
+
+        var side = match[1];
+
+        var times = 1;
+        if (!match[2]=="") {
+            times = match[2] % 4;
+        }
+
+        if (match[3]=="'") {
+            times = (4 - times) % 4;
+        }
+
+        return [side, times]
+    }
+    else {
+        return [null, null];
+    }
+
+}
+function moveRotationsToStart(rotationFreeAlg, rotations){
+    // Needs moves of algs to be separated by spaces
+    // wide moves not supported
+
+    transformDict = {
+        "U": "U",
+        "R": "R",
+        "F": "F",
+        "B": "B",
+        "L": "L",
+        "D": "D"
+    }
+
+    rotationEffectDict = {
+        "x": {"U":"B", "B":"D", "D":"F", "F":"U"},
+        "y": {"F":"L", "L":"B", "B":"R", "R":"F"},
+        "z": {"U":"R", "R":"D", "D":"L", "L":"U"}
+    }
+
+    rotationsArr = rotations.trim().split(" ");
+    movesArr = rotationFreeAlg.trim().split(" ")
+
+    rotationsArr.forEach(rotation => {
+        let [side, times] = parseMove(rotation)
+
+        if (side !== null){
+
+            for (let i = 0; i<times; i++){
+                for (const [key1, value1] of Object.entries(transformDict)) {
+                    transformDict[key1] = rotationEffectDict[side][value1] || transformDict[key1]
+                }
+            }
+        }
+
+    })
+
+    newMovesArr = []
+    movesArr.forEach(move => {
+        let [side, times] = parseMove(move)
+        if (side !== null) {
+            newMovesArr.push(move.replace(side, transformDict[side]));
+        }
+    })
+
+    return rotations + " " + newMovesArr.join(" ");
+
+}
+
+
+function equivalentAlgs(alg1, alg2) {
+    const rc1 = new RubiksCube();
+    const rc2 = new RubiksCube();
+    rc1.doAlgorithm(alg1);
+    rc2.doAlgorithm(alg2);
+
+    return rc1.cubestate.length === rc2.cubestate.length && 
+           rc1.cubestate.every((value, index) => value === rc2.cubestate[index]);
+}
+
 
 
 function addAUFs(algArr){
@@ -1628,29 +1750,37 @@ function RubiksCube() {
         if (this.cubestate[13]==1) {//R face
             this.doAlgorithm("z'");
             moves +="z'";
+            moves += " ";
         } else if (this.cubestate[22]==1) {//on F face
             this.doAlgorithm("x");
             moves+="x";
+            moves += " ";
         } else if (this.cubestate[31]==1) {//on D face
             this.doAlgorithm("x2");
             moves+="x2";
+            moves += " ";
         } else if (this.cubestate[40]==1) {//on L face
             this.doAlgorithm("z");
             moves+="z";
+            moves += " ";
         } else if (this.cubestate[49]==1) {//on B face
             this.doAlgorithm("x'");
             moves+="x'";
+            moves += " ";
         }
 
         if (this.cubestate[13]==3) {//R face
             this.doAlgorithm("y");
             moves+="y";
+            moves += " ";
         } else if (this.cubestate[40]==3) {//on L face
             this.doAlgorithm("y'");
             moves+="y'";
+            moves += " ";
         } else if (this.cubestate[49]==3) {//on B face
             this.doAlgorithm("y2");
             moves+="y2";
+            moves += " ";
         }
 
         return moves;
