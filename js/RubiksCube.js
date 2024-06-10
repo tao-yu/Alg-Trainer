@@ -76,6 +76,7 @@ var defaults = {"useVirtual":false,
                 "visualCubeView":"plan",
                 "randomizeSMirror":false,
                 "randomizeMMirror":false,
+                "autoCorrectRotation":true,
                };
 
 for (var setting in defaults){ 
@@ -212,6 +213,11 @@ visualCubeContainer.addEventListener("click", function(){
 var showScramble = document.getElementById("showScramble");
 showScramble.addEventListener("click", function(){
     localStorage.setItem("showScramble", this.checked);
+});
+
+var autoCorrectRotation = document.getElementById("autoCorrectRotation");
+autoCorrectRotation.addEventListener("click", function(){
+    localStorage.setItem("autoCorrectRotation", this.checked);
 });
 
 var realScrambles = document.getElementById("realScrambles");
@@ -973,7 +979,9 @@ function generateAlgTest(){
         solutions = rawAlgs;
     }
 
-    var scramble = generateAlgScramble(correctRotation(solutions[0]),set,obfuscateAlg,shouldPrescramble);
+
+
+    var scramble = generateAlgScramble(localStorage.getItem("autoCorrectRotation")=="true"?correctRotation(solutions[0]):solutions[0],set,obfuscateAlg,shouldPrescramble);
     if (set == "F3L"){
         solutions = [alg.cube.invert(scramble).replace(/2'/g, "2")];
     }
