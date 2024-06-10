@@ -154,8 +154,9 @@ a:visited {
 }
 
 
-border-top: 16px solid blue;
-border-right: 16px solid green;
-border-bottom: 16px solid red;
-border-left: 16px solid yellow;
 
+#visual-cube-container {
+    height: 300px;
+    width: 300px;
+    background: black;
+}

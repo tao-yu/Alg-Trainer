@@ -188,13 +188,24 @@ hideTimer.addEventListener("click", function(){
 
 });
 
-var visualCube = document.getElementById("visualcube");
-visualCube.addEventListener("click", function(){
+var visualCubeContainer = document.getElementById("visual-cube-container");
+visualCubeContainer.addEventListener("click", function(){
     var currentView = localStorage.getItem("visualCubeView")
-    var newView = currentView == ""? "plan": "";
+
+    var viewIndexes = {"plan":0, "":1, "hide": 2}
+
+    var viewIx = viewIndexes[currentView]
+
+    var newView = Object.entries(viewIndexes).find(([key, value]) => value === ((viewIx + 1)%3))[0]; 
     localStorage.setItem("visualCubeView", newView);
-    var algTest = algorithmHistory[historyIndex];
-    updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+
+    if (newView == "hide"){
+        document.getElementById("visualcube").style.display = "none"
+    } else {
+        document.getElementById("visualcube").style.display = "block"
+        var algTest = algorithmHistory[historyIndex];
+        updateVisualCube(algTest ? algTest.preorientation+algTest.scramble : "");
+    }
 });
 
 
