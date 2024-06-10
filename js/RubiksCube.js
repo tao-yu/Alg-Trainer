@@ -657,14 +657,14 @@ function obfuscate(algorithm, numPremoves=3, minLength=16, numPostmoves=0){
     Having rotations in the middle is ugly, so we use the moveRotationsToStart function
     to move them to the start using some alg manipulation
 
+    Note that all rotations will be at the start as long premoves and postmoves consist of outer layer turns only
+
     */
 
 
 
     var premoves = getPremoves(numPremoves);
     var postmoves = getPostmoves(numPostmoves);
-    console.log(`Premoves: ${premoves}`)
-    console.log(`Postmoves: ${postmoves}`)
 
     rc = new RubiksCube()
     rc.doAlgorithm(postmoves + alg.cube.invert(algorithm) + premoves)
@@ -861,7 +861,7 @@ function cancelSingleAxis(originalAlg, axisMoves) {
 }
 
 function cancelParallelMoves(originalAlg) {
-  /* Assumes no wide moves 
+  /* Tested on algs which consist of outer moves and rotations only
     TODO: implement wide moves by replacing r with L x, etc
   */
   
@@ -870,16 +870,7 @@ function cancelParallelMoves(originalAlg) {
   cancelledAlg = cancelSingleAxis(cancelledAlg, ["F", "B", "z"])
   cancelledAlg = cancelledAlg.replace(/\s+/g, ' ').trim();
 
-  if (equivalentAlgs(originalAlg, cancelledAlg)){
-    console.log("cancelParallelMoves succeeded")
-    console.log([originalAlg, cancelledAlg]);
-    return cancelledAlg
-  }
-  else {
-    console.log("cancelParallelMoves FAILED!!!!")
-    console.log([originalAlg, cancelledAlg]);
-    return originalAlg
-  }
+  return cancelledAlg
   
 }
 
