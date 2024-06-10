@@ -36,10 +36,6 @@ p.scramble {
     text-align: center;
 }
 
-p.algdisp {
-
-
-}
 
 table {
     border-collapse: collapse;
@@ -153,10 +149,11 @@ a:visited {
     font-size: 16px;
 }
 
-
-
 #visual-cube-container {
+    display: flex;
+    flex-direction: column;
     height: 300px;
-    width: 300px;
+    width: 100%;
     background: black;
+    align-items: center;
 }
