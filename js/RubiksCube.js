@@ -767,6 +767,122 @@ function equivalentAlgs(alg1, alg2) {
 }
 
 
+function makeMove(side, times) {
+  let timesMod4 = times % 4
+  switch (timesMod4) {
+    case 1:
+      return side;
+    case 2:
+      return side + "2";
+    case 3:
+      return side + "'";
+    case 0:
+      return "";
+    default:
+      return ""
+  }
+  return ""
+}
+
+
+
+function cancelSingleAxis(originalAlg, axisMoves) {
+
+
+  moveCounter = {}
+  for (let move of axisMoves) {
+    moveCounter[move] = 0;
+  }
+
+  moves = originalAlg.split(" ")
+
+  newAlg = ""
+
+  let counting = false
+
+  for (let i = 0; i<moves.length; i++) {
+  	
+  	move = moves[i];
+    let [side, times] = parseMove(move);
+
+    let isLastLoop = i == moves.length - 1
+
+    if (isLastLoop){
+        // On the last loop, ongoing counts must be finished
+        if (counting){
+
+            if (axisMoves.includes(side)){
+                moveCounter[side] += times
+
+                for (let key in moveCounter) {
+                    let newMove = makeMove(key, moveCounter[key])
+                    newAlg += newMove + " "// (newMove == "" ? "" : " ")
+                }
+            }
+            else {
+
+                for (let key in moveCounter) {
+                    let newMove = makeMove(key, moveCounter[key])
+                    newAlg += newMove + " "// (newMove == "" ? "" : " ")
+                }
+                newAlg += move + " "//+ (move == "" ? "" : " ");
+            }
+
+        }
+        else {
+            newAlg += move + " "//+ (move == "" ? "" : " ");
+        }
+        break
+
+    }
+
+    if (!counting && axisMoves.includes(side)) {
+      counting = true;
+      for (let key of axisMoves) {
+        moveCounter[key] = 0;
+      }
+      moveCounter[side] += times
+    } else if (counting && axisMoves.includes(side)) {
+      moveCounter[side] += times
+    } else if (counting && !axisMoves.includes(side)) {
+      counting = false;
+      for (let key in moveCounter) {
+        let newMove = makeMove(key, moveCounter[key])
+        newAlg += newMove + " "// (newMove == "" ? "" : " ")
+      }
+      newAlg += move + " "
+    } else {
+      newAlg += move + " "//+ (move == "" ? "" : " ");
+    }
+  }
+
+  return newAlg
+
+}
+
+function cancelParallelMoves(originalAlg) {
+  /* Assumes no wide moves 
+    TODO: implement wide moves by replacing r with L x, etc
+  */
+  
+  let cancelledAlg = cancelSingleAxis(originalAlg, ["U", "D", "y"])
+  cancelledAlg = cancelSingleAxis(cancelledAlg, ["R", "L", "x"])
+  cancelledAlg = cancelSingleAxis(cancelledAlg, ["F", "B", "z"])
+  cancelledAlg = cancelledAlg.replace(/\s+/g, ' ').trim();
+
+  if (equivalentAlgs(originalAlg, cancelledAlg)){
+    console.log("cancelParallelMoves succeeded")
+    console.log([originalAlg, cancelledAlg]);
+    return cancelledAlg
+  }
+  else {
+    console.log("cancelParallelMoves FAILED!!!!")
+    console.log([originalAlg, cancelledAlg]);
+    return originalAlg
+  }
+  
+}
+
 
 function addAUFs(algArr){
 
@@ -947,6 +1063,7 @@ class AlgTest {
 
     getHtmlFormattedScramble() {
         let cancelled = alg.cube.simplify(this.orientRandPart + this.scramble);
+        cancelled = cancelParallelMoves(cancelled);
         let parts = cancelled.split(" ")
         let htmlStr = ""
         let stopColoring = false // only want to color the rotations at the start of the alg
