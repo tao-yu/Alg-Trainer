@@ -925,6 +925,27 @@ class AlgTest {
         this.cubeType = cubeType;
         this.orientRandPart = orientRandPart;
     }
+
+    getHtmlFormattedScramble() {
+        let cancelled = alg.cube.simplify(this.orientRandPart + this.scramble);
+        let parts = cancelled.split(" ")
+        let htmlStr = ""
+        let stopColoring = false // only want to color the rotations at the start of the alg
+        for (let part of parts){
+            if (part.includes("x") || part.includes("y") || part.includes("z")){
+                if (!stopColoring){
+                    htmlStr = htmlStr + `<span style=\"color: #90f182\">${part}</span> `
+                }
+                
+            }
+            else {
+                htmlStr = htmlStr + part + " "
+                stopColoring = true;
+            }
+        }
+        return htmlStr.trim().replace(/2'/g, "2");
+
+    }
 }
 
 // Adds extra rotations to the end of an alg to reorient
@@ -1002,7 +1023,7 @@ function testAlg(algTest, addToHistory=true){
     var scramble = document.getElementById("scramble");
 
     if (document.getElementById("showScramble").checked){
-        scramble.innerHTML = "<span style=\"color: #90f182\">" + algTest.orientRandPart + "</span>" + " " + algTest.scramble;
+        scramble.innerHTML = algTest.getHtmlFormattedScramble()//"<span style=\"color: #90f182\">" + algTest.orientRandPart + "</span>" + " " + algTest.scramble;
     } else{
         scramble.innerHTML = "&nbsp;";
     }
@@ -1191,7 +1212,8 @@ function displayAlgorithmFromHistory(index){
         timerText = algTest.solveTime.toString()
     }
 
-    updateTrainer("<span style=\"color: #90f182\">" + algTest.orientRandPart + "</span>" + " "+ algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
+    //updateTrainer("<span style=\"color: #90f182\">" + algTest.orientRandPart + "</span>" + " "+ algTest.scramble, algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
+    updateTrainer(algTest.getHtmlFormattedScramble(), algTest.solutions.join("<br><br>"), algTest.preorientation+algTest.scramble, timerText);
 
     scramble.style.color = '#e6e6e6';
 }
@@ -1207,7 +1229,8 @@ function displayAlgorithmForPreviousTest(reTest=true){//not a great name
         reTestAlg();
     }
 
-    updateTrainer("<span style=\"color: #90f182\">" + lastTest.orientRandPart + "</span>" + " "+ lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
+    //updateTrainer("<span style=\"color: #90f182\">" + lastTest.orientRandPart + "</span>" + " "+ lastTest.scramble, lastTest.solutions.join("<br><br>"), null, null);
+    updateTrainer(lastTest.getHtmlFormattedScramble(), lastTest.solutions.join("<br><br>"), null, null);
 
     scramble.style.color = '#e6e6e6';
 }
