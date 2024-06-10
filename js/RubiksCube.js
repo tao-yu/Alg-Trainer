@@ -597,6 +597,23 @@ function getPremoves(length) {
     return sequence;
 }
 
+function getPostmoves(length) {
+    var previous = "";
+    var moveset = ['U', 'R', 'F', 'D', 'L', 'B'];
+    var amts = [" ","' ", "2 "];
+    var randmove = "";
+    var sequence = "";
+    for (let i=0; i<length; i++) {
+        do {
+            randmove = moveset[Math.floor(Math.random()*moveset.length)];
+        } while (previous != "" && (randmove === previous || Math.abs(moveset.indexOf(randmove) - moveset.indexOf(previous)) === 3))
+        previous = randmove;
+        sequence += randmove;
+        sequence += amts[Math.floor(Math.random()*amts.length)];
+    }
+    return sequence;
+}
+
 
 function obfuscate(algorithm, numPremoves=3, minLength=16, numPostmoves=0){
 
@@ -645,7 +662,7 @@ function obfuscate(algorithm, numPremoves=3, minLength=16, numPostmoves=0){
 
 
     var premoves = getPremoves(numPremoves);
-    var postmoves = getPremoves(numPostmoves);
+    var postmoves = getPostmoves(numPostmoves);
     console.log(`Premoves: ${premoves}`)
     console.log(`Postmoves: ${postmoves}`)
 
@@ -841,8 +858,10 @@ function generateAlgScramble(raw_alg,set,obfuscateAlg,shouldPrescramble){
             let drScramble = Array.from(
                 {length: scrambleLength}, 
                 () => ["E", "E'", "U D", "U D'", "M2", "S2", "U2 D", "D U2", "U", "U2", "U'", "R2", "L2", "B2", "F2", "D", "D2", "D'"][Math.floor(Math.random() * scrambleLength)]
-            )
-            return obfuscate(drScramble.join(" ") + alg.cube.invert(raw_alg), numPremoves=3, minLength=16, numPostmoves=5);
+            ).join(" ")
+            let rc = new RubiksCube();
+            rc.doAlgorithm(drScramble);
+            return obfuscate(drScramble + rc.wcaOrient() + alg.cube.invert(raw_alg), numPremoves=3, minLength=13, numPostmoves=5);
         default:  
             return obfuscate(alg.cube.invert(raw_alg));
     }
