@@ -819,6 +819,13 @@ function generateAlgScramble(raw_alg,set,obfuscateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "R2 U2' R2' U' R2 U' R2,R'FR'B2'RF'R'B2'R2,F2U'R'LF2RL'U'F2,U,R U' R' U2 R U' R' ,R U2' R' U R U R' ,R U R' U R U2' R' ,R U2 R' U' R U' R' ", 10000, true);
         case "TDR (Trangium, Yash Mehta)":
             return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true, getRandAuf("D")); // ZBLL-ABF scramble
+        case "Domino Reduction":
+            let scrambleLength = 150 
+            let drScramble = Array.from(
+                {length: scrambleLength}, 
+                () => ["E", "E'", "U D", "U D'", "M2", "S2", "U2 D", "D U2", "U", "U2", "U'", "R2", "L2", "B2", "F2", "D", "D2", "D'"][Math.floor(Math.random() * scrambleLength)]
+            )
+            return obfuscate(drScramble.join(" ") + alg.cube.invert(raw_alg), numPremoves=3, minLength=16, numPostmoves=5);
         default:  
             return obfuscate(alg.cube.invert(raw_alg));
     }
