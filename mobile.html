@@ -37,6 +37,7 @@
                 <input id="goToNextCase" type="checkbox">Don't show alg after stopping timer <br>
                 <input id="mirrorAllAlgs" type="checkbox">Mirror across <span style="font-family: Consolas, monospace;">M</span> <input id="randomizeMMirror" type="checkbox">Randomize<br>
                 <input id="mirrorAllAlgsAcrossS" type="checkbox">Mirror across <span style="font-family: Consolas, monospace;">S</span> <input id="randomizeSMirror" type="checkbox">Randomize<br>
+                <input id="autoCorrectRotation" type="checkbox">Auto-fix algorithm rotation<br>
                 Line style <select id="lines">
                     <option value="none"> None </option>
                     <option selected value="thin-black"> Thin black </option>
@@ -136,9 +137,10 @@
     <div id="right_popup">
 
         <div class=column_right>
-            <img src="https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube"
-                title="Click to switch between flat and 3D view" />
-            <p style="font-size: small;">Click the above cube to switch between flat and 3D view</p>
+            <div id="visual-cube-container">
+                <img src="https://www.cubing.net/api/visualcube/?fmt=svg&size=300&view=plan&bg=black&alg=x2" id="visualcube" title="Click to switch between flat and 3D view"/>
+            </div>
+            <p style="font-size: small;">Click the above cube to switch between flat, 3D view and hidden</p>
 
             <div style="overflow-y: scroll; height:150px;">
                 <p id="timeList" style="text-align: left">&nbsp</p>

@@ -262,3 +262,12 @@ a:visited {
     flex: 2;
     padding: 10px;
 }
+
+#visual-cube-container {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 100%;
+    background: rgb(90, 90, 90);
+    align-items: center;
+}
