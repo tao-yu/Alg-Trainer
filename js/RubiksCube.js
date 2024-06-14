@@ -968,7 +968,19 @@ function generateAlgScramble(raw_alg,set,obfuscateAlg,shouldPrescramble){
             rc.doAlgorithm(drScramble);
             return obfuscate(drScramble + rc.wcaOrient() + alg.cube.invert(raw_alg), numPremoves=3, minLength=13, numPostmoves=5);
         default:  
-            return obfuscate(alg.cube.invert(raw_alg));
+
+            let inverse = alg.cube.invert(raw_alg);
+            if (document.getElementById("userDefined").checked){
+                // postmoves and premoves should be used when the algset is unknown
+                // Ensures that it shuold be hard to guess the solution even for 
+                // unusual and unexpected use cases
+                return obfuscate(inverse, numPremoves=3, minLength=13, numPostmoves=3);
+            }
+            else {
+                // Use only premoves by default to save time 
+                // TODO: it may be worth researching this
+                return obfuscate(inverse);
+            }
     }
 
 }
@@ -989,7 +1001,18 @@ function generatePreScramble(raw_alg, generator, times, obfuscateAlg, premoves="
     scramble += alg.cube.invert(raw_alg);
 
     if (obfuscateAlg){
-        return obfuscate(scramble);
+        
+        if (document.getElementById("userDefined").checked){
+            // postmoves and premoves should be used when the algset is unknown
+            // Ensures that it shuold be hard to guess the solution even for 
+            // unusual and unexpected use cases
+            return obfuscate(scramble, numPremoves=3, minLength=13, numPostmoves=3);
+        }
+        else {
+            // Use only premoves by default to save time 
+            // TODO: it may be worth researching this
+            return obfuscate(scramble);
+        }
     }
     else {
         return scramble;
