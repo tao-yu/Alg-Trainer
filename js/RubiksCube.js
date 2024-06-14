@@ -962,10 +962,8 @@ function generateAlgScramble(raw_alg,set,obfuscateAlg,shouldPrescramble){
             return generatePreScramble(raw_alg, "RBR'FRB'R'F',RUR'URU2R',U,R'U'RU'R'U2R,F2U'R'LF2L'RU'F2", 1000, true, getRandAuf("D")); // ZBLL-ABF scramble
         case "Domino Reduction":
             let scrambleLength = 150 
-            let drScramble = Array.from(
-                {length: scrambleLength}, 
-                () => ["E", "E'", "U D", "U D'", "M2", "S2", "U2 D", "D U2", "U", "U2", "U'", "R2", "L2", "B2", "F2", "D", "D2", "D'"][Math.floor(Math.random() * scrambleLength)]
-            ).join(" ")
+            let generator = ["E", "E'", "U D", "U D'", "M2", "S2", "U2 D", "D U2", "U", "U2", "U'", "R2", "L2", "B2", "F2", "D", "D2", "D'"];
+            let drScramble = Array.from({length: scrambleLength}, () => generator[Math.floor(Math.random() * generator.length)]).join(" ");
             let rc = new RubiksCube();
             rc.doAlgorithm(drScramble);
             return obfuscate(drScramble + rc.wcaOrient() + alg.cube.invert(raw_alg), numPremoves=3, minLength=13, numPostmoves=5);
@@ -1090,6 +1088,12 @@ function generateAlgTest(){
     var obfuscateAlg = document.getElementById("realScrambles").checked;
     var shouldPrescramble = document.getElementById("prescramble").checked;
     var randAUF = document.getElementById("randAUF").checked;
+
+    let neverAUF = ["Domino Reduction"];
+
+    if (neverAUF.includes(set)){
+        randAUF = false;
+    }
 
     var algList = createAlgList()
     if (shouldRecalculateStatistics){
